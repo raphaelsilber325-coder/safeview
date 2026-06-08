@@ -24,7 +24,9 @@
       "mcp__Claude_in_Chrome__navigate",
       "mcp__Claude_in_Chrome__browser_batch",
       "mcp__aa6bbd5e-9ca3-4339-9de3-bfba17c27da1__create-product",
-      "mcp__aa6bbd5e-9ca3-4339-9de3-bfba17c27da1__create-collection"
+      "mcp__aa6bbd5e-9ca3-4339-9de3-bfba17c27da1__create-collection",
+      "PowerShell(Write-Output \"---TRACKED FILES---\"; git ls-files; Write-Output \"---ZIP CONTENTS---\"; Add-Type -AssemblyName System.IO.Compression.FileSystem; $zip=[System.IO.Compression.ZipFile]::OpenRead\\(\\(Resolve-Path 'files.zip'\\)\\); $zip.Entries | Select-Object FullName, Length | Format-Table -AutoSize; $zip.Dispose\\(\\))",
+      "PowerShell(git add -A)"
     ]
   }
 }
