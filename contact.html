@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>צור קשר | SafeView</title>
+<meta name="description" content="צרו קשר עם SafeView – תמיכה בעברית בוואטסאפ, מייל וטלפון. מענה מהיר לכל שאלה.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Noto+Sans+Hebrew:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div id="nav-mount"></div>
+<div class="page-head"><h1>צור <strong>קשר</strong></h1><p>צוות SafeView כאן בשבילכם — מענה מהיר בעברית</p></div>
+<section style="padding-top:32px">
+  <div class="contact-grid">
+    <a class="contact-card" id="cWa" href="#"><div class="contact-icon" id="cWaIcon"></div><div class="contact-label">וואטסאפ (הכי מהיר)</div><div class="contact-val">שלחו הודעה ←</div></a>
+    <a class="contact-card" href="mailto:info@safeview.co.il"><div class="contact-icon" id="cMailIcon"></div><div class="contact-label">אימייל</div><div class="contact-val">info@safeview.co.il</div></a>
+    <a class="contact-card" id="cTel" href="tel:+972586343786"><div class="contact-icon" id="cTelIcon"></div><div class="contact-label">טלפון</div><div class="contact-val">058-634-3786</div></a>
+  </div>
+  <div class="content" style="padding-top:48px">
+    <h2>שעות פעילות</h2>
+    <ul>
+      <li>ימים א'-ה': 09:00 - 18:00</li>
+      <li>יום ו': 09:00 - 13:00</li>
+      <li>מוצ"ש וחגים: סגור</li>
+    </ul>
+    <p>בשעות הפעילות אנו משיבים תוך שעה עד שלוש שעות. הדרך המהירה ביותר לקבל מענה היא דרך הוואטסאפ.</p>
+    <h2>איך נוכל לעזור?</h2>
+    <ul>
+      <li>🔍 המלצה על מצלמה שמתאימה לצרכים שלכם</li>
+      <li>🛠️ עזרה טכנית בהתקנה ובשימוש</li>
+      <li>📦 מעקב אחרי הזמנה ובדיקת משלוחים</li>
+      <li>🔄 החזרות והחלפות</li>
+      <li>💰 הצעות מחיר לרכישה מרוכזת / עסקים</li>
+    </ul>
+    <p style="margin-top:24px"><a class="btn-wa" id="cBtn" href="#">פתחו שיחת וואטסאפ ←</a></p>
+  </div>
+</section>
+<div id="footer-mount"></div>
+<script src="assets/app.js"></script>
+<script>
+  var m = waLink('שלום SafeView! 👋 אני מעוניין/ת בעזרה.');
+  document.getElementById('cWa').href = m;
+  document.getElementById('cBtn').href = m;
+  document.getElementById('cWaIcon').innerHTML = ICON.wa;
+  document.getElementById('cMailIcon').innerHTML = ICON.chat;
+  document.getElementById('cTelIcon').innerHTML = ICON.chat;
+</script>
+</body>
+</html>

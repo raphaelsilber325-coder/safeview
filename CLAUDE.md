@@ -13,8 +13,22 @@
 יש **שני חלקים נפרדים** לפרויקט — אל תבלבל ביניהם:
 
 ### 1. אתר HTML עצמאי (זה ה-repo הזה) 🟢
-- קובץ ראשי: **`index.html`** — אתר מלא בעברית, vanilla HTML/CSS/JS, ללא פלטפורמה (לשעבר `safeview_darktech.html`).
-- מספר וואטסאפ: מוגדר כמשתנה `WA_NUMBER` בראש ה-`<script>` ב-`index.html` — צריך להחליף ל-`972XXXXXXXXX`.
+אתר רב-עמודי מלא בעברית, vanilla HTML/CSS/JS, ללא פלטפורמה. מבנה הקבצים:
+- **`index.html`** — דף בית (hero, קטגוריות, 9 מוצרים, חבילות, יתרונות, הבטחות, FAQ)
+- **`product.html?id=<id>`** — עמוד מוצר בודד דינמי (מפרט + מוצרים קשורים)
+- **`cart.html`** — עגלת קניות (localStorage) עם צ'קאאוט בוואטסאפ
+- **`about.html` / `contact.html` / `faq.html`** — עמודי תוכן
+- **`shipping/returns/privacy/terms.html`** — 4 דפים משפטיים
+- **`blog.html`** — 5 מאמרי מדריך
+- **`assets/style.css`** — כל העיצוב (Dark Tech), כולל רספונסיב
+- **`assets/app.js`** — מקור האמת: קטלוג `PRODUCTS`, עגלה, וואטסאפ, הזרקת nav/footer, אנימציות, FAQ, אנליטיקס
+- **`sitemap.xml` / `robots.txt`** — SEO
+
+**לעריכה:**
+- מוצרים, מחירים, מפרט → מערך `PRODUCTS` ב-`assets/app.js`
+- מספר וואטסאפ → `WA_NUMBER` ב-`assets/app.js` (כרגע `972586343786`)
+- Google Analytics / Facebook Pixel → `GA4_ID` / `FB_PIXEL_ID` ב-`assets/app.js` (ריקים, ממתינים למזהים)
+- nav ו-footer מוזרקים אוטומטית דרך `injectChrome()` ב-app.js — לעדכון תפריט עורכים שם פעם אחת.
 - סגנון עיצוב: **"Dark Tech"** (רקע כהה #080a0f, כחול זוהר #3a9fff, פונטים Rajdhani + Noto Sans Hebrew). הפלטה המלאה ב-`SafeView_CONTEXT.md` סעיף 3.
 - פותחים אותו בלחיצה כפולה בדפדפן — לא צריך שרת.
 

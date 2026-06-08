@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>מוצר | SafeView</title>
+<meta name="description" content="פרטי מצלמת אבטחה SafeView – מפרט מלא, מחיר והזמנה מהירה.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Noto+Sans+Hebrew:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<div id="nav-mount"></div>
+
+<div class="pdp" id="pdp"></div>
+
+<section class="reveal" style="padding-top:0">
+  <div class="section-label">// אולי תאהבו גם</div>
+  <div class="section-title">מוצרים <strong>נוספים</strong></div>
+  <div class="section-sub" style="margin-bottom:24px"></div>
+  <div class="products-grid" id="related"></div>
+</section>
+
+<div id="footer-mount"></div>
+
+<script src="assets/app.js"></script>
+<script>
+  var params = new URLSearchParams(location.search);
+  var id = params.get('id');
+  var p = getProduct(id) || PRODUCTS[0];
+  document.title = p.name + ' | SafeView';
+
+  var msg = 'שלום SafeView! 👋 אני מעוניין/ת במצלמה: ' + p.name + ' (' + fmt(p.price) + '). אפשר פרטים?';
+
+  document.getElementById('pdp').innerHTML =
+    '<div class="pdp-gallery"><img src="'+p.img+'" alt="'+p.name+'"><div class="pdp-badge">'+p.badge+'</div></div>' +
+    '<div class="pdp-info">' +
+      '<h1>'+p.name+'</h1>' +
+      '<div class="pdp-price">'+fmt(p.price)+'</div>' +
+      '<div class="pdp-stock">במלאי — נשלח תוך 24 שעות</div>' +
+      '<p style="color:var(--text2);margin-bottom:24px;line-height:1.8">'+p.desc+'</p>' +
+      '<div class="pdp-buy">' +
+        '<button class="btn-primary" onclick="addToCart(\''+p.id+'\')">הוסף לעגלה</button>' +
+        '<a class="btn-wa" href="'+waLink(msg)+'" target="_blank" rel="noopener">'+ICON.wa+' הזמן בוואטסאפ</a>' +
+      '</div>' +
+      '<div class="pdp-specs">'+p.specs.map(function(s){ return '<div class="pdp-spec"><span>'+s[0]+'</span><span>'+s[1]+'</span></div>'; }).join('')+'</div>' +
+      '<div class="pdp-trust">' +
+        '<div>🚚 משלוח חינם בהזמנה מעל ₪200</div>' +
+        '<div>🛡️ אחריות מלאה לשנה + תמיכה בעברית</div>' +
+        '<div>🔄 14 ימי החזרה ללא שאלות</div>' +
+        '<div>🔒 תשלום מאובטח</div>' +
+      '</div>' +
+    '</div>';
+
+  // related (אותה קטגוריה, עד 3)
+  var rel = PRODUCTS.filter(function(x){ return x.cat===p.cat && x.id!==p.id; });
+  if (rel.length < 3) rel = rel.concat(PRODUCTS.filter(function(x){ return x.id!==p.id && rel.indexOf(x)<0; }));
+  rel = rel.slice(0,3);
+  document.getElementById('related').innerHTML = rel.map(function(x){
+    var m = 'שלום SafeView! 👋 אני מעוניין/ת במצלמה: ' + x.name + ' (' + fmt(x.price) + ').';
+    return '<div class="prod-card">' +
+      '<div class="prod-img"><a href="product.html?id='+x.id+'"><img src="'+x.img+'" alt="'+x.name+'" loading="lazy"></a><div class="prod-badge">'+x.badge+'</div></div>' +
+      '<div class="prod-body"><a class="prod-name" href="product.html?id='+x.id+'">'+x.name+'</a>' +
+        '<div class="prod-footer"><span class="prod-price">'+fmt(x.price)+'</span><span class="prod-stock">במלאי</span></div>' +
+        '<div class="prod-actions"><button class="prod-add" onclick="addToCart(\''+x.id+'\')">הוסף לעגלה</button>' +
+        '<a class="prod-order" href="'+waLink(m)+'" target="_blank" rel="noopener" aria-label="וואטסאפ">'+ICON.wa+'</a></div>' +
+      '</div></div>';
+  }).join('');
+
+  // breadcrumb scroll top
+  window.scrollTo(0,0);
+</script>
+
+</body>
+</html>

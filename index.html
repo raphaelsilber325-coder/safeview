@@ -3,681 +3,29 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SafeView – מצלמות אבטחה חכמות לבית ולעסק</title>
+<title>SafeView – מצלמות אבטחה חכמות לבית ולעסק | משלוח חינם ואחריות שנה</title>
 <meta name="description" content="SafeView – חנות מצלמות אבטחה חכמות בישראל. מצלמות סולאריות, פנימיות, חיצוניות ומיני עם ראיית לילה, WiFi ו-4G. משלוח מהיר, אחריות שנה ותמיכה בעברית.">
+<meta property="og:title" content="SafeView – מצלמות אבטחה חכמות">
+<meta property="og:description" content="מצלמות אבטחה חכמות לבית ולעסק. ראיית לילה, סולארי, 4G. משלוח חינם מעל ₪200 ואחריות שנה.">
+<meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Noto+Sans+Hebrew:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-:root {
-  --bg: #080a0f;
-  --bg2: #0d1018;
-  --bg3: #121620;
-  --bg4: #161b28;
-  --blue: #3a9fff;
-  --blue2: #1a6fd8;
-  --blue-dim: #1a3560;
-  --blue-glow: rgba(58,159,255,0.12);
-  --text: #e8eaf0;
-  --text2: #9aa0b4;
-  --text3: #5a6070;
-  --border: rgba(58,159,255,0.15);
-  --border2: rgba(255,255,255,0.06);
-  --accent: #00d4ff;
-  --wa: #25D366;
+<link rel="stylesheet" href="assets/style.css">
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Store",
+  "name":"SafeView",
+  "description":"חנות מצלמות אבטחה חכמות בישראל",
+  "areaServed":"IL",
+  "telephone":"+972586343786"
 }
-* { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: 'Noto Sans Hebrew', sans-serif;
-  font-weight: 300;
-  line-height: 1.6;
-  direction: rtl;
-  overflow-x: hidden;
-}
-
-/* GRID OVERLAY */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(58,159,255,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(58,159,255,0.03) 1px, transparent 1px);
-  background-size: 40px 40px;
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* NAV */
-nav {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: rgba(8,10,15,0.92);
-  backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--border);
-  padding: 0 40px;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.nav-logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-family: 'Rajdhani', sans-serif;
-  font-size: 22px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  color: var(--text);
-  text-transform: uppercase;
-}
-.nav-logo-icon {
-  width: 32px; height: 32px;
-  border: 1.5px solid var(--blue);
-  border-radius: 6px;
-  display: flex; align-items: center; justify-content: center;
-  color: var(--blue);
-  font-size: 16px;
-}
-.nav-logo span { color: var(--blue); }
-.nav-links {
-  display: flex;
-  gap: 28px;
-  font-size: 13px;
-  color: var(--text2);
-  list-style: none;
-}
-.nav-links a { color: inherit; text-decoration: none; transition: color 0.2s; }
-.nav-links a:hover { color: var(--blue); }
-.nav-cta {
-  background: transparent;
-  border: 1px solid var(--blue);
-  color: var(--blue);
-  padding: 8px 20px;
-  font-size: 13px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-family: 'Noto Sans Hebrew', sans-serif;
-  transition: all 0.2s;
-}
-.nav-cta:hover { background: var(--blue); color: #fff; }
-.nav-burger {
-  display: none;
-  flex-direction: column;
-  gap: 5px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 6px;
-}
-.nav-burger span { width: 24px; height: 2px; background: var(--text); transition: 0.3s; }
-
-/* HERO */
-.hero {
-  position: relative;
-  min-height: 88vh;
-  display: flex;
-  align-items: center;
-  padding: 80px 40px;
-  overflow: hidden;
-  z-index: 1;
-}
-.hero-orb {
-  position: absolute;
-  width: 600px; height: 600px;
-  background: radial-gradient(circle, rgba(58,159,255,0.08) 0%, transparent 70%);
-  left: -100px; top: 50%;
-  transform: translateY(-50%);
-  pointer-events: none;
-}
-.hero-content { position: relative; max-width: 560px; animation: fadeUp 0.7s ease both; }
-.hero-eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 11px;
-  font-family: 'Rajdhani', sans-serif;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--blue);
-  background: var(--blue-glow);
-  border: 1px solid var(--border);
-  padding: 6px 14px;
-  border-radius: 2px;
-  margin-bottom: 24px;
-}
-.hero-eyebrow::before {
-  content: '';
-  width: 6px; height: 6px;
-  background: var(--blue);
-  border-radius: 50%;
-  animation: pulse 2s infinite;
-}
-.hero h1 {
-  font-size: 52px;
-  font-weight: 300;
-  line-height: 1.1;
-  color: var(--text);
-  margin-bottom: 20px;
-}
-.hero h1 strong {
-  font-weight: 500;
-  color: var(--blue);
-  display: block;
-}
-.hero-sub {
-  font-size: 16px;
-  color: var(--text2);
-  margin-bottom: 36px;
-  max-width: 420px;
-  line-height: 1.75;
-}
-.hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
-.btn-primary {
-  background: var(--blue);
-  color: #fff;
-  border: none;
-  padding: 13px 28px;
-  font-size: 14px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-family: 'Noto Sans Hebrew', sans-serif;
-  font-weight: 500;
-  transition: all 0.2s;
-  display: inline-flex; align-items: center; gap: 8px;
-  text-decoration: none;
-}
-.btn-primary:hover { background: #5ab5ff; transform: translateY(-1px); }
-.btn-secondary {
-  background: transparent;
-  color: var(--text2);
-  border: 1px solid var(--border2);
-  padding: 13px 28px;
-  font-size: 14px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-family: 'Noto Sans Hebrew', sans-serif;
-  transition: all 0.2s;
-  display: inline-flex; align-items: center; gap: 8px;
-  text-decoration: none;
-}
-.btn-secondary:hover { border-color: var(--blue); color: var(--blue); }
-.hero-stats {
-  display: flex;
-  gap: 40px;
-  margin-top: 52px;
-  padding-top: 32px;
-  border-top: 1px solid var(--border2);
-}
-.stat-num {
-  font-family: 'Rajdhani', sans-serif;
-  font-size: 28px;
-  font-weight: 600;
-  color: var(--text);
-  display: block;
-}
-.stat-num span { color: var(--blue); }
-.stat-label { font-size: 12px; color: var(--text3); margin-top: 2px; }
-
-/* HERO VISUAL */
-.hero-visual {
-  position: absolute;
-  left: 60px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 420px;
-  animation: fadeUp 0.9s 0.2s ease both;
-}
-.cam-card {
-  background: var(--bg3);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 20px;
-  position: relative;
-  overflow: hidden;
-}
-.cam-card::before {
-  content: '';
-  position: absolute;
-  top: 0; right: 0;
-  width: 100%; height: 2px;
-  background: linear-gradient(90deg, transparent, var(--blue), transparent);
-}
-.cam-screen {
-  background: var(--bg);
-  border-radius: 8px;
-  height: 220px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-  border: 1px solid var(--border2);
-  margin-bottom: 14px;
-}
-.cam-scan {
-  position: absolute;
-  width: 100%; height: 2px;
-  background: linear-gradient(90deg, transparent, var(--blue), transparent);
-  animation: scan 3s linear infinite;
-  opacity: 0.6;
-}
-.cam-live {
-  position: absolute;
-  top: 10px; right: 10px;
-  display: flex; align-items: center; gap: 5px;
-  font-size: 10px;
-  font-family: 'Rajdhani', sans-serif;
-  letter-spacing: 1px;
-  color: #ff4040;
-}
-.cam-live::before {
-  content: '';
-  width: 6px; height: 6px;
-  background: #ff4040;
-  border-radius: 50%;
-  animation: pulse 1s infinite;
-}
-.cam-info { display: flex; gap: 10px; }
-.cam-stat {
-  flex: 1;
-  background: var(--bg4);
-  border: 1px solid var(--border2);
-  border-radius: 6px;
-  padding: 10px 12px;
-  font-size: 11px;
-  color: var(--text3);
-}
-.cam-stat strong { display: block; font-size: 14px; color: var(--blue); font-family: 'Rajdhani', sans-serif; font-weight: 600; margin-bottom: 2px; }
-
-/* TRUST BAR */
-.trust-bar {
-  position: relative;
-  z-index: 1;
-  border-top: 1px solid var(--border2);
-  border-bottom: 1px solid var(--border2);
-  background: var(--bg2);
-  padding: 18px 40px;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 48px;
-}
-.trust-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 13px;
-  color: var(--text2);
-}
-.trust-icon {
-  width: 32px; height: 32px;
-  background: var(--blue-glow);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  display: flex; align-items: center; justify-content: center;
-  color: var(--blue);
-  font-size: 14px;
-  flex-shrink: 0;
-}
-
-/* SECTION */
-section {
-  position: relative;
-  z-index: 1;
-  padding: 72px 40px;
-}
-.section-label {
-  font-family: 'Rajdhani', sans-serif;
-  font-size: 11px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  color: var(--blue);
-  margin-bottom: 12px;
-}
-.section-title {
-  font-size: 30px;
-  font-weight: 300;
-  color: var(--text);
-  margin-bottom: 8px;
-}
-.section-title strong { font-weight: 500; }
-.section-sub { font-size: 14px; color: var(--text2); margin-bottom: 40px; }
-
-/* CATEGORIES */
-.cats-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 14px;
-}
-.cat-card {
-  background: var(--bg3);
-  border: 1px solid var(--border2);
-  border-radius: 8px;
-  padding: 24px 20px;
-  cursor: pointer;
-  transition: all 0.25s;
-  position: relative;
-  overflow: hidden;
-}
-.cat-card::after {
-  content: '';
-  position: absolute;
-  bottom: 0; right: 0;
-  width: 100%; height: 1px;
-  background: var(--blue);
-  transform: scaleX(0);
-  transform-origin: right;
-  transition: transform 0.3s;
-}
-.cat-card:hover { border-color: var(--border); background: var(--bg4); transform: translateY(-2px); }
-.cat-card:hover::after { transform: scaleX(1); }
-.cat-icon {
-  width: 40px; height: 40px;
-  background: var(--blue-glow);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  display: flex; align-items: center; justify-content: center;
-  color: var(--blue);
-  font-size: 18px;
-  margin-bottom: 14px;
-}
-.cat-name { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 4px; }
-.cat-count { font-size: 12px; color: var(--text3); }
-.cat-arrow { position: absolute; top: 20px; left: 20px; color: var(--text3); font-size: 14px; opacity: 0; transition: opacity 0.2s; }
-.cat-card:hover .cat-arrow { opacity: 1; color: var(--blue); }
-
-/* PRODUCTS */
-.products-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-}
-.prod-card {
-  background: var(--bg3);
-  border: 1px solid var(--border2);
-  border-radius: 10px;
-  overflow: hidden;
-  transition: all 0.25s;
-  display: flex;
-  flex-direction: column;
-}
-.prod-card:hover { border-color: var(--border); transform: translateY(-3px); }
-.prod-img {
-  background: #fff;
-  height: 220px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  border-bottom: 1px solid var(--border2);
-  overflow: hidden;
-}
-.prod-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.4s;
-}
-.prod-card:hover .prod-img img { transform: scale(1.05); }
-.prod-badge {
-  position: absolute;
-  top: 12px; right: 12px;
-  font-size: 10px;
-  font-family: 'Rajdhani', sans-serif;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  background: var(--blue-glow);
-  color: var(--blue);
-  border: 1px solid var(--border);
-  padding: 3px 8px;
-  border-radius: 2px;
-  backdrop-filter: blur(4px);
-}
-.prod-body { padding: 16px; display: flex; flex-direction: column; flex: 1; }
-.prod-name { font-size: 13px; color: var(--text); font-weight: 400; line-height: 1.5; margin-bottom: 14px; flex: 1; }
-.prod-footer { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
-.prod-price { font-family: 'Rajdhani', sans-serif; font-size: 22px; font-weight: 600; color: var(--blue); }
-.prod-stock { font-size: 11px; color: var(--accent); display:flex; align-items:center; gap:5px; }
-.prod-stock::before { content:''; width:6px; height:6px; border-radius:50%; background: var(--accent); box-shadow:0 0 6px var(--accent); }
-.prod-order {
-  width: 100%;
-  background: var(--wa);
-  color: #fff;
-  border: none;
-  padding: 11px;
-  font-size: 13px;
-  font-weight: 500;
-  border-radius: 6px;
-  cursor: pointer;
-  font-family: 'Noto Sans Hebrew', sans-serif;
-  transition: all 0.2s;
-  display: flex; align-items: center; justify-content: center; gap: 8px;
-}
-.prod-order:hover { background: #1fb855; transform: translateY(-1px); }
-
-/* FEATURES */
-.features-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-}
-.feat-card {
-  background: var(--bg3);
-  border: 1px solid var(--border2);
-  border-radius: 10px;
-  padding: 28px 24px;
-}
-.feat-num {
-  font-family: 'Rajdhani', sans-serif;
-  font-size: 36px;
-  font-weight: 700;
-  color: var(--blue-dim);
-  margin-bottom: 14px;
-  line-height: 1;
-}
-.feat-title { font-size: 15px; font-weight: 500; color: var(--text); margin-bottom: 10px; }
-.feat-desc { font-size: 13px; color: var(--text2); line-height: 1.7; }
-
-/* CTA BAND */
-.cta-band {
-  position: relative;
-  z-index: 1;
-  margin: 0 40px 72px;
-  background: var(--bg3);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 48px 48px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-  flex-wrap: wrap;
-  overflow: hidden;
-}
-.cta-band::before {
-  content: '';
-  position: absolute;
-  top: 0; right: 0;
-  width: 300px; height: 300px;
-  background: radial-gradient(circle, rgba(58,159,255,0.07) 0%, transparent 70%);
-}
-.cta-text h2 { font-size: 26px; font-weight: 300; color: var(--text); margin-bottom: 8px; }
-.cta-text h2 strong { font-weight: 500; color: var(--blue); }
-.cta-text p { font-size: 14px; color: var(--text2); }
-.cta-band .hero-btns { position: relative; }
-
-/* CONTACT */
-.contact-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-}
-.contact-card {
-  background: var(--bg3);
-  border: 1px solid var(--border2);
-  border-radius: 10px;
-  padding: 28px 24px;
-  text-align: center;
-  text-decoration: none;
-  color: var(--text);
-  transition: all 0.25s;
-  display: block;
-}
-.contact-card:hover { border-color: var(--border); transform: translateY(-3px); }
-.contact-icon { font-size: 28px; margin-bottom: 12px; }
-.contact-label { font-size: 13px; color: var(--text3); margin-bottom: 6px; }
-.contact-val { font-size: 15px; font-weight: 500; color: var(--blue); }
-
-/* FOOTER */
-footer {
-  position: relative;
-  z-index: 1;
-  background: var(--bg2);
-  border-top: 1px solid var(--border2);
-  padding: 32px 40px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-.footer-logo {
-  font-family: 'Rajdhani', sans-serif;
-  font-size: 18px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--text);
-}
-.footer-logo span { color: var(--blue); }
-.footer-links { display: flex; gap: 24px; font-size: 12px; color: var(--text3); flex-wrap: wrap; }
-.footer-links a { color: inherit; text-decoration: none; }
-.footer-links a:hover { color: var(--blue); }
-.footer-copy { font-size: 12px; color: var(--text3); }
-
-/* WHATSAPP FLOAT */
-.wa-float {
-  position: fixed;
-  bottom: 24px; left: 24px;
-  width: 58px; height: 58px;
-  background: var(--wa);
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 4px 16px rgba(37,211,102,0.4);
-  z-index: 200;
-  text-decoration: none;
-  transition: transform 0.2s;
-  animation: waPulse 2.5s infinite;
-}
-.wa-float:hover { transform: scale(1.1); animation: none; }
-.wa-float svg { width: 32px; height: 32px; fill: #fff; }
-
-/* ANIMATIONS */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.3; }
-}
-@keyframes scan {
-  0% { top: 0; }
-  100% { top: 100%; }
-}
-@keyframes waPulse {
-  0% { box-shadow: 0 4px 16px rgba(37,211,102,0.4), 0 0 0 0 rgba(37,211,102,0.6); }
-  70% { box-shadow: 0 4px 16px rgba(37,211,102,0.4), 0 0 0 16px rgba(37,211,102,0); }
-  100% { box-shadow: 0 4px 16px rgba(37,211,102,0.4), 0 0 0 0 rgba(37,211,102,0); }
-}
-
-/* ============ RESPONSIVE ============ */
-@media (max-width: 1100px) {
-  .hero-visual { width: 340px; left: 30px; opacity: 0.85; }
-  .hero-content { max-width: 460px; }
-}
-@media (max-width: 900px) {
-  nav { padding: 0 20px; }
-  .nav-links {
-    position: fixed;
-    top: 60px; right: 0; left: 0;
-    background: rgba(8,10,15,0.98);
-    backdrop-filter: blur(16px);
-    flex-direction: column;
-    gap: 0;
-    border-bottom: 1px solid var(--border);
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
-  }
-  .nav-links.open { max-height: 320px; }
-  .nav-links li { width: 100%; border-bottom: 1px solid var(--border2); }
-  .nav-links a { display: block; padding: 16px 20px; font-size: 15px; }
-  .nav-burger { display: flex; }
-  .nav-cta { display: none; }
-
-  .hero { padding: 48px 20px 56px; min-height: auto; }
-  .hero-visual {
-    position: relative;
-    left: auto; top: auto;
-    transform: none;
-    width: 100%;
-    max-width: 420px;
-    margin: 36px auto 0;
-  }
-  .hero { flex-direction: column; align-items: stretch; }
-  .hero-content { max-width: 100%; }
-  .hero h1 { font-size: 40px; }
-
-  .cats-grid { grid-template-columns: repeat(2, 1fr); }
-  .products-grid { grid-template-columns: repeat(2, 1fr); }
-  .features-grid { grid-template-columns: 1fr; }
-  .contact-grid { grid-template-columns: 1fr; }
-  .trust-bar { gap: 24px 32px; padding: 18px 20px; }
-  section { padding: 56px 20px; }
-  .cta-band { margin: 0 20px 56px; padding: 32px 24px; flex-direction: column; align-items: flex-start; text-align: right; }
-  footer { flex-direction: column; text-align: center; }
-}
-@media (max-width: 520px) {
-  .hero h1 { font-size: 32px; }
-  .hero-stats { gap: 24px; }
-  .stat-num { font-size: 22px; }
-  .section-title { font-size: 24px; }
-  .products-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
-  .prod-img { height: 150px; }
-  .prod-name { font-size: 12px; }
-  .prod-price { font-size: 18px; }
-  .prod-order { font-size: 12px; padding: 9px; }
-  .trust-bar { gap: 14px 20px; }
-  .trust-item { font-size: 12px; width: 44%; }
-  .hero-btns .btn-primary, .hero-btns .btn-secondary { flex: 1; justify-content: center; }
-}
-</style>
+</script>
 </head>
 <body>
 
-<nav>
-  <a href="#top" class="nav-logo" style="text-decoration:none">
-    <div class="nav-logo-icon">&#9673;</div>
-    Safe<span>View</span>
-  </a>
-  <ul class="nav-links" id="navLinks">
-    <li><a href="#products">מוצרים</a></li>
-    <li><a href="#categories">קטגוריות</a></li>
-    <li><a href="#features">למה אנחנו</a></li>
-    <li><a href="#contact">צור קשר</a></li>
-  </ul>
-  <button class="nav-cta" onclick="document.getElementById('products').scrollIntoView()">לרכישה עכשיו</button>
-  <button class="nav-burger" id="burger" aria-label="תפריט">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
+<div id="nav-mount"></div>
 
 <section class="hero" id="top">
   <div class="hero-orb"></div>
@@ -690,25 +38,15 @@ footer {
       <a class="btn-secondary" href="#features">למה SafeView?</a>
     </div>
     <div class="hero-stats">
-      <div>
-        <span class="stat-num">9<span>+</span></span>
-        <div class="stat-label">דגמים בחנות</div>
-      </div>
-      <div>
-        <span class="stat-num">2K<span>–</span>8K</span>
-        <div class="stat-label">רזולוציה</div>
-      </div>
-      <div>
-        <span class="stat-num">24<span>/7</span></span>
-        <div class="stat-label">תמיכה בעברית</div>
-      </div>
+      <div><span class="stat-num">9<span>+</span></span><div class="stat-label">דגמים בחנות</div></div>
+      <div><span class="stat-num">2K<span>–</span>8K</span><div class="stat-label">רזולוציה</div></div>
+      <div><span class="stat-num">24<span>/7</span></span><div class="stat-label">תמיכה בעברית</div></div>
     </div>
   </div>
-
   <div class="hero-visual">
     <div class="cam-card">
       <div class="cam-screen">
-        <img src="https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S3d0de0a565ab48b993427b57182989a0e.webp?v=1780222615" alt="מצלמת אבטחה SafeView" style="width:100%;height:100%;object-fit:cover;">
+        <img src="https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S3d0de0a565ab48b993427b57182989a0e.webp?v=1780222615" alt="מצלמת אבטחה SafeView">
         <div class="cam-scan"></div>
         <div class="cam-live">LIVE</div>
       </div>
@@ -723,177 +61,150 @@ footer {
 </section>
 
 <div class="trust-bar">
-  <div class="trust-item"><div class="trust-icon">&#128666;</div>משלוח מהיר לכל הארץ</div>
-  <div class="trust-item"><div class="trust-icon">&#128737;</div>אחריות מלאה לשנה</div>
-  <div class="trust-item"><div class="trust-icon">&#128172;</div>תמיכה בעברית 24/7</div>
-  <div class="trust-item"><div class="trust-icon">&#128274;</div>תשלום מאובטח 100%</div>
+  <div class="trust-item"><span class="trust-icon" id="ti1"></span>משלוח מהיר לכל הארץ</div>
+  <div class="trust-item"><span class="trust-icon" id="ti2"></span>אחריות מלאה לשנה</div>
+  <div class="trust-item"><span class="trust-icon" id="ti3"></span>תמיכה בעברית 24/7</div>
+  <div class="trust-item"><span class="trust-icon" id="ti4"></span>תשלום מאובטח 100%</div>
 </div>
 
-<section id="categories">
+<section id="categories" class="reveal">
   <div class="section-label">// קטגוריות</div>
   <div class="section-title">מצא את <strong>המצלמה המושלמת</strong></div>
   <div class="section-sub">בחר לפי צורך – סולארי, פנימי, חיצוני או מיני</div>
-  <div class="cats-grid">
-    <div class="cat-card" onclick="document.getElementById('products').scrollIntoView()">
-      <div class="cat-icon">&#9728;</div>
-      <div class="cat-name">מצלמות סולאריות</div>
-      <div class="cat-count">3 מוצרים</div>
-      <div class="cat-arrow">←</div>
-    </div>
-    <div class="cat-card" onclick="document.getElementById('products').scrollIntoView()">
-      <div class="cat-icon">&#127968;</div>
-      <div class="cat-name">מצלמות אינדור</div>
-      <div class="cat-count">2 מוצרים</div>
-      <div class="cat-arrow">←</div>
-    </div>
-    <div class="cat-card" onclick="document.getElementById('products').scrollIntoView()">
-      <div class="cat-icon">&#127970;</div>
-      <div class="cat-name">מצלמות אאוטדור</div>
-      <div class="cat-count">2 מוצרים</div>
-      <div class="cat-arrow">←</div>
-    </div>
-    <div class="cat-card" onclick="document.getElementById('products').scrollIntoView()">
-      <div class="cat-icon">&#128247;</div>
-      <div class="cat-name">מצלמות מיני</div>
-      <div class="cat-count">2 מוצרים</div>
-      <div class="cat-arrow">←</div>
-    </div>
-  </div>
+  <div class="cats-grid" id="catsGrid"></div>
 </section>
 
-<section id="products" style="padding-top:0">
+<section id="products" class="reveal" style="padding-top:0">
   <div class="section-label">// כל המצלמות</div>
   <div class="section-title">המוצרים <strong>שלנו</strong></div>
-  <div class="section-sub">לחצו "הזמן בוואטסאפ" וקבלו מענה אישי מיידי</div>
+  <div class="section-sub">הוסיפו לעגלה או הזמינו ישירות בוואטסאפ — מענה אישי מיידי</div>
   <div class="products-grid" id="productsGrid"></div>
 </section>
 
-<section id="features" style="padding-top:0">
+<section id="bundles" class="reveal" style="padding-top:0">
+  <div class="section-label">// חבילות במבצע</div>
+  <div class="section-title">חסכו עם <strong>חבילות אבטחה</strong></div>
+  <div class="section-sub">שילובים מוכנים מראש במחיר משתלם — חוסכים לעומת רכישה בנפרד</div>
+  <div class="bundles-grid" id="bundlesGrid"></div>
+</section>
+
+<section id="features" class="reveal" style="padding-top:0">
   <div class="section-label">// למה SafeView?</div>
   <div class="section-title">יתרונות <strong>שמבדילים אותנו</strong></div>
   <div class="section-sub">טכנולוגיה מתקדמת עם פשטות השימוש</div>
   <div class="features-grid">
-    <div class="feat-card">
-      <div class="feat-num">01</div>
-      <div class="feat-title">חיבור WiFi / 4G / סולארי</div>
-      <div class="feat-desc">מגוון חיבורים לכל מצב – גם במקומות ללא חשמל או אינטרנט. אפליקציה חכמה לניהול מרחוק בכל זמן ומכל מקום.</div>
-    </div>
-    <div class="feat-card">
-      <div class="feat-num">02</div>
-      <div class="feat-title">ראיית לילה צבעונית</div>
-      <div class="feat-desc">טכנולוגיית LED מתקדמת לתמונה ברורה וצבעונית גם בחושך מוחלט – לא שחור-לבן.</div>
-    </div>
-    <div class="feat-card">
-      <div class="feat-num">03</div>
-      <div class="feat-title">הגדרה תוך 5 דקות</div>
-      <div class="feat-desc">התקנה פשוטה בלי טכנאי ובלי כבלים. סורקים קוד QR והמצלמה מתחילה לעבוד מיד.</div>
-    </div>
+    <div class="feat-card"><div class="feat-num">01</div><div class="feat-title">חיבור WiFi / 4G / סולארי</div><div class="feat-desc">מגוון חיבורים לכל מצב – גם במקומות ללא חשמל או אינטרנט. אפליקציה חכמה לניהול מרחוק בכל זמן ומכל מקום.</div></div>
+    <div class="feat-card"><div class="feat-num">02</div><div class="feat-title">ראיית לילה צבעונית</div><div class="feat-desc">טכנולוגיית LED מתקדמת לתמונה ברורה וצבעונית גם בחושך מוחלט – לא שחור-לבן.</div></div>
+    <div class="feat-card"><div class="feat-num">03</div><div class="feat-title">הגדרה תוך 5 דקות</div><div class="feat-desc">התקנה פשוטה בלי טכנאי ובלי כבלים. סורקים קוד QR והמצלמה מתחילה לעבוד מיד.</div></div>
   </div>
 </section>
 
-<div class="cta-band">
+<section id="guarantee" class="reveal" style="padding-top:0">
+  <div class="section-label">// ההבטחה שלנו</div>
+  <div class="section-title">קונים <strong>בראש שקט</strong></div>
+  <div class="section-sub">כל רכישה ב-SafeView מגיעה עם ההתחייבויות האלה</div>
+  <div class="guarantee-grid" id="guaranteeGrid"></div>
+</section>
+
+<section id="faq" class="reveal" style="padding-top:0">
+  <div class="section-label">// שאלות נפוצות</div>
+  <div class="section-title">כל מה <strong>שרציתם לדעת</strong></div>
+  <div class="section-sub">לא מצאתם תשובה? דברו איתנו בוואטסאפ</div>
+  <div class="faq-wrap" id="faqWrap"></div>
+</section>
+
+<div class="cta-band reveal">
   <div class="cta-text">
     <h2>מוכן להגן על <strong>הבית שלך?</strong></h2>
     <p>דברו איתנו בוואטסאפ – נעזור לכם לבחור את המצלמה המתאימה בדיוק עבורכם</p>
   </div>
   <div class="hero-btns">
     <a class="btn-primary" href="#products">לכל המצלמות ←</a>
-    <a class="btn-secondary" id="ctaWa" href="#">צור קשר בוואטסאפ</a>
+    <a class="btn-wa" id="ctaWa" href="#">צור קשר בוואטסאפ</a>
   </div>
 </div>
 
-<section id="contact" style="padding-top:0">
-  <div class="section-label">// צור קשר</div>
-  <div class="section-title">כאן <strong>בשבילכם</strong></div>
-  <div class="section-sub">צוות SafeView זמין למענה מהיר בעברית</div>
-  <div class="contact-grid">
-    <a class="contact-card" id="contactWa" href="#">
-      <div class="contact-icon">&#128172;</div>
-      <div class="contact-label">וואטסאפ (הכי מהיר)</div>
-      <div class="contact-val">שלחו הודעה →</div>
-    </a>
-    <a class="contact-card" href="mailto:info@safeview.co.il">
-      <div class="contact-icon">&#9993;</div>
-      <div class="contact-label">אימייל</div>
-      <div class="contact-val">info@safeview.co.il</div>
-    </a>
-    <div class="contact-card">
-      <div class="contact-icon">&#128340;</div>
-      <div class="contact-label">שעות פעילות</div>
-      <div class="contact-val">א'-ה' 09:00-18:00</div>
-    </div>
-  </div>
-</section>
+<div id="footer-mount"></div>
 
-<footer>
-  <div class="footer-logo">Safe<span>View</span></div>
-  <div class="footer-links">
-    <a href="#products">מוצרים</a>
-    <a href="#categories">קטגוריות</a>
-    <a href="#features">למה אנחנו</a>
-    <a href="#contact">צור קשר</a>
-  </div>
-  <div class="footer-copy">© 2026 SafeView. כל הזכויות שמורות.</div>
-</footer>
-
-<a class="wa-float" id="waFloat" href="#" target="_blank" rel="noopener" aria-label="וואטסאפ">
-  <svg viewBox="0 0 32 32"><path d="M16 3C9 3 3.5 8.5 3.5 15.5c0 2.4.7 4.7 1.9 6.7L3 29l7-1.8c1.9 1 4 1.6 6 1.6 7 0 12.5-5.5 12.5-12.5S23 3 16 3zm0 22.8c-1.8 0-3.6-.5-5.1-1.4l-.4-.2-4.2 1.1 1.1-4-.3-.4a10.3 10.3 0 01-1.6-5.5c0-5.7 4.7-10.4 10.5-10.4S26.5 9.8 26.5 15.5 21.8 25.8 16 25.8zm5.8-7.8c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.2-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.3.4-.6.1-.2 0-.4 0-.6l-1-2.3c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.3 5.2 4.6.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.9-.8 2.1-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.2-.6-.4z"/></svg>
-</a>
-
+<script src="assets/app.js"></script>
 <script>
-  // ===== הגדרת מספר וואטסאפ =====
-  // החלף את המספר למספר העסק שלך בפורמט בינלאומי ללא + וללא 0 בהתחלה
-  // לדוגמה: 0501234567 ישראלי → '972501234567'
-  var WA_NUMBER = '972586343786';
+  // אייקוני trust bar
+  document.getElementById('ti1').innerHTML = ICON.truck;
+  document.getElementById('ti2').innerHTML = ICON.shield;
+  document.getElementById('ti3').innerHTML = ICON.chat;
+  document.getElementById('ti4').innerHTML = ICON.lock;
 
-  function waLink(text){
-    return 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(text);
-  }
-
-  // ===== מוצרים =====
-  var PRODUCTS = [
-    { name:'מצלמת אבטחה סולארית 20MP | 360° | 4G | IP66', price:405, badge:'סולארי', img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S8924d13a697e4df5908c2861b8f886b9p.webp?v=1780222611' },
-    { name:'מצלמת אבטחה סולארית Baseus S1 Lite | 2K | IP67', price:232, badge:'סולארי', img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sb99a1e51ba0546c293772a41243fa232M.webp?v=1780222614' },
-    { name:'מצלמת אבטחה סולארית חיצונית 3MP | זיהוי AI | IP65', price:102, badge:'סולארי', img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S11c4aabf01be4261982b94a7be532532H.webp?v=1780222615' },
-    { name:'מצלמת אבטחה פנימית 2K | AI + שיחה דו-כיוונית | Blurams', price:45, badge:'אינדור', img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sa514dbb7266a4564936a4b980a3f13f5M.webp?v=1780222612' },
-    { name:'מצלמת אבטחה חיצונית 16MP 8K | 360° | 4 עדשות', price:356, badge:'פלאגשיפ', img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S3d0de0a565ab48b993427b57182989a0e.webp?v=1780222615' },
-    { name:'מצלמת WiFi חיצונית | עדשה כפולה 3MP | ICSee', price:71, badge:'אאוטדור', img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Saa99283cf09d4592a7c33ced52d81019B.webp?v=1780222614' },
-    { name:'מצלמת אבטחה WiFi | אינפרא-אדום | Smart Home', price:35, badge:'אאוטדור', img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S9a4b640268a140399e446738c30b95d4p.webp?v=1780222615' },
-    { name:'מצלמת מיני אלחוטית 1080P | ראיית לילה', price:39, badge:'מיני', img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S68e20b3917ca422eb8255d53f414f757F.webp?v=1780222612' },
-    { name:'מצלמת מיני 4K WiFi | ניטור פנימי חכם', price:29, badge:'מיני', img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S92a865b3286d42b8b447e7f041978ca6b.webp?v=1780222616' }
+  // קטגוריות
+  var CATS = [
+    ['סולאריות', ICON.sun, 3], ['אינדור', ICON.home, 2], ['אאוטדור', ICON.building, 2], ['מיני', ICON.cam, 2]
   ];
+  document.getElementById('catsGrid').innerHTML = CATS.map(function(c){
+    return '<a class="cat-card" href="#products"><span class="cat-icon">'+c[1]+'</span><div class="cat-name">מצלמות '+c[0]+'</div><div class="cat-count">'+c[2]+' מוצרים</div><div class="cat-arrow">←</div></a>';
+  }).join('');
 
-  function renderProducts(){
-    var grid = document.getElementById('productsGrid');
-    grid.innerHTML = PRODUCTS.map(function(p){
-      var msg = 'שלום SafeView! 👋 אני מעוניין/ת במצלמה: ' + p.name + ' (₪' + p.price + '). אפשר פרטים?';
-      return '<div class="prod-card">' +
-        '<div class="prod-img"><img src="'+p.img+'" alt="'+p.name+'" loading="lazy"><div class="prod-badge">'+p.badge+'</div></div>' +
-        '<div class="prod-body">' +
-          '<div class="prod-name">'+p.name+'</div>' +
-          '<div class="prod-footer"><span class="prod-price">₪'+p.price+'</span><span class="prod-stock">במלאי</span></div>' +
-          '<a class="prod-order" href="'+waLink(msg)+'" target="_blank" rel="noopener">' +
-            '<svg viewBox="0 0 32 32" style="width:16px;height:16px;fill:#fff"><path d="M16 3C9 3 3.5 8.5 3.5 15.5c0 2.4.7 4.7 1.9 6.7L3 29l7-1.8c1.9 1 4 1.6 6 1.6 7 0 12.5-5.5 12.5-12.5S23 3 16 3z"/></svg>' +
-            'הזמן בוואטסאפ</a>' +
+  // מוצרים
+  document.getElementById('productsGrid').innerHTML = PRODUCTS.map(function(p){
+    var msg = 'שלום SafeView! 👋 אני מעוניין/ת במצלמה: ' + p.name + ' (' + fmt(p.price) + '). אפשר פרטים?';
+    return '<div class="prod-card">' +
+      '<div class="prod-img"><a href="product.html?id='+p.id+'"><img src="'+p.img+'" alt="'+p.name+'" loading="lazy"></a><div class="prod-badge">'+p.badge+'</div></div>' +
+      '<div class="prod-body">' +
+        '<a class="prod-name" href="product.html?id='+p.id+'">'+p.name+'</a>' +
+        '<div class="prod-footer"><span class="prod-price">'+fmt(p.price)+'</span><span class="prod-stock">במלאי</span></div>' +
+        '<div class="prod-actions">' +
+          '<button class="prod-add" onclick="addToCart(\''+p.id+'\')">הוסף לעגלה</button>' +
+          '<a class="prod-order" href="'+waLink(msg)+'" target="_blank" rel="noopener" aria-label="הזמן בוואטסאפ">'+ICON.wa+'</a>' +
         '</div>' +
-      '</div>';
-    }).join('');
-  }
-  renderProducts();
+      '</div>' +
+    '</div>';
+  }).join('');
 
-  // ===== קישורי וואטסאפ כלליים =====
-  var generalMsg = 'שלום SafeView! 👋 אני מעוניין/ת לקבל ייעוץ לבחירת מצלמת אבטחה.';
-  document.getElementById('waFloat').href = waLink(generalMsg);
-  document.getElementById('ctaWa').href = waLink(generalMsg);
-  document.getElementById('contactWa').href = waLink(generalMsg);
+  // חבילות
+  var BUNDLES = [
+    { tag:'הכי פופולרי', name:'חבילת אבטחה לבית', items:['מצלמה פנימית 2K עם AI','מצלמה סולארית חיצונית 3MP','מדריכי התקנה בעברית'], now:179, old:229,
+      msg:'שלום! אני מעוניין/ת בחבילת אבטחה לבית (₪179)' },
+    { tag:'משתלם לעסקים', name:'חבילת אבטחה לעסק', items:['3 מצלמות סולאריות 3MP','מצלמת פלאגשיפ 16MP 8K','תמיכה מועדפת לעסקים'], now:899, old:1149,
+      msg:'שלום! אני מעוניין/ת בחבילת אבטחה לעסק (₪899)' },
+    { tag:'למתחילים', name:'חבילת מתחילים', items:['2 מצלמות מיני אלחוטיות','ראיית לילה וזיהוי תנועה','אחריות מלאה לשנה'], now:89, old:119,
+      msg:'שלום! אני מעוניין/ת בחבילת מתחילים (₪89)' }
+  ];
+  document.getElementById('bundlesGrid').innerHTML = BUNDLES.map(function(b){
+    return '<div class="bundle-card">' +
+      '<div class="bundle-tag">'+b.tag+'</div>' +
+      '<div class="bundle-name">'+b.name+'</div>' +
+      '<ul class="bundle-list">'+b.items.map(function(i){ return '<li>'+i+'</li>'; }).join('')+'</ul>' +
+      '<div class="bundle-price"><span class="bundle-now">'+fmt(b.now)+'</span><span class="bundle-old">'+fmt(b.old)+'</span></div>' +
+      '<a class="btn-wa" href="'+waLink(b.msg)+'" target="_blank" rel="noopener">'+ICON.wa+' הזמן חבילה</a>' +
+    '</div>';
+  }).join('');
 
-  // ===== תפריט מובייל =====
-  document.getElementById('burger').addEventListener('click', function(){
-    document.getElementById('navLinks').classList.toggle('open');
-  });
-  document.querySelectorAll('#navLinks a').forEach(function(a){
-    a.addEventListener('click', function(){ document.getElementById('navLinks').classList.remove('open'); });
-  });
+  // הבטחות
+  var GUAR = [
+    [ICON.truck,'משלוח חינם מעל ₪200','משלוח מהיר 3-7 ימי עסקים לכל הארץ'],
+    [ICON.shield,'אחריות מלאה לשנה','אחריות יצרן על כל מוצר + תמיכה טכנית'],
+    [ICON.refresh,'14 ימי החזרה','לא מרוצים? מחזירים את הכסף ללא שאלות'],
+    [ICON.lock,'תשלום מאובטח','הצפנת SSL ואמצעי תשלום מאובטחים']
+  ];
+  document.getElementById('guaranteeGrid').innerHTML = GUAR.map(function(g){
+    return '<div class="guarantee-card"><div class="guarantee-icon">'+g[0]+'</div><div class="guarantee-title">'+g[1]+'</div><div class="guarantee-desc">'+g[2]+'</div></div>';
+  }).join('');
+
+  // FAQ
+  var FAQ = [
+    ['האם צריך אינטרנט למצלמות?','רוב המצלמות פועלות עם WiFi ביתי. המצלמה הסולארית עם 4G יכולה לעבוד גם ללא WiFi בעזרת כרטיס SIM — מושלם למקומות מרוחקים.'],
+    ['כמה זמן לוקח המשלוח?','משלוח רגיל 3-7 ימי עסקים לכל הארץ. משלוח חינם בהזמנה מעל ₪200.'],
+    ['האם קשה להתקין?','ממש לא! ההתקנה פשוטה — מחברים לחשמל או סולאר, מורידים את האפליקציה וסורקים קוד QR. מדריך התקנה בעברית מצורף.'],
+    ['האם יש אחריות?','כן, כל המוצרים מגיעים עם אחריות יצרן מלאה ל-12 חודשים + תמיכה טכנית בעברית.'],
+    ['איך מזמינים?','אפשר להוסיף לעגלה ולשלוח את ההזמנה בוואטסאפ, או ללחוץ על "הזמן בוואטסאפ" בכל מוצר לקבלת מענה אישי מיידי.']
+  ];
+  document.getElementById('faqWrap').innerHTML = FAQ.map(function(f){
+    return '<div class="faq-item"><button class="faq-q">'+f[0]+'</button><div class="faq-a"><div class="faq-a-inner">'+f[1]+'</div></div></div>';
+  }).join('');
+
+  // CTA whatsapp
+  document.getElementById('ctaWa').href = waLink('שלום SafeView! 👋 אני מעוניין/ת בייעוץ לבחירת מצלמת אבטחה.');
+
+  // re-init dynamic widgets
+  initFaq();
 </script>
 
 </body>

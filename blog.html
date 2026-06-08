@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>מדריכים וטיפים | SafeView</title>
+<meta name="description" content="מדריכים מקצועיים לבחירה, התקנה ושימוש במצלמות אבטחה – הבלוג של SafeView.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Noto+Sans+Hebrew:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  .article { max-width: 900px; margin: 0 auto; }
+  .article-card { background: var(--bg3); border: 1px solid var(--border2); border-radius: 10px; padding: 28px; margin-bottom: 16px; }
+  .article-card h2 { font-size: 20px; color: var(--text); margin-bottom: 10px; }
+  .article-meta { font-size: 12px; color: var(--text3); margin-bottom: 14px; font-family: 'Rajdhani', sans-serif; letter-spacing: 1px; }
+  .article-card p { color: var(--text2); line-height: 1.8; margin-bottom: 10px; }
+  .article-card ul { color: var(--text2); margin: 0 20px 10px 0; padding-right: 20px; line-height: 1.8; }
+  .article-card details { margin-top: 6px; }
+  .article-card summary { color: var(--blue); cursor: pointer; font-size: 14px; }
+</style>
+</head>
+<body>
+<div id="nav-mount"></div>
+<div class="page-head"><h1>מדריכים ו<strong>טיפים</strong></h1><p>כל מה שצריך לדעת על מצלמות אבטחה — מהמומחים של SafeView</p></div>
+<section style="padding-top:32px">
+  <div class="article" id="articles"></div>
+</section>
+<div id="footer-mount"></div>
+<script src="assets/app.js"></script>
+<script>
+  var ARTICLES = [
+    { t:'איך לבחור מצלמת אבטחה לבית? מדריך מלא 2026', d:'יוני 2026',
+      body:'<p>בחירת מצלמה יכולה לבלבל — הנה מה שחשוב לדעת:</p><ul><li><strong>רזולוציה:</strong> לבית מספיק 2K/3MP. לכניסות ושטחים גדולים — 4K/16MP.</li><li><strong>חיבור:</strong> WiFi לבית רגיל, 4G למקומות ללא אינטרנט, סולארי כשאין חשמל.</li><li><strong>ראיית לילה:</strong> צבעונית עדיפה — מזהים צבעי בגדים גם בחושך.</li><li><strong>זיהוי AI:</strong> מבדיל בין אדם לחיה ומונע התראות שווא.</li><li><strong>עמידות:</strong> לחוץ דרשו לפחות IP65.</li></ul>' },
+    { t:'מצלמה סולארית מול מצלמה רגילה — מה עדיף?', d:'יוני 2026',
+      body:'<p>מצלמה סולארית מתאימה כשאין גישה לחשמל, חוסכת בחשבון החשמל ומותקנת בכל מקום. מצלמה רגילה (קווית) עדיפה כשצריך הקלטה רציפה 24/7 באיכות הגבוהה ביותר. לרוב הלקוחות הפרטיים — הסולארית היא הבחירה החכמה.</p>' },
+    { t:'מצלמת אבטחה לעסק — המדריך המלא', d:'יוני 2026',
+      body:'<p>מפו את הנקודות הקריטיות: כניסה ראשית, קופה, מחסן וחניה. עסק קטן מסתפק ב-2-4 מצלמות. בחרו רזולוציה גבוהה לזיהוי פנים ומספרי רכב, וודאו גיבוי הקלטות בענן למקרה שמצלמה נגנבת.</p>' },
+    { t:'מצלמת אינדור לתינוקות ולחיות מחמד', d:'יוני 2026',
+      body:'<p>חפשו שמע דו-כיווני (לדבר ולהרגיע מרחוק), ראיית לילה, והתראות תנועה/בכי. מקמו את המצלמה בגובה שמציג זווית רחבה וודאו חיבור WiFi יציב לצפייה רציפה.</p>' },
+    { t:'7 טיפים להתקנת מצלמת אבטחה נכונה', d:'יוני 2026',
+      body:'<ul><li>גובה התקנה 2.5-3 מטר</li><li>הימנעו מתאורה ישירה מול העדשה</li><li>כסו נקודות כניסה — דלתות וחלונות</li><li>ודאו WiFi יציב במקום</li><li>גבו הקלטות (SD/ענן)</li><li>עדכנו קושחה</li><li>בדקו את המערכת מדי חודש</li></ul>' }
+  ];
+  document.getElementById('articles').innerHTML = ARTICLES.map(function(a){
+    return '<div class="article-card"><div class="article-meta">// '+a.d+'</div><h2>'+a.t+'</h2>'+a.body+'</div>';
+  }).join('') +
+  '<div class="article-card" style="text-align:center;border-color:var(--border)"><p>רוצים ייעוץ אישי לבחירת מצלמה?</p><a class="btn-wa" id="blogWa" href="#" style="margin-top:8px">דברו איתנו בוואטסאפ ←</a></div>';
+  document.getElementById('blogWa').href = waLink('שלום SafeView! 👋 אני רוצה ייעוץ לבחירת מצלמה.');
+</script>
+</body>
+</html>
