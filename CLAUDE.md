@@ -13,7 +13,8 @@
 יש **שני חלקים נפרדים** לפרויקט — אל תבלבל ביניהם:
 
 ### 1. אתר HTML עצמאי (זה ה-repo הזה) 🟢
-- קובץ ראשי: **`safeview_darktech.html`** — אתר מלא בעברית, vanilla HTML/CSS/JS, ללא פלטפורמה.
+- קובץ ראשי: **`index.html`** — אתר מלא בעברית, vanilla HTML/CSS/JS, ללא פלטפורמה (לשעבר `safeview_darktech.html`).
+- מספר וואטסאפ: מוגדר כמשתנה `WA_NUMBER` בראש ה-`<script>` ב-`index.html` — צריך להחליף ל-`972XXXXXXXXX`.
 - סגנון עיצוב: **"Dark Tech"** (רקע כהה #080a0f, כחול זוהר #3a9fff, פונטים Rajdhani + Noto Sans Hebrew). הפלטה המלאה ב-`SafeView_CONTEXT.md` סעיף 3.
 - פותחים אותו בלחיצה כפולה בדפדפן — לא צריך שרת.
 
