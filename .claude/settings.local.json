@@ -1,0 +1,30 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__aa6bbd5e-9ca3-4339-9de3-bfba17c27da1__get-shop-info",
+      "mcp__aa6bbd5e-9ca3-4339-9de3-bfba17c27da1__search_products",
+      "mcp__aa6bbd5e-9ca3-4339-9de3-bfba17c27da1__graphql_query",
+      "mcp__aa6bbd5e-9ca3-4339-9de3-bfba17c27da1__graphql_schema",
+      "mcp__aa6bbd5e-9ca3-4339-9de3-bfba17c27da1__graphql_mutation",
+      "Bash(Start-Sleep -Seconds 8)",
+      "mcp__aa6bbd5e-9ca3-4339-9de3-bfba17c27da1__validate_graphql_codeblocks",
+      "mcp__aa6bbd5e-9ca3-4339-9de3-bfba17c27da1__search_collections",
+      "mcp__52642ae5-7e07-4ac7-ab35-6a9460ecdcef__generate-design",
+      "mcp__52642ae5-7e07-4ac7-ab35-6a9460ecdcef__upload-asset-from-url",
+      "mcp__52642ae5-7e07-4ac7-ab35-6a9460ecdcef__create-design-from-candidate",
+      "mcp__52642ae5-7e07-4ac7-ab35-6a9460ecdcef__start-editing-transaction",
+      "mcp__52642ae5-7e07-4ac7-ab35-6a9460ecdcef__perform-editing-operations",
+      "mcp__52642ae5-7e07-4ac7-ab35-6a9460ecdcef__commit-editing-transaction",
+      "mcp__aa6bbd5e-9ca3-4339-9de3-bfba17c27da1__update-product",
+      "mcp__aa6bbd5e-9ca3-4339-9de3-bfba17c27da1__create-discount",
+      "mcp__52642ae5-7e07-4ac7-ab35-6a9460ecdcef__export-design",
+      "mcp__Claude_in_Chrome__list_connected_browsers",
+      "mcp__Claude_in_Chrome__tabs_create_mcp",
+      "mcp__Claude_in_Chrome__tabs_context_mcp",
+      "mcp__Claude_in_Chrome__navigate",
+      "mcp__Claude_in_Chrome__browser_batch",
+      "mcp__aa6bbd5e-9ca3-4339-9de3-bfba17c27da1__create-product",
+      "mcp__aa6bbd5e-9ca3-4339-9de3-bfba17c27da1__create-collection"
+    ]
+  }
+}
