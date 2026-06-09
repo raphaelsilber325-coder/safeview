@@ -280,7 +280,9 @@ section { position: relative; z-index: 1; padding: 72px 40px; }
 .pdp-spec span:first-child { color: var(--text3); }
 .pdp-spec span:last-child { color: var(--text); font-weight: 500; }
 .pdp-trust { background: var(--bg3); border: 1px solid var(--border2); border-radius: 10px; padding: 18px; }
-.pdp-trust div { font-size: 13px; color: var(--text2); padding: 5px 0; }
+.pdp-trust div { font-size: 13px; color: var(--text2); padding: 5px 0; display: flex; align-items: center; gap: 10px; }
+.pdp-trust-icon { display: inline-flex; width: 18px; height: 18px; color: var(--blue); flex-shrink: 0; }
+.pdp-trust-icon svg { width: 100%; height: 100%; fill: currentColor; }
 
 /* CART */
 .cart-wrap { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; padding: 48px 40px 72px; }

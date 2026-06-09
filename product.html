@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>מוצר | SafeView</title>
 <meta name="description" content="פרטי מצלמת אבטחה SafeView – מפרט מלא, מחיר והזמנה מהירה.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Noto+Sans+Hebrew:wght@300;400;500&display=swap" rel="stylesheet">
@@ -32,6 +33,25 @@
   var p = getProduct(id) || PRODUCTS[0];
   document.title = p.name + ' | SafeView';
 
+  // ===== Dynamic SEO meta (description, Open Graph, Product JSON-LD) =====
+  document.querySelector('meta[name="description"]').setAttribute('content', p.desc);
+  function addMeta(prop, val){
+    var m = document.createElement('meta'); m.setAttribute('property', prop); m.setAttribute('content', val); document.head.appendChild(m);
+  }
+  addMeta('og:title', p.name + ' | SafeView');
+  addMeta('og:description', p.desc);
+  addMeta('og:type', 'product');
+  addMeta('og:image', p.img);
+  addMeta('product:price:amount', String(p.price));
+  addMeta('product:price:currency', 'ILS');
+
+  var jsonLd = {
+    "@context":"https://schema.org","@type":"Product",
+    "name": p.name,"description": p.desc,"image": p.img,"category": p.cat,"brand":{"@type":"Brand","name":"SafeView"},
+    "offers":{"@type":"Offer","priceCurrency":"ILS","price": p.price,"availability":"https://schema.org/InStock","seller":{"@type":"Organization","name":"SafeView"}}
+  };
+  var s = document.createElement('script'); s.type = 'application/ld+json'; s.textContent = JSON.stringify(jsonLd); document.head.appendChild(s);
+
   var msg = 'שלום SafeView! 👋 אני מעוניין/ת במצלמה: ' + p.name + ' (' + fmt(p.price) + '). אפשר פרטים?';
 
   document.getElementById('pdp').innerHTML =
@@ -47,10 +67,10 @@
       '</div>' +
       '<div class="pdp-specs">'+p.specs.map(function(s){ return '<div class="pdp-spec"><span>'+s[0]+'</span><span>'+s[1]+'</span></div>'; }).join('')+'</div>' +
       '<div class="pdp-trust">' +
-        '<div>🚚 משלוח חינם בהזמנה מעל ₪200</div>' +
-        '<div>🛡️ אחריות מלאה לשנה + תמיכה בעברית</div>' +
-        '<div>🔄 14 ימי החזרה ללא שאלות</div>' +
-        '<div>🔒 תשלום מאובטח</div>' +
+        '<div><span class="pdp-trust-icon">'+ICON.truck+'</span>משלוח חינם בהזמנה מעל ₪200</div>' +
+        '<div><span class="pdp-trust-icon">'+ICON.shield+'</span>אחריות מלאה לשנה + תמיכה בעברית</div>' +
+        '<div><span class="pdp-trust-icon">'+ICON.refresh+'</span>14 ימי החזרה ללא שאלות</div>' +
+        '<div><span class="pdp-trust-icon">'+ICON.lock+'</span>תשלום מאובטח</div>' +
       '</div>' +
     '</div>';
 
