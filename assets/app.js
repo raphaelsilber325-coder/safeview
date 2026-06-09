@@ -182,6 +182,8 @@ function initReveal(){
 // ===== FAQ accordion =====
 function initFaq(){
   document.querySelectorAll('.faq-q').forEach(function(q){
+    if (q.dataset.bound === '1') return; // מונע האזנה כפולה
+    q.dataset.bound = '1';
     q.addEventListener('click', function(){
       var item = q.parentElement;
       var a = item.querySelector('.faq-a');
