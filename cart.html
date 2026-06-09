@@ -45,7 +45,7 @@
     var total = cartTotal();
     var remaining = FREE_SHIP_THRESHOLD - total;
     var shipMsg = remaining > 0
-      ? '<div class="cart-row" style="color:var(--gold)">הוסיפו עוד '+fmt(remaining)+' למשלוח חינם 🚚</div>'
+      ? '<div class="cart-row" style="color:var(--gold)">הוסיפו עוד '+fmt(remaining)+' למשלוח חינם</div>'
       : '<div class="cart-row" style="color:var(--accent)">🎉 זכאים למשלוח חינם!</div>';
     wrap.innerHTML = itemsHtml +
       '<div class="cart-summary">' +

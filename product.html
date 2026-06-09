@@ -52,7 +52,7 @@
   };
   var s = document.createElement('script'); s.type = 'application/ld+json'; s.textContent = JSON.stringify(jsonLd); document.head.appendChild(s);
 
-  var msg = 'שלום SafeView! 👋 אני מעוניין/ת במצלמה: ' + p.name + ' (' + fmt(p.price) + '). אפשר פרטים?';
+  var msg = 'שלום SafeView!אני מעוניין/ת במצלמה: ' + p.name + ' (' + fmt(p.price) + '). אפשר פרטים?';
 
   document.getElementById('pdp').innerHTML =
     '<div class="pdp-gallery"><img src="'+p.img+'" alt="'+p.name+'"><div class="pdp-badge">'+p.badge+'</div></div>' +
@@ -79,7 +79,7 @@
   if (rel.length < 3) rel = rel.concat(PRODUCTS.filter(function(x){ return x.id!==p.id && rel.indexOf(x)<0; }));
   rel = rel.slice(0,3);
   document.getElementById('related').innerHTML = rel.map(function(x){
-    var m = 'שלום SafeView! 👋 אני מעוניין/ת במצלמה: ' + x.name + ' (' + fmt(x.price) + ').';
+    var m = 'שלום SafeView!אני מעוניין/ת במצלמה: ' + x.name + ' (' + fmt(x.price) + ').';
     return '<div class="prod-card">' +
       '<div class="prod-img"><a href="product.html?id='+x.id+'"><img src="'+x.img+'" alt="'+x.name+'" loading="lazy"></a><div class="prod-badge">'+x.badge+'</div></div>' +
       '<div class="prod-body"><a class="prod-name" href="product.html?id='+x.id+'">'+x.name+'</a>' +

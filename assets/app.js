@@ -81,7 +81,7 @@ function updateCartCount(){
 function checkoutWhatsApp(){
   var c = getCart();
   if (!c.length){ alert('העגלה ריקה'); return; }
-  var lines = ['שלום SafeView! 👋 אני רוצה להזמין:', ''];
+  var lines = ['שלום SafeView!אני רוצה להזמין:', ''];
   c.forEach(function(i){ var p=getProduct(i.id); if(p) lines.push('• ' + p.name + ' × ' + i.qty + ' = ' + fmt(p.price*i.qty)); });
   lines.push(''); lines.push('סה"כ: ' + fmt(cartTotal()));
   var ship = cartTotal() >= FREE_SHIP_THRESHOLD ? 'משלוח חינם 🎉' : 'בתוספת משלוח';
@@ -111,6 +111,7 @@ var ICON = {
   home: '<svg viewBox="0 0 24 24"><path d="M12 3l9 8h-3v9h-4v-6h-4v6H6v-9H3z"/></svg>',
   building: '<svg viewBox="0 0 24 24"><path d="M5 3h9v18H5zM16 8h3v13h-3zM7 6h2v2H7zm0 4h2v2H7zm0 4h2v2H7zm4-8h1v2h-1zm0 4h1v2h-1z"/></svg>',
   cam: '<svg viewBox="0 0 24 24"><path d="M12 8a4 4 0 100 8 4 4 0 000-8zm0 6a2 2 0 110-4 2 2 0 010 4zM20 5h-3l-2-2H9L7 5H4a2 2 0 00-2 2v11a2 2 0 002 2h16a2 2 0 002-2V7a2 2 0 00-2-2z"/></svg>',
+  brand: '<svg viewBox="0 0 32 32"><path d="M16 3l11 4v8.4c0 6.8-4.6 12.9-11 14.6-6.4-1.7-11-7.8-11-14.6V7l11-4z" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M10.5 16.5l3.8 3.8 7.3-8" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity=".95"/></svg>',
   mail: '<svg viewBox="0 0 24 24"><path d="M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2zm0 4v10h16V8l-8 5-8-5zm0-2l8 5 8-5H4z"/></svg>',
   phone: '<svg viewBox="0 0 24 24"><path d="M6.6 10.8a15 15 0 006.6 6.6l2.2-2.2a1 1 0 011-.25 11.4 11.4 0 003.6.6 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.6 3.6a1 1 0 01-.25 1l-2.25 2.2z"/></svg>'
 };
@@ -127,7 +128,7 @@ function injectChrome(active){
   ];
   var navHtml =
     '<nav>' +
-      '<a href="index.html" class="nav-logo"><span class="nav-logo-icon">' + ICON.cam + '</span>Safe<span>View</span></a>' +
+      '<a href="index.html" class="nav-logo" dir="ltr"><span class="nav-logo-icon">' + ICON.brand + '</span>Safe<span>View</span></a>' +
       '<div class="nav-right">' +
         '<ul class="nav-links" id="navLinks">' +
           navLinks.map(function(l){ return '<li><a href="'+l[0]+'">'+l[1]+'</a></li>'; }).join('') +
@@ -141,7 +142,7 @@ function injectChrome(active){
     '<footer>' +
       '<div class="footer-top">' +
         '<div class="footer-brand">' +
-          '<div class="footer-logo">Safe<span>View</span></div>' +
+          '<div class="footer-logo" dir="ltr">Safe<span>View</span></div>' +
           '<p>חנות מצלמות האבטחה החכמות של ישראל. מצלמות סולאריות, פנימיות וחיצוניות עם אחריות מלאה ותמיכה בעברית.</p>' +
         '</div>' +
         '<div class="footer-col"><h4>חנות</h4>' +
@@ -154,7 +155,7 @@ function injectChrome(active){
       '<div class="footer-bottom"><span>© 2026 SafeView. כל הזכויות שמורות.</span><span>נבנה באהבה בישראל 🇮🇱</span></div>' +
     '</footer>';
 
-  var waHtml = '<a class="wa-float" id="waFloat" href="'+waLink('שלום SafeView! 👋 אני מעוניין/ת בייעוץ לבחירת מצלמת אבטחה.')+'" target="_blank" rel="noopener" aria-label="וואטסאפ">'+ICON.wa+'</a>';
+  var waHtml = '<a class="wa-float" id="waFloat" href="'+waLink('שלום SafeView!אני מעוניין/ת בייעוץ לבחירת מצלמת אבטחה.')+'" target="_blank" rel="noopener" aria-label="וואטסאפ">'+ICON.wa+'</a>';
 
   var navMount = document.getElementById('nav-mount');
   var footMount = document.getElementById('footer-mount');
