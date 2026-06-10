@@ -65,6 +65,11 @@
         '<button class="btn-primary" onclick="addToCart(\''+p.id+'\')">הוסף לעגלה</button>' +
         '<a class="btn-wa" href="'+waLink(msg)+'" target="_blank" rel="noopener">'+ICON.wa+' הזמן בוואטסאפ</a>' +
       '</div>' +
+      // Sticky CTA למובייל
+      '<div class="pdp-sticky">' +
+        '<div class="pdp-sticky-price">'+fmt(p.price)+'</div>' +
+        '<button class="btn-primary" onclick="addToCart(\''+p.id+'\')">הוסף לעגלה</button>' +
+      '</div>' +
       '<div class="pdp-specs">'+p.specs.map(function(s){ return '<div class="pdp-spec"><span>'+s[0]+'</span><span>'+s[1]+'</span></div>'; }).join('')+'</div>' +
       '<div class="pdp-trust">' +
         '<div><span class="pdp-trust-icon">'+ICON.truck+'</span>משלוח חינם בהזמנה מעל ₪200</div>' +

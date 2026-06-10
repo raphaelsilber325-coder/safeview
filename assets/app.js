@@ -116,6 +116,34 @@ var ICON = {
   phone: '<svg viewBox="0 0 24 24"><path d="M6.6 10.8a15 15 0 006.6 6.6l2.2-2.2a1 1 0 011-.25 11.4 11.4 0 003.6.6 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.6 3.6a1 1 0 01-.25 1l-2.25 2.2z"/></svg>'
 };
 
+// ===== SEO meta הזרקה אוטומטית (canonical, og:url, og:image, twitter card) =====
+var OG_IMAGE_DEFAULT = 'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S3d0de0a565ab48b993427b57182989a0e.webp?v=1780222615';
+function injectSeoMeta(){
+  var head = document.head;
+  function add(tag, attrs){
+    // אם תג עם המאפיין הזה כבר קיים — דלג
+    var sel = tag + Object.keys(attrs).filter(function(k){return k!=='content';}).map(function(k){return '['+k+'="'+attrs[k]+'"]';}).join('');
+    if (document.querySelector(sel)) return;
+    var el = document.createElement(tag);
+    Object.keys(attrs).forEach(function(k){ el.setAttribute(k, attrs[k]); });
+    head.appendChild(el);
+  }
+  var url = location.href.split('#')[0];
+  add('link', { rel:'canonical', href: url });
+  add('meta', { property:'og:url', content: url });
+  add('meta', { property:'og:site_name', content: 'SafeView' });
+  add('meta', { property:'og:locale', content: 'he_IL' });
+  if (!document.querySelector('meta[property="og:image"]')) {
+    add('meta', { property:'og:image', content: OG_IMAGE_DEFAULT });
+  }
+  add('meta', { name:'twitter:card', content: 'summary_large_image' });
+  add('meta', { name:'twitter:title', content: document.title });
+  var desc = document.querySelector('meta[name="description"]');
+  if (desc) add('meta', { name:'twitter:description', content: desc.getAttribute('content') });
+  add('meta', { name:'twitter:image', content: OG_IMAGE_DEFAULT });
+  add('meta', { name:'theme-color', content: '#080a0f' });
+}
+
 // ===== Header / Footer הזרקה =====
 function injectChrome(active){
   var navLinks = [
@@ -157,10 +185,28 @@ function injectChrome(active){
 
   var waHtml = '<a class="wa-float" id="waFloat" href="'+waLink('שלום SafeView!אני מעוניין/ת בייעוץ לבחירת מצלמת אבטחה.')+'" target="_blank" rel="noopener" aria-label="וואטסאפ">'+ICON.wa+'</a>';
 
+  // Skip link: על לחיצה — נמצא את התוכן הראשי הראשון אחרי הנאב, נגלול אליו ונמקד
+  var skipHtml = '<a href="#main" class="skip-link" id="skipLink">דלג לתוכן הראשי</a>';
+  var shipBarHtml = '<div class="ship-bar" id="shipBar">משלוח חינם בכל הזמנה מעל <strong>₪200</strong> · אחריות מלאה לשנה · תמיכה בעברית</div>';
   var navMount = document.getElementById('nav-mount');
   var footMount = document.getElementById('footer-mount');
-  if (navMount) navMount.outerHTML = navHtml;
+  if (navMount) navMount.outerHTML = skipHtml + shipBarHtml + navHtml;
   if (footMount) footMount.outerHTML = footerHtml + waHtml;
+
+  // skip link — מוצא את התוכן הראשי ומסמן אותו
+  var skip = document.getElementById('skipLink');
+  if (skip){
+    skip.addEventListener('click', function(e){
+      e.preventDefault();
+      var target = document.querySelector('section, .page-head, .pdp, .cart-wrap, .content');
+      if (target){
+        if (!target.id) target.id = 'main';
+        target.setAttribute('tabindex', '-1');
+        target.focus();
+        target.scrollIntoView({ behavior:'smooth', block:'start' });
+      }
+    });
+  }
 
   // burger
   var burger = document.getElementById('burger');
@@ -184,10 +230,13 @@ function initFaq(){
   document.querySelectorAll('.faq-q').forEach(function(q){
     if (q.dataset.bound === '1') return; // מונע האזנה כפולה
     q.dataset.bound = '1';
+    q.setAttribute('aria-expanded', 'false');
+    q.setAttribute('type', 'button');
     q.addEventListener('click', function(){
       var item = q.parentElement;
       var a = item.querySelector('.faq-a');
       var open = item.classList.toggle('open');
+      q.setAttribute('aria-expanded', open ? 'true' : 'false');
       a.style.maxHeight = open ? a.scrollHeight + 'px' : '0';
     });
   });
@@ -216,6 +265,7 @@ function initAnalytics(){
 }
 
 document.addEventListener('DOMContentLoaded', function(){
+  injectSeoMeta();
   injectChrome();
   initReveal();
   initFaq();

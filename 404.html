@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>הדף לא נמצא | SafeView</title>
+<meta name="description" content="הדף שחיפשתם לא נמצא. חזרו לדף הבית של SafeView או דברו איתנו בוואטסאפ.">
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Noto+Sans+Hebrew:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  .err-wrap { min-height: 70vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 60px 20px; }
+  .err-code { font-family: 'Rajdhani', sans-serif; font-size: 120px; font-weight: 700; color: var(--blue); line-height: 1; letter-spacing: 4px; filter: drop-shadow(0 0 24px rgba(58,159,255,0.3)); }
+  .err-title { font-size: 28px; color: var(--text); margin: 12px 0 10px; }
+  .err-sub { color: var(--text2); margin-bottom: 32px; max-width: 480px; line-height: 1.7; }
+  .err-btns { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+  @media (max-width: 520px) { .err-code { font-size: 88px; } .err-title { font-size: 22px; } }
+</style>
+</head>
+<body>
+
+<div id="nav-mount"></div>
+
+<div class="err-wrap">
+  <div class="err-code">404</div>
+  <h1 class="err-title">הדף לא נמצא</h1>
+  <p class="err-sub">נראה שהדף שחיפשת זז, נמחק או שאף פעם לא היה. אבל אנחנו כאן, ונשמח לעזור לך למצוא את מה שאתה צריך.</p>
+  <div class="err-btns">
+    <a class="btn-primary" href="index.html">← חזרה לדף הבית</a>
+    <a class="btn-secondary" href="index.html#products">כל המצלמות</a>
+    <a class="btn-wa" id="errWa" href="#">דברו איתנו בוואטסאפ</a>
+  </div>
+</div>
+
+<div id="footer-mount"></div>
+
+<script src="assets/app.js"></script>
+<script>
+  document.getElementById('errWa').href = waLink('שלום SafeView! הגעתי לדף שלא קיים — אפשר עזרה?');
+</script>
+
+</body>
+</html>
