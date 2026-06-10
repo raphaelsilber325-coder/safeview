@@ -17,6 +17,20 @@
 
 <div class="pdp" id="pdp"></div>
 
+<!-- מקטע ביקורות — מוכן ל-Judge.me (להחליף את ה-data-judgeme-id לאחר התקנת האפליקציה) -->
+<section class="reveal reviews-section" style="padding-top:0">
+  <div class="section-label">// ביקורות לקוחות</div>
+  <div class="section-title">מה <strong>הלקוחות אומרים</strong></div>
+  <div class="section-sub" style="margin-bottom:24px">ביקורות אמיתיות מלקוחות שקנו את המוצר</div>
+  <!-- Judge.me Product Reviews Widget -->
+  <div id="judgeme_product_reviews" data-id="" class="reviews-empty">
+    <div class="reviews-empty-text">
+      <strong>אנחנו אוספים ביקורות אמיתיות.</strong> רכשת את המוצר? נשמח לשמוע מה דעתך — פנה אלינו בוואטסאפ אחרי שתקבל ותתנסה.
+    </div>
+    <a class="btn-wa" id="reviewWa" href="#">שלח את חוות הדעת שלך</a>
+  </div>
+</section>
+
 <section class="reveal" style="padding-top:0">
   <div class="section-label">// אולי תאהבו גם</div>
   <div class="section-title">מוצרים <strong>נוספים</strong></div>
@@ -108,6 +122,10 @@
 
   // breadcrumb scroll top
   window.scrollTo(0,0);
+
+  // Reviews CTA — קישור וואטסאפ ייעודי לחוות דעת
+  var rWa = document.getElementById('reviewWa');
+  if (rWa) rWa.href = waLink('שלום SafeView! רכשתי את ' + p.name + ' ואני רוצה לשתף חוות דעת.');
 </script>
 
 </body>

@@ -38,8 +38,25 @@
   document.getElementById('faqWrap').innerHTML = FAQ.map(function(f){
     return '<div class="faq-item"><button class="faq-q">'+f[0]+'</button><div class="faq-a"><div class="faq-a-inner">'+f[1]+'</div></div></div>';
   }).join('');
-  document.getElementById('faqWa').href = waLink('שלום SafeView!יש לי שאלה שלא מצאתי עליה תשובה.');
+  document.getElementById('faqWa').href = waLink('שלום SafeView! יש לי שאלה שלא מצאתי עליה תשובה.');
   initFaq();
+
+  // FAQPage JSON-LD Schema — מאפשר לגוגל להציג שאלות נפוצות ישירות בתוצאות החיפוש
+  var faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": FAQ.map(function(f){
+      return {
+        "@type": "Question",
+        "name": f[0],
+        "acceptedAnswer": { "@type": "Answer", "text": f[1] }
+      };
+    })
+  };
+  var s = document.createElement('script');
+  s.type = 'application/ld+json';
+  s.textContent = JSON.stringify(faqSchema);
+  document.head.appendChild(s);
 </script>
 </body>
 </html>

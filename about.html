@@ -19,20 +19,26 @@
   <h2>החזון שלנו</h2>
   <p>אנחנו מביאים את העתיד של האבטחה — מצלמות חכמות, סולאריות ומקושרות — ישירות אליכם, ללא מתווכים וללא מחירי חורג. כל מצלמה נבחרת בקפידה ונבדקת לפני שהיא מגיעה למדפים שלנו.</p>
   <h2>למה לבחור בנו?</h2>
-  <ul>
-    <li>🔍 <strong>בחירה מוקפדת</strong> — אנחנו בודקים כל מוצר לפני שהוא נכנס לחנות</li>
-    <li>💰 <strong>מחירים הוגנים</strong> — ללא ההתייקרויות של חנויות פיזיות</li>
-    <li>📦 <strong>משלוח מהיר</strong> — לכל הארץ, חינם מעל ₪200</li>
-    <li>🛡️ <strong>אחריות שנה</strong> — עם תמיכה טכנית בעברית</li>
-    <li>📞 <strong>תמיכה אמיתית</strong> — צוות ישראלי זמין בוואטסאפ</li>
-    <li>🔄 <strong>14 ימי החזרה</strong> — לא מרוצים? מחזירים את הכסף</li>
-  </ul>
+  <ul class="icon-bullets" id="aboutBullets"></ul>
   <h2>המחויבות שלנו אליך</h2>
   <p>כל לקוח מקבל יחס אישי. אנחנו לא מרפים עד שאתם מרוצים ב-100% — מבחירת המצלמה הנכונה, דרך ההתקנה ועד התמיכה השוטפת. <strong>הביטחון שלכם מגיע לכם בלי פשרות.</strong></p>
   <p style="margin-top:24px"><a class="btn-wa" id="aboutWa" href="#">צרו איתנו קשר בוואטסאפ</a></p>
 </div>
 <div id="footer-mount"></div>
 <script src="assets/app.js"></script>
-<script>document.getElementById('aboutWa').href = waLink('שלום SafeView!יש לי שאלה.');</script>
+<script>
+  document.getElementById('aboutWa').href = waLink('שלום SafeView! יש לי שאלה.');
+  var ABOUT_BULLETS = [
+    [ICON.check,   'בחירה מוקפדת', 'אנחנו בודקים כל מוצר לפני שהוא נכנס לחנות'],
+    [ICON.coin,    'מחירים הוגנים', 'ללא ההתייקרויות של חנויות פיזיות'],
+    [ICON.truck,   'משלוח מהיר', 'לכל הארץ, חינם מעל ₪200'],
+    [ICON.shield,  'אחריות שנה', 'עם תמיכה טכנית בעברית'],
+    [ICON.phone,   'תמיכה אמיתית', 'צוות ישראלי זמין בוואטסאפ'],
+    [ICON.refresh, '14 ימי החזרה', 'לא מרוצים? מחזירים את הכסף']
+  ];
+  document.getElementById('aboutBullets').innerHTML = ABOUT_BULLETS.map(function(b){
+    return '<li><span class="icon-bullet">'+b[0]+'</span><div><strong>'+b[1]+'</strong> — '+b[2]+'</div></li>';
+  }).join('');
+</script>
 </body>
 </html>

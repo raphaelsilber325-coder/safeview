@@ -30,7 +30,7 @@
     var c = getCart();
     var wrap = document.getElementById('cartWrap');
     if (!c.length){
-      wrap.innerHTML = '<div class="cart-empty"><div class="cart-empty-icon">🛒</div><p>העגלה ריקה.</p><br><a class="btn-primary" href="index.html#products">לכל המצלמות ←</a></div>';
+      wrap.innerHTML = '<div class="cart-empty"><div class="cart-empty-icon">'+ICON.cart+'</div><p>העגלה ריקה.</p><br><a class="btn-primary" href="index.html#products">לכל המצלמות ←</a></div>';
       return;
     }
     var itemsHtml = c.map(function(i){

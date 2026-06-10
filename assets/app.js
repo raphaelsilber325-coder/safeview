@@ -113,6 +113,9 @@ var ICON = {
   cam: '<svg viewBox="0 0 24 24"><path d="M12 8a4 4 0 100 8 4 4 0 000-8zm0 6a2 2 0 110-4 2 2 0 010 4zM20 5h-3l-2-2H9L7 5H4a2 2 0 00-2 2v11a2 2 0 002 2h16a2 2 0 002-2V7a2 2 0 00-2-2z"/></svg>',
   brand: '<svg viewBox="0 0 32 32"><path d="M16 3l11 4v8.4c0 6.8-4.6 12.9-11 14.6-6.4-1.7-11-7.8-11-14.6V7l11-4z" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M10.5 16.5l3.8 3.8 7.3-8" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity=".95"/></svg>',
   access: '<svg viewBox="0 0 24 24"><circle cx="12" cy="4" r="2"/><path d="M19 8h-5v13a1 1 0 11-2 0v-6h-1v6a1 1 0 11-2 0V8H4a1 1 0 110-2h15a1 1 0 110 2z"/></svg>',
+  check: '<svg viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>',
+  coin: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M13 7v1.5h2v2h-4.5a.5.5 0 000 1H14a2.5 2.5 0 010 5h-1v1.5h-2V16.5H9v-2h4.5a.5.5 0 000-1H10a2.5 2.5 0 010-5h1V7z"/></svg>',
+  tool: '<svg viewBox="0 0 24 24"><path d="M21 4.5 19.5 3 15 7.5l2 2zm-7.4 4.6L4.4 18.3l1.4 1.4 9.2-9.2zM18 11.6l-2-2-8 8 2 2z"/></svg>',
   mail: '<svg viewBox="0 0 24 24"><path d="M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2zm0 4v10h16V8l-8 5-8-5zm0-2l8 5 8-5H4z"/></svg>',
   phone: '<svg viewBox="0 0 24 24"><path d="M6.6 10.8a15 15 0 006.6 6.6l2.2-2.2a1 1 0 011-.25 11.4 11.4 0 003.6.6 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.6 3.6a1 1 0 01-.25 1l-2.25 2.2z"/></svg>'
 };
@@ -144,6 +147,9 @@ function injectSeoMeta(){
   add('meta', { name:'twitter:image', content: OG_IMAGE_DEFAULT });
   add('meta', { name:'theme-color', content: '#080a0f' });
   add('link', { rel:'manifest', href:'manifest.json' });
+  // preconnect ל-CDN של התמונות — מאיץ טעינה ראשונה
+  add('link', { rel:'preconnect', href:'https://cdn.shopify.com', crossorigin:'' });
+  add('link', { rel:'dns-prefetch', href:'https://cdn.shopify.com' });
 }
 
 // ===== Service Worker (PWA) =====
@@ -179,21 +185,38 @@ function injectChrome(active){
       '</div>' +
     '</nav>';
 
+  var trustBadgesHtml =
+    '<div class="footer-trust">' +
+      '<div class="trust-badge"><span class="trust-badge-ic">'+ICON.lock+'</span><div><strong>תשלום מאובטח</strong><span>הצפנת SSL 256-bit</span></div></div>' +
+      '<div class="trust-badge"><span class="trust-badge-ic">'+ICON.shield+'</span><div><strong>אחריות יצרן</strong><span>שנה מלאה + תמיכה</span></div></div>' +
+      '<div class="trust-badge"><span class="trust-badge-ic">'+ICON.refresh+'</span><div><strong>14 ימי החזרה</strong><span>החזר מלא, ללא שאלות</span></div></div>' +
+      '<div class="trust-badge"><span class="trust-badge-ic">'+ICON.chat+'</span><div><strong>תמיכה בעברית</strong><span>וואטסאפ + מייל</span></div></div>' +
+    '</div>';
+
   var footerHtml =
     '<footer>' +
+      trustBadgesHtml +
       '<div class="footer-top">' +
         '<div class="footer-brand">' +
           '<div class="footer-logo" dir="ltr">Safe<span>View</span></div>' +
           '<p>חנות מצלמות האבטחה החכמות של ישראל. מצלמות סולאריות, פנימיות וחיצוניות עם אחריות מלאה ותמיכה בעברית.</p>' +
         '</div>' +
         '<div class="footer-col"><h4>חנות</h4>' +
-          '<a href="index.html#products">כל המצלמות</a><a href="index.html#categories">קטגוריות</a><a href="index.html#bundles">חבילות במבצע</a><a href="cart.html">עגלת קניות</a></div>' +
+          '<a href="index.html#products">כל המצלמות</a><a href="index.html#categories">קטגוריות</a><a href="index.html#bundles">חבילות במבצע</a><a href="compare.html">השוואה</a><a href="cart.html">עגלת קניות</a></div>' +
         '<div class="footer-col"><h4>מידע</h4>' +
           '<a href="about.html">אודות</a><a href="blog.html">מדריכים</a><a href="faq.html">שאלות נפוצות</a><a href="contact.html">צור קשר</a></div>' +
         '<div class="footer-col"><h4>מדיניות</h4>' +
           '<a href="shipping.html">משלוחים</a><a href="returns.html">החזרות</a><a href="privacy.html">פרטיות</a><a href="terms.html">תקנון</a></div>' +
       '</div>' +
-      '<div class="footer-bottom"><span>© 2026 SafeView. כל הזכויות שמורות.</span><span>נבנה באהבה בישראל 🇮🇱</span></div>' +
+      '<div class="footer-payments"><span class="footer-pay-label">אמצעי תשלום מקובלים</span><span class="footer-pay-icons">' +
+        '<span class="pay-pill">VISA</span>' +
+        '<span class="pay-pill">Mastercard</span>' +
+        '<span class="pay-pill">AmEx</span>' +
+        '<span class="pay-pill">Bit</span>' +
+        '<span class="pay-pill">PayPal</span>' +
+        '<span class="pay-pill">Apple&nbsp;Pay</span>' +
+      '</span></div>' +
+      '<div class="footer-bottom"><span>© 2026 SafeView. כל הזכויות שמורות.</span><span>נבנה בישראל</span></div>' +
     '</footer>';
 
   var waHtml = '<a class="wa-float" id="waFloat" href="'+waLink('שלום SafeView! אני מעוניין/ת בייעוץ לבחירת מצלמת אבטחה.')+'" target="_blank" rel="noopener" aria-label="וואטסאפ">'+ICON.wa+'</a>';
@@ -271,6 +294,23 @@ function initFaq(){
   });
 }
 
+// ===== באנר עוגיות (cookie consent) =====
+var COOKIE_KEY = 'sv_cookies_ok';
+function hasCookieConsent(){ try { return localStorage.getItem(COOKIE_KEY) === '1'; } catch(e){ return false; } }
+function setCookieConsent(){ try { localStorage.setItem(COOKIE_KEY, '1'); } catch(e){} var b = document.getElementById('cookieBanner'); if (b) b.remove(); }
+function showCookieBanner(){
+  if (hasCookieConsent()) return;
+  var html =
+    '<div class="cookie-banner" id="cookieBanner" role="region" aria-label="הודעת עוגיות">' +
+      '<div class="cookie-text">אנחנו משתמשים בעוגיות (cookies) כדי לשפר את החוויה באתר ולצורכי אנליטיקה. ' +
+        '<a href="privacy.html">מידע נוסף</a></div>' +
+      '<div class="cookie-actions">' +
+        '<button class="cookie-ok" onclick="setCookieConsent()">מסכים/ה</button>' +
+      '</div>' +
+    '</div>';
+  document.body.insertAdjacentHTML('beforeend', html);
+}
+
 // ===== נגישות (a11y) =====
 // העדפות נשמרות ב-localStorage ומוחלות גם בטעינה מחודשת.
 var A11Y_KEY = 'sv_a11y';
@@ -341,4 +381,5 @@ document.addEventListener('DOMContentLoaded', function(){
   initFaq();
   initAnalytics();
   registerSW();
+  showCookieBanner();
 });

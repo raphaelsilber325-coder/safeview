@@ -29,13 +29,7 @@
     </ul>
     <p>בשעות הפעילות אנו משיבים תוך שעה עד שלוש שעות. הדרך המהירה ביותר לקבל מענה היא דרך הוואטסאפ.</p>
     <h2>איך נוכל לעזור?</h2>
-    <ul>
-      <li>🔍 המלצה על מצלמה שמתאימה לצרכים שלכם</li>
-      <li>🛠️ עזרה טכנית בהתקנה ובשימוש</li>
-      <li>📦 מעקב אחרי הזמנה ובדיקת משלוחים</li>
-      <li>🔄 החזרות והחלפות</li>
-      <li>💰 הצעות מחיר לרכישה מרוכזת / עסקים</li>
-    </ul>
+    <ul class="icon-bullets" id="helpBullets"></ul>
     <p style="margin-top:24px"><a class="btn-wa" id="cBtn" href="#">פתחו שיחת וואטסאפ ←</a></p>
   </div>
 </section>
@@ -48,6 +42,16 @@
   document.getElementById('cWaIcon').innerHTML = ICON.wa;
   document.getElementById('cMailIcon').innerHTML = ICON.mail;
   document.getElementById('cTelIcon').innerHTML = ICON.phone;
+  var HELP_BULLETS = [
+    [ICON.check,   'המלצה על מצלמה שמתאימה לצרכים שלכם'],
+    [ICON.tool,    'עזרה טכנית בהתקנה ובשימוש'],
+    [ICON.truck,   'מעקב אחרי הזמנה ובדיקת משלוחים'],
+    [ICON.refresh, 'החזרות והחלפות'],
+    [ICON.coin,    'הצעות מחיר לרכישה מרוכזת / עסקים']
+  ];
+  document.getElementById('helpBullets').innerHTML = HELP_BULLETS.map(function(b){
+    return '<li><span class="icon-bullet">'+b[0]+'</span><span>'+b[1]+'</span></li>';
+  }).join('');
 </script>
 </body>
 </html>

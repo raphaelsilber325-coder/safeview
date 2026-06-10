@@ -1,0 +1,38 @@
+# Claude Code local settings (per-machine, shouldn't be tracked)
+.claude/settings.local.json
+.claude/cache/
+.claude/tasks/
+
+# Tool result dumps
+**/tool-results/
+
+# Node / build artifacts (אם מישהו ישלב יום אחד)
+node_modules/
+dist/
+build/
+.cache/
+
+# OS noise
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*~
+
+# Logs
+*.log
+npm-debug.log*
+
+# Archives (לא להעלות zip של כל הפרויקט ל-repo)
+*.zip
+*.tar.gz
+*.7z
+
+# Environment variables (סודות)
+.env
+.env.local
+.env.*.local
