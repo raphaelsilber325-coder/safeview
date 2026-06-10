@@ -1,5 +1,6 @@
 // SafeView Service Worker — קאשינג בסיסי לתמיכה אופליין חלקית
-const CACHE_VERSION = 'safeview-v1';
+// גרסה: עלייה בערך הזה תגרום ל-SW חדש להתקין ולמחוק caches ישנים
+const CACHE_VERSION = 'safeview-v3';
 const CORE_ASSETS = [
   './',
   './index.html',
@@ -11,27 +12,28 @@ const CORE_ASSETS = [
 ];
 
 self.addEventListener('install', (event) => {
+  // הפעלה מיידית של גרסה חדשה, בלי להמתין ש-tabs ייסגרו
+  self.skipWaiting();
   event.waitUntil(
-    caches.open(CACHE_VERSION).then((cache) => cache.addAll(CORE_ASSETS)).then(() => self.skipWaiting())
+    caches.open(CACHE_VERSION).then((cache) => cache.addAll(CORE_ASSETS))
   );
 });
 
 self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches.keys().then((keys) =>
-      Promise.all(keys.filter((k) => k !== CACHE_VERSION).map((k) => caches.delete(k)))
-    ).then(() => self.clients.claim())
+    caches.keys()
+      .then((keys) => Promise.all(keys.filter((k) => k !== CACHE_VERSION).map((k) => caches.delete(k))))
+      .then(() => self.clients.claim())
   );
 });
 
 self.addEventListener('fetch', (event) => {
   const req = event.request;
-  // רק GET, ורק origin שלנו
   if (req.method !== 'GET') return;
   const url = new URL(req.url);
 
-  // למעבר ראשון נוצרת בקשת fetch — Network-first עם נפילה ל-cache (HTML)
-  if (req.mode === 'navigate' || req.headers.get('accept')?.includes('text/html')) {
+  // HTML (ניווט) — Network-first עם נפילה ל-cache
+  if (req.mode === 'navigate' || (req.headers.get('accept') || '').includes('text/html')) {
     event.respondWith(
       fetch(req).then((res) => {
         const copy = res.clone();
@@ -42,14 +44,20 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // נכסים סטטיים — Cache-first
+  // נכסים מקומיים (CSS/JS/SVG) — Stale-while-revalidate: מגיש מהמטמון ועדכן ברקע
+  // כך שינויי קוד מגיעים בטעינה הבאה, בלי צורך בהורדה מחדש של SW
   if (url.origin === location.origin) {
     event.respondWith(
-      caches.match(req).then((cached) => cached || fetch(req).then((res) => {
-        const copy = res.clone();
-        caches.open(CACHE_VERSION).then((cache) => cache.put(req, copy));
-        return res;
-      }))
+      caches.match(req).then((cached) => {
+        const fetchPromise = fetch(req).then((res) => {
+          if (res && res.status === 200) {
+            const copy = res.clone();
+            caches.open(CACHE_VERSION).then((cache) => cache.put(req, copy));
+          }
+          return res;
+        }).catch(() => cached);
+        return cached || fetchPromise;
+      })
     );
     return;
   }
@@ -58,8 +66,10 @@ self.addEventListener('fetch', (event) => {
   event.respondWith(
     caches.match(req).then((cached) => {
       const fetchPromise = fetch(req).then((res) => {
-        const copy = res.clone();
-        caches.open(CACHE_VERSION).then((cache) => cache.put(req, copy));
+        if (res && res.status === 200) {
+          const copy = res.clone();
+          caches.open(CACHE_VERSION).then((cache) => cache.put(req, copy));
+        }
         return res;
       }).catch(() => cached);
       return cached || fetchPromise;
