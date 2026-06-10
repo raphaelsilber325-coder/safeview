@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>השוואת מצלמות אבטחה | SafeView</title>
+<meta name="description" content="השוו בין כל 9 מצלמות האבטחה של SafeView לפי רזולוציה, חיבור, ראיית לילה, עמידות ומחיר. בחרו את המצלמה הנכונה עבורכם.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Noto+Sans+Hebrew:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  .cmp-wrap { max-width: 1280px; margin: 0 auto; padding: 0 20px 64px; }
+  .cmp-controls { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-bottom: 24px; }
+  .cmp-filter { background: var(--bg3); border: 1px solid var(--border2); border-radius: 30px; padding: 8px 18px; font-size: 13px; color: var(--text2); cursor: pointer; font-family: inherit; transition: all 0.2s; }
+  .cmp-filter:hover { border-color: var(--blue); color: var(--text); }
+  .cmp-filter.active { background: var(--blue); color: #fff; border-color: var(--blue); }
+  .cmp-table-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 12px; background: var(--bg3); }
+  .cmp-table { width: 100%; min-width: 900px; border-collapse: collapse; }
+  .cmp-table th, .cmp-table td { padding: 16px 14px; text-align: right; border-bottom: 1px solid var(--border2); vertical-align: middle; font-size: 13px; }
+  .cmp-table thead th { background: var(--bg4); position: sticky; top: 0; font-family: 'Rajdhani', sans-serif; font-size: 13px; letter-spacing: 1px; color: var(--text3); text-transform: uppercase; }
+  .cmp-table tbody tr:hover { background: var(--bg4); }
+  .cmp-prod { display: flex; align-items: center; gap: 12px; min-width: 200px; }
+  .cmp-prod img { width: 52px; height: 52px; object-fit: cover; border-radius: 6px; border: 1px solid var(--border2); flex-shrink: 0; }
+  .cmp-prod-name { color: var(--text); font-weight: 500; line-height: 1.4; text-decoration: none; }
+  .cmp-prod-name:hover { color: var(--blue); }
+  .cmp-prod-cat { font-size: 11px; color: var(--text3); margin-top: 2px; }
+  .cmp-price { font-family: 'Rajdhani', sans-serif; font-size: 18px; font-weight: 600; color: var(--blue); }
+  .cmp-badge { display: inline-block; background: var(--blue-glow); border: 1px solid rgba(58,159,255,0.3); color: var(--blue); padding: 2px 8px; border-radius: 4px; font-size: 11px; font-family: 'Rajdhani', sans-serif; letter-spacing: 0.5px; }
+  .cmp-actions { display: flex; gap: 6px; }
+  .cmp-btn-buy { background: var(--blue); color: #fff; padding: 8px 12px; border-radius: 6px; font-size: 12px; text-decoration: none; border: none; cursor: pointer; font-family: inherit; }
+  .cmp-btn-buy:hover { background: var(--blue2); }
+  .cmp-btn-wa { background: var(--wa); border-radius: 6px; padding: 8px; display: flex; align-items: center; justify-content: center; text-decoration: none; }
+  .cmp-btn-wa svg { width: 16px; height: 16px; fill: #fff; }
+  .cmp-check { color: var(--accent); font-weight: 700; }
+  .cmp-x { color: var(--text3); }
+  @media (max-width: 760px) {
+    .cmp-table th, .cmp-table td { padding: 12px 10px; font-size: 12px; }
+    .cmp-prod img { width: 44px; height: 44px; }
+    .cmp-price { font-size: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<div id="nav-mount"></div>
+
+<div class="page-head">
+  <h1>השוואת <strong>מצלמות</strong></h1>
+  <p>בחרו את המצלמה המתאימה לכם — כל המפרטים והמחירים במבט אחד</p>
+</div>
+
+<div class="cmp-wrap">
+  <div class="cmp-controls" id="cmpFilters"></div>
+  <div class="cmp-table-wrap">
+    <table class="cmp-table">
+      <thead>
+        <tr>
+          <th>מצלמה</th>
+          <th>רזולוציה</th>
+          <th>חיבור</th>
+          <th>ראיית לילה</th>
+          <th>עמידות</th>
+          <th>סוללה/חשמל</th>
+          <th>מחיר</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="cmpBody"></tbody>
+    </table>
+  </div>
+
+  <div class="content" style="margin-top:48px;padding:0">
+    <h2>איך לבחור את המצלמה הנכונה?</h2>
+    <ul>
+      <li><strong>סולארי + 4G</strong> — למקומות מרוחקים ללא חשמל ואינטרנט (חצרות, חניות, אתרי בנייה).</li>
+      <li><strong>סולארי + WiFi</strong> — לחצר/גינה עם רשת ביתית, ללא חשבון חשמל.</li>
+      <li><strong>פנימי 2K + AI</strong> — לבית, בייביסיטר, חיות מחמד, השגחה על ילדים.</li>
+      <li><strong>חיצוני WiFi</strong> — לכניסה לבית, לפינות עם תאורה בלילה.</li>
+      <li><strong>פלאגשיפ 16MP 8K</strong> — לכיסוי 360° של נכס יקר או עסק.</li>
+      <li><strong>מיני</strong> — אבטחה דיסקרטית, בייביסיטר, מתנה.</li>
+    </ul>
+    <p style="margin-top:24px">לא בטוחים? <a class="btn-wa" id="cmpHelp" href="#" style="margin-top:12px;display:inline-flex">דברו איתנו בוואטסאפ — נעזור לבחור</a></p>
+  </div>
+</div>
+
+<div id="footer-mount"></div>
+
+<script src="assets/app.js"></script>
+<script>
+  // מפרט מלא להשוואה (מעבר ל-PRODUCTS המקורי)
+  var CMP_SPECS = {
+    'solar-20mp':   { res:'20MP', conn:'4G + WiFi', night:'צבעוני', ip:'IP66', power:'סוללה 12,000mAh + סולארי' },
+    'baseus-s1':    { res:'2K', conn:'WiFi', night:'צבעוני', ip:'IP67', power:'סוללה + סולארי' },
+    'solar-3mp':    { res:'3MP', conn:'WiFi', night:'צבעוני', ip:'IP65', power:'סוללה + סולארי' },
+    'indoor-2k':    { res:'2K', conn:'WiFi', night:'צבעוני', ip:'פנימי', power:'חשמל קבוע' },
+    'flagship-16mp':{ res:'16MP / 8K', conn:'WiFi', night:'צבעוני', ip:'חיצוני', power:'חשמל קבוע' },
+    'wifi-dual':    { res:'3MP', conn:'WiFi', night:'אינפרא-אדום', ip:'Waterproof', power:'חשמל קבוע' },
+    'wifi-ir':      { res:'HD', conn:'WiFi', night:'אינפרא-אדום', ip:'חיצוני', power:'חשמל קבוע' },
+    'mini-1080':    { res:'1080P', conn:'WiFi', night:'אינפרא-אדום', ip:'פנימי', power:'USB' },
+    'mini-4k':      { res:'4K', conn:'WiFi', night:'אינפרא-אדום', ip:'פנימי', power:'USB' }
+  };
+
+  var CATS = ['הכל','סולאריות','אינדור','אאוטדור','מיני'];
+  var currentCat = 'הכל';
+
+  function renderFilters(){
+    document.getElementById('cmpFilters').innerHTML = CATS.map(function(c){
+      return '<button class="cmp-filter'+(c===currentCat?' active':'')+'" data-cat="'+c+'">'+c+'</button>';
+    }).join('');
+    document.querySelectorAll('.cmp-filter').forEach(function(b){
+      b.addEventListener('click', function(){ currentCat = b.dataset.cat; renderFilters(); renderTable(); });
+    });
+  }
+
+  function renderTable(){
+    var rows = PRODUCTS.filter(function(p){ return currentCat==='הכל' || p.cat===currentCat; });
+    document.getElementById('cmpBody').innerHTML = rows.map(function(p){
+      var s = CMP_SPECS[p.id] || {};
+      var msg = 'שלום SafeView! אני מעוניין/ת בייעוץ לגבי: ' + p.name + ' (' + fmt(p.price) + ').';
+      return '<tr>' +
+        '<td><a class="cmp-prod" href="product.html?id='+p.id+'"><img src="'+p.img+'" alt="'+p.name+'" loading="lazy"><div><div class="cmp-prod-name">'+p.name+'</div><div class="cmp-prod-cat">'+p.cat+' · <span class="cmp-badge">'+p.badge+'</span></div></div></a></td>' +
+        '<td>'+(s.res||'-')+'</td>' +
+        '<td>'+(s.conn||'-')+'</td>' +
+        '<td>'+(s.night||'-')+'</td>' +
+        '<td>'+(s.ip||'-')+'</td>' +
+        '<td>'+(s.power||'-')+'</td>' +
+        '<td><span class="cmp-price">'+fmt(p.price)+'</span></td>' +
+        '<td><div class="cmp-actions"><button class="cmp-btn-buy" onclick="addToCart(\''+p.id+'\')">+ עגלה</button><a class="cmp-btn-wa" href="'+waLink(msg)+'" target="_blank" rel="noopener" aria-label="וואטסאפ">'+ICON.wa+'</a></div></td>' +
+      '</tr>';
+    }).join('');
+  }
+
+  // המתן ל-DOMContentLoaded ש-injectChrome ירוץ קודם
+  function init(){
+    renderFilters();
+    renderTable();
+    var help = document.getElementById('cmpHelp');
+    if (help) help.href = waLink('שלום SafeView! אני מעוניין/ת בייעוץ לבחירת מצלמת אבטחה.');
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+</script>
+
+</body>
+</html>

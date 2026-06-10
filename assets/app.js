@@ -12,15 +12,15 @@ function waLink(text) {
 
 // ===== קטלוג המוצרים =====
 var PRODUCTS = [
-  { id:'solar-20mp', name:'מצלמת אבטחה סולארית 20MP | 360° | 4G | IP66', price:405, badge:'סולארי', cat:'סולאריות',
+  { id:'solar-20mp', name:'מצלמת אבטחה סולארית 20MP | 360° | 4G | IP66', price:399, badge:'סולארי', cat:'סולאריות',
     img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S8924d13a697e4df5908c2861b8f886b9p.webp?v=1780222611',
     desc:'מצלמת אבטחה סולארית מתקדמת עם חיבור 4G ישיר — ללא חשמל, ללא WiFi, ללא חיווט. מתקינים בכל מקום ומגינים על הבית או העסק 24/7.',
     specs:[['רזולוציה','20MP'],['חיבור','4G + SIM'],['סוללה','12000mAh'],['זווית','360° סיבוב אוטומטי'],['ראיית לילה','צבעונית מלאה'],['עמידות','IP66']] },
-  { id:'baseus-s1', name:'מצלמת אבטחה סולארית Baseus S1 Lite | 2K | IP67', price:232, badge:'סולארי', cat:'סולאריות',
+  { id:'baseus-s1', name:'מצלמת אבטחה סולארית Baseus S1 Lite | 2K | IP67', price:229, badge:'סולארי', cat:'סולאריות',
     img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sb99a1e51ba0546c293772a41243fa232M.webp?v=1780222614',
     desc:'מצלמת אבטחה סולארית מהמותג המוערך Baseus. רזולוציית 2K, זווית רחבה 135°, ועמידות IP67 — העמידות הגבוהה בקטגוריה.',
     specs:[['מותג','Baseus'],['רזולוציה','2K Ultra HD'],['זווית','135°'],['עמידות','IP67'],['הספק','סולארי + סוללה'],['חיבור','WiFi']] },
-  { id:'solar-3mp', name:'מצלמת אבטחה סולארית חיצונית 3MP | זיהוי AI | IP65', price:102, badge:'סולארי', cat:'סולאריות',
+  { id:'solar-3mp', name:'מצלמת אבטחה סולארית חיצונית 3MP | זיהוי AI | IP65', price:99, badge:'סולארי', cat:'סולאריות',
     img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S11c4aabf01be4261982b94a7be532532H.webp?v=1780222615',
     desc:'מצלמה סולארית עם זיהוי בני אדם חכם (לא התראות שווא מחתולים), ראיית לילה צבעונית ושמע דו-כיווני. חיסכון מלא בחשמל.',
     specs:[['רזולוציה','3MP HD+'],['זיהוי AI','בני אדם'],['הספק','סולארי'],['עמידות','IP65'],['תקשורת','דו-כיוונית'],['חיבור','WiFi']] },
@@ -28,11 +28,11 @@ var PRODUCTS = [
     img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sa514dbb7266a4564936a4b980a3f13f5M.webp?v=1780222612',
     desc:'מצלמת אבטחה פנימית עם בינה מלאכותית — מזהה אנשים וחיות מחמד. שיחה דו-כיוונית בלחיצה אחת. מושלם למשפחות ולחיות מחמד.',
     specs:[['רזולוציה','2K Ultra HD'],['חיבור','WiFi'],['שמע','דו-כיווני'],['ראיית לילה','צבעונית'],['תאימות','Alexa / Google'],['אחסון','ענן + SD']] },
-  { id:'flagship-16mp', name:'מצלמת אבטחה חיצונית 16MP 8K | 360° | 4 עדשות', price:356, badge:'פלאגשיפ', cat:'אינדור',
+  { id:'flagship-16mp', name:'מצלמת אבטחה חיצונית 16MP 8K | 360° | 4 עדשות', price:359, badge:'פלאגשיפ', cat:'אינדור',
     img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S3d0de0a565ab48b993427b57182989a0e.webp?v=1780222615',
     desc:'המצלמה המתקדמת ביותר שלנו — 16MP, 8K אמיתי, 4 עדשות שמסתובבות 360°, זום 10x וזיהוי AI. מערכת אבטחה מקצועית בקופסה אחת.',
     specs:[['רזולוציה','16MP / 8K'],['עדשות','4 עצמאיות'],['זווית','360°'],['זום','דיגיטלי 10x'],['AI','זיהוי תנועה ובני אדם'],['חיבור','WiFi']] },
-  { id:'wifi-dual', name:'מצלמת WiFi חיצונית | עדשה כפולה 3MP | ICSee', price:71, badge:'אאוטדור', cat:'אאוטדור',
+  { id:'wifi-dual', name:'מצלמת WiFi חיצונית | עדשה כפולה 3MP | ICSee', price:69, badge:'אאוטדור', cat:'אאוטדור',
     img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Saa99283cf09d4592a7c33ced52d81019B.webp?v=1780222614',
     desc:'מצלמה חיצונית עם עדשה כפולה — תצוגה רחבה וזום במקביל. תמונה חדה של 3MP, עמידות מלאה למזג אוויר, אפליקציית ICSee היציבה.',
     specs:[['רזולוציה','3MP (2304×1296)'],['עדשות','כפולות'],['חיבור','WiFi'],['אפליקציה','ICSee'],['עמידות','Waterproof'],['אחסון','כרטיס SD']] },
@@ -112,6 +112,7 @@ var ICON = {
   building: '<svg viewBox="0 0 24 24"><path d="M5 3h9v18H5zM16 8h3v13h-3zM7 6h2v2H7zm0 4h2v2H7zm0 4h2v2H7zm4-8h1v2h-1zm0 4h1v2h-1z"/></svg>',
   cam: '<svg viewBox="0 0 24 24"><path d="M12 8a4 4 0 100 8 4 4 0 000-8zm0 6a2 2 0 110-4 2 2 0 010 4zM20 5h-3l-2-2H9L7 5H4a2 2 0 00-2 2v11a2 2 0 002 2h16a2 2 0 002-2V7a2 2 0 00-2-2z"/></svg>',
   brand: '<svg viewBox="0 0 32 32"><path d="M16 3l11 4v8.4c0 6.8-4.6 12.9-11 14.6-6.4-1.7-11-7.8-11-14.6V7l11-4z" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M10.5 16.5l3.8 3.8 7.3-8" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity=".95"/></svg>',
+  access: '<svg viewBox="0 0 24 24"><circle cx="12" cy="4" r="2"/><path d="M19 8h-5v13a1 1 0 11-2 0v-6h-1v6a1 1 0 11-2 0V8H4a1 1 0 110-2h15a1 1 0 110 2z"/></svg>',
   mail: '<svg viewBox="0 0 24 24"><path d="M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2zm0 4v10h16V8l-8 5-8-5zm0-2l8 5 8-5H4z"/></svg>',
   phone: '<svg viewBox="0 0 24 24"><path d="M6.6 10.8a15 15 0 006.6 6.6l2.2-2.2a1 1 0 011-.25 11.4 11.4 0 003.6.6 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.6 3.6a1 1 0 01-.25 1l-2.25 2.2z"/></svg>'
 };
@@ -142,6 +143,17 @@ function injectSeoMeta(){
   if (desc) add('meta', { name:'twitter:description', content: desc.getAttribute('content') });
   add('meta', { name:'twitter:image', content: OG_IMAGE_DEFAULT });
   add('meta', { name:'theme-color', content: '#080a0f' });
+  add('link', { rel:'manifest', href:'manifest.json' });
+}
+
+// ===== Service Worker (PWA) =====
+function registerSW(){
+  if (!('serviceWorker' in navigator)) return;
+  // הימנע מ-SW בפיתוח מקומי (file://)
+  if (location.protocol !== 'https:' && location.hostname !== 'localhost') return;
+  window.addEventListener('load', function(){
+    navigator.serviceWorker.register('sw.js').catch(function(){ /* בשקט */ });
+  });
 }
 
 // ===== Header / Footer הזרקה =====
@@ -149,6 +161,7 @@ function injectChrome(active){
   var navLinks = [
     ['index.html#products','מוצרים'],
     ['index.html#categories','קטגוריות'],
+    ['compare.html','השוואה'],
     ['blog.html','מדריכים'],
     ['about.html','אודות'],
     ['faq.html','שאלות נפוצות'],
@@ -183,7 +196,20 @@ function injectChrome(active){
       '<div class="footer-bottom"><span>© 2026 SafeView. כל הזכויות שמורות.</span><span>נבנה באהבה בישראל 🇮🇱</span></div>' +
     '</footer>';
 
-  var waHtml = '<a class="wa-float" id="waFloat" href="'+waLink('שלום SafeView!אני מעוניין/ת בייעוץ לבחירת מצלמת אבטחה.')+'" target="_blank" rel="noopener" aria-label="וואטסאפ">'+ICON.wa+'</a>';
+  var waHtml = '<a class="wa-float" id="waFloat" href="'+waLink('שלום SafeView! אני מעוניין/ת בייעוץ לבחירת מצלמת אבטחה.')+'" target="_blank" rel="noopener" aria-label="וואטסאפ">'+ICON.wa+'</a>';
+
+  var a11yHtml =
+    '<button class="a11y-float" id="a11yFloat" aria-label="תפריט נגישות" aria-haspopup="dialog" aria-expanded="false">'+ICON.access+'</button>' +
+    '<div class="a11y-panel" id="a11yPanel" role="dialog" aria-labelledby="a11yPanelTitle" aria-hidden="true">' +
+      '<div class="a11y-head"><span id="a11yPanelTitle">תפריט נגישות</span><button class="a11y-close" id="a11yClose" aria-label="סגור">×</button></div>' +
+      '<button class="a11y-opt" data-act="font-up"><span>הגדל גודל טקסט</span><strong>+A</strong></button>' +
+      '<button class="a11y-opt" data-act="font-down"><span>הקטן גודל טקסט</span><strong>−A</strong></button>' +
+      '<button class="a11y-opt" data-act="contrast"><span>ניגודיות גבוהה</span><strong>◐</strong></button>' +
+      '<button class="a11y-opt" data-act="links"><span>הדגשת קישורים</span><strong>U</strong></button>' +
+      '<button class="a11y-opt" data-act="motion"><span>צמצום אנימציות</span><strong>⏸</strong></button>' +
+      '<button class="a11y-opt a11y-reset" data-act="reset"><span>איפוס</span><strong>↺</strong></button>' +
+      '<div class="a11y-foot">הצהרת נגישות: האתר נבנה לפי תקן <strong>WCAG 2.1 AA</strong>. בעיה? <a href="contact.html">צרו קשר</a></div>' +
+    '</div>';
 
   // Skip link: על לחיצה — נמצא את התוכן הראשי הראשון אחרי הנאב, נגלול אליו ונמקד
   var skipHtml = '<a href="#main" class="skip-link" id="skipLink">דלג לתוכן הראשי</a>';
@@ -191,7 +217,7 @@ function injectChrome(active){
   var navMount = document.getElementById('nav-mount');
   var footMount = document.getElementById('footer-mount');
   if (navMount) navMount.outerHTML = skipHtml + shipBarHtml + navHtml;
-  if (footMount) footMount.outerHTML = footerHtml + waHtml;
+  if (footMount) footMount.outerHTML = footerHtml + waHtml + a11yHtml;
 
   // skip link — מוצא את התוכן הראשי ומסמן אותו
   var skip = document.getElementById('skipLink');
@@ -207,6 +233,9 @@ function injectChrome(active){
       }
     });
   }
+
+  // נגישות — טעינה + handlers
+  initA11y();
 
   // burger
   var burger = document.getElementById('burger');
@@ -242,6 +271,46 @@ function initFaq(){
   });
 }
 
+// ===== נגישות (a11y) =====
+// העדפות נשמרות ב-localStorage ומוחלות גם בטעינה מחודשת.
+var A11Y_KEY = 'sv_a11y';
+function getA11y(){ try { return JSON.parse(localStorage.getItem(A11Y_KEY) || '{}'); } catch(e){ return {}; } }
+function saveA11y(s){ localStorage.setItem(A11Y_KEY, JSON.stringify(s)); applyA11y(s); }
+function applyA11y(s){
+  var html = document.documentElement;
+  // font size: -2..+4 steps × 2px
+  var step = Math.max(-2, Math.min(4, s.font || 0));
+  html.style.fontSize = (100 + step*8) + '%';
+  html.classList.toggle('a11y-contrast', !!s.contrast);
+  html.classList.toggle('a11y-links', !!s.links);
+  html.classList.toggle('a11y-motion', !!s.motion);
+}
+function initA11y(){
+  applyA11y(getA11y());
+  var btn = document.getElementById('a11yFloat');
+  var panel = document.getElementById('a11yPanel');
+  var closeBtn = document.getElementById('a11yClose');
+  if (!btn || !panel) return;
+  function open(){ panel.classList.add('open'); panel.setAttribute('aria-hidden','false'); btn.setAttribute('aria-expanded','true'); }
+  function close(){ panel.classList.remove('open'); panel.setAttribute('aria-hidden','true'); btn.setAttribute('aria-expanded','false'); }
+  btn.addEventListener('click', function(){ panel.classList.contains('open') ? close() : open(); });
+  if (closeBtn) closeBtn.addEventListener('click', close);
+  document.addEventListener('keydown', function(e){ if (e.key==='Escape' && panel.classList.contains('open')) close(); });
+  panel.querySelectorAll('.a11y-opt').forEach(function(opt){
+    opt.addEventListener('click', function(){
+      var s = getA11y();
+      var act = opt.dataset.act;
+      if (act==='font-up') s.font = Math.min(4, (s.font||0)+1);
+      else if (act==='font-down') s.font = Math.max(-2, (s.font||0)-1);
+      else if (act==='contrast') s.contrast = !s.contrast;
+      else if (act==='links') s.links = !s.links;
+      else if (act==='motion') s.motion = !s.motion;
+      else if (act==='reset') s = {};
+      saveA11y(s);
+    });
+  });
+}
+
 // ===== Analytics / Pixel (אופציונלי) =====
 // כדי להפעיל מעקב: החליפו את המזהים למטה והסירו את ה-// בתחילת השורות הרלוונטיות.
 var GA4_ID = '';   // לדוגמה: 'G-XXXXXXXXXX'
@@ -270,4 +339,5 @@ document.addEventListener('DOMContentLoaded', function(){
   initReveal();
   initFaq();
   initAnalytics();
+  registerSW();
 });

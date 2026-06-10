@@ -1,0 +1,22 @@
+{
+  "name": "SafeView – מצלמות אבטחה חכמות",
+  "short_name": "SafeView",
+  "description": "חנות מצלמות אבטחה חכמות בישראל – סולאריות, פנימיות, חיצוניות ומיני.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#080a0f",
+  "theme_color": "#080a0f",
+  "lang": "he",
+  "dir": "rtl",
+  "categories": ["shopping", "business"],
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

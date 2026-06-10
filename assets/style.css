@@ -329,6 +329,44 @@ footer { position: relative; z-index: 1; background: var(--bg2); border-top: 1px
 .wa-float:hover { transform: scale(1.1); animation: none; }
 .wa-float svg { width: 32px; height: 32px; fill: #fff; }
 
+/* ===== נגישות (a11y) ===== */
+.a11y-float { position: fixed; bottom: 24px; left: 92px; width: 46px; height: 46px; background: var(--blue); border: 2px solid #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 14px rgba(58,159,255,0.45); z-index: 200; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; padding: 0; }
+.a11y-float:hover { transform: scale(1.08); box-shadow: 0 4px 20px rgba(58,159,255,0.6); }
+.a11y-float:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.a11y-float svg { width: 22px; height: 22px; fill: #fff; }
+.a11y-panel { position: fixed; bottom: 86px; left: 24px; width: 280px; background: var(--bg3); border: 1px solid var(--border); border-radius: 12px; padding: 14px; z-index: 201; box-shadow: 0 12px 32px rgba(0,0,0,0.6); opacity: 0; pointer-events: none; transform: translateY(10px); transition: opacity 0.2s, transform 0.2s; }
+.a11y-panel.open { opacity: 1; pointer-events: auto; transform: translateY(0); }
+.a11y-head { display: flex; justify-content: space-between; align-items: center; font-family: 'Rajdhani', sans-serif; font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid var(--border2); }
+.a11y-close { background: none; border: none; color: var(--text2); font-size: 24px; line-height: 1; cursor: pointer; padding: 0 4px; }
+.a11y-close:hover { color: var(--blue); }
+.a11y-opt { width: 100%; display: flex; justify-content: space-between; align-items: center; background: var(--bg4); border: 1px solid var(--border2); border-radius: 7px; padding: 9px 12px; margin-bottom: 6px; color: var(--text); font-family: 'Noto Sans Hebrew', sans-serif; font-size: 13px; cursor: pointer; transition: background 0.15s, border-color 0.15s; text-align: right; }
+.a11y-opt:hover { background: var(--blue-glow); border-color: var(--blue); }
+.a11y-opt:focus-visible { outline: 2px solid var(--blue); outline-offset: -2px; }
+.a11y-opt strong { font-family: 'Rajdhani', sans-serif; color: var(--blue); font-size: 15px; min-width: 28px; text-align: center; }
+.a11y-reset { background: rgba(255,64,64,0.08); border-color: rgba(255,64,64,0.3); }
+.a11y-reset:hover { background: rgba(255,64,64,0.15); border-color: rgba(255,64,64,0.5); }
+.a11y-reset strong { color: #ff6464; }
+.a11y-foot { font-size: 11px; color: var(--text3); margin-top: 10px; line-height: 1.5; }
+.a11y-foot a { color: var(--blue); }
+
+/* === מצבי נגישות מופעלים === */
+html.a11y-contrast { background: #000 !important; }
+html.a11y-contrast body, html.a11y-contrast section, html.a11y-contrast .content, html.a11y-contrast .page-head { background: #000 !important; color: #fff !important; }
+html.a11y-contrast .prod-card, html.a11y-contrast .feat-card, html.a11y-contrast .guarantee-card, html.a11y-contrast .cat-card, html.a11y-contrast .bundle-card, html.a11y-contrast .faq-item, html.a11y-contrast .cart-item, html.a11y-contrast .cart-summary, html.a11y-contrast .article-card, html.a11y-contrast .contact-card, html.a11y-contrast .pdp-info { background: #000 !important; border: 2px solid #fff !important; color: #fff !important; }
+html.a11y-contrast h1, html.a11y-contrast h2, html.a11y-contrast h3, html.a11y-contrast strong, html.a11y-contrast .prod-name, html.a11y-contrast .section-title { color: #ffeb3b !important; }
+html.a11y-contrast a { color: #00e5ff !important; }
+html.a11y-contrast nav { background: #000 !important; border-bottom: 2px solid #fff !important; }
+html.a11y-contrast .btn-primary { background: #ffeb3b !important; color: #000 !important; border: 2px solid #ffeb3b !important; }
+
+html.a11y-links a:not(.btn-primary):not(.btn-secondary):not(.btn-wa):not(.nav-logo):not(.cat-card):not(.contact-card):not(.skip-link):not(.wa-float):not(.prod-card *):not(.article-card *) { text-decoration: underline !important; text-decoration-thickness: 2px !important; text-underline-offset: 3px !important; }
+html.a11y-links .nav-links a, html.a11y-links footer a { text-decoration: underline !important; }
+
+html.a11y-motion *, html.a11y-motion *::before, html.a11y-motion *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+
+@media (max-width: 520px) {
+  .a11y-panel { width: calc(100vw - 48px); }
+}
+
 /* SCROLL REVEAL */
 .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
 .reveal.in { opacity: 1; transform: translateY(0); }
