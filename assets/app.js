@@ -278,9 +278,10 @@ function getA11y(){ try { return JSON.parse(localStorage.getItem(A11Y_KEY) || '{
 function saveA11y(s){ localStorage.setItem(A11Y_KEY, JSON.stringify(s)); applyA11y(s); }
 function applyA11y(s){
   var html = document.documentElement;
-  // font size: -2..+4 steps × 2px
+  // גודל טקסט: מיושם דרך data-font + CSS zoom (פועל גם על px)
   var step = Math.max(-2, Math.min(4, s.font || 0));
-  html.style.fontSize = (100 + step*8) + '%';
+  if (step === 0) html.removeAttribute('data-font');
+  else html.setAttribute('data-font', String(step));
   html.classList.toggle('a11y-contrast', !!s.contrast);
   html.classList.toggle('a11y-links', !!s.links);
   html.classList.toggle('a11y-motion', !!s.motion);

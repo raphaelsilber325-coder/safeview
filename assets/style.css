@@ -349,19 +349,170 @@ footer { position: relative; z-index: 1; background: var(--bg2); border-top: 1px
 .a11y-foot { font-size: 11px; color: var(--text3); margin-top: 10px; line-height: 1.5; }
 .a11y-foot a { color: var(--blue); }
 
-/* === מצבי נגישות מופעלים === */
+/* === גודל טקסט (zoom פועל על px ולא רק על rem) === */
+html[data-font="-2"] body { zoom: 0.86; }
+html[data-font="-1"] body { zoom: 0.93; }
+html[data-font="1"]  body { zoom: 1.10; }
+html[data-font="2"]  body { zoom: 1.20; }
+html[data-font="3"]  body { zoom: 1.32; }
+html[data-font="4"]  body { zoom: 1.45; }
+/* גיבוי לדפדפנים שלא תומכים ב-zoom (Firefox ישן) */
+@supports not (zoom: 1) {
+  html[data-font="-2"] body { transform: scale(0.86); transform-origin: top center; }
+  html[data-font="-1"] body { transform: scale(0.93); transform-origin: top center; }
+  html[data-font="1"]  body { transform: scale(1.10); transform-origin: top center; }
+  html[data-font="2"]  body { transform: scale(1.20); transform-origin: top center; }
+  html[data-font="3"]  body { transform: scale(1.32); transform-origin: top center; }
+  html[data-font="4"]  body { transform: scale(1.45); transform-origin: top center; }
+}
+
+/* === ניגודיות גבוהה — שחור / לבן / צהוב / תכלת === */
 html.a11y-contrast { background: #000 !important; }
-html.a11y-contrast body, html.a11y-contrast section, html.a11y-contrast .content, html.a11y-contrast .page-head { background: #000 !important; color: #fff !important; }
-html.a11y-contrast .prod-card, html.a11y-contrast .feat-card, html.a11y-contrast .guarantee-card, html.a11y-contrast .cat-card, html.a11y-contrast .bundle-card, html.a11y-contrast .faq-item, html.a11y-contrast .cart-item, html.a11y-contrast .cart-summary, html.a11y-contrast .article-card, html.a11y-contrast .contact-card, html.a11y-contrast .pdp-info { background: #000 !important; border: 2px solid #fff !important; color: #fff !important; }
-html.a11y-contrast h1, html.a11y-contrast h2, html.a11y-contrast h3, html.a11y-contrast strong, html.a11y-contrast .prod-name, html.a11y-contrast .section-title { color: #ffeb3b !important; }
-html.a11y-contrast a { color: #00e5ff !important; }
-html.a11y-contrast nav { background: #000 !important; border-bottom: 2px solid #fff !important; }
-html.a11y-contrast .btn-primary { background: #ffeb3b !important; color: #000 !important; border: 2px solid #ffeb3b !important; }
+html.a11y-contrast body { background: #000 !important; color: #fff !important; }
+/* כל אלמנט קונטיינר/טקסט — שחור + לבן */
+html.a11y-contrast nav,
+html.a11y-contrast footer,
+html.a11y-contrast section,
+html.a11y-contrast .page-head,
+html.a11y-contrast .content,
+html.a11y-contrast .hero,
+html.a11y-contrast .trust-bar,
+html.a11y-contrast .ship-bar,
+html.a11y-contrast .prod-card,
+html.a11y-contrast .feat-card,
+html.a11y-contrast .guarantee-card,
+html.a11y-contrast .cat-card,
+html.a11y-contrast .bundle-card,
+html.a11y-contrast .faq-item,
+html.a11y-contrast .cart-item,
+html.a11y-contrast .cart-summary,
+html.a11y-contrast .article-card,
+html.a11y-contrast .contact-card,
+html.a11y-contrast .pdp-info,
+html.a11y-contrast .pdp-gallery,
+html.a11y-contrast .pdp-specs,
+html.a11y-contrast .pdp-trust,
+html.a11y-contrast .pdp-sticky,
+html.a11y-contrast .cta-band,
+html.a11y-contrast .footer-top,
+html.a11y-contrast .footer-bottom,
+html.a11y-contrast .err-wrap,
+html.a11y-contrast .cmp-wrap,
+html.a11y-contrast .cmp-table,
+html.a11y-contrast .cmp-table-wrap,
+html.a11y-contrast .cmp-table th,
+html.a11y-contrast .cmp-table td { background: #000 !important; }
+html.a11y-contrast,
+html.a11y-contrast p,
+html.a11y-contrast li,
+html.a11y-contrast span,
+html.a11y-contrast td,
+html.a11y-contrast div,
+html.a11y-contrast label,
+html.a11y-contrast .prod-stock,
+html.a11y-contrast .section-sub,
+html.a11y-contrast .section-label,
+html.a11y-contrast .feat-desc,
+html.a11y-contrast .guarantee-desc,
+html.a11y-contrast .cat-count,
+html.a11y-contrast .stat-label,
+html.a11y-contrast .cmp-prod-name { color: #fff !important; }
+/* גבולות חזקים על כרטיסים */
+html.a11y-contrast .prod-card,
+html.a11y-contrast .feat-card,
+html.a11y-contrast .guarantee-card,
+html.a11y-contrast .cat-card,
+html.a11y-contrast .bundle-card,
+html.a11y-contrast .faq-item,
+html.a11y-contrast .cart-item,
+html.a11y-contrast .cart-summary,
+html.a11y-contrast .article-card,
+html.a11y-contrast .contact-card,
+html.a11y-contrast .pdp-info,
+html.a11y-contrast nav { border-color: #fff !important; border-width: 2px !important; }
+/* כותרות וטקסט מודגש — צהוב */
+html.a11y-contrast h1,
+html.a11y-contrast h2,
+html.a11y-contrast h3,
+html.a11y-contrast h4,
+html.a11y-contrast h5,
+html.a11y-contrast strong,
+html.a11y-contrast b,
+html.a11y-contrast .prod-name,
+html.a11y-contrast .prod-price,
+html.a11y-contrast .pdp-price,
+html.a11y-contrast .pdp-sticky-price,
+html.a11y-contrast .section-title,
+html.a11y-contrast .stat-num,
+html.a11y-contrast .hero h1 strong,
+html.a11y-contrast .nav-logo,
+html.a11y-contrast .nav-logo span,
+html.a11y-contrast .bundle-now,
+html.a11y-contrast .cmp-price { color: #ffeb3b !important; }
+/* קישורים — תכלת זוהר */
+html.a11y-contrast a,
+html.a11y-contrast a:visited { color: #00e5ff !important; }
+/* כפתור ראשי — צהוב על שחור */
+html.a11y-contrast .btn-primary,
+html.a11y-contrast .prod-add,
+html.a11y-contrast .cmp-btn-buy { background: #ffeb3b !important; color: #000 !important; border: 2px solid #ffeb3b !important; }
+/* כפתור משני */
+html.a11y-contrast .btn-secondary { background: #000 !important; color: #fff !important; border: 2px solid #fff !important; }
+/* וואטסאפ — שומר ירוק לזיהוי */
+html.a11y-contrast .btn-wa,
+html.a11y-contrast .wa-float,
+html.a11y-contrast .prod-order,
+html.a11y-contrast .cmp-btn-wa { background: #25D366 !important; color: #000 !important; }
+html.a11y-contrast .btn-wa svg,
+html.a11y-contrast .wa-float svg,
+html.a11y-contrast .prod-order svg,
+html.a11y-contrast .cmp-btn-wa svg { fill: #000 !important; }
+/* תמונות — גוון אפור עם ניגודיות מוגברת */
+html.a11y-contrast img { filter: grayscale(1) contrast(1.4) brightness(1.05); }
+/* פאנל הנגישות עצמו — בולט */
+html.a11y-contrast .a11y-float { background: #fff !important; border: 3px solid #ffeb3b !important; }
+html.a11y-contrast .a11y-float svg { fill: #000 !important; }
+html.a11y-contrast .a11y-panel { background: #000 !important; border: 2px solid #fff !important; }
+html.a11y-contrast .a11y-opt { background: #111 !important; border: 1px solid #fff !important; color: #fff !important; }
+html.a11y-contrast .a11y-opt strong { color: #ffeb3b !important; }
 
-html.a11y-links a:not(.btn-primary):not(.btn-secondary):not(.btn-wa):not(.nav-logo):not(.cat-card):not(.contact-card):not(.skip-link):not(.wa-float):not(.prod-card *):not(.article-card *) { text-decoration: underline !important; text-decoration-thickness: 2px !important; text-underline-offset: 3px !important; }
-html.a11y-links .nav-links a, html.a11y-links footer a { text-decoration: underline !important; }
+/* === הדגשת קישורים — קו מתחת לכל קישור טקסטואלי === */
+html.a11y-links a {
+  text-decoration: underline !important;
+  text-decoration-thickness: 2px !important;
+  text-underline-offset: 3px !important;
+}
+/* יוצאי דופן — כפתורים, אייקונים, וכרטיסים שלמים שמשמשים כקישור */
+html.a11y-links a.btn-primary,
+html.a11y-links a.btn-secondary,
+html.a11y-links a.btn-wa,
+html.a11y-links a.wa-float,
+html.a11y-links a.skip-link,
+html.a11y-links a.nav-logo,
+html.a11y-links a.nav-cart,
+html.a11y-links a.prod-order,
+html.a11y-links a.cat-card,
+html.a11y-links a.contact-card,
+html.a11y-links a.prod-card,
+html.a11y-links a.article-card,
+html.a11y-links a.cmp-btn-wa,
+html.a11y-links a.cmp-btn-buy,
+html.a11y-links a.cmp-prod { text-decoration: none !important; }
+/* רק שם המוצר בכרטיס מקבל קו */
+html.a11y-links .prod-name,
+html.a11y-links .cmp-prod-name { text-decoration: underline !important; text-underline-offset: 3px !important; }
 
-html.a11y-motion *, html.a11y-motion *::before, html.a11y-motion *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+/* === צמצום אנימציות === */
+html.a11y-motion *,
+html.a11y-motion *::before,
+html.a11y-motion *::after {
+  animation-duration: 0.001ms !important;
+  animation-delay: 0ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+  transition-delay: 0ms !important;
+  scroll-behavior: auto !important;
+}
 
 @media (max-width: 520px) {
   .a11y-panel { width: calc(100vw - 48px); }

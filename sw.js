@@ -1,6 +1,6 @@
 // SafeView Service Worker — קאשינג בסיסי לתמיכה אופליין חלקית
 // גרסה: עלייה בערך הזה תגרום ל-SW חדש להתקין ולמחוק caches ישנים
-const CACHE_VERSION = 'safeview-v3';
+const CACHE_VERSION = 'safeview-v4';
 const CORE_ASSETS = [
   './',
   './index.html',
