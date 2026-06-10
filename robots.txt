@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
 
+# Updated 2026-06-10
 Sitemap: https://raphaelsilber325-coder.github.io/safeview/sitemap.xml
