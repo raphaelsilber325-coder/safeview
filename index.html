@@ -154,25 +154,41 @@
     return '<a class="cat-card" href="#products"><span class="cat-icon">'+c[1]+'</span><div class="cat-name">מצלמות '+c[0]+'</div><div class="cat-count">'+c[2]+' מוצרים</div><div class="cat-arrow">←</div></a>';
   }).join('');
 
-  // מוצרים
-  document.getElementById('productsGrid').innerHTML = PRODUCTS.map(function(p, idx){
-    var msg = 'שלום SafeView! אני מעוניין/ת במצלמה: ' + p.name + ' (' + fmt(p.price) + '). אפשר פרטים?';
-    // 4 התמונות הראשונות — fetchpriority גבוה (סביר שייראו ראשונות)
-    var imgAttrs = idx < 4
-      ? 'fetchpriority="high" decoding="async"'
-      : 'loading="lazy" decoding="async"';
-    return '<div class="prod-card">' +
-      '<div class="prod-img"><a href="product.html?id='+p.id+'"><img src="'+p.img+'" alt="'+p.name+'" '+imgAttrs+'></a><div class="prod-badge">'+p.badge+'</div></div>' +
-      '<div class="prod-body">' +
-        '<a class="prod-name" href="product.html?id='+p.id+'">'+p.name+'</a>' +
-        '<div class="prod-footer"><span class="prod-price">'+fmt(p.price)+'</span><span class="prod-stock">במלאי</span></div>' +
-        '<div class="prod-actions">' +
-          '<button class="prod-add" onclick="addToCart(\''+p.id+'\')">הוסף לעגלה</button>' +
-          '<a class="prod-order" href="'+waLink(msg)+'" target="_blank" rel="noopener" aria-label="הזמן בוואטסאפ">'+ICON.wa+'</a>' +
+  // מוצרים — skeleton בזמן הטעינה מ-Shopify
+  (function renderProductSkeleton(){
+    var skelHtml = '';
+    for (var i = 0; i < 9; i++) {
+      skelHtml += '<div class="prod-card prod-skeleton">' +
+        '<div class="prod-img skel-block" style="height:200px"></div>' +
+        '<div class="prod-body" style="padding:16px">' +
+          '<div class="skel-block" style="height:14px;margin-bottom:10px;border-radius:4px"></div>' +
+          '<div class="skel-block" style="height:12px;width:55%;border-radius:4px"></div>' +
+        '</div></div>';
+    }
+    document.getElementById('productsGrid').innerHTML = skelHtml;
+  })();
+
+  fetchShopifyProducts().then(function(products){
+    document.getElementById('productsGrid').innerHTML = products.map(function(p, idx){
+      var msg = 'שלום SafeView! אני מעוניין/ת במצלמה: ' + p.name + ' (' + fmt(p.price) + '). אפשר פרטים?';
+      var imgAttrs = idx < 4
+        ? 'fetchpriority="high" decoding="async"'
+        : 'loading="lazy" decoding="async"';
+      return '<div class="prod-card">' +
+        '<div class="prod-img"><a href="product.html?id='+p.id+'"><img src="'+p.img+'" alt="'+p.name+'" '+imgAttrs+'></a>' +
+          (p.badge ? '<div class="prod-badge">'+p.badge+'</div>' : '') +
         '</div>' +
-      '</div>' +
-    '</div>';
-  }).join('');
+        '<div class="prod-body">' +
+          '<a class="prod-name" href="product.html?id='+p.id+'">'+p.name+'</a>' +
+          '<div class="prod-footer"><span class="prod-price">'+fmt(p.price)+'</span><span class="prod-stock">במלאי</span></div>' +
+          '<div class="prod-actions">' +
+            '<button class="prod-add" onclick="addToCart(\''+p.id+'\')">הוסף לעגלה</button>' +
+            '<a class="prod-order" href="'+waLink(msg)+'" target="_blank" rel="noopener" aria-label="הזמן בוואטסאפ">'+ICON.wa+'</a>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+  });
 
   // חבילות
   var BUNDLES = [

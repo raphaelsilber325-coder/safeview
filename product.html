@@ -43,89 +43,121 @@
 <script src="assets/app.js"></script>
 <script>
   var params = new URLSearchParams(location.search);
-  var id = params.get('id');
-  var p = getProduct(id) || PRODUCTS[0];
-  document.title = p.name + ' | SafeView';
+  var id = params.get('id') || params.get('handle');
 
-  // ===== Dynamic SEO meta (description, Open Graph, Product JSON-LD) =====
-  document.querySelector('meta[name="description"]').setAttribute('content', p.desc);
+  // skeleton בזמן הטעינה מ-Shopify
+  document.getElementById('pdp').innerHTML =
+    '<div class="pdp-gallery skel-block" style="min-height:320px;border-radius:12px"></div>' +
+    '<div class="pdp-info">' +
+      '<div class="skel-block" style="height:28px;margin-bottom:16px;border-radius:6px"></div>' +
+      '<div class="skel-block" style="height:22px;width:35%;margin-bottom:24px;border-radius:6px"></div>' +
+      '<div class="skel-block" style="height:14px;margin-bottom:8px;border-radius:4px"></div>' +
+      '<div class="skel-block" style="height:14px;width:75%;border-radius:4px"></div>' +
+    '</div>';
+
   function addMeta(prop, val){
     var m = document.createElement('meta'); m.setAttribute('property', prop); m.setAttribute('content', val); document.head.appendChild(m);
   }
-  addMeta('og:title', p.name + ' | SafeView');
-  addMeta('og:description', p.desc);
-  addMeta('og:type', 'product');
-  addMeta('og:image', p.img);
-  addMeta('product:price:amount', String(p.price));
-  addMeta('product:price:currency', 'ILS');
 
-  var jsonLd = {
-    "@context":"https://schema.org","@type":"Product",
-    "name": p.name,"description": p.desc,"image": p.img,"category": p.cat,"brand":{"@type":"Brand","name":"SafeView"},
-    "offers":{"@type":"Offer","priceCurrency":"ILS","price": p.price,"availability":"https://schema.org/InStock","seller":{"@type":"Organization","name":"SafeView"}}
-  };
-  var s = document.createElement('script'); s.type = 'application/ld+json'; s.textContent = JSON.stringify(jsonLd); document.head.appendChild(s);
+  function renderPdp(p) {
+    document.title = p.name + ' | SafeView';
+    document.querySelector('meta[name="description"]').setAttribute('content', p.desc);
+    addMeta('og:title', p.name + ' | SafeView');
+    addMeta('og:description', p.desc);
+    addMeta('og:type', 'product');
+    addMeta('og:image', p.img);
+    addMeta('product:price:amount', String(p.price));
+    addMeta('product:price:currency', 'ILS');
 
-  // BreadcrumbList Schema — נראות טובה יותר בגוגל
-  var baseUrl = location.origin + location.pathname.replace(/[^/]+$/, '');
-  var breadcrumbs = {
-    "@context":"https://schema.org","@type":"BreadcrumbList",
-    "itemListElement":[
-      { "@type":"ListItem","position":1,"name":"דף הבית","item": baseUrl + "index.html" },
-      { "@type":"ListItem","position":2,"name":"מצלמות " + p.cat,"item": baseUrl + "index.html#categories" },
-      { "@type":"ListItem","position":3,"name": p.name,"item": location.href }
-    ]
-  };
-  var s2 = document.createElement('script'); s2.type = 'application/ld+json'; s2.textContent = JSON.stringify(breadcrumbs); document.head.appendChild(s2);
+    var jsonLd = {
+      "@context":"https://schema.org","@type":"Product",
+      "name": p.name,"description": p.desc,"image": p.img,"category": p.cat,
+      "brand":{"@type":"Brand","name":"SafeView"},
+      "offers":{"@type":"Offer","priceCurrency":"ILS","price": p.price,
+        "availability":"https://schema.org/InStock","seller":{"@type":"Organization","name":"SafeView"}}
+    };
+    var s = document.createElement('script'); s.type = 'application/ld+json'; s.textContent = JSON.stringify(jsonLd); document.head.appendChild(s);
 
-  var msg = 'שלום SafeView!אני מעוניין/ת במצלמה: ' + p.name + ' (' + fmt(p.price) + '). אפשר פרטים?';
+    var baseUrl = location.origin + location.pathname.replace(/[^/]+$/, '');
+    var breadcrumbs = {
+      "@context":"https://schema.org","@type":"BreadcrumbList",
+      "itemListElement":[
+        { "@type":"ListItem","position":1,"name":"דף הבית","item": baseUrl + "index.html" },
+        { "@type":"ListItem","position":2,"name":"מצלמות " + p.cat,"item": baseUrl + "index.html#categories" },
+        { "@type":"ListItem","position":3,"name": p.name,"item": location.href }
+      ]
+    };
+    var s2 = document.createElement('script'); s2.type = 'application/ld+json'; s2.textContent = JSON.stringify(breadcrumbs); document.head.appendChild(s2);
 
-  document.getElementById('pdp').innerHTML =
-    '<div class="pdp-gallery"><img src="'+p.img+'" alt="'+p.name+'"><div class="pdp-badge">'+p.badge+'</div></div>' +
-    '<div class="pdp-info">' +
-      '<h1>'+p.name+'</h1>' +
-      '<div class="pdp-price">'+fmt(p.price)+'</div>' +
-      '<div class="pdp-stock">במלאי — נשלח תוך 24 שעות</div>' +
-      '<p style="color:var(--text2);margin-bottom:24px;line-height:1.8">'+p.desc+'</p>' +
-      '<div class="pdp-buy">' +
-        '<button class="btn-primary" onclick="addToCart(\''+p.id+'\')">הוסף לעגלה</button>' +
-        '<a class="btn-wa" href="'+waLink(msg)+'" target="_blank" rel="noopener">'+ICON.wa+' הזמן בוואטסאפ</a>' +
-      '</div>' +
-      // Sticky CTA למובייל
-      '<div class="pdp-sticky">' +
-        '<div class="pdp-sticky-price">'+fmt(p.price)+'</div>' +
-        '<button class="btn-primary" onclick="addToCart(\''+p.id+'\')">הוסף לעגלה</button>' +
-      '</div>' +
-      '<div class="pdp-specs">'+p.specs.map(function(s){ return '<div class="pdp-spec"><span>'+s[0]+'</span><span>'+s[1]+'</span></div>'; }).join('')+'</div>' +
-      '<div class="pdp-trust">' +
-        '<div><span class="pdp-trust-icon">'+ICON.truck+'</span>משלוח חינם בהזמנה מעל ₪200</div>' +
-        '<div><span class="pdp-trust-icon">'+ICON.shield+'</span>אחריות מלאה לשנה + תמיכה בעברית</div>' +
-        '<div><span class="pdp-trust-icon">'+ICON.refresh+'</span>14 ימי החזרה ללא שאלות</div>' +
-        '<div><span class="pdp-trust-icon">'+ICON.lock+'</span>תשלום מאובטח</div>' +
-      '</div>' +
-    '</div>';
+    var msg = 'שלום SafeView! אני מעוניין/ת במצלמה: ' + p.name + ' (' + fmt(p.price) + '). אפשר פרטים?';
 
-  // related (אותה קטגוריה, עד 3)
-  var rel = PRODUCTS.filter(function(x){ return x.cat===p.cat && x.id!==p.id; });
-  if (rel.length < 3) rel = rel.concat(PRODUCTS.filter(function(x){ return x.id!==p.id && rel.indexOf(x)<0; }));
-  rel = rel.slice(0,3);
-  document.getElementById('related').innerHTML = rel.map(function(x){
-    var m = 'שלום SafeView!אני מעוניין/ת במצלמה: ' + x.name + ' (' + fmt(x.price) + ').';
-    return '<div class="prod-card">' +
-      '<div class="prod-img"><a href="product.html?id='+x.id+'"><img src="'+x.img+'" alt="'+x.name+'" loading="lazy"></a><div class="prod-badge">'+x.badge+'</div></div>' +
-      '<div class="prod-body"><a class="prod-name" href="product.html?id='+x.id+'">'+x.name+'</a>' +
-        '<div class="prod-footer"><span class="prod-price">'+fmt(x.price)+'</span><span class="prod-stock">במלאי</span></div>' +
-        '<div class="prod-actions"><button class="prod-add" onclick="addToCart(\''+x.id+'\')">הוסף לעגלה</button>' +
-        '<a class="prod-order" href="'+waLink(m)+'" target="_blank" rel="noopener" aria-label="וואטסאפ">'+ICON.wa+'</a></div>' +
-      '</div></div>';
-  }).join('');
+    // גלריה — תמונות מרובות אם יש
+    var galleryHtml;
+    if (p.images && p.images.length > 1) {
+      galleryHtml =
+        '<div class="pdp-gallery pdp-gallery-multi">' +
+          '<img id="mainImg" src="'+p.images[0]+'" alt="'+p.name+'">' +
+          (p.badge ? '<div class="pdp-badge">'+p.badge+'</div>' : '') +
+          '<div class="pdp-thumbs">' +
+            p.images.slice(0,6).map(function(url,i){
+              return '<img src="'+url+'" class="pdp-thumb'+(i===0?' active':'')+'" onclick="document.getElementById(\'mainImg\').src=this.src;document.querySelectorAll(\'.pdp-thumb\').forEach(function(t){t.classList.remove(\'active\');});this.classList.add(\'active\')" loading="lazy">';
+            }).join('') +
+          '</div>' +
+        '</div>';
+    } else {
+      galleryHtml = '<div class="pdp-gallery"><img src="'+p.img+'" alt="'+p.name+'">' + (p.badge ? '<div class="pdp-badge">'+p.badge+'</div>' : '') + '</div>';
+    }
 
-  // breadcrumb scroll top
-  window.scrollTo(0,0);
+    document.getElementById('pdp').innerHTML =
+      galleryHtml +
+      '<div class="pdp-info">' +
+        '<h1>'+p.name+'</h1>' +
+        '<div class="pdp-price">'+fmt(p.price)+'</div>' +
+        '<div class="pdp-stock">במלאי — נשלח תוך 24 שעות</div>' +
+        '<p style="color:var(--text2);margin-bottom:24px;line-height:1.8">'+p.desc+'</p>' +
+        '<div class="pdp-buy">' +
+          '<button class="btn-primary" onclick="addToCart(\''+p.id+'\')">הוסף לעגלה</button>' +
+          '<a class="btn-wa" href="'+waLink(msg)+'" target="_blank" rel="noopener">'+ICON.wa+' הזמן בוואטסאפ</a>' +
+        '</div>' +
+        '<div class="pdp-sticky">' +
+          '<div class="pdp-sticky-price">'+fmt(p.price)+'</div>' +
+          '<button class="btn-primary" onclick="addToCart(\''+p.id+'\')">הוסף לעגלה</button>' +
+        '</div>' +
+        (p.specs && p.specs.length ? '<div class="pdp-specs">'+p.specs.map(function(sp){ return '<div class="pdp-spec"><span>'+sp[0]+'</span><span>'+sp[1]+'</span></div>'; }).join('')+'</div>' : '') +
+        '<div class="pdp-trust">' +
+          '<div><span class="pdp-trust-icon">'+ICON.truck+'</span>משלוח חינם בהזמנה מעל ₪200</div>' +
+          '<div><span class="pdp-trust-icon">'+ICON.shield+'</span>אחריות מלאה לשנה + תמיכה בעברית</div>' +
+          '<div><span class="pdp-trust-icon">'+ICON.refresh+'</span>14 ימי החזרה ללא שאלות</div>' +
+          '<div><span class="pdp-trust-icon">'+ICON.lock+'</span>תשלום מאובטח</div>' +
+        '</div>' +
+      '</div>';
 
-  // Reviews CTA — קישור וואטסאפ ייעודי לחוות דעת
-  var rWa = document.getElementById('reviewWa');
-  if (rWa) rWa.href = waLink('שלום SafeView! רכשתי את ' + p.name + ' ואני רוצה לשתף חוות דעת.');
+    // related — אותה קטגוריה, עד 3 (מהמוצרים שנטענו מ-Shopify)
+    fetchShopifyProducts().then(function(all){
+      var rel = all.filter(function(x){ return x.cat === p.cat && x.id !== p.id; });
+      if (rel.length < 3) rel = rel.concat(all.filter(function(x){ return x.id !== p.id && rel.indexOf(x) < 0; }));
+      rel = rel.slice(0, 3);
+      document.getElementById('related').innerHTML = rel.map(function(x){
+        var m = 'שלום SafeView! אני מעוניין/ת במצלמה: ' + x.name + ' (' + fmt(x.price) + ').';
+        return '<div class="prod-card">' +
+          '<div class="prod-img"><a href="product.html?id='+x.id+'"><img src="'+x.img+'" alt="'+x.name+'" loading="lazy"></a>' +
+            (x.badge ? '<div class="prod-badge">'+x.badge+'</div>' : '') +
+          '</div>' +
+          '<div class="prod-body"><a class="prod-name" href="product.html?id='+x.id+'">'+x.name+'</a>' +
+            '<div class="prod-footer"><span class="prod-price">'+fmt(x.price)+'</span><span class="prod-stock">במלאי</span></div>' +
+            '<div class="prod-actions"><button class="prod-add" onclick="addToCart(\''+x.id+'\')">הוסף לעגלה</button>' +
+            '<a class="prod-order" href="'+waLink(m)+'" target="_blank" rel="noopener" aria-label="וואטסאפ">'+ICON.wa+'</a></div>' +
+          '</div></div>';
+      }).join('');
+    });
+
+    window.scrollTo(0, 0);
+
+    var rWa = document.getElementById('reviewWa');
+    if (rWa) rWa.href = waLink('שלום SafeView! רכשתי את ' + p.name + ' ואני רוצה לשתף חוות דעת.');
+  }
+
+  fetchShopifyProduct(id).then(renderPdp);
 </script>
 
 </body>

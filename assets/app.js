@@ -50,7 +50,122 @@ var PRODUCTS = [
     specs:[['רזולוציה','4K HD'],['חיבור','WiFi'],['גודל','מיני'],['צפייה','מרחוק'],['תיאום','Smart Home']] }
 ];
 
-function getProduct(id){ return PRODUCTS.filter(function(p){ return p.id === id; })[0]; }
+// ===== Shopify Storefront API (Dropshipping) =====
+// token מתוך: Shopify Admin → Settings → Apps → Develop apps → SafeView Frontend → Storefront API access token
+var SHOPIFY_DOMAIN = 'azxiyx-z1.myshopify.com';
+var SHOPIFY_STOREFRONT_TOKEN = ''; // הדבק כאן את ה-token לאחר יצירתו
+
+// מיפוי מפרטים מהמאגר הסטטי לפי handle — fallback כאשר אין מידע מ-Shopify
+var _specsLookup = (function(){
+  var m = {};
+  PRODUCTS.forEach(function(p){ m[p.id] = p.specs || []; });
+  return m;
+})();
+
+var _productsCache = null;
+var _productsFetchPromise = null;
+
+function shopifyFetch(query, variables) {
+  return fetch('https://' + SHOPIFY_DOMAIN + '/api/2024-10/graphql.json', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Shopify-Storefront-Access-Token': SHOPIFY_STOREFRONT_TOKEN
+    },
+    body: JSON.stringify({ query: query, variables: variables || {} })
+  }).then(function(r){ return r.json(); });
+}
+
+function _mapShopifyNode(node) {
+  var price = Math.round(parseFloat(node.priceRange.minVariantPrice.amount));
+  var cat = '', badge = '';
+  (node.tags || []).forEach(function(t){
+    if (t.indexOf('קטגוריה:') === 0) cat = t.replace('קטגוריה:', '');
+    if (t.indexOf('badge:') === 0)    badge = t.replace('badge:', '');
+  });
+  // fallback badge/cat from known tags
+  if (!badge) {
+    var tags = node.tags || [];
+    if (tags.indexOf('סולאריות') >= 0)  badge = 'סולארי';
+    else if (tags.indexOf('אינדור') >= 0) badge = 'אינדור';
+    else if (tags.indexOf('אאוטדור') >= 0) badge = 'אאוטדור';
+    else if (tags.indexOf('מיני') >= 0)   badge = 'מיני';
+  }
+  if (!cat && badge) cat = badge === 'סולארי' ? 'סולאריות' : badge;
+
+  var firstVariant = node.variants && node.variants.edges[0] ? node.variants.edges[0].node : null;
+  var imgs = (node.images && node.images.edges || []).map(function(e){ return e.node.url; });
+  var handle = node.handle;
+  return {
+    id: handle,
+    shopifyId: node.id,
+    variantId: firstVariant ? firstVariant.id : null,
+    availableForSale: firstVariant ? firstVariant.availableForSale : true,
+    name: node.title,
+    price: price,
+    badge: badge,
+    cat: cat,
+    img: node.featuredImage ? node.featuredImage.url : (imgs[0] || ''),
+    images: imgs,
+    desc: node.description || '',
+    specs: _specsLookup[handle] || []
+  };
+}
+
+// שולף את כל המוצרים מ-Shopify (עם cache)
+function fetchShopifyProducts() {
+  if (_productsCache) return Promise.resolve(_productsCache);
+  if (_productsFetchPromise) return _productsFetchPromise;
+  if (!SHOPIFY_STOREFRONT_TOKEN) return Promise.resolve(PRODUCTS);
+
+  _productsFetchPromise = shopifyFetch(
+    'query{products(first:50,sortKey:TITLE){edges{node{' +
+    'id handle title description tags' +
+    ' priceRange{minVariantPrice{amount}}' +
+    ' featuredImage{url altText}' +
+    ' images(first:10){edges{node{url}}}' +
+    ' variants(first:5){edges{node{id title availableForSale price{amount}}}}' +
+    '}}}}'
+  ).then(function(data){
+    if (data.data && data.data.products) {
+      _productsCache = data.data.products.edges.map(function(e){ return _mapShopifyNode(e.node); });
+      return _productsCache;
+    }
+    return PRODUCTS;
+  }).catch(function(){ return PRODUCTS; });
+
+  return _productsFetchPromise;
+}
+
+// שולף מוצר בודד מ-Shopify לפי handle
+function fetchShopifyProduct(handle) {
+  if (!SHOPIFY_STOREFRONT_TOKEN) return Promise.resolve(getProduct(handle) || PRODUCTS[0]);
+  if (_productsCache) {
+    var hit = _productsCache.filter(function(p){ return p.id === handle; })[0];
+    if (hit) return Promise.resolve(hit);
+  }
+  return shopifyFetch(
+    'query($h:String!){product(handle:$h){' +
+    'id handle title description tags' +
+    ' priceRange{minVariantPrice{amount}}' +
+    ' featuredImage{url altText}' +
+    ' images(first:10){edges{node{url}}}' +
+    ' variants(first:10){edges{node{id title availableForSale price{amount}}}}' +
+    '}}',
+    { h: handle }
+  ).then(function(data){
+    if (data.data && data.data.product) return _mapShopifyNode(data.data.product);
+    return getProduct(handle) || PRODUCTS[0];
+  }).catch(function(){ return getProduct(handle) || PRODUCTS[0]; });
+}
+
+function getProduct(id){
+  if (_productsCache) {
+    var cached = _productsCache.filter(function(p){ return p.id === id; })[0];
+    if (cached) return cached;
+  }
+  return PRODUCTS.filter(function(p){ return p.id === id; })[0];
+}
 function fmt(n){ return '₪' + Number(n).toLocaleString('he-IL'); }
 
 // ===== עגלה (localStorage) =====
@@ -87,6 +202,43 @@ function checkoutWhatsApp(){
   var ship = cartTotal() >= FREE_SHIP_THRESHOLD ? 'משלוח חינם 🎉' : 'בתוספת משלוח';
   lines.push('(' + ship + ')');
   window.open(waLink(lines.join('\n')), '_blank');
+}
+
+// Checkout דרך Shopify — מעביר ללדף תשלום מאובטח
+function createShopifyCheckout() {
+  var c = getCart();
+  if (!c.length){ alert('העגלה ריקה'); return; }
+  if (!SHOPIFY_STOREFRONT_TOKEN){ checkoutWhatsApp(); return; }
+
+  var btn = document.getElementById('checkoutBtn');
+  if (btn){ btn.disabled = true; btn.textContent = 'מכין תשלום...'; }
+
+  fetchShopifyProducts().then(function(products){
+    var map = {};
+    products.forEach(function(p){ map[p.id] = p; });
+    var lineItems = [];
+    c.forEach(function(item){
+      var prod = map[item.id];
+      if (prod && prod.variantId) lineItems.push({ variantId: prod.variantId, quantity: item.qty });
+    });
+    if (!lineItems.length){ checkoutWhatsApp(); return; }
+
+    return shopifyFetch(
+      'mutation($input:CheckoutCreateInput!){checkoutCreate(input:$input){checkout{id webUrl}checkoutUserErrors{message}}}',
+      { input: { lineItems: lineItems, allowPartialAddresses: true } }
+    ).then(function(data){
+      var co = data.data && data.data.checkoutCreate && data.data.checkoutCreate.checkout;
+      if (co && co.webUrl) {
+        window.location.href = co.webUrl;
+      } else {
+        if (btn){ btn.disabled = false; btn.textContent = 'לתשלום ←'; }
+        checkoutWhatsApp();
+      }
+    });
+  }).catch(function(){
+    if (btn){ btn.disabled = false; btn.textContent = 'לתשלום ←'; }
+    checkoutWhatsApp();
+  });
 }
 
 // ===== Toast =====
