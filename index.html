@@ -193,11 +193,11 @@
   // חבילות
   var BUNDLES = [
     { tag:'הכי פופולרי', name:'חבילת אבטחה לבית', items:['מצלמה פנימית 2K עם AI','מצלמה סולארית חיצונית 3MP','מדריכי התקנה בעברית'], now:179, old:229,
-      msg:'שלום! אני מעוניין/ת בחבילת אבטחה לבית (₪179)' },
+      id:'bundle-home', vid:50501081137292 },
     { tag:'משתלם לעסקים', name:'חבילת אבטחה לעסק', items:['3 מצלמות סולאריות 3MP','מצלמת פלאגשיפ 16MP 8K','תמיכה מועדפת לעסקים'], now:899, old:1149,
-      msg:'שלום! אני מעוניין/ת בחבילת אבטחה לעסק (₪899)' },
+      id:'bundle-business', vid:50501081170060 },
     { tag:'למתחילים', name:'חבילת מתחילים', items:['2 מצלמות מיני אלחוטיות','ראיית לילה וזיהוי תנועה','אחריות מלאה לשנה'], now:89, old:119,
-      msg:'שלום! אני מעוניין/ת בחבילת מתחילים (₪89)' }
+      id:'bundle-starter', vid:50501081202828 }
   ];
   document.getElementById('bundlesGrid').innerHTML = BUNDLES.map(function(b){
     return '<div class="bundle-card">' +
@@ -205,7 +205,7 @@
       '<div class="bundle-name">'+b.name+'</div>' +
       '<ul class="bundle-list">'+b.items.map(function(i){ return '<li>'+i+'</li>'; }).join('')+'</ul>' +
       '<div class="bundle-price"><span class="bundle-now">'+fmt(b.now)+'</span><span class="bundle-old">'+fmt(b.old)+'</span></div>' +
-      '<a class="btn-wa" href="'+waLink(b.msg)+'" target="_blank" rel="noopener">'+ICON.wa+' הזמן חבילה</a>' +
+      '<button class="btn-primary" onclick="addToCart(\''+b.id+'\');window.location.href=\'cart.html\'">🛒 הוסף לעגלה</button>' +
     '</div>';
   }).join('');
 

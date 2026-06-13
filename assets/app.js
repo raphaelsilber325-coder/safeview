@@ -12,42 +12,54 @@ function waLink(text) {
 
 // ===== קטלוג המוצרים =====
 var PRODUCTS = [
-  { id:'solar-20mp', name:'מצלמת אבטחה סולארית 20MP | 360° | 4G | IP66', price:399, badge:'סולארי', cat:'סולאריות',
+  { id:'solar-20mp', variantId:50367694405772, name:'מצלמת אבטחה סולארית 20MP | 360° | 4G | IP66', price:399, badge:'סולארי', cat:'סולאריות',
     img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S8924d13a697e4df5908c2861b8f886b9p.webp?v=1780222611',
     desc:'מצלמת אבטחה סולארית מתקדמת עם חיבור 4G ישיר — ללא חשמל, ללא WiFi, ללא חיווט. מתקינים בכל מקום ומגינים על הבית או העסק 24/7.',
     specs:[['רזולוציה','20MP'],['חיבור','4G + SIM'],['סוללה','12000mAh'],['זווית','360° סיבוב אוטומטי'],['ראיית לילה','צבעונית מלאה'],['עמידות','IP66']] },
-  { id:'baseus-s1', name:'מצלמת אבטחה סולארית Baseus S1 Lite | 2K | IP67', price:229, badge:'סולארי', cat:'סולאריות',
+  { id:'baseus-s1', variantId:50367694798988, name:'מצלמת אבטחה סולארית Baseus S1 Lite | 2K | IP67', price:229, badge:'סולארי', cat:'סולאריות',
     img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sb99a1e51ba0546c293772a41243fa232M.webp?v=1780222614',
     desc:'מצלמת אבטחה סולארית מהמותג המוערך Baseus. רזולוציית 2K, זווית רחבה 135°, ועמידות IP67 — העמידות הגבוהה בקטגוריה.',
     specs:[['מותג','Baseus'],['רזולוציה','2K Ultra HD'],['זווית','135°'],['עמידות','IP67'],['הספק','סולארי + סוללה'],['חיבור','WiFi']] },
-  { id:'solar-3mp', name:'מצלמת אבטחה סולארית חיצונית 3MP | זיהוי AI | IP65', price:99, badge:'סולארי', cat:'סולאריות',
+  { id:'solar-3mp', variantId:50367695028364, name:'מצלמת אבטחה סולארית חיצונית 3MP | זיהוי AI | IP65', price:99, badge:'סולארי', cat:'סולאריות',
     img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S11c4aabf01be4261982b94a7be532532H.webp?v=1780222615',
     desc:'מצלמה סולארית עם זיהוי בני אדם חכם (לא התראות שווא מחתולים), ראיית לילה צבעונית ושמע דו-כיווני. חיסכון מלא בחשמל.',
     specs:[['רזולוציה','3MP HD+'],['זיהוי AI','בני אדם'],['הספק','סולארי'],['עמידות','IP65'],['תקשורת','דו-כיוונית'],['חיבור','WiFi']] },
-  { id:'indoor-2k', name:'מצלמת אבטחה פנימית 2K | AI + שיחה דו-כיוונית | Blurams', price:45, badge:'אינדור', cat:'אינדור',
+  { id:'indoor-2k', variantId:50367694667916, name:'מצלמת אבטחה פנימית 2K | AI + שיחה דו-כיוונית | Blurams', price:45, badge:'אינדור', cat:'אינדור',
     img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sa514dbb7266a4564936a4b980a3f13f5M.webp?v=1780222612',
     desc:'מצלמת אבטחה פנימית עם בינה מלאכותית — מזהה אנשים וחיות מחמד. שיחה דו-כיוונית בלחיצה אחת. מושלם למשפחות ולחיות מחמד.',
     specs:[['רזולוציה','2K Ultra HD'],['חיבור','WiFi'],['שמע','דו-כיווני'],['ראיית לילה','צבעונית'],['תאימות','Alexa / Google'],['אחסון','ענן + SD']] },
-  { id:'flagship-16mp', name:'מצלמת אבטחה חיצונית 16MP 8K | 360° | 4 עדשות', price:359, badge:'פלאגשיפ', cat:'אינדור',
+  { id:'flagship-16mp', variantId:50367695159436, name:'מצלמת אבטחה חיצונית 16MP 8K | 360° | 4 עדשות', price:359, badge:'פלאגשיפ', cat:'אינדור',
     img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S3d0de0a565ab48b993427b57182989a0e.webp?v=1780222615',
     desc:'המצלמה המתקדמת ביותר שלנו — 16MP, 8K אמיתי, 4 עדשות שמסתובבות 360°, זום 10x וזיהוי AI. מערכת אבטחה מקצועית בקופסה אחת.',
     specs:[['רזולוציה','16MP / 8K'],['עדשות','4 עצמאיות'],['זווית','360°'],['זום','דיגיטלי 10x'],['AI','זיהוי תנועה ובני אדם'],['חיבור','WiFi']] },
-  { id:'wifi-dual', name:'מצלמת WiFi חיצונית | עדשה כפולה 3MP | ICSee', price:69, badge:'אאוטדור', cat:'אאוטדור',
+  { id:'wifi-dual', variantId:50367694700684, name:'מצלמת WiFi חיצונית | עדשה כפולה 3MP | ICSee', price:69, badge:'אאוטדור', cat:'אאוטדור',
     img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Saa99283cf09d4592a7c33ced52d81019B.webp?v=1780222614',
     desc:'מצלמה חיצונית עם עדשה כפולה — תצוגה רחבה וזום במקביל. תמונה חדה של 3MP, עמידות מלאה למזג אוויר, אפליקציית ICSee היציבה.',
     specs:[['רזולוציה','3MP (2304×1296)'],['עדשות','כפולות'],['חיבור','WiFi'],['אפליקציה','ICSee'],['עמידות','Waterproof'],['אחסון','כרטיס SD']] },
-  { id:'wifi-ir', name:'מצלמת אבטחה WiFi | אינפרא-אדום | Smart Home', price:35, badge:'אאוטדור', cat:'אאוטדור',
+  { id:'wifi-ir', variantId:50367695224972, name:'מצלמת אבטחה WiFi | אינפרא-אדום | Smart Home', price:35, badge:'אאוטדור', cat:'אאוטדור',
     img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S9a4b640268a140399e446738c30b95d4p.webp?v=1780222615',
     desc:'מצלמת WiFi קומפקטית עם ראיית לילה אינפרא-אדומה — הדרך הזולה להתחיל לאבטח. התקנה ב-3 דקות וצפייה מרחוק מכל מקום.',
     specs:[['ראיית לילה','אינפרא-אדום'],['חיבור','WiFi'],['זיהוי','תנועה'],['צפייה','מרחוק'],['תיאום','Smart Home']] },
-  { id:'mini-1080', name:'מצלמת מיני אלחוטית 1080P | ראיית לילה', price:39, badge:'מיני', cat:'מיני',
+  { id:'mini-1080', variantId:50367694504076, name:'מצלמת מיני אלחוטית 1080P | ראיית לילה', price:39, badge:'מיני', cat:'מיני',
     img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S68e20b3917ca422eb8255d53f414f757F.webp?v=1780222612',
     desc:'מצלמת מיני קטנה ודיסקרטית באיכות Full HD 1080P. ראיית לילה, זיהוי תנועה, מתחבאת בקלות. מושלם לבייביסיטר ולחיות מחמד.',
     specs:[['רזולוציה','1080P Full HD'],['חיבור','WiFi'],['ראיית לילה','אינפרא-אדום'],['זיהוי','תנועה אוטומטי'],['חיבור חשמל','USB']] },
-  { id:'mini-4k', name:'מצלמת מיני 4K WiFi | ניטור פנימי חכם', price:29, badge:'מיני', cat:'מיני',
+  { id:'mini-4k', variantId:50367695257740, name:'מצלמת מיני 4K WiFi | ניטור פנימי חכם', price:29, badge:'מיני', cat:'מיני',
     img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S92a865b3286d42b8b447e7f041978ca6b.webp?v=1780222616',
     desc:'מצלמת המיני הקטנה והזולה ביותר — איכות 4K, ניידת לחלוטין, גישה מרחוק מהפלאפון. אבטחה דיסקרטית במחיר מנצח.',
-    specs:[['רזולוציה','4K HD'],['חיבור','WiFi'],['גודל','מיני'],['צפייה','מרחוק'],['תיאום','Smart Home']] }
+    specs:[['רזולוציה','4K HD'],['חיבור','WiFi'],['גודל','מיני'],['צפייה','מרחוק'],['תיאום','Smart Home']] },
+  { id:'bundle-home', variantId:50501081137292, name:'חבילת אבטחה לבית | פנימית + סולארית חיצונית', price:179, badge:'חבילה', cat:'חבילות',
+    img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sa514dbb7266a4564936a4b980a3f13f5M.webp?v=1780222612',
+    desc:'חבילה מושלמת לבית — מצלמת Blurams 2K לפנים עם AI + מצלמת solar חיצונית 3MP. כיסוי מלא 24/7 בחיסכון של 30% לעומת קנייה נפרדת.',
+    specs:[['מצלמות','2 מצלמות'],['פנים','Blurams 2K AI'],['חוץ','סולארית 3MP IP65'],['חיסכון','30% לעומת נפרד']] },
+  { id:'bundle-business', variantId:50501081170060, name:'חבילת אבטחה לעסק | 3 סולאריות + פלאגשיפ 16MP', price:899, badge:'חבילה', cat:'חבילות',
+    img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S3d0de0a565ab48b993427b57182989a0e.webp?v=1780222615',
+    desc:'פתרון אבטחה מקיף לעסקים — 3 מצלמות סולאריות לחוץ + מצלמת הפלאגשיפ 16MP 8K. מערכת מקצועית ב-4 מצלמות במחיר חבילה.',
+    specs:[['מצלמות','4 מצלמות'],['סולאריות','3 × IP65 חיצוניות'],['פלאגשיפ','16MP 8K 360°'],['חיסכון','35% לעומת נפרד']] },
+  { id:'bundle-starter', variantId:50501081202828, name:'חבילת מתחילים | 2 מצלמות מיני דיסקרטיות', price:89, badge:'חבילה', cat:'חבילות',
+    img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S68e20b3917ca422eb8255d53f414f757F.webp?v=1780222612',
+    desc:'הדרך הכי חכמה להתחיל לאבטח — 2 מצלמות מיני 1080P דיסקרטיות לכל מקום בבית. חסכון של ₪29 לעומת קנייה נפרדת.',
+    specs:[['מצלמות','2 מצלמות מיני'],['רזולוציה','1080P Full HD'],['חיבור','WiFi'],['חיסכון','₪29 לעומת נפרד']] }
 ];
 
 // ===== Shopify Storefront API (Dropshipping) =====
@@ -204,11 +216,10 @@ function checkoutWhatsApp(){
   window.open(waLink(lines.join('\n')), '_blank');
 }
 
-// Checkout דרך Shopify — מעביר ללדף תשלום מאובטח
+// Checkout דרך Shopify — בניית URL ישיר לעגלת Shopify (ללא Storefront token)
 function createShopifyCheckout() {
   var c = getCart();
   if (!c.length){ alert('העגלה ריקה'); return; }
-  if (!SHOPIFY_STOREFRONT_TOKEN){ checkoutWhatsApp(); return; }
 
   var btn = document.getElementById('checkoutBtn');
   if (btn){ btn.disabled = true; btn.textContent = 'מכין תשלום...'; }
@@ -216,25 +227,20 @@ function createShopifyCheckout() {
   fetchShopifyProducts().then(function(products){
     var map = {};
     products.forEach(function(p){ map[p.id] = p; });
-    var lineItems = [];
+    var parts = [];
     c.forEach(function(item){
       var prod = map[item.id];
-      if (prod && prod.variantId) lineItems.push({ variantId: prod.variantId, quantity: item.qty });
-    });
-    if (!lineItems.length){ checkoutWhatsApp(); return; }
-
-    return shopifyFetch(
-      'mutation($input:CheckoutCreateInput!){checkoutCreate(input:$input){checkout{id webUrl}checkoutUserErrors{message}}}',
-      { input: { lineItems: lineItems, allowPartialAddresses: true } }
-    ).then(function(data){
-      var co = data.data && data.data.checkoutCreate && data.data.checkoutCreate.checkout;
-      if (co && co.webUrl) {
-        window.location.href = co.webUrl;
-      } else {
-        if (btn){ btn.disabled = false; btn.textContent = 'לתשלום ←'; }
-        checkoutWhatsApp();
+      if (prod && prod.variantId) {
+        var vid = String(prod.variantId).replace('gid://shopify/ProductVariant/', '');
+        parts.push(vid + ':' + item.qty);
       }
     });
+    if (parts.length) {
+      window.location.href = 'https://' + SHOPIFY_DOMAIN + '/cart/' + parts.join(',');
+    } else {
+      if (btn){ btn.disabled = false; btn.textContent = 'לתשלום ←'; }
+      checkoutWhatsApp();
+    }
   }).catch(function(){
     if (btn){ btn.disabled = false; btn.textContent = 'לתשלום ←'; }
     checkoutWhatsApp();
