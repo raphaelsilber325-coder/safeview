@@ -25,14 +25,13 @@ var PRODUCTS = [
       'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S0fde468f62dc41a98182395a71c5f28f7.webp?v=1780222614',
       'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S74add88121b4408d8f01a605e6ed8a38o.webp?v=1780222613',
       'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S088fd088388a417c8bb506fe8f29dae2B.webp?v=1780222613',
-      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Scd4c5740c93c44efa3823c01e33192ccf.webp?v=1780222614',
       'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sa060cbc3a7de45129cfe0e9225118b53E.webp?v=1780222614',
       'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S1458c3b1a4d5469db1e527febc869a0aE.webp?v=1780222614'
     ],
     variants:[
       {id:50367694798988, title:'מצלמה אחת', price:290},
-      {id:50367694766220, title:'2 מצלמות', price:529},
-      {id:50367694733452, title:'3 מצלמות', price:759}
+      {id:50367694766220, title:'2 מצלמות', price:529, variantImg:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sa060cbc3a7de45129cfe0e9225118b53E.webp?v=1780222614'},
+      {id:50367694733452, title:'3 מצלמות', price:759, variantImg:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S1458c3b1a4d5469db1e527febc869a0aE.webp?v=1780222614'}
     ],
     desc:'מצלמת אבטחה סולארית מהמותג המוערך Baseus — המצלמה הכי נמכרת שלנו! רזולוציית 2K, ראיית לילה צבעונית מלאה, זווית 135° רחבה ועמידות IP67. עובדת ללא חשמל וללא חיווט. ₪290 למצלמה אחת | ₪529 לשתיים | ₪759 לשלוש.',
     specs:[['מותג','Baseus'],['רזולוציה','2K Ultra HD'],['זווית','135°'],['עמידות','IP67'],['הספק','סולארי + סוללה'],['חיבור','WiFi'],['אחסון','עד 512GB מקומי'],['הצפנה','AES+RSA'],['אחריות','2 שנים']] },

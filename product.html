@@ -98,6 +98,13 @@
       window._selVid = el.dataset.vid;
       window._selPrice = parseInt(el.dataset.price, 10);
       document.querySelectorAll('.pdp-price,.pdp-sticky-price').forEach(function(e){ e.textContent = fmt(window._selPrice); });
+      if (el.dataset.img) {
+        var mainImg = document.getElementById('mainImg');
+        if (mainImg) {
+          mainImg.src = el.dataset.img;
+          document.querySelectorAll('.pdp-thumb').forEach(function(t){ t.classList.remove('active'); });
+        }
+      }
     };
 
     var msg = 'שלום SafeView! אני מעוניין/ת במצלמה: ' + p.name + ' (' + fmt(p.price) + '). אפשר פרטים?';
@@ -107,12 +114,14 @@
     if (p.images && p.images.length > 1) {
       galleryHtml =
         '<div class="pdp-gallery pdp-gallery-multi">' +
-          '<img id="mainImg" src="'+p.images[0]+'" alt="'+p.name+'">' +
-          (p.badge ? '<div class="pdp-badge">'+p.badge+'</div>' : '') +
           '<div class="pdp-thumbs">' +
             p.images.slice(0,9).map(function(url,i){
               return '<img src="'+url+'" class="pdp-thumb'+(i===0?' active':'')+'" onclick="document.getElementById(\'mainImg\').src=this.src;document.querySelectorAll(\'.pdp-thumb\').forEach(function(t){t.classList.remove(\'active\');});this.classList.add(\'active\')" loading="lazy">';
             }).join('') +
+          '</div>' +
+          '<div class="pdp-main-wrap">' +
+            '<img id="mainImg" src="'+p.images[0]+'" alt="'+p.name+'">' +
+            (p.badge ? '<div class="pdp-badge">'+p.badge+'</div>' : '') +
           '</div>' +
         '</div>';
     } else {
@@ -127,7 +136,7 @@
         '<div style="color:var(--text2);font-size:13px;margin-bottom:10px;font-weight:500">📦 בחר כמות מצלמות:</div>' +
         '<div style="display:flex;gap:10px;flex-wrap:wrap">' +
         p.variants.map(function(v,i){
-          return '<button class="vbtn'+(i===0?' vbtn-active':'')+'" data-vid="'+v.id+'" data-price="'+v.price+'" onclick="selectVariant(this)">'+
+          return '<button class="vbtn'+(i===0?' vbtn-active':'')+'" data-vid="'+v.id+'" data-price="'+v.price+'"'+(v.variantImg?' data-img="'+v.variantImg+'"':'')+' onclick="selectVariant(this)">'+
             v.title+'<br><strong>'+fmt(v.price)+'</strong></button>';
         }).join('') +
         '</div></div>';
@@ -136,7 +145,7 @@
     document.getElementById('pdp').innerHTML =
       galleryHtml +
       '<div class="pdp-info">' +
-        (p.badge === 'הכי פופולרי' ? '<div style="display:inline-block;background:var(--accent);color:#fff;font-size:12px;font-weight:700;padding:4px 14px;border-radius:20px;margin-bottom:14px">⭐ הכי פופולרי — המצלמה הנמכרת ביותר</div>' : '') +
+        (p.badge === 'הכי פופולרי' ? '<div style="display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,#ff4500,#ff7a00);color:#fff;font-size:14px;font-weight:800;padding:7px 18px;border-radius:30px;margin-bottom:16px;box-shadow:0 2px 12px rgba(255,80,0,.35)">🔥 הכי פופולרי — המצלמה הנמכרת ביותר!</div>' : '') +
         '<h1>'+p.name+'</h1>' +
         '<div class="pdp-price">'+fmt(p.price)+'</div>' +
         '<div class="pdp-stock">במלאי — נשלח תוך 24 שעות</div>' +
