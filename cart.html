@@ -17,7 +17,7 @@
 
 <div class="page-head">
   <h1>עגלת <strong>קניות</strong></h1>
-  <p>בדקו את ההזמנה והשלימו אותה בוואטסאפ — מהיר ואישי</p>
+  <p>בדקו את ההזמנה והשלימו את התשלום בצורה מאובטחת</p>
 </div>
 
 <div class="cart-wrap" id="cartWrap"></div>
@@ -33,40 +33,46 @@
       wrap.innerHTML = '<div class="cart-empty"><div class="cart-empty-icon">'+ICON.cart+'</div><p>העגלה ריקה.</p><br><a class="btn-primary" href="index.html#products">לכל המצלמות ←</a></div>';
       return;
     }
-    var itemsHtml = c.map(function(i){
-      var p = getProduct(i.id); if(!p) return '';
-      var v = getVariant(p, i.variant);
-      var unit = getItemPrice(p, i.variant);
-      var variantLabel = v ? '<div class="cart-item-variant">'+v.label+'</div>' : '';
-      var vAttr = i.variant ? i.variant : '';
-      return '<div class="cart-item">' +
-        '<img src="'+p.img+'" alt="'+p.name+'">' +
-        '<div class="cart-item-info"><div class="cart-item-name">'+p.name+'</div>'+variantLabel+'<div class="cart-item-price">'+fmt(unit*i.qty)+'</div></div>' +
-        '<div class="cart-qty"><button onclick="chg(\''+p.id+'\',-1,\''+vAttr+'\')">−</button><span>'+i.qty+'</span><button onclick="chg(\''+p.id+'\',1,\''+vAttr+'\')">+</button></div>' +
-        '<button class="cart-remove" onclick="rm(\''+p.id+'\',\''+vAttr+'\')" aria-label="הסר">×</button>' +
-      '</div>';
-    }).join('');
-    var total = cartTotal();
-    var remaining = FREE_SHIP_THRESHOLD - total;
-    var shipMsg = remaining > 0
-      ? '<div class="cart-row" style="color:var(--gold)">הוסיפו עוד '+fmt(remaining)+' למשלוח חינם</div>'
-      : '<div class="cart-row" style="color:var(--accent)">🎉 זכאים למשלוח חינם!</div>';
-    wrap.innerHTML = itemsHtml +
-      '<div class="cart-summary">' +
-        '<div class="cart-row"><span>סכום ביניים</span><span>'+fmt(total)+'</span></div>' +
-        shipMsg +
-        '<div class="cart-total"><span>סה"כ</span><strong>'+fmt(total)+'</strong></div>' +
-        '<button class="btn-wa" style="width:100%;margin-top:18px;padding:15px" onclick="checkoutWhatsApp()">'+ICON.wa+' השלם הזמנה בוואטסאפ</button>' +
-        '<a class="btn-secondary" style="width:100%;margin-top:10px;justify-content:center" href="index.html#products">המשך בקנייה</a>' +
-      '</div>';
+    // שלב 1: skeleton בזמן שהמוצרים נטענים
+    wrap.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text2)">טוען...</div>';
+
+    fetchShopifyProducts().then(function(products){
+      var map = {};
+      products.forEach(function(p){ map[p.id] = p; });
+
+      var itemsHtml = c.map(function(i){
+        var p = map[i.id] || getProduct(i.id);
+        if (!p) return '';
+        return '<div class="cart-item">' +
+          '<img src="'+p.img+'" alt="'+p.name+'">' +
+          '<div class="cart-item-info"><div class="cart-item-name">'+p.name+'</div><div class="cart-item-price">'+fmt(p.price*i.qty)+'</div></div>' +
+          '<div class="cart-qty"><button onclick="chg(\''+p.id+'\',-1)">−</button><span>'+i.qty+'</span><button onclick="chg(\''+p.id+'\',1)">+</button></div>' +
+          '<button class="cart-remove" onclick="rm(\''+p.id+'\')" aria-label="הסר">×</button>' +
+        '</div>';
+      }).join('');
+
+      var total = c.reduce(function(s,i){
+        var p = map[i.id] || getProduct(i.id);
+        return s + (p ? p.price * i.qty : 0);
+      }, 0);
+      var remaining = FREE_SHIP_THRESHOLD - total;
+      var shipMsg = remaining > 0
+        ? '<div class="cart-row" style="color:var(--gold)">הוסיפו עוד '+fmt(remaining)+' למשלוח חינם</div>'
+        : '<div class="cart-row" style="color:var(--accent)">משלוח חינם!</div>';
+
+      wrap.innerHTML = itemsHtml +
+        '<div class="cart-summary">' +
+          '<div class="cart-row"><span>סכום ביניים</span><span>'+fmt(total)+'</span></div>' +
+          shipMsg +
+          '<div class="cart-total"><span>סה"כ</span><strong>'+fmt(total)+'</strong></div>' +
+          '<button class="btn-primary" id="checkoutBtn" style="width:100%;margin-top:18px;padding:15px;font-size:17px" onclick="createShopifyCheckout()">לתשלום מאובטח ←</button>' +
+          '<button class="btn-wa" style="width:100%;margin-top:10px;padding:13px" onclick="checkoutWhatsApp()">'+ICON.wa+' הזמן בוואטסאפ</button>' +
+          '<a class="btn-secondary" style="width:100%;margin-top:10px;justify-content:center" href="index.html#products">המשך בקנייה</a>' +
+        '</div>';
+    });
   }
-  function chg(id, d, variant){
-    variant = variant || null;
-    var key = cartKey(id, variant);
-    var it = getCart().filter(function(i){ return cartKey(i.id, i.variant) === key; })[0];
-    if (it){ setQty(id, it.qty + d, variant); renderCart(); }
-  }
-  function rm(id, variant){ removeFromCart(id, variant || null); renderCart(); }
+  function chg(id, d){ var it = getCart().filter(function(i){return i.id===id;})[0]; if(it){ setQty(id, it.qty + d); renderCart(); } }
+  function rm(id){ removeFromCart(id); renderCart(); }
   renderCart();
 </script>
 

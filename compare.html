@@ -119,10 +119,6 @@
     document.getElementById('cmpBody').innerHTML = rows.map(function(p){
       var s = CMP_SPECS[p.id] || {};
       var msg = 'שלום SafeView! אני מעוניין/ת בייעוץ לגבי: ' + p.name + ' (' + fmt(p.price) + ').';
-      var priceDisplay = hasVariants(p) ? ('החל מ-' + fmt(p.price)) : fmt(p.price);
-      var buyBtn = hasVariants(p)
-        ? '<a class="cmp-btn-buy" href="product.html?id='+p.id+'">בחר אפשרות</a>'
-        : '<button class="cmp-btn-buy" onclick="addToCart(\''+p.id+'\')">+ עגלה</button>';
       return '<tr>' +
         '<td><a class="cmp-prod" href="product.html?id='+p.id+'"><img src="'+p.img+'" alt="'+p.name+'" loading="lazy"><div><div class="cmp-prod-name">'+p.name+'</div><div class="cmp-prod-cat">'+p.cat+' · <span class="cmp-badge">'+p.badge+'</span></div></div></a></td>' +
         '<td>'+(s.res||'-')+'</td>' +
@@ -130,8 +126,8 @@
         '<td>'+(s.night||'-')+'</td>' +
         '<td>'+(s.ip||'-')+'</td>' +
         '<td>'+(s.power||'-')+'</td>' +
-        '<td><span class="cmp-price">'+priceDisplay+'</span></td>' +
-        '<td><div class="cmp-actions">'+buyBtn+'<a class="cmp-btn-wa" href="'+waLink(msg)+'" target="_blank" rel="noopener" aria-label="וואטסאפ">'+ICON.wa+'</a></div></td>' +
+        '<td><span class="cmp-price">'+fmt(p.price)+'</span></td>' +
+        '<td><div class="cmp-actions"><button class="cmp-btn-buy" onclick="addToCart(\''+p.id+'\')">+ עגלה</button><a class="cmp-btn-wa" href="'+waLink(msg)+'" target="_blank" rel="noopener" aria-label="וואטסאפ">'+ICON.wa+'</a></div></td>' +
       '</tr>';
     }).join('');
   }

@@ -148,45 +148,56 @@
 
   // קטגוריות
   var CATS = [
-    ['סולאריות', ICON.sun, 3], ['אינדור', ICON.home, 2], ['אאוטדור', ICON.building, 2], ['מיני', ICON.cam, 2]
+    ['סולאריות', ICON.sun, 6], ['אאוטדור', ICON.building, 10], ['אינדור', ICON.home, 2], ['מיני', ICON.cam, 2], ['מערכות', ICON.shield, 4]
   ];
   document.getElementById('catsGrid').innerHTML = CATS.map(function(c){
     return '<a class="cat-card" href="#products"><span class="cat-icon">'+c[1]+'</span><div class="cat-name">מצלמות '+c[0]+'</div><div class="cat-count">'+c[2]+' מוצרים</div><div class="cat-arrow">←</div></a>';
   }).join('');
 
-  // מוצרים
-  document.getElementById('productsGrid').innerHTML = PRODUCTS.map(function(p, idx){
-    var msg = 'שלום SafeView! אני מעוניין/ת במצלמה: ' + p.name + ' (' + fmt(p.price) + '). אפשר פרטים?';
-    // 4 התמונות הראשונות — fetchpriority גבוה (סביר שייראו ראשונות)
-    var imgAttrs = idx < 4
-      ? 'fetchpriority="high" decoding="async"'
-      : 'loading="lazy" decoding="async"';
-    // מוצרים עם וריאנטים: כפתור "בחר אפשרות" שמעביר לעמוד מוצר; אחרים: הוספה ישירה
-    var priceDisplay = hasVariants(p) ? ('החל מ-' + fmt(p.price)) : fmt(p.price);
-    var actionBtn = hasVariants(p)
-      ? '<a class="prod-add" href="product.html?id='+p.id+'">בחר אפשרות</a>'
-      : '<button class="prod-add" onclick="addToCart(\''+p.id+'\')">הוסף לעגלה</button>';
-    return '<div class="prod-card">' +
-      '<div class="prod-img"><a href="product.html?id='+p.id+'"><img src="'+p.img+'" alt="'+p.name+'" '+imgAttrs+'></a><div class="prod-badge">'+p.badge+'</div></div>' +
-      '<div class="prod-body">' +
-        '<a class="prod-name" href="product.html?id='+p.id+'">'+p.name+'</a>' +
-        '<div class="prod-footer"><span class="prod-price">'+priceDisplay+'</span><span class="prod-stock">במלאי</span></div>' +
-        '<div class="prod-actions">' +
-          actionBtn +
-          '<a class="prod-order" href="'+waLink(msg)+'" target="_blank" rel="noopener" aria-label="הזמן בוואטסאפ">'+ICON.wa+'</a>' +
+  // מוצרים — skeleton בזמן הטעינה מ-Shopify
+  (function renderProductSkeleton(){
+    var skelHtml = '';
+    for (var i = 0; i < 9; i++) {
+      skelHtml += '<div class="prod-card prod-skeleton">' +
+        '<div class="prod-img skel-block" style="height:200px"></div>' +
+        '<div class="prod-body" style="padding:16px">' +
+          '<div class="skel-block" style="height:14px;margin-bottom:10px;border-radius:4px"></div>' +
+          '<div class="skel-block" style="height:12px;width:55%;border-radius:4px"></div>' +
+        '</div></div>';
+    }
+    document.getElementById('productsGrid').innerHTML = skelHtml;
+  })();
+
+  fetchShopifyProducts().then(function(products){
+    document.getElementById('productsGrid').innerHTML = products.map(function(p, idx){
+      var msg = 'שלום SafeView! אני מעוניין/ת במצלמה: ' + p.name + ' (' + fmt(p.price) + '). אפשר פרטים?';
+      var imgAttrs = idx < 4
+        ? 'fetchpriority="high" decoding="async"'
+        : 'loading="lazy" decoding="async"';
+      return '<div class="prod-card">' +
+        '<div class="prod-img"><a href="product.html?id='+p.id+'"><img src="'+p.img+'" alt="'+p.name+'" '+imgAttrs+'></a>' +
+          (p.badge === 'הכי פופולרי' ? '<div class="prod-badge prod-badge-hot"><span class="fire-emoji">🔥</span> הכי פופולרי</div>' : (p.badge ? '<div class="prod-badge">'+p.badge+'</div>' : '')) +
         '</div>' +
-      '</div>' +
-    '</div>';
-  }).join('');
+        '<div class="prod-body">' +
+          '<a class="prod-name" href="product.html?id='+p.id+'">'+p.name+'</a>' +
+          '<div class="prod-footer"><span class="prod-price">'+fmt(p.price)+'</span><span class="prod-stock">במלאי</span></div>' +
+          '<div class="prod-actions">' +
+            '<button class="prod-add" onclick="addToCart(\''+p.id+'\')">הוסף לעגלה</button>' +
+            '<a class="prod-order" href="'+waLink(msg)+'" target="_blank" rel="noopener" aria-label="הזמן בוואטסאפ">'+ICON.wa+'</a>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+  });
 
   // חבילות
   var BUNDLES = [
     { tag:'הכי פופולרי', name:'חבילת אבטחה לבית', items:['מצלמה פנימית 2K עם AI','מצלמה סולארית חיצונית 3MP','מדריכי התקנה בעברית'], now:179, old:229,
-      msg:'שלום! אני מעוניין/ת בחבילת אבטחה לבית (₪179)' },
+      id:'bundle-home', vid:50501081137292 },
     { tag:'משתלם לעסקים', name:'חבילת אבטחה לעסק', items:['3 מצלמות סולאריות 3MP','מצלמת פלאגשיפ 16MP 8K','תמיכה מועדפת לעסקים'], now:899, old:1149,
-      msg:'שלום! אני מעוניין/ת בחבילת אבטחה לעסק (₪899)' },
+      id:'bundle-business', vid:50501081170060 },
     { tag:'למתחילים', name:'חבילת מתחילים', items:['2 מצלמות מיני אלחוטיות','ראיית לילה וזיהוי תנועה','אחריות מלאה לשנה'], now:89, old:119,
-      msg:'שלום! אני מעוניין/ת בחבילת מתחילים (₪89)' }
+      id:'bundle-starter', vid:50501081202828 }
   ];
   document.getElementById('bundlesGrid').innerHTML = BUNDLES.map(function(b){
     return '<div class="bundle-card">' +
@@ -194,7 +205,7 @@
       '<div class="bundle-name">'+b.name+'</div>' +
       '<ul class="bundle-list">'+b.items.map(function(i){ return '<li>'+i+'</li>'; }).join('')+'</ul>' +
       '<div class="bundle-price"><span class="bundle-now">'+fmt(b.now)+'</span><span class="bundle-old">'+fmt(b.old)+'</span></div>' +
-      '<a class="btn-wa" href="'+waLink(b.msg)+'" target="_blank" rel="noopener">'+ICON.wa+' הזמן חבילה</a>' +
+      '<button class="btn-primary" onclick="addToCart(\''+b.id+'\');window.location.href=\'cart.html\'">🛒 הוסף לעגלה</button>' +
     '</div>';
   }).join('');
 
