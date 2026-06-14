@@ -595,7 +595,7 @@ function initA11y(){
 
 // ===== Analytics / Pixel (אופציונלי) =====
 // כדי להפעיל מעקב: החליפו את המזהים למטה והסירו את ה-// בתחילת השורות הרלוונטיות.
-var GA4_ID = '';   // לדוגמה: 'G-XXXXXXXXXX'
+var GA4_ID = 'G-VBLPD1FCHP';
 var FB_PIXEL_ID = ''; // לדוגמה: '123456789012345'
 function initAnalytics(){
   if (GA4_ID) {
