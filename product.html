@@ -60,10 +60,11 @@
   }
 
   function renderPdp(p) {
-    document.title = p.name + ' | SafeView';
-    document.querySelector('meta[name="description"]').setAttribute('content', p.desc);
+    var seoDesc = p.desc.length > 155 ? p.desc.substring(0, 152) + '...' : p.desc;
+    document.title = p.name + ' | SafeView — מצלמות אבטחה';
+    document.querySelector('meta[name="description"]').setAttribute('content', seoDesc);
     addMeta('og:title', p.name + ' | SafeView');
-    addMeta('og:description', p.desc);
+    addMeta('og:description', seoDesc);
     addMeta('og:type', 'product');
     addMeta('og:image', p.img);
     addMeta('product:price:amount', String(p.price));

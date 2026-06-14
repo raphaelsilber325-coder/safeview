@@ -26,7 +26,21 @@
       "mcp__aa6bbd5e-9ca3-4339-9de3-bfba17c27da1__create-product",
       "mcp__aa6bbd5e-9ca3-4339-9de3-bfba17c27da1__create-collection",
       "PowerShell(Write-Output \"---TRACKED FILES---\"; git ls-files; Write-Output \"---ZIP CONTENTS---\"; Add-Type -AssemblyName System.IO.Compression.FileSystem; $zip=[System.IO.Compression.ZipFile]::OpenRead\\(\\(Resolve-Path 'files.zip'\\)\\); $zip.Entries | Select-Object FullName, Length | Format-Table -AutoSize; $zip.Dispose\\(\\))",
-      "PowerShell(git add -A)"
+      "PowerShell(git add -A)",
+      "PowerShell($files = @\\('contact.html','faq.html','blog.html','shipping.html','returns.html','privacy.html','terms.html'\\); foreach \\($f in $files\\) { $content = Get-Content $f -Raw -Encoding UTF8; if \\($content -notmatch 'favicon.svg'\\) { $new = $content -replace '<link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">', '<link rel=\"icon\" type=\"image/svg+xml\" href=\"favicon.svg\">' + \"`r`n\" + '<link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">'; Set-Content $f -Value $new -Encoding UTF8 -NoNewline; Write-Output \"patched: $f\" } else { Write-Output \"skip \\(already has\\): $f\" } })",
+      "Bash(git push *)",
+      "Bash(git add *)",
+      "Bash(git commit -m 'Remove hero camera promo card, fix FAQ accordion double-binding *)",
+      "WebFetch(domain:raphaelsilber325-coder.github.io)",
+      "Bash(git commit -m 'Fix SW: stale-while-revalidate for assets + skipWaiting *)",
+      "Bash(curl -s \"https://raphaelsilber325-coder.github.io/safeview/assets/app.js?bust=$\\(date +%s\\)\")",
+      "Bash(curl -sI \"https://raphaelsilber325-coder.github.io/safeview/assets/app.js\")",
+      "Bash(git ls-tree *)",
+      "Bash(gh api *)",
+      "PowerShell($h = @{ \"Accept\" = \"application/vnd.github+json\" }; try { $r = Invoke-RestMethod -Uri \"https://api.github.com/repos/raphaelsilber325-coder/safeview/pages/builds?per_page=3\" -Headers $h; $r | ForEach-Object { Write-Output \"$\\($_.created_at\\) - $\\($_.status\\) - $\\($_.commit.Substring\\(0,7\\)\\)\" } } catch { Write-Output \"Error: $\\($_.Exception.Message\\)\" })",
+      "Bash(git commit *)",
+      "Bash(kill %1)",
+      "Bash(git rm *)"
     ]
   }
 }
