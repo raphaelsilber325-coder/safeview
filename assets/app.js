@@ -16,10 +16,26 @@ var PRODUCTS = [
     img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S8924d13a697e4df5908c2861b8f886b9p.webp?v=1780222611',
     desc:'מצלמת אבטחה סולארית מתקדמת עם חיבור 4G ישיר — ללא חשמל, ללא WiFi, ללא חיווט. מתקינים בכל מקום ומגינים על הבית או העסק 24/7.',
     specs:[['רזולוציה','20MP'],['חיבור','4G + SIM'],['סוללה','12000mAh'],['זווית','360° סיבוב אוטומטי'],['ראיית לילה','צבעונית מלאה'],['עמידות','IP66']] },
-  { id:'baseus-s1', variantId:50367694798988, name:'מצלמת אבטחה סולארית Baseus S1 Lite | 2K | IP67', price:229, badge:'סולארי', cat:'סולאריות',
+  { id:'baseus-s1', variantId:50367694798988, name:'מצלמת אבטחה סולארית Baseus S1 Lite | 2K | IP67 ★ הכי פופולרית', price:290, badge:'הכי פופולרי', cat:'סולאריות',
     img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sb99a1e51ba0546c293772a41243fa232M.webp?v=1780222614',
-    desc:'מצלמת אבטחה סולארית מהמותג המוערך Baseus. רזולוציית 2K, זווית רחבה 135°, ועמידות IP67 — העמידות הגבוהה בקטגוריה.',
-    specs:[['מותג','Baseus'],['רזולוציה','2K Ultra HD'],['זווית','135°'],['עמידות','IP67'],['הספק','סולארי + סוללה'],['חיבור','WiFi']] },
+    images:[
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sb99a1e51ba0546c293772a41243fa232M.webp?v=1780222614',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S7c0254cf5be7420b91c70a033f22425av.webp?v=1780222613',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S499f5637c7a84a2d83630cedea413958E.webp?v=1780222614',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S0fde468f62dc41a98182395a71c5f28f7.webp?v=1780222614',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S74add88121b4408d8f01a605e6ed8a38o.webp?v=1780222613',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S088fd088388a417c8bb506fe8f29dae2B.webp?v=1780222613',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Scd4c5740c93c44efa3823c01e33192ccf.webp?v=1780222614',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sa060cbc3a7de45129cfe0e9225118b53E.webp?v=1780222614',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S1458c3b1a4d5469db1e527febc869a0aE.webp?v=1780222614'
+    ],
+    variants:[
+      {id:50367694798988, title:'מצלמה אחת', price:290},
+      {id:50367694766220, title:'2 מצלמות', price:529},
+      {id:50367694733452, title:'3 מצלמות', price:759}
+    ],
+    desc:'מצלמת אבטחה סולארית מהמותג המוערך Baseus — המצלמה הכי נמכרת שלנו! רזולוציית 2K, ראיית לילה צבעונית מלאה, זווית 135° רחבה ועמידות IP67. עובדת ללא חשמל וללא חיווט. ₪290 למצלמה אחת | ₪529 לשתיים | ₪759 לשלוש.',
+    specs:[['מותג','Baseus'],['רזולוציה','2K Ultra HD'],['זווית','135°'],['עמידות','IP67'],['הספק','סולארי + סוללה'],['חיבור','WiFi'],['אחסון','עד 512GB מקומי'],['הצפנה','AES+RSA'],['אחריות','2 שנים']] },
   { id:'solar-3mp', variantId:50367695028364, name:'מצלמת אבטחה סולארית חיצונית 3MP | זיהוי AI | IP65', price:99, badge:'סולארי', cat:'סולאריות',
     img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S11c4aabf01be4261982b94a7be532532H.webp?v=1780222615',
     desc:'מצלמה סולארית עם זיהוי בני אדם חכם (לא התראות שווא מחתולים), ראיית לילה צבעונית ושמע דו-כיווני. חיסכון מלא בחשמל.',
@@ -248,12 +264,19 @@ function fmt(n){ return '₪' + Number(n).toLocaleString('he-IL'); }
 function getCart(){ try { return JSON.parse(localStorage.getItem('sv_cart') || '[]'); } catch(e){ return []; } }
 function saveCart(c){ localStorage.setItem('sv_cart', JSON.stringify(c)); updateCartCount(); }
 function cartCount(){ return getCart().reduce(function(s,i){ return s + i.qty; }, 0); }
-function cartTotal(){ return getCart().reduce(function(s,i){ var p=getProduct(i.id); return s + (p ? p.price*i.qty : 0); }, 0); }
-function addToCart(id, qty){
+function cartTotal(){ return getCart().reduce(function(s,i){ var price = i.price || (getProduct(i.id) ? getProduct(i.id).price : 0); return s + price*i.qty; }, 0); }
+function addToCart(id, qty, variantId, price){
   qty = qty || 1;
   var c = getCart();
-  var found = c.filter(function(i){ return i.id===id; })[0];
-  if (found) found.qty += qty; else c.push({ id:id, qty:qty });
+  var vid = variantId ? String(variantId) : '';
+  var found = c.filter(function(i){ return i.id===id && (i.variantId||'') === vid; })[0];
+  if (found) { found.qty += qty; }
+  else {
+    var item = { id:id, qty:qty };
+    if (variantId) item.variantId = vid;
+    if (price) item.price = price;
+    c.push(item);
+  }
   saveCart(c);
   toast('✓ נוסף לעגלה');
 }
@@ -294,8 +317,9 @@ function createShopifyCheckout() {
     var parts = [];
     c.forEach(function(item){
       var prod = map[item.id];
-      if (prod && prod.variantId) {
-        var vid = String(prod.variantId).replace('gid://shopify/ProductVariant/', '');
+      var vid = item.variantId || (prod && prod.variantId ? String(prod.variantId) : null);
+      if (vid) {
+        vid = vid.replace('gid://shopify/ProductVariant/', '');
         parts.push(vid + ':' + item.qty);
       }
     });
