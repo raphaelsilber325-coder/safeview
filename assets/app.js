@@ -15,19 +15,46 @@ var PRODUCTS = [
   { id:'solar-20mp', name:'מצלמת אבטחה סולארית 20MP | 360° | 4G | IP66', price:399, badge:'סולארי', cat:'סולאריות',
     img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S8924d13a697e4df5908c2861b8f886b9p.webp?v=1780222611',
     desc:'מצלמת אבטחה סולארית מתקדמת עם חיבור 4G ישיר — ללא חשמל, ללא WiFi, ללא חיווט. מתקינים בכל מקום ומגינים על הבית או העסק 24/7.',
-    specs:[['רזולוציה','20MP'],['חיבור','4G + SIM'],['סוללה','12000mAh'],['זווית','360° סיבוב אוטומטי'],['ראיית לילה','צבעונית מלאה'],['עמידות','IP66']] },
+    specs:[['רזולוציה','20MP'],['חיבור','4G + SIM'],['סוללה','12000mAh'],['זווית','360° סיבוב אוטומטי'],['ראיית לילה','צבעונית מלאה'],['עמידות','IP66']],
+    variantsLabel:'גודל כרטיס SD',
+    variants:[
+      { id:'nocard', label:'ללא כרטיס SD', price:399 },
+      { id:'32gb',   label:'כולל SD 32GB', price:429 },
+      { id:'64gb',   label:'כולל SD 64GB', price:449 },
+      { id:'128gb',  label:'כולל SD 128GB', price:469 }
+    ] },
   { id:'baseus-s1', name:'מצלמת אבטחה סולארית Baseus S1 Lite | 2K | IP67', price:229, badge:'סולארי', cat:'סולאריות',
     img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sb99a1e51ba0546c293772a41243fa232M.webp?v=1780222614',
     desc:'מצלמת אבטחה סולארית מהמותג המוערך Baseus. רזולוציית 2K, זווית רחבה 135°, ועמידות IP67 — העמידות הגבוהה בקטגוריה.',
-    specs:[['מותג','Baseus'],['רזולוציה','2K Ultra HD'],['זווית','135°'],['עמידות','IP67'],['הספק','סולארי + סוללה'],['חיבור','WiFi']] },
+    specs:[['מותג','Baseus'],['רזולוציה','2K Ultra HD'],['זווית','135°'],['עמידות','IP67'],['הספק','סולארי + סוללה'],['חיבור','WiFi']],
+    variantsLabel:'מספר מצלמות',
+    variants:[
+      { id:'1pc', label:'מצלמה אחת', price:229 },
+      { id:'2pc', label:'2 מצלמות', price:379, save:79 },
+      { id:'3pc', label:'3 מצלמות', price:579, save:108 }
+    ] },
   { id:'solar-3mp', name:'מצלמת אבטחה סולארית חיצונית 3MP | זיהוי AI | IP65', price:99, badge:'סולארי', cat:'סולאריות',
     img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S11c4aabf01be4261982b94a7be532532H.webp?v=1780222615',
     desc:'מצלמה סולארית עם זיהוי בני אדם חכם (לא התראות שווא מחתולים), ראיית לילה צבעונית ושמע דו-כיווני. חיסכון מלא בחשמל.',
-    specs:[['רזולוציה','3MP HD+'],['זיהוי AI','בני אדם'],['הספק','סולארי'],['עמידות','IP65'],['תקשורת','דו-כיוונית'],['חיבור','WiFi']] },
+    specs:[['רזולוציה','3MP HD+'],['זיהוי AI','בני אדם'],['הספק','סולארי'],['עמידות','IP65'],['תקשורת','דו-כיוונית'],['חיבור','WiFi']],
+    variantsLabel:'מספר מצלמות',
+    variants:[
+      { id:'1pc', label:'מצלמה אחת', price:99 },
+      { id:'2pc', label:'2 מצלמות', price:189, save:9 },
+      { id:'3pc', label:'3 מצלמות', price:279, save:18 },
+      { id:'4pc', label:'4 מצלמות', price:369, save:27 }
+    ] },
   { id:'indoor-2k', name:'מצלמת אבטחה פנימית 2K | AI + שיחה דו-כיוונית | Blurams', price:45, badge:'אינדור', cat:'אינדור',
     img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sa514dbb7266a4564936a4b980a3f13f5M.webp?v=1780222612',
     desc:'מצלמת אבטחה פנימית עם בינה מלאכותית — מזהה אנשים וחיות מחמד. שיחה דו-כיוונית בלחיצה אחת. מושלם למשפחות ולחיות מחמד.',
-    specs:[['רזולוציה','2K Ultra HD'],['חיבור','WiFi'],['שמע','דו-כיווני'],['ראיית לילה','צבעונית'],['תאימות','Alexa / Google'],['אחסון','ענן + SD']] },
+    specs:[['רזולוציה','2K Ultra HD'],['חיבור','WiFi'],['שמע','דו-כיווני'],['ראיית לילה','צבעונית'],['תאימות','Alexa / Google'],['אחסון','ענן + SD']],
+    variantsLabel:'מספר מצלמות',
+    variants:[
+      { id:'1pc', label:'מצלמה אחת', price:45 },
+      { id:'2pc', label:'2 מצלמות', price:99, save:9 },
+      { id:'3pc', label:'3 מצלמות', price:159, save:21 },
+      { id:'4pc', label:'4 מצלמות', price:219, save:36 }
+    ] },
   { id:'flagship-16mp', name:'מצלמת אבטחה חיצונית 16MP 8K | 360° | 4 עדשות', price:359, badge:'פלאגשיפ', cat:'אינדור',
     img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S3d0de0a565ab48b993427b57182989a0e.webp?v=1780222615',
     desc:'המצלמה המתקדמת ביותר שלנו — 16MP, 8K אמיתי, 4 עדשות שמסתובבות 360°, זום 10x וזיהוי AI. מערכת אבטחה מקצועית בקופסה אחת.',
@@ -53,24 +80,55 @@ var PRODUCTS = [
 function getProduct(id){ return PRODUCTS.filter(function(p){ return p.id === id; })[0]; }
 function fmt(n){ return '₪' + Number(n).toLocaleString('he-IL'); }
 
+// ===== עזרים לוריאנטים =====
+function hasVariants(p){ return !!(p && p.variants && p.variants.length > 1); }
+function getVariant(p, variantId){
+  if (!p || !p.variants) return null;
+  var v = p.variants.filter(function(x){ return x.id === variantId; })[0];
+  return v || p.variants[0];
+}
+function getItemPrice(p, variantId){
+  var v = getVariant(p, variantId);
+  return v ? v.price : (p ? p.price : 0);
+}
+function getItemLabel(p, variantId){
+  var v = getVariant(p, variantId);
+  return p && v ? (p.name + ' · ' + v.label) : (p ? p.name : '');
+}
+function cartKey(id, variant){ return variant ? (id + '|' + variant) : id; }
+
 // ===== עגלה (localStorage) =====
 function getCart(){ try { return JSON.parse(localStorage.getItem('sv_cart') || '[]'); } catch(e){ return []; } }
 function saveCart(c){ localStorage.setItem('sv_cart', JSON.stringify(c)); updateCartCount(); }
 function cartCount(){ return getCart().reduce(function(s,i){ return s + i.qty; }, 0); }
-function cartTotal(){ return getCart().reduce(function(s,i){ var p=getProduct(i.id); return s + (p ? p.price*i.qty : 0); }, 0); }
-function addToCart(id, qty){
+function cartTotal(){
+  return getCart().reduce(function(s,i){
+    var p = getProduct(i.id);
+    return s + (p ? getItemPrice(p, i.variant) * i.qty : 0);
+  }, 0);
+}
+function addToCart(id, qty, variant){
   qty = qty || 1;
+  variant = variant || null;
   var c = getCart();
-  var found = c.filter(function(i){ return i.id===id; })[0];
-  if (found) found.qty += qty; else c.push({ id:id, qty:qty });
+  var key = cartKey(id, variant);
+  var found = c.filter(function(i){ return cartKey(i.id, i.variant) === key; })[0];
+  if (found) found.qty += qty;
+  else c.push({ id:id, variant:variant, qty:qty });
   saveCart(c);
   toast('✓ נוסף לעגלה');
 }
-function setQty(id, qty){
-  var c = getCart().map(function(i){ if(i.id===id) i.qty = Math.max(1, qty); return i; });
+function setQty(id, qty, variant){
+  variant = variant || null;
+  var key = cartKey(id, variant);
+  var c = getCart().map(function(i){ if (cartKey(i.id, i.variant) === key) i.qty = Math.max(1, qty); return i; });
   saveCart(c);
 }
-function removeFromCart(id){ saveCart(getCart().filter(function(i){ return i.id!==id; })); }
+function removeFromCart(id, variant){
+  variant = variant || null;
+  var key = cartKey(id, variant);
+  saveCart(getCart().filter(function(i){ return cartKey(i.id, i.variant) !== key; }));
+}
 function updateCartCount(){
   document.querySelectorAll('.nav-cart-count').forEach(function(el){
     var n = cartCount(); el.textContent = n; el.style.display = n>0 ? 'flex' : 'none';
@@ -81,10 +139,16 @@ function updateCartCount(){
 function checkoutWhatsApp(){
   var c = getCart();
   if (!c.length){ alert('העגלה ריקה'); return; }
-  var lines = ['שלום SafeView!אני רוצה להזמין:', ''];
-  c.forEach(function(i){ var p=getProduct(i.id); if(p) lines.push('• ' + p.name + ' × ' + i.qty + ' = ' + fmt(p.price*i.qty)); });
+  var lines = ['שלום SafeView! אני רוצה להזמין:', ''];
+  c.forEach(function(i){
+    var p = getProduct(i.id);
+    if (!p) return;
+    var unitPrice = getItemPrice(p, i.variant);
+    var label = getItemLabel(p, i.variant);
+    lines.push('• ' + label + ' × ' + i.qty + ' = ' + fmt(unitPrice * i.qty));
+  });
   lines.push(''); lines.push('סה"כ: ' + fmt(cartTotal()));
-  var ship = cartTotal() >= FREE_SHIP_THRESHOLD ? 'משלוח חינם 🎉' : 'בתוספת משלוח';
+  var ship = cartTotal() >= FREE_SHIP_THRESHOLD ? 'משלוח חינם' : 'בתוספת משלוח';
   lines.push('(' + ship + ')');
   window.open(waLink(lines.join('\n')), '_blank');
 }

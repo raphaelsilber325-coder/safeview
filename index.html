@@ -161,13 +161,18 @@
     var imgAttrs = idx < 4
       ? 'fetchpriority="high" decoding="async"'
       : 'loading="lazy" decoding="async"';
+    // מוצרים עם וריאנטים: כפתור "בחר אפשרות" שמעביר לעמוד מוצר; אחרים: הוספה ישירה
+    var priceDisplay = hasVariants(p) ? ('החל מ-' + fmt(p.price)) : fmt(p.price);
+    var actionBtn = hasVariants(p)
+      ? '<a class="prod-add" href="product.html?id='+p.id+'">בחר אפשרות</a>'
+      : '<button class="prod-add" onclick="addToCart(\''+p.id+'\')">הוסף לעגלה</button>';
     return '<div class="prod-card">' +
       '<div class="prod-img"><a href="product.html?id='+p.id+'"><img src="'+p.img+'" alt="'+p.name+'" '+imgAttrs+'></a><div class="prod-badge">'+p.badge+'</div></div>' +
       '<div class="prod-body">' +
         '<a class="prod-name" href="product.html?id='+p.id+'">'+p.name+'</a>' +
-        '<div class="prod-footer"><span class="prod-price">'+fmt(p.price)+'</span><span class="prod-stock">במלאי</span></div>' +
+        '<div class="prod-footer"><span class="prod-price">'+priceDisplay+'</span><span class="prod-stock">במלאי</span></div>' +
         '<div class="prod-actions">' +
-          '<button class="prod-add" onclick="addToCart(\''+p.id+'\')">הוסף לעגלה</button>' +
+          actionBtn +
           '<a class="prod-order" href="'+waLink(msg)+'" target="_blank" rel="noopener" aria-label="הזמן בוואטסאפ">'+ICON.wa+'</a>' +
         '</div>' +
       '</div>' +

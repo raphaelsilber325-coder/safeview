@@ -35,11 +35,15 @@
     }
     var itemsHtml = c.map(function(i){
       var p = getProduct(i.id); if(!p) return '';
+      var v = getVariant(p, i.variant);
+      var unit = getItemPrice(p, i.variant);
+      var variantLabel = v ? '<div class="cart-item-variant">'+v.label+'</div>' : '';
+      var vAttr = i.variant ? i.variant : '';
       return '<div class="cart-item">' +
         '<img src="'+p.img+'" alt="'+p.name+'">' +
-        '<div class="cart-item-info"><div class="cart-item-name">'+p.name+'</div><div class="cart-item-price">'+fmt(p.price*i.qty)+'</div></div>' +
-        '<div class="cart-qty"><button onclick="chg(\''+p.id+'\',-1)">−</button><span>'+i.qty+'</span><button onclick="chg(\''+p.id+'\',1)">+</button></div>' +
-        '<button class="cart-remove" onclick="rm(\''+p.id+'\')" aria-label="הסר">×</button>' +
+        '<div class="cart-item-info"><div class="cart-item-name">'+p.name+'</div>'+variantLabel+'<div class="cart-item-price">'+fmt(unit*i.qty)+'</div></div>' +
+        '<div class="cart-qty"><button onclick="chg(\''+p.id+'\',-1,\''+vAttr+'\')">−</button><span>'+i.qty+'</span><button onclick="chg(\''+p.id+'\',1,\''+vAttr+'\')">+</button></div>' +
+        '<button class="cart-remove" onclick="rm(\''+p.id+'\',\''+vAttr+'\')" aria-label="הסר">×</button>' +
       '</div>';
     }).join('');
     var total = cartTotal();
@@ -56,8 +60,13 @@
         '<a class="btn-secondary" style="width:100%;margin-top:10px;justify-content:center" href="index.html#products">המשך בקנייה</a>' +
       '</div>';
   }
-  function chg(id, d){ var it = getCart().filter(function(i){return i.id===id;})[0]; if(it){ setQty(id, it.qty + d); renderCart(); } }
-  function rm(id){ removeFromCart(id); renderCart(); }
+  function chg(id, d, variant){
+    variant = variant || null;
+    var key = cartKey(id, variant);
+    var it = getCart().filter(function(i){ return cartKey(i.id, i.variant) === key; })[0];
+    if (it){ setQty(id, it.qty + d, variant); renderCart(); }
+  }
+  function rm(id, variant){ removeFromCart(id, variant || null); renderCart(); }
   renderCart();
 </script>
 
