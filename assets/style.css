@@ -366,6 +366,12 @@ footer { position: relative; z-index: 1; background: var(--bg2); border-top: 1px
 .wa-float { position: fixed; bottom: 24px; left: 24px; width: 58px; height: 58px; background: var(--wa); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 16px rgba(37,211,102,0.4); z-index: 200; text-decoration: none; transition: transform 0.2s; animation: waPulse 2.5s infinite; }
 .wa-float:hover { transform: scale(1.1); animation: none; }
 .wa-float svg { width: 32px; height: 32px; fill: #fff; }
+.wa-bubble { position: fixed; bottom: 92px; left: 18px; background: #fff; color: #111; border-radius: 16px 16px 4px 16px; padding: 10px 14px 10px 36px; font-size: 13px; line-height: 1.5; max-width: 220px; box-shadow: 0 4px 20px rgba(0,0,0,0.22); z-index: 201; animation: waBubbleIn .4s cubic-bezier(.34,1.56,.64,1) both; white-space: nowrap; cursor: pointer; }
+.wa-bubble strong { display: block; color: #25D366; font-size: 12px; margin-bottom: 2px; }
+.wa-bubble .wa-bubble-x { position: absolute; top: 6px; left: 10px; font-size: 16px; color: #aaa; line-height: 1; }
+.wa-bubble.hide { animation: waBubbleOut .3s ease forwards; }
+@keyframes waBubbleIn { from { opacity:0; transform:translateY(14px) scale(.92); } to { opacity:1; transform:none; } }
+@keyframes waBubbleOut { to { opacity:0; transform:translateY(8px) scale(.95); } }
 
 /* ===== מקטע ביקורות (מוכן ל-Judge.me) ===== */
 .reviews-section { padding-bottom: 32px; }

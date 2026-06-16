@@ -57,9 +57,18 @@
         return s + (p ? (i.price || p.price) * i.qty : 0);
       }, 0);
       var remaining = FREE_SHIP_THRESHOLD - total;
-      var shipMsg = remaining > 0
-        ? '<div class="cart-row" style="color:var(--gold)">הוסיפו עוד '+fmt(remaining)+' למשלוח חינם</div>'
-        : '<div class="cart-row" style="color:var(--accent)">משלוח חינם!</div>';
+      var pct = Math.min(100, Math.round(total / FREE_SHIP_THRESHOLD * 100));
+      var shipMsg = '<div style="margin:12px 0 6px">' +
+        '<div style="display:flex;justify-content:space-between;font-size:12px;color:var(--text2);margin-bottom:6px">' +
+          (remaining > 0
+            ? '<span>עוד <strong style="color:var(--gold)">'+fmt(remaining)+'</strong> למשלוח חינם</span>'
+            : '<span style="color:var(--accent);font-weight:600">✓ זכית במשלוח חינם!</span>') +
+          '<span>'+pct+'%</span>' +
+        '</div>' +
+        '<div style="background:var(--bg4);border-radius:20px;height:8px;overflow:hidden">' +
+          '<div style="height:100%;width:'+pct+'%;background:'+(pct>=100?'var(--accent)':'linear-gradient(90deg,var(--blue),var(--accent))')+';border-radius:20px;transition:width .4s ease"></div>' +
+        '</div>' +
+      '</div>';
 
       wrap.innerHTML = itemsHtml +
         '<div class="cart-summary">' +

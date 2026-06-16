@@ -705,6 +705,27 @@ function initAnalytics(){
   }
 }
 
+function showWaBubble(){
+  try { if (sessionStorage.getItem('sv_wa_bubble')) return; } catch(e){}
+  var link = waLink('שלום SafeView! יש לי שאלה לפני שאני קונה.');
+  var bubble = document.createElement('div');
+  bubble.className = 'wa-bubble';
+  bubble.setAttribute('role', 'status');
+  bubble.innerHTML = '<span class="wa-bubble-x" aria-label="סגור">×</span><strong>SafeView — כאן בשבילך</strong>רוצה עזרה בבחירה?<br>שאל/י אותנו בוואטסאפ ←';
+  bubble.addEventListener('click', function(e){
+    if (e.target.classList.contains('wa-bubble-x')) { removeBubble(); return; }
+    window.open(link, '_blank', 'noopener');
+    removeBubble();
+  });
+  document.body.appendChild(bubble);
+  function removeBubble(){
+    try { sessionStorage.setItem('sv_wa_bubble','1'); } catch(e){}
+    bubble.classList.add('hide');
+    setTimeout(function(){ if (bubble.parentNode) bubble.parentNode.removeChild(bubble); }, 350);
+  }
+  setTimeout(removeBubble, 10000);
+}
+
 document.addEventListener('DOMContentLoaded', function(){
   injectSeoMeta();
   injectChrome();
@@ -713,4 +734,5 @@ document.addEventListener('DOMContentLoaded', function(){
   initAnalytics();
   registerSW();
   showCookieBanner();
+  setTimeout(showWaBubble, 15000);
 });

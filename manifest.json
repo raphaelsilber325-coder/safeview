@@ -1,16 +1,15 @@
 {
-  "name": "SafeView – מצלמות אבטחה חכמות",
+  "name": "SafeView — מצלמות אבטחה",
   "short_name": "SafeView",
-  "description": "חנות מצלמות אבטחה חכמות בישראל – סולאריות, פנימיות, חיצוניות ומיני.",
-  "start_url": "./index.html",
-  "scope": "./",
+  "description": "חנות מצלמות אבטחה חכמות לבית ולעסק. סולאריות, WiFi, 4G ומיני.",
+  "start_url": "index.html",
+  "scope": ".",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#080a0f",
   "theme_color": "#080a0f",
   "lang": "he",
   "dir": "rtl",
-  "categories": ["shopping", "business"],
   "icons": [
     {
       "src": "favicon.svg",
@@ -18,5 +17,11 @@
       "type": "image/svg+xml",
       "purpose": "any maskable"
     }
+  ],
+  "categories": ["shopping", "security"],
+  "shortcuts": [
+    { "name": "כל המצלמות", "url": "index.html#products", "description": "רשימת כל מצלמות האבטחה" },
+    { "name": "השוואת מצלמות", "url": "compare.html", "description": "השווה לפי מפרט ומחיר" },
+    { "name": "עגלת קניות", "url": "cart.html", "description": "ההזמנות שלך" }
   ]
 }

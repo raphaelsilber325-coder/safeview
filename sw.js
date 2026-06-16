@@ -1,78 +1,57 @@
-// SafeView Service Worker — קאשינג בסיסי לתמיכה אופליין חלקית
-// גרסה: עלייה בערך הזה תגרום ל-SW חדש להתקין ולמחוק caches ישנים
-const CACHE_VERSION = 'safeview-v5';
-const CORE_ASSETS = [
-  './',
-  './index.html',
-  './assets/style.css',
-  './assets/app.js',
-  './favicon.svg',
-  './manifest.json',
-  './404.html'
+/* SafeView Service Worker — PWA offline support */
+var CACHE_NAME = 'sv-cache-v1';
+var PRECACHE = [
+  'index.html',
+  'assets/style.css',
+  'assets/app.js',
+  'favicon.svg',
+  'compare.html',
+  'cart.html',
+  'blog.html',
+  'faq.html',
+  'about.html',
+  'contact.html'
 ];
 
-self.addEventListener('install', (event) => {
-  // הפעלה מיידית של גרסה חדשה, בלי להמתין ש-tabs ייסגרו
-  self.skipWaiting();
-  event.waitUntil(
-    caches.open(CACHE_VERSION).then((cache) => cache.addAll(CORE_ASSETS))
+self.addEventListener('install', function(e) {
+  e.waitUntil(
+    caches.open(CACHE_NAME).then(function(cache) {
+      return cache.addAll(PRECACHE);
+    }).then(function() { self.skipWaiting(); })
   );
 });
 
-self.addEventListener('activate', (event) => {
-  event.waitUntil(
-    caches.keys()
-      .then((keys) => Promise.all(keys.filter((k) => k !== CACHE_VERSION).map((k) => caches.delete(k))))
-      .then(() => self.clients.claim())
+self.addEventListener('activate', function(e) {
+  e.waitUntil(
+    caches.keys().then(function(keys) {
+      return Promise.all(
+        keys.filter(function(k) { return k !== CACHE_NAME; })
+            .map(function(k) { return caches.delete(k); })
+      );
+    }).then(function() { self.clients.claim(); })
   );
 });
 
-self.addEventListener('fetch', (event) => {
-  const req = event.request;
-  if (req.method !== 'GET') return;
-  const url = new URL(req.url);
-
-  // HTML (ניווט) — Network-first עם נפילה ל-cache
-  if (req.mode === 'navigate' || (req.headers.get('accept') || '').includes('text/html')) {
-    event.respondWith(
-      fetch(req).then((res) => {
-        const copy = res.clone();
-        caches.open(CACHE_VERSION).then((cache) => cache.put(req, copy));
-        return res;
-      }).catch(() => caches.match(req).then((r) => r || caches.match('./404.html')))
-    );
-    return;
+self.addEventListener('fetch', function(e) {
+  if (e.request.method !== 'GET') return;
+  var url = new URL(e.request.url);
+  // Shopify CDN + external fonts: network-first, no cache
+  if (url.hostname !== self.location.hostname) {
+    return e.respondWith(fetch(e.request).catch(function() { return new Response('', {status: 503}); }));
   }
-
-  // נכסים מקומיים (CSS/JS/SVG) — Stale-while-revalidate: מגיש מהמטמון ועדכן ברקע
-  // כך שינויי קוד מגיעים בטעינה הבאה, בלי צורך בהורדה מחדש של SW
-  if (url.origin === location.origin) {
-    event.respondWith(
-      caches.match(req).then((cached) => {
-        const fetchPromise = fetch(req).then((res) => {
-          if (res && res.status === 200) {
-            const copy = res.clone();
-            caches.open(CACHE_VERSION).then((cache) => cache.put(req, copy));
-          }
-          return res;
-        }).catch(() => cached);
-        return cached || fetchPromise;
-      })
-    );
-    return;
-  }
-
-  // CDN חיצוני (Shopify images, Google Fonts) — Stale-while-revalidate
-  event.respondWith(
-    caches.match(req).then((cached) => {
-      const fetchPromise = fetch(req).then((res) => {
-        if (res && res.status === 200) {
-          const copy = res.clone();
-          caches.open(CACHE_VERSION).then((cache) => cache.put(req, copy));
+  // Local assets: cache-first
+  e.respondWith(
+    caches.match(e.request).then(function(cached) {
+      if (cached) return cached;
+      return fetch(e.request).then(function(res) {
+        if (res.ok) {
+          var clone = res.clone();
+          caches.open(CACHE_NAME).then(function(c) { c.put(e.request, clone); });
         }
         return res;
-      }).catch(() => cached);
-      return cached || fetchPromise;
+      }).catch(function() {
+        return caches.match('index.html');
+      });
     })
   );
 });
