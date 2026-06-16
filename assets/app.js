@@ -379,36 +379,27 @@ function checkoutWhatsApp(){
   window.open(waLink(lines.join('\n')), '_blank');
 }
 
-// Checkout דרך Shopify — בניית URL ישיר לעגלת Shopify (ללא Storefront token)
+// Checkout דרך Shopify — בניית URL ישיר לעגלת Shopify
 function createShopifyCheckout() {
   var c = getCart();
   if (!c.length){ alert('העגלה ריקה'); return; }
-
-  var btn = document.getElementById('checkoutBtn');
-  if (btn){ btn.disabled = true; btn.textContent = 'מכין תשלום...'; }
-
-  fetchShopifyProducts().then(function(products){
-    var map = {};
-    products.forEach(function(p){ map[p.id] = p; });
-    var parts = [];
-    c.forEach(function(item){
-      var prod = map[item.id];
-      var vid = item.variantId || (prod && prod.variantId ? String(prod.variantId) : null);
-      if (vid) {
-        vid = vid.replace('gid://shopify/ProductVariant/', '');
-        parts.push(vid + ':' + item.qty);
-      }
-    });
-    if (parts.length) {
-      window.location.href = 'https://' + SHOPIFY_DOMAIN + '/cart/' + parts.join(',');
-    } else {
-      if (btn){ btn.disabled = false; btn.textContent = 'לתשלום ←'; }
-      checkoutWhatsApp();
+  var parts = [];
+  c.forEach(function(item){
+    var vid = item.variantId ? String(item.variantId) : null;
+    if (!vid) {
+      var p = getProduct(item.id);
+      if (p && p.variantId) vid = String(p.variantId);
     }
-  }).catch(function(){
-    if (btn){ btn.disabled = false; btn.textContent = 'לתשלום ←'; }
-    checkoutWhatsApp();
+    if (vid) {
+      vid = vid.replace('gid://shopify/ProductVariant/', '');
+      parts.push(vid + ':' + item.qty);
+    }
   });
+  if (parts.length) {
+    window.location.href = 'https://' + SHOPIFY_DOMAIN + '/cart/' + parts.join(',');
+  } else {
+    checkoutWhatsApp();
+  }
 }
 
 // ===== Toast =====
