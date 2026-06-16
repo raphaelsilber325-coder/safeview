@@ -442,7 +442,7 @@ var ICON = {
   home: '<svg viewBox="0 0 24 24"><path d="M12 3l9 8h-3v9h-4v-6h-4v6H6v-9H3z"/></svg>',
   building: '<svg viewBox="0 0 24 24"><path d="M5 3h9v18H5zM16 8h3v13h-3zM7 6h2v2H7zm0 4h2v2H7zm0 4h2v2H7zm4-8h1v2h-1zm0 4h1v2h-1z"/></svg>',
   cam: '<svg viewBox="0 0 24 24"><path d="M12 8a4 4 0 100 8 4 4 0 000-8zm0 6a2 2 0 110-4 2 2 0 010 4zM20 5h-3l-2-2H9L7 5H4a2 2 0 00-2 2v11a2 2 0 002 2h16a2 2 0 002-2V7a2 2 0 00-2-2z"/></svg>',
-  brand: '<svg viewBox="0 0 32 32"><path d="M16 3l11 4v8.4c0 6.8-4.6 12.9-11 14.6-6.4-1.7-11-7.8-11-14.6V7l11-4z" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M10.5 16.5l3.8 3.8 7.3-8" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity=".95"/></svg>',
+  brand: '<svg viewBox="0 0 32 32" fill="none"><path d="M16 3l11 4v8.4c0 6.8-4.6 12.9-11 14.6-6.4-1.7-11-7.8-11-14.6V7l11-4z" stroke="#3a9fff" stroke-width="2.2" stroke-linejoin="round"/><path d="M10.5 16.5l3.8 3.8 7.3-8" stroke="#26d9b0" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>',
   access: '<svg viewBox="0 0 24 24"><circle cx="12" cy="4" r="2"/><path d="M19 8h-5v13a1 1 0 11-2 0v-6h-1v6a1 1 0 11-2 0V8H4a1 1 0 110-2h15a1 1 0 110 2z"/></svg>',
   check: '<svg viewBox="0 0 24 24"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>',
   coin: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M13 7v1.5h2v2h-4.5a.5.5 0 000 1H14a2.5 2.5 0 010 5h-1v1.5h-2V16.5H9v-2h4.5a.5.5 0 000-1H10a2.5 2.5 0 010-5h1V7z"/></svg>',
