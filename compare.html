@@ -91,18 +91,34 @@
 <script>
   // מפרט מלא להשוואה (מעבר ל-PRODUCTS המקורי)
   var CMP_SPECS = {
-    'solar-20mp':   { res:'20MP', conn:'4G + WiFi', night:'צבעוני', ip:'IP66', power:'סוללה 12,000mAh + סולארי' },
-    'baseus-s1':    { res:'2K', conn:'WiFi', night:'צבעוני', ip:'IP67', power:'סוללה + סולארי' },
-    'solar-3mp':    { res:'3MP', conn:'WiFi', night:'צבעוני', ip:'IP65', power:'סוללה + סולארי' },
-    'indoor-2k':    { res:'2K', conn:'WiFi', night:'צבעוני', ip:'פנימי', power:'חשמל קבוע' },
-    'flagship-16mp':{ res:'16MP / 8K', conn:'WiFi', night:'צבעוני', ip:'חיצוני', power:'חשמל קבוע' },
-    'wifi-dual':    { res:'3MP', conn:'WiFi', night:'אינפרא-אדום', ip:'Waterproof', power:'חשמל קבוע' },
-    'wifi-ir':      { res:'HD', conn:'WiFi', night:'אינפרא-אדום', ip:'חיצוני', power:'חשמל קבוע' },
-    'mini-1080':    { res:'1080P', conn:'WiFi', night:'אינפרא-אדום', ip:'פנימי', power:'USB' },
-    'mini-4k':      { res:'4K', conn:'WiFi', night:'אינפרא-אדום', ip:'פנימי', power:'USB' }
+    'baseus-s1':          { res:'2K', conn:'WiFi', night:'צבעוני', ip:'IP67', power:'סוללה + סולארי' },
+    'bulb-8mp-e27':       { res:'8MP', conn:'WiFi', night:'אינפרא-אדום', ip:'פנימי', power:'בסיס E27' },
+    'solar-3mp':          { res:'3MP', conn:'WiFi', night:'צבעוני', ip:'IP65', power:'סוללה + סולארי' },
+    'indoor-2k':          { res:'2K', conn:'WiFi', night:'צבעוני', ip:'פנימי', power:'חשמל קבוע' },
+    'flagship-16mp':      { res:'16MP / 8K', conn:'WiFi', night:'צבעוני', ip:'חיצוני', power:'חשמל קבוע' },
+    'wifi-dual':          { res:'3MP', conn:'WiFi', night:'אינפרא-אדום', ip:'Waterproof', power:'חשמל קבוע' },
+    'wifi-ir':            { res:'1080P', conn:'WiFi', night:'אינפרא-אדום', ip:'חיצוני', power:'חשמל קבוע' },
+    'mini-1080':          { res:'1080P', conn:'WiFi', night:'אינפרא-אדום', ip:'פנימי', power:'USB' },
+    'mini-4k':            { res:'4K', conn:'WiFi', night:'אינפרא-אדום', ip:'פנימי', power:'USB' },
+    'ease-life-bulb':     { res:'1080P', conn:'WiFi 5GHz', night:'צבעוני', ip:'חיצוני', power:'בסיס E27' },
+    'annke-poe-8ch':      { res:'5MP / 3K', conn:'POE', night:'כפולה חכמה', ip:'IP67', power:'POE (חוטי)' },
+    'outdoor-3mp-wifi':   { res:'3MP', conn:'WiFi', night:'אינפרא-אדום', ip:'IP66', power:'חשמל קבוע' },
+    'camhi-solar-dual-4g':{ res:'4MP', conn:'4G SIM', night:'לילה', ip:'חיצוני', power:'סוללה + סולארי' },
+    'tuya-5g-5mp':        { res:'5MP', conn:'WiFi 5G', night:'צבעוני', ip:'חיצוני', power:'חשמל קבוע' },
+    'gadinan-nvr-4k':     { res:'8MP / 4K', conn:'POE', night:'אינפרא-אדום', ip:'חיצוני', power:'POE (חוטי)' },
+    'ls-vision-solar-4g': { res:'8MP / 4K', conn:'4G + WiFi', night:'צבעוני', ip:'חיצוני', power:'סולארי' },
+    'zumimall-f5':        { res:'3MP', conn:'WiFi 2.4G', night:'צבעוני', ip:'IP66', power:'סוללה נטענת' },
+    'annke-nvr-3k':       { res:'3K', conn:'POE', night:'אינפרא-אדום', ip:'IP67', power:'POE (חוטי)' },
+    'annke-c1200':        { res:'12MP Ultra HD', conn:'PoE', night:'כפולה חכמה', ip:'IP67', power:'PoE (חוטי)' },
+    'okam-solar-ptz':     { res:'8MP / 4K', conn:'WiFi', night:'צבעוני', ip:'חיצוני', power:'סולארי' },
+    'annke-2pcs-wifi':    { res:'3MP', conn:'WiFi', night:'אינפרא-אדום', ip:'IP66', power:'חשמל קבוע' },
+    'annke-5mp-bullet':   { res:'5MP', conn:'PoE / WiFi', night:'כפולה חכמה', ip:'IP67', power:'חשמל קבוע' },
+    'annke-nvr-kit':      { res:'3MP / 5MP', conn:'WiFi', night:'אינפרא-אדום', ip:'IP66', power:'חשמל קבוע' },
+    'ptz-15mp-8k':        { res:'15MP / 8K', conn:'WiFi 5G', night:'צבעוני', ip:'חיצוני', power:'חשמל קבוע' },
+    'lenovo-bulb-3mp':    { res:'3MP', conn:'WiFi', night:'צבעוני', ip:'פנימי', power:'בסיס E27' }
   };
 
-  var CATS = ['הכל','סולאריות','אינדור','אאוטדור','מיני'];
+  var CATS = ['הכל','סולאריות','אאוטדור','אינדור','מיני','מערכות'];
   var currentCat = 'הכל';
 
   function renderFilters(){

@@ -66,7 +66,7 @@
       <a class="btn-secondary" href="#features">למה SafeView?</a>
     </div>
     <div class="hero-stats">
-      <div><span class="stat-num">9<span>+</span></span><div class="stat-label">דגמים בחנות</div></div>
+      <div><span class="stat-num">25<span>+</span></span><div class="stat-label">דגמים בחנות</div></div>
       <div><span class="stat-num">2K<span>–</span>8K</span><div class="stat-label">רזולוציה</div></div>
       <div><span class="stat-num">24<span>/7</span></span><div class="stat-label">תמיכה בעברית</div></div>
     </div>
@@ -149,7 +149,7 @@
 
   // קטגוריות
   var CATS = [
-    ['סולאריות', ICON.sun, 6], ['אאוטדור', ICON.building, 10], ['אינדור', ICON.home, 2], ['מיני', ICON.cam, 2], ['מערכות', ICON.shield, 4]
+    ['סולאריות', ICON.sun, 5], ['אאוטדור', ICON.building, 10], ['אינדור', ICON.home, 4], ['מיני', ICON.cam, 2], ['מערכות', ICON.shield, 4], ['חבילות', ICON.coin, 4]
   ];
   document.getElementById('catsGrid').innerHTML = CATS.map(function(c){
     return '<a class="cat-card" href="#products"><span class="cat-icon">'+c[1]+'</span><div class="cat-name">מצלמות '+c[0]+'</div><div class="cat-count">'+c[2]+' מוצרים</div><div class="cat-arrow">←</div></a>';
@@ -170,6 +170,7 @@
   })();
 
   fetchShopifyProducts().then(function(products){
+    products = products.filter(function(p){ return p.cat !== 'חבילות'; });
     document.getElementById('productsGrid').innerHTML = products.map(function(p, idx){
       var msg = 'שלום SafeView! אני מעוניין/ת במצלמה: ' + p.name + ' (' + fmt(p.price) + '). אפשר פרטים?';
       var imgAttrs = idx < 4
@@ -191,22 +192,22 @@
     }).join('');
   });
 
-  // חבילות
+  // חבילות — נשלפות ישירות מ-PRODUCTS
   var BUNDLES = [
-    { tag:'הכי פופולרי', name:'חבילת אבטחה לבית', items:['מצלמה פנימית 2K עם AI','מצלמה סולארית חיצונית 3MP','מדריכי התקנה בעברית'], now:179, old:229,
-      id:'bundle-home', vid:50501081137292 },
-    { tag:'משתלם לעסקים', name:'חבילת אבטחה לעסק', items:['3 מצלמות סולאריות 3MP','מצלמת פלאגשיפ 16MP 8K','תמיכה מועדפת לעסקים'], now:899, old:1149,
-      id:'bundle-business', vid:50501081170060 },
-    { tag:'למתחילים', name:'חבילת מתחילים', items:['2 מצלמות מיני אלחוטיות','ראיית לילה וזיהוי תנועה','אחריות מלאה לשנה'], now:89, old:119,
-      id:'bundle-starter', vid:50501081202828 }
+    { tag:'כיסוי בסיסי', name:'חבילת כיסוי בסיסי', items:['מצלמת WiFi חיצונית + ראיית לילה IR','מצלמת מיני נסתרת לפנים','התקנה עצמאית — ללא טכנאי'], now:99, old:128, id:'bundle-starter', vid:50501081202828 },
+    { tag:'🏆 הכי פופולרי', name:'חבילת מגן הבית', items:['Blurams 2K AI — זיהוי פנים וחיות מחמד','Solar 3MP IP65 — ללא חשמל וחיווט','כיסוי 24/7 פנים + חוץ'], now:299, old:367, id:'bundle-home', vid:50501081137292 },
+    { tag:'נורה E27 — אפס ברגים', name:'חבילת הנורות', items:['Ease Life 360° WiFi 5GHz','8MP זום 8x עדשה כפולה','מתקינים בשקע נורה רגיל תוך שניות'], now:499, old:588, id:'bundle-bulbs', vid:50744609177740 },
+    { tag:'לעסק', name:'חבילת עסק פרמיום', items:['פלאגשיפ 16MP 8K — 4 עדשות 360°','Baseus S1 Lite 2K IP67 — סולארית','Blurams AI — זיהוי חכם פנימי'], now:1349, old:1620, id:'bundle-business', vid:50501081170060 }
   ];
   document.getElementById('bundlesGrid').innerHTML = BUNDLES.map(function(b){
+    var save = b.old - b.now;
+    var pct = Math.round(save / b.old * 100);
     return '<div class="bundle-card">' +
       '<div class="bundle-tag">'+b.tag+'</div>' +
       '<div class="bundle-name">'+b.name+'</div>' +
       '<ul class="bundle-list">'+b.items.map(function(i){ return '<li>'+i+'</li>'; }).join('')+'</ul>' +
-      '<div class="bundle-price"><span class="bundle-now">'+fmt(b.now)+'</span><span class="bundle-old">'+fmt(b.old)+'</span></div>' +
-      '<button class="btn-primary" onclick="addToCart(\''+b.id+'\');window.location.href=\'cart.html\'">🛒 הוסף לעגלה</button>' +
+      '<div class="bundle-price"><span class="bundle-now">'+fmt(b.now)+'</span><span class="bundle-old">'+fmt(b.old)+'</span><span style="font-size:12px;color:var(--accent);margin-right:6px">חיסכון '+fmt(save)+' ('+pct+'%)</span></div>' +
+      '<button class="btn-primary" onclick="addToCart(\''+b.id+'\',1,\''+b.vid+'\','+b.now+');window.location.href=\'cart.html\'">🛒 הוסף לעגלה</button>' +
     '</div>';
   }).join('');
 

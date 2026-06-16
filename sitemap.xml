@@ -1,21 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://raphaelsilber325-coder.github.io/safeview/index.html</loc><priority>1.0</priority></url>
+  <url><loc>https://raphaelsilber325-coder.github.io/safeview/compare.html</loc><priority>0.8</priority></url>
   <url><loc>https://raphaelsilber325-coder.github.io/safeview/about.html</loc><priority>0.7</priority></url>
   <url><loc>https://raphaelsilber325-coder.github.io/safeview/contact.html</loc><priority>0.7</priority></url>
   <url><loc>https://raphaelsilber325-coder.github.io/safeview/faq.html</loc><priority>0.6</priority></url>
   <url><loc>https://raphaelsilber325-coder.github.io/safeview/blog.html</loc><priority>0.6</priority></url>
-  <url><loc>https://raphaelsilber325-coder.github.io/safeview/compare.html</loc><priority>0.7</priority></url>
   <url><loc>https://raphaelsilber325-coder.github.io/safeview/cart.html</loc><priority>0.4</priority></url>
-  <url><loc>https://raphaelsilber325-coder.github.io/safeview/product.html?id=solar-20mp</loc><priority>0.8</priority></url>
-  <url><loc>https://raphaelsilber325-coder.github.io/safeview/product.html?id=baseus-s1</loc><priority>0.8</priority></url>
+  <!-- מוצרים — סולאריות -->
+  <url><loc>https://raphaelsilber325-coder.github.io/safeview/product.html?id=baseus-s1</loc><priority>0.9</priority></url>
   <url><loc>https://raphaelsilber325-coder.github.io/safeview/product.html?id=solar-3mp</loc><priority>0.8</priority></url>
-  <url><loc>https://raphaelsilber325-coder.github.io/safeview/product.html?id=indoor-2k</loc><priority>0.8</priority></url>
-  <url><loc>https://raphaelsilber325-coder.github.io/safeview/product.html?id=flagship-16mp</loc><priority>0.8</priority></url>
+  <url><loc>https://raphaelsilber325-coder.github.io/safeview/product.html?id=ls-vision-solar-4g</loc><priority>0.8</priority></url>
+  <url><loc>https://raphaelsilber325-coder.github.io/safeview/product.html?id=okam-solar-ptz</loc><priority>0.8</priority></url>
+  <url><loc>https://raphaelsilber325-coder.github.io/safeview/product.html?id=camhi-solar-dual-4g</loc><priority>0.7</priority></url>
+  <!-- מוצרים — אאוטדור -->
+  <url><loc>https://raphaelsilber325-coder.github.io/safeview/product.html?id=wifi-ir</loc><priority>0.9</priority></url>
   <url><loc>https://raphaelsilber325-coder.github.io/safeview/product.html?id=wifi-dual</loc><priority>0.8</priority></url>
-  <url><loc>https://raphaelsilber325-coder.github.io/safeview/product.html?id=wifi-ir</loc><priority>0.8</priority></url>
+  <url><loc>https://raphaelsilber325-coder.github.io/safeview/product.html?id=ease-life-bulb</loc><priority>0.8</priority></url>
+  <url><loc>https://raphaelsilber325-coder.github.io/safeview/product.html?id=outdoor-3mp-wifi</loc><priority>0.8</priority></url>
+  <url><loc>https://raphaelsilber325-coder.github.io/safeview/product.html?id=ptz-15mp-8k</loc><priority>0.8</priority></url>
+  <url><loc>https://raphaelsilber325-coder.github.io/safeview/product.html?id=tuya-5g-5mp</loc><priority>0.7</priority></url>
+  <url><loc>https://raphaelsilber325-coder.github.io/safeview/product.html?id=zumimall-f5</loc><priority>0.7</priority></url>
+  <url><loc>https://raphaelsilber325-coder.github.io/safeview/product.html?id=annke-5mp-bullet</loc><priority>0.7</priority></url>
+  <url><loc>https://raphaelsilber325-coder.github.io/safeview/product.html?id=annke-c1200</loc><priority>0.7</priority></url>
+  <url><loc>https://raphaelsilber325-coder.github.io/safeview/product.html?id=annke-2pcs-wifi</loc><priority>0.7</priority></url>
+  <!-- מוצרים — אינדור -->
+  <url><loc>https://raphaelsilber325-coder.github.io/safeview/product.html?id=indoor-2k</loc><priority>0.9</priority></url>
+  <url><loc>https://raphaelsilber325-coder.github.io/safeview/product.html?id=flagship-16mp</loc><priority>0.8</priority></url>
+  <url><loc>https://raphaelsilber325-coder.github.io/safeview/product.html?id=bulb-8mp-e27</loc><priority>0.8</priority></url>
+  <url><loc>https://raphaelsilber325-coder.github.io/safeview/product.html?id=lenovo-bulb-3mp</loc><priority>0.7</priority></url>
+  <!-- מוצרים — מיני -->
   <url><loc>https://raphaelsilber325-coder.github.io/safeview/product.html?id=mini-1080</loc><priority>0.8</priority></url>
   <url><loc>https://raphaelsilber325-coder.github.io/safeview/product.html?id=mini-4k</loc><priority>0.8</priority></url>
+  <!-- מוצרים — מערכות -->
+  <url><loc>https://raphaelsilber325-coder.github.io/safeview/product.html?id=annke-nvr-kit</loc><priority>0.8</priority></url>
+  <url><loc>https://raphaelsilber325-coder.github.io/safeview/product.html?id=annke-poe-8ch</loc><priority>0.7</priority></url>
+  <url><loc>https://raphaelsilber325-coder.github.io/safeview/product.html?id=gadinan-nvr-4k</loc><priority>0.7</priority></url>
+  <url><loc>https://raphaelsilber325-coder.github.io/safeview/product.html?id=annke-nvr-3k</loc><priority>0.7</priority></url>
+  <!-- חבילות -->
+  <url><loc>https://raphaelsilber325-coder.github.io/safeview/product.html?id=bundle-starter</loc><priority>0.8</priority></url>
+  <url><loc>https://raphaelsilber325-coder.github.io/safeview/product.html?id=bundle-home</loc><priority>0.8</priority></url>
+  <url><loc>https://raphaelsilber325-coder.github.io/safeview/product.html?id=bundle-bulbs</loc><priority>0.8</priority></url>
+  <url><loc>https://raphaelsilber325-coder.github.io/safeview/product.html?id=bundle-business</loc><priority>0.8</priority></url>
+  <!-- דפים משפטיים -->
   <url><loc>https://raphaelsilber325-coder.github.io/safeview/shipping.html</loc><priority>0.4</priority></url>
   <url><loc>https://raphaelsilber325-coder.github.io/safeview/returns.html</loc><priority>0.4</priority></url>
   <url><loc>https://raphaelsilber325-coder.github.io/safeview/privacy.html</loc><priority>0.3</priority></url>
