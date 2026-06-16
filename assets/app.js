@@ -384,6 +384,17 @@ function createShopifyCheckout() {
   var c = getCart();
   if (!c.length){ alert('העגלה ריקה'); return; }
 
+  // אם יש פריט עם מחיר חבילה (2/3 מצלמות) — מחיר Shopify לא יתאים, נעבור לוואטסאפ
+  var hasBundle = c.some(function(i){
+    var p = getProduct(i.id);
+    return p && i.price && i.price !== p.price;
+  });
+  if (hasBundle) {
+    toast('חבילת מצלמות מרובות — מעביר לוואטסאפ עם המחיר המדויק');
+    setTimeout(checkoutWhatsApp, 800);
+    return;
+  }
+
   var btn = document.getElementById('checkoutBtn');
   if (btn){ btn.disabled = true; btn.textContent = 'מכין תשלום...'; }
 

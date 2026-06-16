@@ -43,9 +43,10 @@
       var itemsHtml = c.map(function(i){
         var p = map[i.id] || getProduct(i.id);
         if (!p) return '';
+        var linePrice = (i.price || p.price) * i.qty;
         return '<div class="cart-item">' +
           '<img src="'+p.img+'" alt="'+p.name+'">' +
-          '<div class="cart-item-info"><div class="cart-item-name">'+p.name+'</div><div class="cart-item-price">'+fmt(p.price*i.qty)+'</div></div>' +
+          '<div class="cart-item-info"><div class="cart-item-name">'+p.name+'</div><div class="cart-item-price">'+fmt(linePrice)+'</div></div>' +
           '<div class="cart-qty"><button onclick="chg(\''+p.id+'\',-1)">−</button><span>'+i.qty+'</span><button onclick="chg(\''+p.id+'\',1)">+</button></div>' +
           '<button class="cart-remove" onclick="rm(\''+p.id+'\')" aria-label="הסר">×</button>' +
         '</div>';
@@ -53,7 +54,7 @@
 
       var total = c.reduce(function(s,i){
         var p = map[i.id] || getProduct(i.id);
-        return s + (p ? p.price * i.qty : 0);
+        return s + (p ? (i.price || p.price) * i.qty : 0);
       }, 0);
       var remaining = FREE_SHIP_THRESHOLD - total;
       var shipMsg = remaining > 0
