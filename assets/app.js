@@ -1244,7 +1244,12 @@ function initBackToTop(){
 }
 
 // ===== Quick View =====
+var _qvTimer = null;
+function scheduleQvClose(){ _qvTimer = setTimeout(closeQuickView, 180); }
+function cancelQvClose(){ clearTimeout(_qvTimer); }
+
 function openQuickView(id){
+  cancelQvClose();
   var p; for (var i=0; i<PRODUCTS.length; i++) if (PRODUCTS[i].id===id){ p=PRODUCTS[i]; break; }
   if (!p) return;
   var msg = 'שלום SafeView! אני מעוניין/ת במצלמה: '+p.name+' ('+fmt(p.price)+'). אפשר פרטים?';
@@ -1265,12 +1270,13 @@ function openQuickView(id){
       '</div>'+
     '</div>';
   modal.classList.add('open');
-  document.body.style.overflow = 'hidden';
+  // סגירה בהזזת עכבר מחוץ לפופ-אפ
+  var box = modal.querySelector('.qv-box');
+  if (box){ box.onmouseenter = cancelQvClose; box.onmouseleave = scheduleQvClose; }
 }
 function closeQuickView(){
   var modal = document.getElementById('qvModal');
   if (modal) modal.classList.remove('open');
-  document.body.style.overflow = '';
 }
 document.addEventListener('keydown', function(e){ if (e.key==='Escape') closeQuickView(); });
 
