@@ -29,9 +29,6 @@
   <url><loc>https://raphaelsilber325-coder.github.io/safeview/product.html?id=flagship-16mp</loc><priority>0.8</priority></url>
   <url><loc>https://raphaelsilber325-coder.github.io/safeview/product.html?id=bulb-8mp-e27</loc><priority>0.8</priority></url>
   <url><loc>https://raphaelsilber325-coder.github.io/safeview/product.html?id=lenovo-bulb-3mp</loc><priority>0.7</priority></url>
-  <!-- מוצרים — מיני -->
-  <url><loc>https://raphaelsilber325-coder.github.io/safeview/product.html?id=mini-1080</loc><priority>0.8</priority></url>
-  <url><loc>https://raphaelsilber325-coder.github.io/safeview/product.html?id=mini-4k</loc><priority>0.8</priority></url>
   <!-- מוצרים — מערכות -->
   <url><loc>https://raphaelsilber325-coder.github.io/safeview/product.html?id=annke-nvr-kit</loc><priority>0.8</priority></url>
   <url><loc>https://raphaelsilber325-coder.github.io/safeview/product.html?id=annke-poe-8ch</loc><priority>0.7</priority></url>
@@ -39,7 +36,7 @@
   <url><loc>https://raphaelsilber325-coder.github.io/safeview/product.html?id=annke-nvr-3k</loc><priority>0.7</priority></url>
   <!-- מוצרים חדשים (סשן 6) -->
   <url><loc>https://raphaelsilber325-coder.github.io/safeview/product.html?id=three-screen-4k-ptz</loc><priority>0.8</priority></url>
-  <url><loc>https://raphaelsilber325-coder.github.io/safeview/product.html?id=mini-portable-wifi</loc><priority>0.7</priority></url>
+
   <url><loc>https://raphaelsilber325-coder.github.io/safeview/product.html?id=smart-360-4k</loc><priority>0.7</priority></url>
   <url><loc>https://raphaelsilber325-coder.github.io/safeview/product.html?id=sonoff-pt2</loc><priority>0.7</priority></url>
   <url><loc>https://raphaelsilber325-coder.github.io/safeview/product.html?id=4k-indoor-mini</loc><priority>0.7</priority></url>
