@@ -1245,8 +1245,11 @@ function initBackToTop(){
 
 // ===== Quick View =====
 var _qvTimer = null;
+var _qvOpenTimer = null;
 function scheduleQvClose(){ _qvTimer = setTimeout(closeQuickView, 180); }
 function cancelQvClose(){ clearTimeout(_qvTimer); }
+function scheduleQvOpen(id){ cancelQvOpen(); _qvOpenTimer = setTimeout(function(){ openQuickView(id); }, 900); }
+function cancelQvOpen(){ clearTimeout(_qvOpenTimer); }
 
 function openQuickView(id){
   cancelQvClose();

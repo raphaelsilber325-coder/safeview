@@ -251,8 +251,7 @@
           '<div class="prod-actions">' +
             '<button class="prod-add" onclick="addToCart(\''+p.id+'\',1,null,null,this)">הוסף לעגלה</button>' +
             '<a class="prod-order" href="'+waLink(msg)+'" target="_blank" rel="noopener" aria-label="הזמן בוואטסאפ">'+ICON.wa+'</a>' +
-            '<button class="prod-qv" onmouseenter="openQuickView(\''+p.id+'\')" onmouseleave="scheduleQvClose()">👁 מהיר</button>' +
-            '<a class="prod-compare" href="compare.html" title="השוואת מוצרים" aria-label="השוואת מוצרים">⚖</a>' +
+            '<button class="prod-qv" onmouseenter="scheduleQvOpen(\''+p.id+'\')" onmouseleave="cancelQvOpen();scheduleQvClose()">👁 מהיר</button>' +
           '</div>' +
         '</div>' +
       '</div>';
