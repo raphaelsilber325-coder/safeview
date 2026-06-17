@@ -827,7 +827,7 @@ function getCart(){ try { return JSON.parse(localStorage.getItem('sv_cart') || '
 function saveCart(c){ localStorage.setItem('sv_cart', JSON.stringify(c)); updateCartCount(); }
 function cartCount(){ return getCart().reduce(function(s,i){ return s + i.qty; }, 0); }
 function cartTotal(){ return getCart().reduce(function(s,i){ var price = i.price || (getProduct(i.id) ? getProduct(i.id).price : 0); return s + price*i.qty; }, 0); }
-function addToCart(id, qty, variantId, price){
+function addToCart(id, qty, variantId, price, btn){
   qty = qty || 1;
   var c = getCart();
   var vid = variantId ? String(variantId) : '';
@@ -841,6 +841,12 @@ function addToCart(id, qty, variantId, price){
   }
   saveCart(c);
   toast('✓ נוסף לעגלה');
+  if (btn) {
+    var prev = btn.textContent;
+    btn.classList.add('added');
+    btn.textContent = '✓ נוסף!';
+    setTimeout(function(){ btn.classList.remove('added'); btn.textContent = prev; }, 1400);
+  }
 }
 function setQty(id, qty){
   var c = getCart().map(function(i){ if(i.id===id) i.qty = Math.max(1, qty); return i; });
@@ -1065,6 +1071,22 @@ function injectChrome(active){
   var burger = document.getElementById('burger');
   if (burger) burger.addEventListener('click', function(){ document.getElementById('navLinks').classList.toggle('open'); });
   document.querySelectorAll('#navLinks a').forEach(function(a){ a.addEventListener('click', function(){ document.getElementById('navLinks').classList.remove('open'); }); });
+
+  // סגירת nav במובייל בלחיצה מחוץ לתפריט
+  document.addEventListener('click', function(e){
+    var nl = document.getElementById('navLinks');
+    var b = document.getElementById('burger');
+    if (nl && nl.classList.contains('open') && !nl.contains(e.target) && (!b || !b.contains(e.target))){
+      nl.classList.remove('open');
+    }
+  });
+
+  // הוספת class לnav בגלילה
+  window.addEventListener('scroll', function(){
+    var nav = document.querySelector('nav');
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+
   updateCartCount();
 }
 

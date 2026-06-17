@@ -55,7 +55,9 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  transition: background .3s, box-shadow .3s;
 }
+nav.scrolled { background: rgba(8,10,15,0.98); box-shadow: 0 2px 24px rgba(0,0,0,0.55); }
 .nav-logo {
   display: flex; align-items: center; gap: 10px;
   font-family: 'Rajdhani', sans-serif;
@@ -239,8 +241,11 @@ section { position: relative; z-index: 1; padding: 72px 40px; }
 .prod-stock { font-size: 11px; color: var(--accent); display: flex; align-items: center; gap: 5px; }
 .prod-stock::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 6px var(--accent); }
 .prod-actions { display: flex; gap: 8px; }
-.prod-add { flex: 1; background: var(--blue-glow); color: var(--blue); border: 1px solid var(--border); padding: 10px; font-size: 13px; font-weight: 500; border-radius: 6px; cursor: pointer; font-family: 'Noto Sans Hebrew', sans-serif; transition: all 0.2s; }
+.prod-add { flex: 1; background: var(--blue-glow); color: var(--blue); border: 1px solid var(--border); padding: 10px; font-size: 13px; font-weight: 500; border-radius: 6px; cursor: pointer; font-family: 'Noto Sans Hebrew', sans-serif; transition: all 0.25s; }
 .prod-add:hover { background: var(--blue); color: #fff; }
+.prod-add.added { background: var(--accent) !important; color: #000 !important; border-color: var(--accent) !important; font-weight: 700; }
+.prod-compare { display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 6px; border: 1px solid var(--border2); color: var(--text3); font-size: 14px; text-decoration: none; transition: all .2s; flex-shrink: 0; }
+.prod-compare:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-glow); }
 .prod-order { background: var(--wa); color: #fff; border: none; width: 44px; border-radius: 6px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; flex-shrink: 0; }
 .prod-order:hover { background: #1fb855; }
 .prod-order svg { width: 18px; height: 18px; fill: #fff; }
@@ -469,6 +474,13 @@ footer { position: relative; z-index: 1; background: var(--bg2); border-top: 1px
 .search-icon { position: absolute; top: 50%; left: 16px; transform: translateY(-50%); color: var(--text3); pointer-events: none; display: flex; }
 .search-icon svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .search-empty { text-align: center; color: var(--text2); padding: 40px 20px; display: none; }
+.search-autocomplete { position: absolute; top: calc(100% + 4px); right: 0; left: 0; background: var(--bg3); border: 1px solid var(--border); border-radius: 12px; z-index: 60; max-height: 300px; overflow-y: auto; box-shadow: 0 8px 32px rgba(0,0,0,0.5); }
+.ac-item { display: flex; align-items: center; gap: 12px; padding: 10px 14px; cursor: pointer; border-bottom: 1px solid var(--border2); transition: background .15s; }
+.ac-item:last-child { border-bottom: none; }
+.ac-item:hover { background: var(--bg4); }
+.ac-item img { width: 42px; height: 42px; object-fit: contain; border-radius: 6px; background: #fff; flex-shrink: 0; padding: 3px; }
+.ac-name { font-size: 13px; color: var(--text); flex: 1; line-height: 1.4; }
+.ac-price { font-size: 13px; color: var(--blue); font-weight: 600; font-family: 'Rajdhani', sans-serif; flex-shrink: 0; }
 
 /* ===== חזרה לראש ===== */
 .back-to-top { position: fixed; bottom: 92px; left: 24px; width: 42px; height: 42px; background: var(--bg3); border: 1px solid var(--border2); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 190; opacity: 0; transform: translateY(10px); transition: opacity .3s, transform .3s; pointer-events: none; }

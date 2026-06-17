@@ -94,7 +94,8 @@
   <div class="section-sub">הוסיפו לעגלה או הזמינו ישירות בוואטסאפ — מענה אישי מיידי</div>
   <div class="search-wrap" style="margin-top:20px">
     <div class="search-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
-    <input type="text" id="prodSearchInput" placeholder="חפש מצלמה לפי שם, קטגוריה..." oninput="applyFilters()" dir="rtl" aria-label="חיפוש מוצרים">
+    <input type="text" id="prodSearchInput" placeholder="חפש מצלמה לפי שם, קטגוריה..." oninput="applyFilters();updateAutocomplete()" onfocus="updateAutocomplete()" dir="rtl" aria-label="חיפוש מוצרים" autocomplete="off">
+    <div class="search-autocomplete" id="searchAC" style="display:none"></div>
   </div>
   <div class="prod-toolbar">
     <div class="prod-cats" id="prodCats"></div>
@@ -248,9 +249,10 @@
           '<a class="prod-name" href="product.html?id='+p.id+'">'+p.name+'</a>' +
           '<div class="prod-footer"><span class="prod-price">'+fmt(p.price)+'</span><span class="prod-stock">במלאי</span></div>' +
           '<div class="prod-actions">' +
-            '<button class="prod-add" onclick="addToCart(\''+p.id+'\')">הוסף לעגלה</button>' +
+            '<button class="prod-add" onclick="addToCart(\''+p.id+'\',1,null,null,this)">הוסף לעגלה</button>' +
             '<a class="prod-order" href="'+waLink(msg)+'" target="_blank" rel="noopener" aria-label="הזמן בוואטסאפ">'+ICON.wa+'</a>' +
             '<button class="prod-qv" onmouseenter="openQuickView(\''+p.id+'\')" onclick="openQuickView(\''+p.id+'\')">👁 מהיר</button>' +
+            '<a class="prod-compare" href="compare.html" title="השוואת מוצרים" aria-label="השוואת מוצרים">⚖</a>' +
           '</div>' +
         '</div>' +
       '</div>';
@@ -264,6 +266,27 @@
       return (p.name||'').toLowerCase().indexOf(lower)>=0 || (p.cat||'').toLowerCase().indexOf(lower)>=0 || (p.desc||'').toLowerCase().indexOf(lower)>=0;
     }));
   }
+
+  function updateAutocomplete(){
+    var q = (document.getElementById('prodSearchInput').value || '').trim().toLowerCase();
+    var ac = document.getElementById('searchAC');
+    if (!q || q.length < 2 || !allIndexProducts.length){ ac.style.display='none'; return; }
+    var matches = allIndexProducts.filter(function(p){
+      return (p.name||'').toLowerCase().indexOf(q)>=0 || (p.cat||'').toLowerCase().indexOf(q)>=0;
+    }).slice(0, 5);
+    if (!matches.length){ ac.style.display='none'; return; }
+    ac.innerHTML = matches.map(function(p){
+      return '<div class="ac-item" onmousedown="window.location.href=\'product.html?id='+p.id+'\'">' +
+        '<img src="'+p.img+'" alt="" loading="lazy">' +
+        '<span class="ac-name">'+p.name+'</span>' +
+        '<span class="ac-price">'+fmt(p.price)+'</span>' +
+      '</div>';
+    }).join('');
+    ac.style.display='block';
+  }
+  document.getElementById('prodSearchInput').addEventListener('blur', function(){
+    setTimeout(function(){ var ac=document.getElementById('searchAC'); if(ac) ac.style.display='none'; }, 200);
+  });
 
   fetchShopifyProducts().then(function(products){
     products = products.filter(function(p){ return p.cat !== 'חבילות'; });
