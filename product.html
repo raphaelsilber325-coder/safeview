@@ -16,6 +16,10 @@
 
 <div id="nav-mount"></div>
 
+<div class="pdp-back-wrap">
+  <a class="pdp-back-btn" href="index.html#products" onclick="if(document.referrer&&document.referrer.indexOf(location.hostname)>=0){history.back();return false;}">← חזרה לכל המצלמות</a>
+</div>
+
 <div class="pdp" id="pdp"></div>
 
 <!-- מקטע ביקורות — מוכן ל-Judge.me (להחליף את ה-data-judgeme-id לאחר התקנת האפליקציה) -->
@@ -30,6 +34,12 @@
     </div>
     <a class="btn-wa" id="reviewWa" href="#">שלח את חוות הדעת שלך</a>
   </div>
+</section>
+
+<section id="rvSection" style="display:none;padding-top:0">
+  <div class="section-label">// נצפו לאחרונה</div>
+  <div class="section-title">המשכת <strong>לגלוש</strong></div>
+  <div class="products-grid" id="rvGrid" style="margin-top:20px"></div>
 </section>
 
 <section class="reveal" style="padding-top:0">
@@ -189,6 +199,25 @@
           '</div></div>';
       }).join('');
     });
+
+    saveRecentlyViewed(p.id);
+
+    var rvIds = getRecentlyViewed(p.id);
+    var rvProds = rvIds.map(function(rid){ return PRODUCTS.filter(function(x){ return x.id===rid; })[0]; }).filter(Boolean);
+    if (rvProds.length) {
+      document.getElementById('rvSection').style.display = 'block';
+      document.getElementById('rvGrid').innerHTML = rvProds.map(function(x){
+        return '<div class="prod-card">' +
+          '<div class="prod-img"><a href="product.html?id='+x.id+'"><img src="'+x.img+'" alt="'+x.name+'" loading="lazy"></a>' +
+            (x.badge==='קל להרכבה' ? '<div class="prod-badge prod-badge-easy">⚡ קל להרכבה</div>' : x.badge==='הכי פופולרי' ? '<div class="prod-badge prod-badge-hot">🔥 הכי פופולרי</div>' : (x.badge ? '<div class="prod-badge">'+x.badge+'</div>' : '')) +
+          '</div>' +
+          '<div class="prod-body"><a class="prod-name" href="product.html?id='+x.id+'">'+x.name+'</a>' +
+            '<div class="prod-footer"><span class="prod-price">'+fmt(x.price)+'</span></div>' +
+            '<div class="prod-actions"><button class="prod-add" onclick="addToCart(\''+x.id+'\')">הוסף לעגלה</button>' +
+            '<a class="prod-order" href="'+waLink('שלום SafeView! אני מעוניין/ת במצלמה: '+x.name+' ('+fmt(x.price)+').')+'" target="_blank" rel="noopener" aria-label="וואטסאפ">'+ICON.wa+'</a></div>' +
+          '</div></div>';
+      }).join('');
+    }
 
     window.scrollTo(0, 0);
 

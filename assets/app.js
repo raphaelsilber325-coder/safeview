@@ -1196,6 +1196,22 @@ function showWaBubble(){
   setTimeout(removeBubble, 10000);
 }
 
+// ===== Recently Viewed =====
+var RV_KEY = 'sv_rv';
+function saveRecentlyViewed(id){
+  try {
+    var rv = JSON.parse(localStorage.getItem(RV_KEY) || '[]');
+    rv = rv.filter(function(x){ return x !== id; });
+    rv.unshift(id);
+    localStorage.setItem(RV_KEY, JSON.stringify(rv.slice(0, 6)));
+  } catch(e){}
+}
+function getRecentlyViewed(excludeId){
+  try {
+    return JSON.parse(localStorage.getItem(RV_KEY) || '[]').filter(function(x){ return x !== excludeId; }).slice(0, 4);
+  } catch(e){ return []; }
+}
+
 // ===== Back to Top =====
 function initBackToTop(){
   var btn = document.getElementById('backToTop');
@@ -1269,5 +1285,14 @@ document.addEventListener('DOMContentLoaded', function(){
   registerSW();
   showCookieBanner();
   initBackToTop();
-  setTimeout(showWaBubble, 15000);
+  (function(){
+    var shown = false;
+    function tryShow(){
+      if (shown) return;
+      var scrolled = window.scrollY / (document.body.scrollHeight - window.innerHeight || 1);
+      if (scrolled >= 0.35){ shown = true; showWaBubble(); }
+    }
+    window.addEventListener('scroll', tryShow, { passive: true });
+    setTimeout(function(){ if (!shown){ shown = true; showWaBubble(); } }, 30000);
+  })();
 });

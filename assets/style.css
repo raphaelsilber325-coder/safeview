@@ -91,6 +91,21 @@ nav {
 .nav-burger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 6px; }
 .nav-burger span { width: 24px; height: 2px; background: var(--text); transition: 0.3s; }
 
+/* ===== Product filter toolbar ===== */
+.prod-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 16px 0 8px; flex-wrap: wrap; }
+.prod-cats { display: flex; gap: 8px; flex-wrap: wrap; }
+.prod-cat-btn { background: var(--bg3); border: 1px solid var(--border2); border-radius: 30px; padding: 7px 16px; font-size: 13px; color: var(--text2); cursor: pointer; font-family: inherit; transition: all .2s; white-space: nowrap; }
+.prod-cat-btn:hover { border-color: var(--blue); color: var(--text); }
+.prod-cat-btn.active { background: var(--blue); color: #fff; border-color: var(--blue); }
+.prod-sort { background: var(--bg3); border: 1px solid var(--border2); border-radius: 8px; padding: 7px 12px; font-size: 13px; color: var(--text2); font-family: inherit; cursor: pointer; outline: none; transition: border-color .2s; }
+.prod-sort:hover, .prod-sort:focus { border-color: var(--blue); }
+@media (max-width:600px) { .prod-toolbar { flex-direction: column; align-items: flex-start; } .prod-sort { width: 100%; } }
+
+/* ===== PDP back button ===== */
+.pdp-back-wrap { max-width: 1200px; margin: 0 auto; padding: 12px 24px 0; }
+.pdp-back-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--text2); text-decoration: none; transition: color .2s; }
+.pdp-back-btn:hover { color: var(--blue); }
+
 /* BUTTONS */
 .btn-primary {
   background: var(--blue); color: #fff; border: none;

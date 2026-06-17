@@ -94,7 +94,15 @@
   <div class="section-sub">הוסיפו לעגלה או הזמינו ישירות בוואטסאפ — מענה אישי מיידי</div>
   <div class="search-wrap" style="margin-top:20px">
     <div class="search-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
-    <input type="text" id="prodSearchInput" placeholder="חפש מצלמה לפי שם, קטגוריה..." oninput="filterProducts(this.value)" dir="rtl" aria-label="חיפוש מוצרים">
+    <input type="text" id="prodSearchInput" placeholder="חפש מצלמה לפי שם, קטגוריה..." oninput="applyFilters()" dir="rtl" aria-label="חיפוש מוצרים">
+  </div>
+  <div class="prod-toolbar">
+    <div class="prod-cats" id="prodCats"></div>
+    <select class="prod-sort" id="prodSort" onchange="applyFilters()" aria-label="מיון מוצרים">
+      <option value="default">מיון: ברירת מחדל</option>
+      <option value="price-asc">מחיר: נמוך לגבוה ↑</option>
+      <option value="price-desc">מחיר: גבוה לנמוך ↓</option>
+    </select>
   </div>
   <p class="search-empty" id="searchEmpty">לא נמצאו מוצרים התואמים לחיפוש שלך</p>
   <div class="products-grid" id="productsGrid"></div>
@@ -177,6 +185,31 @@
   })();
 
   var allIndexProducts = [];
+  var activeCat = 'הכל';
+  var PROD_CATS = ['הכל','סולאריות','אאוטדור','אינדור','מערכות'];
+
+  function renderCatFilters(){
+    document.getElementById('prodCats').innerHTML = PROD_CATS.map(function(c){
+      return '<button class="prod-cat-btn'+(c===activeCat?' active':'')+'" onclick="setCat(\''+c+'\')">'+c+'</button>';
+    }).join('');
+  }
+
+  function setCat(cat){ activeCat = cat; renderCatFilters(); applyFilters(); }
+
+  function applyFilters(){
+    var q = (document.getElementById('prodSearchInput').value || '').trim().toLowerCase();
+    var sort = document.getElementById('prodSort').value;
+    var filtered = allIndexProducts.filter(function(p){
+      var matchCat = activeCat === 'הכל' || p.cat === activeCat;
+      var matchQ = !q || (p.name||'').toLowerCase().indexOf(q)>=0 || (p.cat||'').toLowerCase().indexOf(q)>=0 || (p.desc||'').toLowerCase().indexOf(q)>=0;
+      return matchCat && matchQ;
+    });
+    if (sort === 'price-asc') filtered.sort(function(a,b){ return a.price - b.price; });
+    else if (sort === 'price-desc') filtered.sort(function(a,b){ return b.price - a.price; });
+    renderIndexProducts(filtered);
+  }
+
+  function filterProducts(q){ applyFilters(); }
 
   function renderIndexProducts(products){
     var empty = document.getElementById('searchEmpty');
@@ -213,6 +246,7 @@
   fetchShopifyProducts().then(function(products){
     products = products.filter(function(p){ return p.cat !== 'חבילות'; });
     allIndexProducts = products;
+    renderCatFilters();
     renderIndexProducts(products);
   });
 
