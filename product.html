@@ -155,6 +155,7 @@
     }
 
     document.getElementById('pdp').innerHTML =
+      '<nav class="pdp-breadcrumb" aria-label="פירורי לחם"><a href="index.html">בית</a><span>›</span><a href="index.html#products">'+p.cat+'</a><span>›</span><span>'+p.name.split('|')[0].trim()+'</span></nav>' +
       galleryHtml +
       '<div class="pdp-info">' +
         (p.badge === 'הכי פופולרי' ? '<div style="display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,#ff3a00,#ff7a00);color:#fff;font-size:16px;font-weight:900;padding:9px 22px;border-radius:30px;margin-bottom:18px;animation:badge-glow 1.5s ease-in-out infinite"><span class="fire-emoji">🔥</span> הכי פופולרי — המצלמה הנמכרת ביותר!</div>' : p.badge === 'קל להרכבה' ? '<div style="display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#6200ee,#00b4ff);color:#fff;font-size:16px;font-weight:900;padding:9px 22px;border-radius:30px;margin-bottom:18px;animation:badge-glow-easy 1.5s ease-in-out infinite">⚡ הכי קל להרכבה — הכי משתלם!</div>' : '') +

@@ -104,6 +104,13 @@
       <option value="price-desc">מחיר: גבוה לנמוך ↓</option>
     </select>
   </div>
+  <div class="prod-price-bar">
+    <span class="prod-price-label">טווח מחיר:</span>
+    <button class="prod-price-btn active" data-range="all" onclick="setPriceRange('all')">הכל</button>
+    <button class="prod-price-btn" data-range="u200" onclick="setPriceRange('u200')">עד ₪200</button>
+    <button class="prod-price-btn" data-range="200-500" onclick="setPriceRange('200-500')">₪200–₪500</button>
+    <button class="prod-price-btn" data-range="o500" onclick="setPriceRange('o500')">מעל ₪500</button>
+  </div>
   <p class="search-empty" id="searchEmpty">לא נמצאו מוצרים התואמים לחיפוש שלך</p>
   <div class="products-grid" id="productsGrid"></div>
 </section>
@@ -186,15 +193,29 @@
 
   var allIndexProducts = [];
   var activeCat = 'הכל';
+  var activePriceRange = 'all';
   var PROD_CATS = ['הכל','סולאריות','אאוטדור','אינדור','מערכות'];
 
   function renderCatFilters(){
+    var counts = {};
+    PROD_CATS.forEach(function(c){ counts[c] = c==='הכל' ? allIndexProducts.length : allIndexProducts.filter(function(p){ return p.cat===c; }).length; });
     document.getElementById('prodCats').innerHTML = PROD_CATS.map(function(c){
-      return '<button class="prod-cat-btn'+(c===activeCat?' active':'')+'" onclick="setCat(\''+c+'\')">'+c+'</button>';
+      return '<button class="prod-cat-btn'+(c===activeCat?' active':'')+'" onclick="setCat(\''+c+'\')">'+ c + (counts[c] ? ' <span class="prod-cat-count">'+counts[c]+'</span>' : '') + '</button>';
     }).join('');
   }
 
-  function setCat(cat){ activeCat = cat; renderCatFilters(); applyFilters(); }
+  function setCat(cat){
+    activeCat = cat;
+    renderCatFilters();
+    applyFilters();
+    document.getElementById('productsGrid').scrollIntoView({ behavior:'smooth', block:'start' });
+  }
+
+  function setPriceRange(r){
+    activePriceRange = r;
+    document.querySelectorAll('.prod-price-btn').forEach(function(b){ b.classList.toggle('active', b.dataset.range===r); });
+    applyFilters();
+  }
 
   function applyFilters(){
     var q = (document.getElementById('prodSearchInput').value || '').trim().toLowerCase();
@@ -202,7 +223,8 @@
     var filtered = allIndexProducts.filter(function(p){
       var matchCat = activeCat === 'הכל' || p.cat === activeCat;
       var matchQ = !q || (p.name||'').toLowerCase().indexOf(q)>=0 || (p.cat||'').toLowerCase().indexOf(q)>=0 || (p.desc||'').toLowerCase().indexOf(q)>=0;
-      return matchCat && matchQ;
+      var matchPrice = activePriceRange==='all' || (activePriceRange==='u200' && p.price<=200) || (activePriceRange==='200-500' && p.price>200 && p.price<=500) || (activePriceRange==='o500' && p.price>500);
+      return matchCat && matchQ && matchPrice;
     });
     if (sort === 'price-asc') filtered.sort(function(a,b){ return a.price - b.price; });
     else if (sort === 'price-desc') filtered.sort(function(a,b){ return b.price - a.price; });
