@@ -14,6 +14,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Noto+Sans+Hebrew:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
+<link rel="preload" href="assets/app.js" as="script">
 <script type="application/ld+json">
 {
   "@context":"https://schema.org",
@@ -70,6 +71,11 @@
       <div><span class="stat-num">2K<span>–</span>8K</span><div class="stat-label">רזולוציה</div></div>
       <div><span class="stat-num">24<span>/7</span></span><div class="stat-label">תמיכה בעברית</div></div>
     </div>
+    <div class="hero-reviews">
+      <span class="hero-stars">★★★★★</span>
+      <span class="hero-cust">500+</span>
+      <span>לקוחות מרוצים · דירוג 4.9</span>
+    </div>
   </div>
 </section>
 
@@ -91,6 +97,11 @@
   <div class="section-label">// כל המצלמות</div>
   <div class="section-title">המוצרים <strong>שלנו</strong></div>
   <div class="section-sub">הוסיפו לעגלה או הזמינו ישירות בוואטסאפ — מענה אישי מיידי</div>
+  <div class="search-wrap" style="margin-top:20px">
+    <div class="search-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+    <input type="text" id="prodSearchInput" placeholder="חפש מצלמה לפי שם, קטגוריה..." oninput="filterProducts(this.value)" dir="rtl" aria-label="חיפוש מוצרים">
+  </div>
+  <p class="search-empty" id="searchEmpty">לא נמצאו מוצרים התואמים לחיפוש שלך</p>
   <div class="products-grid" id="productsGrid"></div>
 </section>
 
@@ -98,6 +109,7 @@
   <div class="section-label">// חבילות במבצע</div>
   <div class="section-title">חסכו עם <strong>חבילות אבטחה</strong></div>
   <div class="section-sub">שילובים מוכנים מראש במחיר משתלם — חוסכים לעומת רכישה בנפרד</div>
+  <div class="countdown-bar">⏰ מחיר המבצע בתוקף עוד <span class="countdown-timer" id="cdTimer">00:00:00</span></div>
   <div class="bundles-grid" id="bundlesGrid"></div>
 </section>
 
@@ -169,16 +181,18 @@
     document.getElementById('productsGrid').innerHTML = skelHtml;
   })();
 
-  fetchShopifyProducts().then(function(products){
-    products = products.filter(function(p){ return p.cat !== 'חבילות'; });
+  var allIndexProducts = [];
+
+  function renderIndexProducts(products){
+    var empty = document.getElementById('searchEmpty');
+    if (!products.length){ if (empty) empty.style.display='block'; document.getElementById('productsGrid').innerHTML=''; return; }
+    if (empty) empty.style.display='none';
     document.getElementById('productsGrid').innerHTML = products.map(function(p, idx){
       var msg = 'שלום SafeView! אני מעוניין/ת במצלמה: ' + p.name + ' (' + fmt(p.price) + '). אפשר פרטים?';
-      var imgAttrs = idx < 4
-        ? 'fetchpriority="high" decoding="async"'
-        : 'loading="lazy" decoding="async"';
+      var imgAttrs = idx < 4 ? 'fetchpriority="high" decoding="async"' : 'loading="lazy" decoding="async"';
       return '<div class="prod-card">' +
         '<div class="prod-img"><a href="product.html?id='+p.id+'"><img src="'+p.img+'" alt="'+p.name+'" '+imgAttrs+'></a>' +
-          (p.badge === 'הכי פופולרי' ? '<div class="prod-badge prod-badge-hot"><span class="fire-emoji">🔥</span> הכי פופולרי</div>' : p.badge === 'קל להרכבה' ? '<div class="prod-badge prod-badge-easy">⚡ קל להרכבה</div>' : (p.badge ? '<div class="prod-badge">'+p.badge+'</div>' : '')) +
+          (p.badge==='הכי פופולרי' ? '<div class="prod-badge prod-badge-hot"><span class="fire-emoji">🔥</span> הכי פופולרי</div>' : p.badge==='קל להרכבה' ? '<div class="prod-badge prod-badge-easy">⚡ קל להרכבה</div>' : (p.badge ? '<div class="prod-badge">'+p.badge+'</div>' : '')) +
         '</div>' +
         '<div class="prod-body">' +
           '<a class="prod-name" href="product.html?id='+p.id+'">'+p.name+'</a>' +
@@ -186,10 +200,25 @@
           '<div class="prod-actions">' +
             '<button class="prod-add" onclick="addToCart(\''+p.id+'\')">הוסף לעגלה</button>' +
             '<a class="prod-order" href="'+waLink(msg)+'" target="_blank" rel="noopener" aria-label="הזמן בוואטסאפ">'+ICON.wa+'</a>' +
+            '<button class="prod-qv" onclick="openQuickView(\''+p.id+'\')">👁 מהיר</button>' +
           '</div>' +
         '</div>' +
       '</div>';
     }).join('');
+  }
+
+  function filterProducts(q){
+    if (!q.trim()){ renderIndexProducts(allIndexProducts); return; }
+    var lower = q.trim().toLowerCase();
+    renderIndexProducts(allIndexProducts.filter(function(p){
+      return (p.name||'').toLowerCase().indexOf(lower)>=0 || (p.cat||'').toLowerCase().indexOf(lower)>=0 || (p.desc||'').toLowerCase().indexOf(lower)>=0;
+    }));
+  }
+
+  fetchShopifyProducts().then(function(products){
+    products = products.filter(function(p){ return p.cat !== 'חבילות'; });
+    allIndexProducts = products;
+    renderIndexProducts(products);
   });
 
   // חבילות — נשלפות ישירות מ-PRODUCTS
@@ -239,6 +268,9 @@
 
   // CTA whatsapp
   document.getElementById('ctaWa').href = waLink('שלום SafeView!אני מעוניין/ת בייעוץ לבחירת מצלמת אבטחה.');
+
+  // ספירה לאחור לחבילות
+  startCountdown('cdTimer');
 
   // re-init dynamic widgets
   initFaq();

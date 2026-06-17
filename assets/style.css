@@ -414,6 +414,86 @@ footer { position: relative; z-index: 1; background: var(--bg2); border-top: 1px
 .a11y-opt:hover { background: var(--blue-glow); border-color: var(--blue); }
 .a11y-opt:focus-visible { outline: 2px solid var(--blue); outline-offset: -2px; }
 .a11y-opt strong { font-family: 'Rajdhani', sans-serif; color: var(--blue); font-size: 15px; min-width: 28px; text-align: center; }
+
+/* ===== חיפוש מוצרים ===== */
+.search-wrap { position: relative; max-width: 520px; margin: 0 auto 24px; }
+.search-wrap input { width: 100%; background: var(--bg3); border: 1px solid var(--border2); border-radius: 30px; padding: 12px 48px 12px 20px; font-size: 15px; color: var(--text); font-family: inherit; outline: none; transition: border-color .2s, box-shadow .2s; box-sizing: border-box; }
+.search-wrap input:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(58,159,255,.12); }
+.search-wrap input::placeholder { color: var(--text3); }
+.search-icon { position: absolute; top: 50%; left: 16px; transform: translateY(-50%); color: var(--text3); pointer-events: none; display: flex; }
+.search-icon svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.search-empty { text-align: center; color: var(--text2); padding: 40px 20px; display: none; }
+
+/* ===== חזרה לראש ===== */
+.back-to-top { position: fixed; bottom: 92px; left: 24px; width: 42px; height: 42px; background: var(--bg3); border: 1px solid var(--border2); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 190; opacity: 0; transform: translateY(10px); transition: opacity .3s, transform .3s; pointer-events: none; }
+.back-to-top.visible { opacity: 1; transform: none; pointer-events: all; }
+.back-to-top:hover { border-color: var(--blue); background: var(--blue-glow); }
+.back-to-top svg { width: 18px; height: 18px; fill: none; stroke: var(--text2); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ===== Quick View Modal ===== */
+.qv-modal { display: none; position: fixed; inset: 0; z-index: 400; align-items: center; justify-content: center; padding: 20px; }
+.qv-modal.open { display: flex; }
+.qv-backdrop { position: absolute; inset: 0; background: rgba(0,0,0,.75); }
+.qv-box { position: relative; background: var(--bg2); border: 1px solid var(--border2); border-radius: 16px; max-width: 640px; width: 100%; padding: 28px; z-index: 1; max-height: 90vh; overflow-y: auto; animation: qvIn .25s ease; }
+@keyframes qvIn { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:none; } }
+.qv-close { position: absolute; top: 12px; left: 12px; background: var(--bg3); border: 1px solid var(--border2); color: var(--text2); width: 32px; height: 32px; border-radius: 50%; cursor: pointer; font-size: 20px; display: flex; align-items: center; justify-content: center; line-height: 1; transition: border-color .15s; }
+.qv-close:hover { border-color: var(--blue); color: var(--blue); }
+.qv-inner { display: flex; gap: 20px; }
+.qv-img { width: 190px; flex-shrink: 0; }
+.qv-img img { width: 100%; border-radius: 10px; aspect-ratio: 1; object-fit: cover; }
+.qv-info { flex: 1; }
+.qv-info h2 { font-size: 18px; margin-bottom: 8px; }
+.qv-price { font-family: 'Rajdhani',sans-serif; font-size: 28px; font-weight: 700; color: var(--blue); margin-bottom: 10px; }
+.qv-desc { color: var(--text2); font-size: 13px; line-height: 1.75; margin-bottom: 16px; }
+.qv-actions { display: flex; flex-direction: column; gap: 8px; }
+.qv-actions button, .qv-actions a { text-align: center; }
+.qv-link { display: block; text-align: center; font-size: 13px; color: var(--text2); margin-top: 6px; }
+.qv-link:hover { color: var(--blue); }
+@media (max-width:560px) { .qv-inner { flex-direction: column; } .qv-img { width: 100%; max-width: 180px; } }
+
+/* ===== כפתור שיתוף ===== */
+.share-row { display: flex; align-items: center; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
+.share-btn { display: inline-flex; align-items: center; gap: 6px; background: transparent; border: 1px solid var(--border2); color: var(--text2); padding: 7px 14px; border-radius: 8px; cursor: pointer; font-size: 13px; font-family: inherit; transition: all .2s; }
+.share-btn:hover { border-color: var(--blue); color: var(--blue); }
+.share-btn svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ===== ספירה לאחור חבילות ===== */
+.countdown-bar { background: linear-gradient(135deg,rgba(58,159,255,.07),rgba(232,184,75,.07)); border: 1px solid rgba(232,184,75,.22); border-radius: 10px; padding: 12px 20px; text-align: center; margin-bottom: 24px; display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; font-size: 13px; color: var(--text2); }
+.countdown-timer { font-family: 'Rajdhani',sans-serif; font-size: 24px; font-weight: 700; color: var(--accent); letter-spacing: 3px; }
+
+/* ===== טופס יצירת קשר ===== */
+.contact-form-wrap { max-width: 560px; background: var(--bg3); border: 1px solid var(--border2); border-radius: 12px; padding: 28px 24px; margin: 40px auto 0; }
+.contact-form-wrap h2 { font-size: 18px; margin-bottom: 20px; }
+.form-group { margin-bottom: 16px; }
+.form-group label { display: block; font-size: 13px; color: var(--text2); margin-bottom: 6px; }
+.form-input { width: 100%; background: var(--bg4); border: 1px solid var(--border2); border-radius: 8px; padding: 11px 14px; font-size: 14px; color: var(--text); font-family: inherit; outline: none; transition: border-color .2s; box-sizing: border-box; }
+.form-input:focus { border-color: var(--blue); }
+.form-input::placeholder { color: var(--text3); }
+textarea.form-input { min-height: 96px; resize: vertical; }
+
+/* ===== שיתוף מאמרי בלוג ===== */
+.blog-share { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+.blog-share a { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; padding: 5px 12px; border-radius: 6px; text-decoration: none; transition: all .2s; border: 1px solid transparent; }
+.blog-share-wa { background: rgba(37,211,102,.08); border-color: rgba(37,211,102,.25); color: #25D366; }
+.blog-share-wa:hover { background: rgba(37,211,102,.16); }
+.blog-share-fb { background: rgba(24,119,242,.08); border-color: rgba(24,119,242,.25); color: #1877F2; }
+.blog-share-fb:hover { background: rgba(24,119,242,.16); }
+
+/* ===== דירוג כוכבים ב-Hero ===== */
+.hero-reviews { display: flex; align-items: center; gap: 8px; margin-top: 14px; font-size: 13px; color: var(--text2); }
+.hero-stars { color: #f5a623; font-size: 15px; letter-spacing: 1px; }
+.hero-cust { color: var(--blue); font-weight: 600; }
+
+/* ===== Quick View על כרטיס מוצר ===== */
+.prod-qv { background: transparent; border: 1px solid var(--border2); color: var(--text2); border-radius: 6px; padding: 5px 10px; font-size: 11px; font-family: inherit; cursor: pointer; transition: all .15s; flex-shrink: 0; white-space: nowrap; }
+.prod-qv:hover { border-color: var(--blue); color: var(--blue); }
+
+/* ===== דף 404 — מוצרים מומלצים ===== */
+.err-products { margin-top: 44px; text-align: center; }
+.err-products h3 { font-size: 15px; color: var(--text2); margin-bottom: 16px; letter-spacing: .5px; }
+.err-prod-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+.err-prod-link { background: var(--bg3); border: 1px solid var(--border2); border-radius: 8px; padding: 8px 16px; font-size: 13px; color: var(--text2); text-decoration: none; transition: all .2s; }
+.err-prod-link:hover { border-color: var(--blue); color: var(--blue); }
 .a11y-reset { background: rgba(255,64,64,0.08); border-color: rgba(255,64,64,0.3); }
 .a11y-reset:hover { background: rgba(255,64,64,0.15); border-color: rgba(255,64,64,0.5); }
 .a11y-reset strong { color: #ff6464; }

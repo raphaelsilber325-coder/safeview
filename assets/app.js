@@ -571,7 +571,9 @@ function injectChrome(active){
   var navMount = document.getElementById('nav-mount');
   var footMount = document.getElementById('footer-mount');
   if (navMount) navMount.outerHTML = skipHtml + shipBarHtml + navHtml;
-  if (footMount) footMount.outerHTML = footerHtml + waHtml + a11yHtml;
+  var btTopHtml = '<button class="back-to-top" id="backToTop" aria-label="חזרה לראש העמוד" onclick="window.scrollTo({top:0,behavior:\'smooth\'})"><svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg></button>';
+  var qvHtml = '<div id="qvModal" class="qv-modal" role="dialog" aria-modal="true" aria-label="מוצר מהיר"><div class="qv-backdrop" onclick="closeQuickView()"></div><div class="qv-box"><button class="qv-close" onclick="closeQuickView()" aria-label="סגור">×</button><div class="qv-inner" id="qvContent"></div></div></div>';
+  if (footMount) footMount.outerHTML = footerHtml + waHtml + a11yHtml + btTopHtml + qvHtml;
 
   // skip link — מוצא את התוכן הראשי ומסמן אותו
   var skip = document.getElementById('skipLink');
@@ -726,6 +728,70 @@ function showWaBubble(){
   setTimeout(removeBubble, 10000);
 }
 
+// ===== Back to Top =====
+function initBackToTop(){
+  var btn = document.getElementById('backToTop');
+  if (!btn) return;
+  window.addEventListener('scroll', function(){
+    btn.classList.toggle('visible', window.scrollY > 400);
+  }, { passive: true });
+}
+
+// ===== Quick View =====
+function openQuickView(id){
+  var p; for (var i=0; i<PRODUCTS.length; i++) if (PRODUCTS[i].id===id){ p=PRODUCTS[i]; break; }
+  if (!p) return;
+  var msg = 'שלום SafeView! אני מעוניין/ת במצלמה: '+p.name+' ('+fmt(p.price)+'). אפשר פרטים?';
+  var content = document.getElementById('qvContent');
+  var modal = document.getElementById('qvModal');
+  if (!content || !modal) return;
+  var desc = p.desc ? (p.desc.length > 200 ? p.desc.substring(0,200)+'...' : p.desc) : '';
+  content.innerHTML =
+    '<div class="qv-img"><img src="'+p.img+'" alt="'+p.name+'" loading="lazy"></div>'+
+    '<div class="qv-info">'+
+      '<h2>'+p.name+'</h2>'+
+      '<div class="qv-price">'+fmt(p.price)+'</div>'+
+      '<p class="qv-desc">'+desc+'</p>'+
+      '<div class="qv-actions">'+
+        '<button class="btn-primary" onclick="addToCart(\''+p.id+'\');closeQuickView()">הוסף לעגלה</button>'+
+        '<a class="btn-wa" href="'+waLink(msg)+'" target="_blank" rel="noopener">'+ICON.wa+' הזמן בוואטסאפ</a>'+
+        '<a class="qv-link" href="product.html?id='+p.id+'">פרטים מלאים ←</a>'+
+      '</div>'+
+    '</div>';
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeQuickView(){
+  var modal = document.getElementById('qvModal');
+  if (modal) modal.classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', function(e){ if (e.key==='Escape') closeQuickView(); });
+
+// ===== שיתוף מוצר =====
+function shareProduct(name, url){
+  var u = url || location.href;
+  if (navigator.share){
+    navigator.share({ title: name+' | SafeView', url: u }).catch(function(){});
+  } else {
+    window.open('https://wa.me/?text='+encodeURIComponent(name+' — SafeView: '+u), '_blank', 'noopener');
+  }
+}
+
+// ===== ספירה לאחור =====
+function startCountdown(elId){
+  var el = document.getElementById(elId);
+  if (!el) return;
+  function tick(){
+    var now = new Date();
+    var midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate()+1, 0,0,0);
+    var diff = Math.max(0, Math.floor((midnight-now)/1000));
+    var h = Math.floor(diff/3600), m = Math.floor((diff%3600)/60), s = diff%60;
+    el.textContent = String(h).padStart(2,'0')+':'+String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+  }
+  tick(); setInterval(tick, 1000);
+}
+
 document.addEventListener('DOMContentLoaded', function(){
   injectSeoMeta();
   injectChrome();
@@ -734,5 +800,6 @@ document.addEventListener('DOMContentLoaded', function(){
   initAnalytics();
   registerSW();
   showCookieBanner();
+  initBackToTop();
   setTimeout(showWaBubble, 15000);
 });

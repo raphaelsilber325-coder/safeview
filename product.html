@@ -10,6 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Noto+Sans+Hebrew:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
+<link rel="preload" href="assets/app.js" as="script">
 </head>
 <body>
 
@@ -160,6 +161,12 @@
         '<div class="pdp-buy">' +
           '<button class="btn-primary" onclick="addToCart(\''+p.id+'\',1,window._selVid,window._selPrice)">הוסף לעגלה</button>' +
           '<a class="btn-wa" href="'+waLink(msg)+'" target="_blank" rel="noopener">'+ICON.wa+' הזמן בוואטסאפ</a>' +
+        '</div>' +
+        '<div class="share-row">' +
+          '<button class="share-btn" onclick="shareProduct(\''+p.name.replace(/'/g,'\\\'')+'\')">' +
+            '<svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>' +
+            ' שתפו מוצר זה' +
+          '</button>' +
         '</div>' +
         '<div class="pdp-sticky">' +
           '<div class="pdp-sticky-price">'+fmt(p.price)+'</div>' +
