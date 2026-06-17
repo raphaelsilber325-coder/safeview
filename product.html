@@ -116,14 +116,14 @@
     if (p.images && p.images.length > 1) {
       galleryHtml =
         '<div class="pdp-gallery pdp-gallery-multi">' +
-          '<div class="pdp-thumbs">' +
-            p.images.slice(0,9).map(function(url,i){
-              return '<img src="'+url+'" class="pdp-thumb'+(i===0?' active':'')+'" onclick="document.getElementById(\'mainImg\').src=this.src;document.querySelectorAll(\'.pdp-thumb\').forEach(function(t){t.classList.remove(\'active\');});this.classList.add(\'active\')" loading="lazy">';
-            }).join('') +
-          '</div>' +
           '<div class="pdp-main-wrap">' +
             '<img id="mainImg" src="'+p.images[0]+'" alt="'+p.name+'">' +
             (p.badge ? '<div class="pdp-badge">'+p.badge+'</div>' : '') +
+          '</div>' +
+          '<div class="pdp-thumbs">' +
+            p.images.slice(0,12).map(function(url,i){
+              return '<img src="'+url+'" class="pdp-thumb'+(i===0?' active':'')+'" onclick="document.getElementById(\'mainImg\').src=this.src;document.querySelectorAll(\'.pdp-thumb\').forEach(function(t){t.classList.remove(\'active\');});this.classList.add(\'active\')" loading="lazy">';
+            }).join('') +
           '</div>' +
         '</div>';
     } else {
@@ -157,17 +157,12 @@
           '<button class="btn-primary" onclick="addToCart(\''+p.id+'\',1,window._selVid,window._selPrice)">הוסף לעגלה</button>' +
           '<a class="btn-wa" href="'+waLink(msg)+'" target="_blank" rel="noopener">'+ICON.wa+' הזמן בוואטסאפ</a>' +
         '</div>' +
-        '<div class="share-row">' +
-          '<button class="share-btn" onclick="shareProduct(\''+p.name.replace(/'/g,'\\\'')+'\')">' +
-            '<svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>' +
-            ' שתפו מוצר זה' +
-          '</button>' +
-        '</div>' +
         '<div class="pdp-sticky">' +
           '<div class="pdp-sticky-price">'+fmt(p.price)+'</div>' +
           '<button class="btn-primary" onclick="addToCart(\''+p.id+'\',1,window._selVid,window._selPrice)">הוסף לעגלה</button>' +
         '</div>' +
         (p.specs && p.specs.length ? '<div class="pdp-specs">'+p.specs.map(function(sp){ return '<div class="pdp-spec"><span>'+sp[0]+'</span><span>'+sp[1]+'</span></div>'; }).join('')+'</div>' : '') +
+        (PRODUCT_INBOX[p.id] ? '<div class="pdp-inbox"><h3>📦 מה באריזה</h3><ul>'+PRODUCT_INBOX[p.id].map(function(item){ return '<li>'+item+'</li>'; }).join('')+'</ul></div>' : '') +
         '<div class="pdp-trust">' +
           '<div><span class="pdp-trust-icon">'+ICON.truck+'</span>משלוח חינם בהזמנה מעל ₪200</div>' +
           '<div><span class="pdp-trust-icon">'+ICON.shield+'</span>אחריות מלאה לשנה + תמיכה בעברית</div>' +

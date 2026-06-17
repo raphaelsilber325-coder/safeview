@@ -195,7 +195,7 @@
           '<div class="prod-actions">' +
             '<button class="prod-add" onclick="addToCart(\''+p.id+'\')">הוסף לעגלה</button>' +
             '<a class="prod-order" href="'+waLink(msg)+'" target="_blank" rel="noopener" aria-label="הזמן בוואטסאפ">'+ICON.wa+'</a>' +
-            '<button class="prod-qv" onclick="openQuickView(\''+p.id+'\')">👁 מהיר</button>' +
+            '<button class="prod-qv" onmouseenter="openQuickView(\''+p.id+'\')" onclick="openQuickView(\''+p.id+'\')">👁 מהיר</button>' +
           '</div>' +
         '</div>' +
       '</div>';
