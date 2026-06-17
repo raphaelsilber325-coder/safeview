@@ -1,4 +1,4 @@
-/* ===== SafeView — Shared App Logic ===== */
+﻿/* ===== SafeView — Shared App Logic ===== */
 
 // ===== הגדרת מספר וואטסאפ =====
 // פורמט בינלאומי ללא + וללא 0 בהתחלה. 0586343786 → 972586343786
@@ -33,6 +33,19 @@ var PRODUCTS = [
     specs:[['מותג','Baseus'],['רזולוציה','2K Ultra HD'],['זווית','135°'],['עמידות','IP67'],['הספק','סולארי + סוללה'],['חיבור','WiFi'],['אחסון','עד 512GB מקומי'],['הצפנה','AES+RSA'],['אחריות','2 שנים']] },
   { id:'bulb-8mp-e27', variantId:50741149106316, name:'מצלמת נורה 8MP | זום 8x | עדשה כפולה | WiFi E27', price:389, badge:'קל להרכבה', cat:'אינדור',
     img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S9ffe8dec584046c893857017f9e6c7cfT.webp?v=1781611665',
+    images:[
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S9ffe8dec584046c893857017f9e6c7cfT.webp?v=1781611665',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S218fa6ce54f54146b1f36c0e3dc40704a.webp?v=1781611598',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S2adec4fc3eb44968a0ad32779133c90fF.webp?v=1781611665',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S28f1e08d664a4062acc69265a1063ccev.webp?v=1781611598',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sea395cf3e90a4ed5846498a51b4af6a4I.webp?v=1781611665',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sd5f01e34c6b64cf6b8a1539bedfca7c8z.webp?v=1781611665',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S5f88e9e5db7b4c9ba7d4e2793f526a97B.webp?v=1781611665',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S83b386af0afd40749174038bd3aebceeY.webp?v=1781611598',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S6dbfd57511754ddb88a4cbf9b30157a5g.webp?v=1781611598',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sd72284794a8e4dbb98c192dbbc4ecc05U.webp?v=1781611598',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S3a04da8ee740420598da0fe21b320128w.webp?v=1781611665'
+    ],
     variants:[
       {id:50741149106316, title:'מצלמה אחת', price:389},
       {id:50741149139084, title:'2 מצלמות', price:699},
@@ -42,6 +55,18 @@ var PRODUCTS = [
     specs:[['רזולוציה','8MP'],['זום','דיגיטלי 8x'],['עדשות','כפולות (רחב + זום)'],['התקנה','בסיס E27'],['חיבור','WiFi'],['שמע','דו-כיווני'],['מעקב','אוטומטי']] },
   { id:'solar-3mp', variantId:50367695028364, name:'מצלמת אבטחה סולארית חיצונית 3MP | זיהוי AI | IP65', price:255, badge:'סולארי', cat:'סולאריות',
     img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S11c4aabf01be4261982b94a7be532532H.webp?v=1780222615',
+    images:[
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S11c4aabf01be4261982b94a7be532532H.webp?v=1780222615',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S6d7ae387b2c3400c94ab3ad749f0fe48f.webp?v=1780222615',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S8ab025a007c94aedb128c8aac2976341E.webp?v=1780222615',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S18f0cbbd7a454daca2d4721eadb2a9e0Y.webp?v=1780222616',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S0077a0aba5954a70bd3b3432533eb0ec0.webp?v=1780222615',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S4dd860ebc15140639cde82219baf9861r.webp?v=1780222615',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sf6d4c88973f144c79f5e71035346d668M.webp?v=1780222615',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S08164e0a888f40179a1bf2bd6bb59a6ab.webp?v=1780222615',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sacf5ef1684ca4a598c3919253eface89i.webp?v=1780222615',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S82542bb4540446fd8224a173420655acI.webp?v=1780222615'
+    ],
     variants:[
       {id:50367695028364, title:'מצלמה אחת', price:255},
       {id:50367694930060, title:'2 מצלמות', price:469},
@@ -51,6 +76,20 @@ var PRODUCTS = [
     specs:[['רזולוציה','3MP HD+'],['זיהוי AI','בני אדם'],['הספק','סולארי'],['עמידות','IP65'],['תקשורת','דו-כיוונית'],['חיבור','WiFi']] },
   { id:'indoor-2k', variantId:50367694667916, name:'מצלמת אבטחה פנימית 2K | AI + שיחה דו-כיוונית | Blurams', price:112, badge:'אינדור', cat:'אינדור',
     img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sa514dbb7266a4564936a4b980a3f13f5M.webp?v=1780222612',
+    images:[
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sa514dbb7266a4564936a4b980a3f13f5M_3ddfb389-0cea-446e-bd0e-60cd82b4caa2.webp?v=1781270980',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sf5230850e9664bd2adcd33df486e27e5y_ab3656d0-9924-4ed1-bcc9-533825171ff0.webp?v=1781270980',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sa48dc75c7dbc471a9dd1ee7f674b52625_414335ff-3229-45d3-ac09-a1ccbcd94254.webp?v=1781270979',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sc1a8e74376f2495eb58dbf15ec85a322z_5ea02fd9-1e0d-497f-a5ed-91573f43d601.webp?v=1781270980',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S10ea7ae0583144bdb6fb215410f63292x_4170324d-3181-468c-8e33-5142fe21ec5c.webp?v=1781270980',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Saf40d22d5cef498bb360995e2f634098N_0eebd524-f4be-4cc4-acea-6c7191845dfb.webp?v=1781270980',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sb4acec6112944a148f0e8073b27d1453p.webp?v=1781270980',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sa466dc9b99e84d0985050a0e92acfaf1k.webp?v=1781270980',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S9201bb937b754e50a71f93996dbe4a57U.webp?v=1781270980',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sf2aa96fd0a3e4e35849dc2738e85e915s.webp?v=1781270980',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S2d67ff8a841c468986695baa71b46c7aQ.webp?v=1781270979',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S840283cf5d3b478a854923aa9ae91c400.webp?v=1781270980'
+    ],
     variants:[
       {id:50367694667916, title:'מצלמה אחת', price:112},
       {id:50367694635148, title:'2 מצלמות', price:249},
@@ -60,6 +99,14 @@ var PRODUCTS = [
     specs:[['רזולוציה','2K Ultra HD'],['חיבור','WiFi'],['שמע','דו-כיווני'],['ראיית לילה','צבעונית'],['תאימות','Alexa / Google'],['אחסון','ענן + SD']] },
   { id:'flagship-16mp', variantId:50740844724364, name:'מצלמת אבטחה חיצונית 16MP 8K | 360° | 4 עדשות', price:929, badge:'פלאגשיפ', cat:'אינדור',
     img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S3d0de0a565ab48b993427b57182989a0e.webp?v=1780222615',
+    images:[
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S3d0de0a565ab48b993427b57182989a0e.webp?v=1780222615',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S3b76929dcab344a89c1f1f0b4f20f0baW.webp?v=1780222615',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S199631254abc4346b31c5de0b6c09b4bd.webp?v=1780222616',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S1b5b26816e2e48929a3de1d27f50c2962.webp?v=1780222615',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S0f73232a61b741c3a41886af57b02549F.webp?v=1780222615',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sebe73adbff4d45db8f8a9ddb2928b22ff.webp?v=1780222615'
+    ],
     variants:[
       {id:50740844724364, title:'מצלמה אחת', price:929},
       {id:50740844757132, title:'2 מצלמות', price:1699},
@@ -69,6 +116,20 @@ var PRODUCTS = [
     specs:[['רזולוציה','16MP / 8K'],['עדשות','4 עצמאיות'],['זווית','360°'],['זום','דיגיטלי 10x'],['AI','זיהוי תנועה ובני אדם'],['חיבור','WiFi']] },
   { id:'wifi-dual', variantId:50740844593292, name:'מצלמת WiFi חיצונית | עדשה כפולה 3MP | ICSee', price:189, badge:'אאוטדור', cat:'אאוטדור',
     img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Saa99283cf09d4592a7c33ced52d81019B.webp?v=1780222614',
+    images:[
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Saa99283cf09d4592a7c33ced52d81019B_c03c7608-098b-46b1-8a55-7fd8cd919b8b.webp?v=1781270980',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S3c130a1f71d44c3ab74c91f283ba0f0et_7542a91a-1908-45fd-aedb-14170bf0155d.webp?v=1781270980',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sd48aab45b07f4b33b44e4c46eeda45cdJ_6a29befa-b835-41dc-b999-fc6506f84aa3.webp?v=1781270980',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sc4f2cb3f70ad4df483883e8433f3905by_a694cb81-3530-43c9-b3ba-98caffaaac90.webp?v=1781270981',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S68288029c62b481e9fc181846e91f8051_c3c37bf1-b3b2-425f-b609-92f1e5f8af1c.webp?v=1781270980',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sa6935805289a4a2296b9cc2bbf9c1ba59_0abfbede-f557-40cf-a314-d8881e1a9d79.webp?v=1781270980',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S5f15ec09a46f43d09e3d4fc1252c1a3dQ.webp?v=1781270981',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sf690a7e5a4f745c5a6df4f699e43f5c5n.webp?v=1781270980',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sdf9f97e6eae64ba58e85d6c966a1e0b13.webp?v=1781270980',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sd7daf6c895424547b8e3a40e11648afaw.webp?v=1781270980',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S0eb9d97f615b41a4822b4940419a599ei.webp?v=1781270981',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S1718511db3f84755abcd6765a670efffA.webp?v=1781270980'
+    ],
     variants:[
       {id:50740844593292, title:'מצלמה אחת', price:189},
       {id:50740844626060, title:'2 מצלמות', price:339},
@@ -78,6 +139,14 @@ var PRODUCTS = [
     specs:[['רזולוציה','3MP (2304×1296)'],['עדשות','כפולות'],['חיבור','WiFi'],['אפליקציה','ICSee'],['עמידות','Waterproof'],['אחסון','כרטיס SD']] },
   { id:'wifi-ir', variantId:50740844167308, name:'מצלמת אבטחה WiFi | אינפרא-אדום | Smart Home', price:89, badge:'אאוטדור', cat:'אאוטדור',
     img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S9a4b640268a140399e446738c30b95d4p.webp?v=1780222615',
+    images:[
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S9a4b640268a140399e446738c30b95d4p.webp?v=1780222615',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S9dd2e870541046a086f986eb846fd41a4.webp?v=1780222616',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S331a78f5987044cf93b46f2b37a2a1255.webp?v=1780222616',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S54bfeefe0f744a2698fb0bdae337b464L.webp?v=1780222616',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Se423580dd9564e7e981501a75a5b3f08g.webp?v=1780222616',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sd7aa4d7d9a5c4464a34b28f47dfd67ebY.webp?v=1780222616'
+    ],
     variants:[
       {id:50740844167308, title:'מצלמה אחת', price:89},
       {id:50740844200076, title:'2 מצלמות', price:159},
@@ -103,6 +172,20 @@ var PRODUCTS = [
     specs:[['מצלמות','3 מצלמות פרמיום'],['פלאגשיפ','16MP 8K 4 עדשות 360°'],['סולארית','Baseus S1 2K IP67'],['פנים','Blurams 2K AI'],['חיסכון','₪271 (17%)']] },
   { id:'ease-life-bulb', variantId:50740845052044, name:'מצלמת נורה חיצונית | WiFi 5GHz | 360° | בסיס E27', price:199, badge:'אאוטדור', cat:'אאוטדור',
     img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S8e30f3e63d994ab484f8c1276cd402c4W.webp?v=1781270981',
+    images:[
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S8e30f3e63d994ab484f8c1276cd402c4W.webp?v=1781270981',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S2028cabf936e42d78b95ab3d2084c0b7I.webp?v=1781270981',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sf1dd7e2f89ba46bb9406553590faeb59l.webp?v=1781270980',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sba080d2849a74f0f9e849d06ba6051a5n.webp?v=1781270981',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Se7f447146111477eb0a728dc2191b5bet.webp?v=1781270981',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sf1d794537c064c39b67967535a1b55ddb.webp?v=1781270981',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S8332216413e64e1c8b0faa1e357733baX.webp?v=1781270981',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S439c2920f0ea4cd1b69db81ee739c30b5.webp?v=1781270981',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S0c189064618e49069fdc8bf317fce6a2N.webp?v=1781270981',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Se18c219d29df486d938dd0fe275fe8737.webp?v=1781270981',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Se5fd961942ae4f9e9a32e33800bdcc95c.webp?v=1781270981',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S4d59a5a252264a7fb43115d6de516411Y.webp?v=1781270981'
+    ],
     variants:[
       {id:50740845052044, title:'מצלמה אחת', price:199},
       {id:50740845084812, title:'מבצע זוג 🔥', price:299},
@@ -112,10 +195,38 @@ var PRODUCTS = [
     specs:[['חיבור','WiFi 5GHz'],['זווית','360°'],['התקנה','בסיס E27 (שקע נורה)'],['אפליקציה','Ease Life'],['ראיית לילה','כן']] },
   { id:'annke-poe-8ch', variantId:50697567862924, name:'מערכת מצלמות ANNKE 3K | 8 ערוצים POE | 5MP | NVR', price:2999, badge:'מערכת', cat:'מערכות',
     img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S1a4d992b979d402eab875624584d0d71i.webp?v=1781270981',
+    images:[
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S1a4d992b979d402eab875624584d0d71i.webp?v=1781270981',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S42d7ea2200a64a8faa2bb8b53dea4bcbL.webp?v=1781270982',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sf6e53ae6e25e495d870bad0d9ff4f9e3U.webp?v=1781270982',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S59451225fa7c4df4a7c83aa6dd688ce88.webp?v=1781270981',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sb300f712cb804e95826ec715f35aecffG.webp?v=1781270982',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S4c43ab3612234d7db65e0767a33ddb74u.webp?v=1781270982',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S2881e62d70554c779d7df8b9b542a8aa0.webp?v=1781270982',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S1dacefbb625d46768f47c9208edd4d0e6.webp?v=1781270981',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S6c329b05cabf445dbbf3ba125180400aq.webp?v=1781270981',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S14e81d78fa624e93b96b2ccc4b3f3ed63.webp?v=1781270982',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sa6448abfb9234130be9441992e814e9cO.webp?v=1781270982',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S207af6f02b1649798c6c87ce1429b99aF.webp?v=1781270982'
+    ],
     desc:'מערכת אבטחה מקצועית מלאה — 8 ערוצי POE, מצלמות 5MP עם תאורה כפולה חכמה, NVR מובנה. פתרון ה-all-in-one האולטימטיבי לעסק.',
     specs:[['ערוצים','8 × POE'],['רזולוציה','5MP / 3K'],['תאורה','כפולה חכמה'],['אחסון','NVR מובנה'],['מותג','ANNKE'],['עמידות','IP67']] },
   { id:'outdoor-3mp-wifi', variantId:50740845150348, name:'מצלמת חיצונית 3MP WiFi | ניטור חצר ובית', price:129, badge:'אאוטדור', cat:'אאוטדור',
     img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S1c83fe4e8bbd401daff3eecb382207fcF.webp?v=1781270982',
+    images:[
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S1c83fe4e8bbd401daff3eecb382207fcF.webp?v=1781270982',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sc818ad4c8bce40c4b59b3d686cb440e2Z.webp?v=1781270982',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S0200baf8325a496c967617ed01aa0ac3j.webp?v=1781270982',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S7753ed5873484ddfb595c5b5754c53aeR.webp?v=1781270982',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S38eb99af8053487c8477309a792923deM.webp?v=1781270982',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Se8abf953794b42f7b8323ee55ec2e373r.webp?v=1781270982',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S88715b0d47e345e881a9004dbce5404aM.webp?v=1781270982',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sff9a88e509ec4c3884cf1ee5278f2393Z.webp?v=1781270982',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Scb2dcc2e8f0b43598cbcf6919c600444G.webp?v=1781270982',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sb3852a2da8e949b4905aebef8fe596adQ.webp?v=1781270982',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S8252fde267b34e7dbee554823fd48e2cl.webp?v=1781270982',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S62b005314bb04072822538e7ebecbd8ed.webp?v=1781270982'
+    ],
     variants:[
       {id:50740845150348, title:'מצלמה אחת', price:129},
       {id:50740845183116, title:'2 מצלמות', price:234},
@@ -125,10 +236,38 @@ var PRODUCTS = [
     specs:[['רזולוציה','3MP 1296P'],['חיבור','WiFi'],['שימוש','חיצוני + פנימי'],['ניטור','מרחוק'],['עמידות','למזג אוויר']] },
   { id:'camhi-solar-dual-4g', variantId:50697568059532, name:'מצלמת Solar Camhi | 4G | עדשה כפולה | 4MP | מסך כפול', price:1499, badge:'סולארי', cat:'סולאריות',
     img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S470ffc28904448afb56d9e4fb61690f7O.webp?v=1781270983',
+    images:[
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S470ffc28904448afb56d9e4fb61690f7O.webp?v=1781270983',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S12d00addddc345e2af041acdd67fa8ffV.webp?v=1781270983',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sddd55d477d8f45da8b1e4a86a6a5b3a0V.webp?v=1781270982',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S087a5f4f889a43efb834c8788143303d8.webp?v=1781270982',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S4715576c24ba473698329527b5a00af7n.webp?v=1781270983',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sc8761e98cf7c4e219a86a0bfd4693c41q.webp?v=1781270983',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sf3de010d561a4d56b3e5134326e5f9d2v.webp?v=1781270983',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S58e5c4ef89644d3fbe9335b63b32b8ac8.webp?v=1781270983',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S7783d0cf921c4b4984e250a3710674f9v.webp?v=1781270983',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S4439e96eb4e04bfcbbda1514abf830d3z.webp?v=1781270983',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S392c47e30cf34666bad009b519b2929dY.webp?v=1781270983',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S6fb603d94e354a44ad19b5f14708e0a6X.webp?v=1781270983'
+    ],
     desc:'מצלמת סולאר מתקדמת עם 4G ועדשה כפולה — תצוגת מסך כפולה (רחב + זום), זיהוי אנשים AI, מעקב אוטומטי. ללא WiFi ללא חשמל.',
     specs:[['חיבור','4G SIM'],['עדשות','כפולות'],['רזולוציה','4MP'],['זיהוי AI','בני אדם'],['הספק','סולארי + סוללה'],['אפליקציה','Camhi']] },
   { id:'tuya-5g-5mp', variantId:50740845314188, name:'מצלמת WiFi 5G | 5MP | AI מעקב אוטומטי | Tuya Smart', price:499, badge:'אאוטדור', cat:'אאוטדור',
     img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S54a1c9e7e16b460cab9f75ea7f191200I.webp?v=1781270983',
+    images:[
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S54a1c9e7e16b460cab9f75ea7f191200I.webp?v=1781270983',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S553ba0776fdc4c7797a4beb6fc8cf85dT.webp?v=1781270983',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S6a4e62a16d124393ae744cac11b85dffR.webp?v=1781270983',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sf81b28f3a72243bea1b5b4cdb8aa0960q.webp?v=1781270983',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sae1035f4c36c45ea875d1fbd884fab5ft.webp?v=1781270983',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S9bbbb59b481e4e3ba30fd3b8bb9efa63g.webp?v=1781270983',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S25201b81ca0642378dcd752add15fb678.webp?v=1781270983',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S8961f03b1eee41a0919383fce12cf4fcG.webp?v=1781270983',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sce3991b57c9e47a6b20112b6f54ecf2ef.webp?v=1781270983',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sdcc67ccc2461477187cca83200828dc0z.webp?v=1781270983',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sd02c8ad8e3d34b1088f9bb2e767f267cI.webp?v=1781270983',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S45d1301726264d618fa76c14ecb72dfdA.webp?v=1781270984'
+    ],
     variants:[
       {id:50740845314188, title:'מצלמה אחת', price:499},
       {id:50740845346956, title:'2 מצלמות', price:899},
@@ -138,10 +277,38 @@ var PRODUCTS = [
     specs:[['חיבור','WiFi 5G מהיר'],['רזולוציה','5MP'],['AI','מעקב אוטומטי'],['תאימות','Tuya / Alexa'],['כיוון','אוטומטי']] },
   { id:'gadinan-nvr-4k', variantId:50697569206412, name:'מערכת CCTV Gadinan 4K | 8MP | NVR | POE | 4-8 ערוצים', price:1799, badge:'מערכת', cat:'מערכות',
     img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S81abcc42a92f4441b2d272830525ca33w.webp?v=1781270986',
+    images:[
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S81abcc42a92f4441b2d272830525ca33w.webp?v=1781270986',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sc2b7bfead5d34fe5aeca1ed341e94fadu.webp?v=1781270986',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sc5d82ad110b74553a705252bcaa0723bD.webp?v=1781270985',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S6f36fa8987114f61b4045fbfa495cf36Y.webp?v=1781270986',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sfac9831dbaa64a03971cae6008942ea5R.webp?v=1781270985',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S9528c6457d724a929b53045723a4e9020.webp?v=1781270986',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Heb4151e4d0b84fa6981ad1b60de12f947.webp?v=1781270985',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sbbef1502b74345f4bba879b722e91537p.webp?v=1781270985',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/H81f33e10f5eb46dcb89400b62c45cdcam.webp?v=1781270985',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/H1a916f105b2c41fa923e0a922f6fef89f.webp?v=1781270985',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/He8efe9ce89404a67bb05ccf142a099023.webp?v=1781270985',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/H00e848b29efa4a8293570c39d3e5a7a8m.webp?v=1781270985'
+    ],
     desc:'מערכת מצלמות 4K מקצועית מ-Gadinan — מצלמות 8MP Ultra HD עם הקלטת שמע, NVR עם אחסון, ממשק POE. פתרון מלא לאבטחה מקצועית.',
     specs:[['רזולוציה','8MP / 4K Ultra HD'],['ערוצים','4-8 ערוצים'],['קלטה','שמע + וידאו'],['חיבור','POE'],['מותג','Gadinan']] },
   { id:'ls-vision-solar-4g', variantId:50740845478028, name:'מצלמת LS VISION סולארית 4G | 8MP 4K | PTZ | V380 Pro', price:699, badge:'סולארי', cat:'סולאריות',
     img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S601c134f84f440e1af5394faa6d5e256A.webp?v=1781270984',
+    images:[
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S601c134f84f440e1af5394faa6d5e256A.webp?v=1781270984',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sa97bc47565b54afe911faf383fc5e6f9k.webp?v=1781270984',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sb49bd75cc8fd46b2910e6dd86f42a598w.webp?v=1781270985',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S71838f94a3484dcb8411be90e69d5982u.webp?v=1781270984',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S85c1721b4a0446dd80634b77c40d69f0R.webp?v=1781270984',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S52320f7aa5564e0a839698009e2ae734b.webp?v=1781270985',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sf63c098246c24c30bbcd51dc9bd48257c.webp?v=1781270985',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S1478106f05e64e36a0f9a471e197ab6aN.webp?v=1781270985',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sc45e744e466d4906940c8006c6766b0ew.webp?v=1781270985',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sdcf43e0d1c8c46238553ed7670c43e3ea.webp?v=1781270985',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S7908ab9d57dc443aa1e80f9262906b2cs.webp?v=1781270985',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sed85ae5fc10442c19f9ee45329cd62b4j.webp?v=1781270984'
+    ],
     variants:[
       {id:50740845478028, title:'מצלמה אחת', price:699},
       {id:50740845510796, title:'2 מצלמות', price:1259},
@@ -151,6 +318,20 @@ var PRODUCTS = [
     specs:[['רזולוציה','8MP / 4K'],['חיבור','4G SIM + WiFi'],['זיהוי','PIR חום'],['סיבוב','PTZ מלא'],['אפליקציה','V380 Pro'],['הספק','סולארי']] },
   { id:'zumimall-f5', variantId:50740845576332, name:'מצלמת ZUMIMALL F5 | סוללה מגנטית | WiFi 2.4G | 3MP', price:399, badge:'אאוטדור', cat:'אאוטדור',
     img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S334c799d473d4f219187f4da6528e85fz.webp?v=1781270984',
+    images:[
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S334c799d473d4f219187f4da6528e85fz.webp?v=1781270984',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S88186d2fd6874befb3201cac13aa180eS.webp?v=1781270985',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S5b7bda021ebe4e78bbd9f714c0641b587.webp?v=1781270984',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S9f745d8da2284367af631965489f6259D.webp?v=1781270985',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sed71c2cf7af442e0a7e59bfbc5bab9efN.webp?v=1781270984',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S5e3afc5b54d94bafa530f0319f33d889i.webp?v=1781270984',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sbf75c427640a4f3db1e7e15c3cb02968b.webp?v=1781270984',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S9eb0f13986be4baba289670addf89071I.webp?v=1781270984',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sbe4f3efaef8b4f10ad28d9166bd1b64af.webp?v=1781270984',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sf265a993d57442ea956b2f91dfa2956fQ.webp?v=1781270985',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Se6cbbebf8ab74b489c868057f152e48af.webp?v=1781270984',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S19c7a1a31b3446a3b351dde67adf7883I.webp?v=1781270984'
+    ],
     variants:[
       {id:50740845576332, title:'מצלמה אחת', price:399},
       {id:50740845609100, title:'2 מצלמות', price:720},
@@ -160,14 +341,56 @@ var PRODUCTS = [
     specs:[['רזולוציה','3MP'],['חיבור','WiFi 2.4G'],['סוללה','נטענת'],['התקנה','מגנטית'],['ראיית לילה','צבעונית'],['מותג','ZUMIMALL']] },
   { id:'annke-nvr-3k', variantId:50697571238028, name:'מערכת ANNKE 3K | 8 ערוצים NVR | מיקרופון מובנה | POE', price:3299, badge:'מערכת', cat:'מערכות',
     img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S550f86c3e7be4034852d29c4d5b81e5fK.webp?v=1781270985',
+    images:[
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S550f86c3e7be4034852d29c4d5b81e5fK.webp?v=1781270985',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S5806da1f42374de9b9e2b2e33f065fedi.webp?v=1781270985',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sf6d320f10f2f44fdab36117761eeb850i.webp?v=1781270986',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S7f599d0d279b4924803414b9c60e1a88X.webp?v=1781270986',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sdcb7103864a847f89ecada8b57c0feb1L.webp?v=1781270985',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S3601246fa07443d79d8a6f1ef017a093R.webp?v=1781270986',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S9c0c9bf08bec4fd1b29a61259ae02798i.webp?v=1781270985',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S012c2014356a46a6b30b5a74c1d4c4d0i.webp?v=1781270985',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S2c22806a06794e8e94414ca32ce38e085.webp?v=1781270985',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sc74f7a95e64b445197c3f242a7006b66f.webp?v=1781270985',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S8d8ce87696c344119fd87627312e52bca.webp?v=1781270985',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S7866977dd8cf400b88d0cc168adb243eo.webp?v=1781270985'
+    ],
     desc:'מערכת אבטחה ANNKE 3K מקיפה — NVR 8 ערוצים עם מיקרופון מובנה בכל מצלמה, POE, קלטת שמע 24/7. אבטחה מקצועית ברמה גבוהה.',
     specs:[['ערוצים','8 × POE'],['רזולוציה','3K'],['שמע','מיקרופון מובנה'],['חיבור','POE'],['מותג','ANNKE'],['הקלטה','24/7']] },
   { id:'annke-c1200', variantId:50697571893388, name:'מצלמת ANNKE C1200 | 12MP Ultra HD | תאורה כפולה | PoE', price:2699, badge:'אאוטדור', cat:'אאוטדור',
     img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S99436a26ac1d42d6a2ee8a48e30a120cF.webp?v=1781270986',
+    images:[
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S99436a26ac1d42d6a2ee8a48e30a120cF.webp?v=1781270986',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S808b0b8d4b13427496b8a3c0122d83e41.webp?v=1781270986',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sc545342fab5d435d850b8bd6811b6d79s.webp?v=1781270986',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Se9f07844ac7d446ca7a93a5968dacd15l.webp?v=1781270986',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S6893c748024d4e1fa87352a0ec77ea773.webp?v=1781270986',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sa782445358c04e078016ae8a3a77cda9Y.webp?v=1781270986',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S28264cb275d94029a592602b68a83f95V.webp?v=1781270986',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S13d180e863a24996b01cdee555280328k.webp?v=1781270986',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S76b063060c3341d78594880a1c7b0ea7g.webp?v=1781270986',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S966b067ab899405dad9513a57c28f16c3.webp?v=1781270986',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S7f3abbdbb8a041ba8daf57b42dd8b1583.webp?v=1781270986',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S6344b49df88748289f11e6bcb973fb7eE.webp?v=1781270986'
+    ],
     desc:'מצלמת IP פרימיום מ-ANNKE — 12MP Ultra HD, תאורה כפולה חכמה (צבעונית + אינפרא-אדום), מיקרופון מובנה, PoE. ראיית לילה יוצאת דופן.',
     specs:[['רזולוציה','12MP Ultra HD'],['תאורה','כפולה חכמה'],['שמע','מיקרופון מובנה'],['חיבור','PoE'],['עמידות','IP67'],['מותג','ANNKE']] },
   { id:'okam-solar-ptz', variantId:50740845740172, name:'מצלמת O-Kam Solar | 8MP 4K | זום 10x | PTZ אוטומטי', price:999, badge:'סולארי', cat:'סולאריות',
     img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sc3ec6fa7658a40eba3595d2251b148caT.webp?v=1781270986',
+    images:[
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sc3ec6fa7658a40eba3595d2251b148caT.webp?v=1781270986',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sa83b4dec74004241a25b7441e11b2df1F.webp?v=1781270986',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sb2f470a932df42deb86624f25a8016c2y.webp?v=1781270986',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S05afe456db6a4042a10be1d6f9df2716O.webp?v=1781270986',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S213e31ed31754c10ae4e5768db19c25fw.webp?v=1781270986',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S13b5afa07a3e49b2ada45db4a46aaeacA.webp?v=1781270986',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sd98ee40205ec43dcb019438c8f592354O.webp?v=1781270986',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S51b7b902e03a435a92b2405a99e64d32Y.webp?v=1781270986',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sae9411b7e7f946469762dfd65a296aa7R.webp?v=1781270986',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S4bc736a7c73a4de089c4a9d5c0c7371bG.webp?v=1781270986',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S506086f6c6db4d939ebc176856eb48dbC.webp?v=1781270986',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S24dd28cbeb1849e1ba0849558a5cb2cdZ.webp?v=1781270986'
+    ],
     variants:[
       {id:50740845740172, title:'מצלמה אחת', price:999},
       {id:50740845772940, title:'2 מצלמות', price:1799},
@@ -177,10 +400,33 @@ var PRODUCTS = [
     specs:[['רזולוציה','8MP / 4K'],['זום','דיגיטלי 10x'],['סיבוב','PTZ אוטומטי'],['הספק','סולארי'],['ראיית לילה','צבעונית'],['אפליקציה','O-Kam']] },
   { id:'annke-2pcs-wifi', variantId:50697572581516, name:'2 מצלמות ANNKE 3MP WiFi | H.265 | עמידות IP66', price:649, badge:'אאוטדור', cat:'אאוטדור',
     img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S582f60e2c73b4baaaa4aec900326e73bo.webp?v=1781270987',
+    images:[
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S582f60e2c73b4baaaa4aec900326e73bo.webp?v=1781270987',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S7ae3496e28684f309da8e6d9be04f5020.webp?v=1781270987',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S0e8645935ec742f289cdbca6e53e3a3cI.webp?v=1781270987',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Se95c0fb767594c678d2d80e054bc9519h.webp?v=1781270987',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sde6b267b8f414aeba1f61182607a2785m.webp?v=1781270987',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sd37ce2da1c004f21af276acd258206845.webp?v=1781270986',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Scd968fae0ed24f2395130c33089c1d67s.webp?v=1781270987',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/wl200-1080p_1.png?v=1781270989',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/wl200-ai.png?v=1781270987',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/ws300-24-noise-cancelling.jpg?v=1781270987',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/wl200-night-vision_1.png?v=1781270987',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/wl200-h.264.png?v=1781270987'
+    ],
     desc:'חבילת 2 מצלמות WiFi של ANNKE — קידוד H.265 (חצי פחות נפח אחסון), IP66 עמיד לגשם, ראיית לילה אינפרא-אדום. חסכון לעומת קנייה נפרדת.',
     specs:[['מצלמות','2 מצלמות'],['רזולוציה','3MP'],['קידוד','H.265'],['חיבור','WiFi'],['עמידות','IP66'],['מותג','ANNKE']] },
   { id:'annke-5mp-bullet', variantId:50740845904012, name:'מצלמת ANNKE 5MP | תאורה חכמה | בולט | IP67', price:369, badge:'אאוטדור', cat:'אאוטדור',
     img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sa92795e6e9124626ba6c07382df4f6e6F.webp?v=1781270987',
+    images:[
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sa92795e6e9124626ba6c07382df4f6e6F.webp?v=1781270987',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S5239ec653f294f51b041e0f155682fd25.webp?v=1781270987',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sf1de55e466a04283a72af53562a9e310V.webp?v=1781270987',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S9c0412adbf1f4946ab0467e4f3ce79aaZ.webp?v=1781270987',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S15d49741989b4710a39f666ac56e5a60z.webp?v=1781270987',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S2611e0d89f7d4de0b9a6838789eef877f.webp?v=1781270987',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S43be85bd1fc44e9c99346e9cedee5c544.webp?v=1781270989'
+    ],
     variants:[
       {id:50740845904012, title:'מצלמה אחת', price:369},
       {id:50740845936780, title:'2 מצלמות', price:670},
@@ -190,6 +436,20 @@ var PRODUCTS = [
     specs:[['רזולוציה','5MP'],['תאורה','כפולה חכמה'],['עמידות','IP67'],['עדשה','2.8mm'],['מותג','ANNKE'],['שימוש','פנים + חוץ']] },
   { id:'annke-nvr-kit', variantId:50740852129932, name:'ערכת ANNKE | NVR 4 ערוצים + מצלמות WiFi 3MP/5MP | IP66', price:679, badge:'מערכת', cat:'מערכות',
     img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S1e83550a8b8744e4beccce5ab55b9034E.webp?v=1781270988',
+    images:[
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S1e83550a8b8744e4beccce5ab55b9034E.webp?v=1781270988',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S19bf1abb0b234059bce33f5ecec154f8x.webp?v=1781270988',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S2bd09b9f94964a53bc973016c2bfe329t.webp?v=1781270988',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S0dc6c5cb3b7944b8bff4100a1665623fi.webp?v=1781270988',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sf529954793c64756999662f98323c85aK.webp?v=1781270988',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Se22edc9cff3545f6ab4a96bd2b969895J.webp?v=1781270988',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S6b6796e4d31b4d1e934e369d7e8d7328k.webp?v=1781270988',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sa6f252fb0f0b4d52b7df725f60f131bar.webp?v=1781270988',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sd2217c91714243bc8a4e0c51111ae01aj.webp?v=1781270988',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S463e10757a2e4bac80b82dc4cf1825cbP.webp?v=1781270988',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S4a32bc67f4fe4dbcaaa965635eefd8b6c.webp?v=1781270988',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S6ca2a6e890904ac78dcd02ae5bc3bdd5b.webp?v=1781270988'
+    ],
     variants:[
       {id:50740852129932, title:'2 מצלמות | 3MP', price:679},
       {id:50740852162700, title:'2 מצלמות | 5MP', price:739},
@@ -200,6 +460,20 @@ var PRODUCTS = [
     specs:[['ערוצים','4 × NVR'],['רזולוציה','3MP / 5MP'],['חיבור','WiFi'],['עמידות','IP66'],['ראיית לילה','IR'],['מותג','ANNKE']] },
   { id:'ptz-15mp-8k', variantId:50740846264460, name:'מצלמת PTZ 15MP 8K | זום 10x | 3 עדשות | WiFi 5G', price:329, badge:'אאוטדור', cat:'אאוטדור',
     img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sc7a2481f2667426b85f423210a32e710J.webp?v=1781270990',
+    images:[
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sc7a2481f2667426b85f423210a32e710J.webp?v=1781270990',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S3d3845ec234043739690d9709592c444h.webp?v=1781270990',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S2b1cc41ea8bd4603bb9b454906261afb7.webp?v=1781270990',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sf4f1b8baaa4f4d9f8e492f4f1ac9bad9f.webp?v=1781270990',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S3c49df28983446f388a47719a5139eafz.webp?v=1781270990',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sb8c2cd0348d54735ae946535ce45e5853.webp?v=1781270990',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S95d82e8af824414682db1d33c525214e5.webp?v=1781270990',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S313e76c969b64a76b90155075925cc1ev.webp?v=1781270990',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S5bf2538187984db198b6551c403ad1f4f.webp?v=1781270990',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Scfd0c1fc68a04f75801cc633e7f5c53bZ.webp?v=1781270990',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sd7f19140ab3e4d798a64f16a35c4abf9h.webp?v=1781270990',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sff418c2dae984ec1bd9f03b4926b33d3Q.webp?v=1781270990'
+    ],
     variants:[
       {id:50740846264460, title:'מצלמה אחת', price:329},
       {id:50740846297228, title:'2 מצלמות', price:599},
@@ -209,6 +483,14 @@ var PRODUCTS = [
     specs:[['רזולוציה','15MP / 8K'],['עדשות','3 עצמאיות'],['זום','דיגיטלי 10x'],['חיבור','WiFi 5G'],['סיבוב','PTZ אוטומטי']] },
   { id:'lenovo-bulb-3mp', variantId:50741149991052, name:'מצלמת נורה Lenovo 3MP | AI מעקב | E27 | Baby Monitor', price:489, badge:'אינדור', cat:'אינדור',
     img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S84f53338185a45e793bb8baa401253f2T.webp?v=1781611823',
+    images:[
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S84f53338185a45e793bb8baa401253f2T.webp?v=1781611823',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S2536f7c140f747ffb6679833ab1eb22eW.webp?v=1781611761',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S47adabf73ddb4637b804ab742c4ae3fcb.webp?v=1781611824',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S01ebe1728d8441ab8dc7599366f00ccad.webp?v=1781611760',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S547bf3e808a44a53a0757706327c8f99X.webp?v=1781611761',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S8b37326abb304665a93f6960eee4fed1w.webp?v=1781611824'
+    ],
     variants:[
       {id:50741149991052, title:'מצלמה אחת', price:489},
       {id:50741150023820, title:'2 מצלמות', price:879},
@@ -220,62 +502,172 @@ var PRODUCTS = [
   // ===== מוצרים חדשים (סשן 6) =====
   { id:'three-screen-4k-ptz', variantId:50747408875660, name:'מצלמת PTZ 4K | 3 מסכים | עדשה כפולה | AI | IP66', price:406, badge:'חדש', cat:'אאוטדור',
     img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S23cb73ac7611448db7fd244cc0d2e694I.webp',
+    images:[
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S23cb73ac7611448db7fd244cc0d2e694I.webp?v=1781635103',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S9ee8f8e391a84398bb7bca0729f2c0eei.webp?v=1781635103',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S3dfb05b2b7a34cc999867addf65d94e4h.webp?v=1781635103',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S5eceb22a9aec42879f34b7f67e20e905b.webp?v=1781635103',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S9cfe89d142ae46f1b35cb8bb0e4b6832P.webp?v=1781635104',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S42fb138f9a3f4c3fa0874dbde999a414J.webp?v=1781635103',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sabe1b1a088ba4e8fa422df9c1e39ebfcZ.webp?v=1781635104',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S387d50d017e84624a112be98f0853efaY.webp?v=1781635103',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Se88b8a51fbe7416391ff0d24902a3a03y.webp?v=1781635103'
+    ],
     desc:'מצלמת חוץ PTZ מתקדמת עם 3 מסכים ועדשה כפולה 4K. כיסוי מלא עם זיהוי AI אנושי, סיבוב PTZ אוטומטי אחר מטרות, ראיית לילה צבעונית ועמידות IP66. אפליקציית iCSee לניהול מרחוק בכל זמן.',
     specs:[['רזולוציה','4K / 8MP'],['עדשה','כפולה — רחב + זום'],['מסכים','3'],['זיהוי','AI — בני אדם ורכבים'],['עמידות','IP66'],['ראיית לילה','צבעונית'],['שמע','דו-כיווני']] },
 
 
   { id:'smart-360-4k', variantId:50747409399948, name:'מצלמה חכמה 360° 4K WiFi | פנים וחוץ | זיהוי AI', price:113, badge:'חדש', cat:'אינדור',
     img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S7cd8fe79b0144144a45fc3ac884eaef4U.webp',
+    images:[
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S7cd8fe79b0144144a45fc3ac884eaef4U.webp?v=1781635104',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S6330c26b8d834d9094e8426629e85117T.webp?v=1781635105',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sc7b688c866d54d969532472716674daf6.webp?v=1781635105',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Saa83309a848d4a779884cc6dbd6b88deA.webp?v=1781635105',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S1352c2f9a58f431fab4f0183f9b1d028x.webp?v=1781635105',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S674eff04f4b94596b3defaa5f3500bfdN.webp?v=1781635105',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S0954f7ec80304298b1f041ef0754b049H.webp?v=1781635105',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S9355a07b3ed34d128cd07696b1780b31R.webp?v=1781635105',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sf02f62296f144f7eb6789b1a33556287m.webp?v=1781635105'
+    ],
     desc:'מצלמה חכמה עם כיסוי פנורמי 360° ורזולוציה 4K. מתאימה לפנים ולחוץ — זיהוי תנועה AI, ראיית לילה צבעונית ושמע דו-כיווני. ניטור מרחוק פשוט דרך האפליקציה.',
     specs:[['רזולוציה','4K'],['כיסוי','360° פנורמי'],['שימוש','פנים + חוץ'],['זיהוי','AI — בני אדם'],['ראיית לילה','צבעונית'],['שמע','דו-כיווני']] },
 
   { id:'sonoff-pt2', variantId:50747409498252, name:'SONOFF CAM PT2 | 360° פנורמי | Smart Home | WiFi', price:229, badge:'חדש', cat:'אינדור',
     img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S27cefefa4dfd4869803eeb762130cdaay.webp',
+    images:[
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S27cefefa4dfd4869803eeb762130cdaay.webp?v=1781635105',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sf5325cc5f73a4d1e9c450ef9092de89ad.webp?v=1781635105',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S92b65891ddc94aa5abeb91b15a421104F.webp?v=1781635106',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S4b147346e1c348069397353e5c3ba07dI.webp?v=1781635105',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sacbcb4b1480f4dc2a04e1a4ed93c476bF.webp?v=1781635105',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S6815cfc351c64b648ff431038c9f4350G.webp?v=1781635106',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S2b519fecf181475bbe57c9a35dbf36bfN.webp?v=1781635105'
+    ],
     desc:'מצלמה חכמה של SONOFF עם כיסוי 360° פנורמי מלא. ראיית לילה HD עמוקה, ניטור מרחוק בזמן אמת, אינטגרציה עם Smart Home (Alexa, Google) ושמע דו-כיווני לתקשורת ישירה.',
     specs:[['מותג','SONOFF'],['כיסוי','360° פנורמי'],['ראיית לילה','HD'],['Smart Home','Alexa + Google'],['שמע','דו-כיווני'],['ניטור','24/7']] },
 
   { id:'4k-indoor-mini', variantId:50747409629324, name:'מצלמה פנימית 4K WiFi מיני | ניטור מרחוק | שמע דו-כיווני', price:49, badge:'חדש', cat:'אינדור',
     img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sf4425dabd92d4fe89308d5453f524076T.webp',
+    images:[
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sf4425dabd92d4fe89308d5453f524076T.webp?v=1781635105',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S1898663997384fccbabc00cd1eb7aa6aQ.webp?v=1781635106',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sbde4c5b7cd2a4d6f90825c00ef858742i.webp?v=1781635106',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sdebb74041a714f2a9430735b368895c1T.webp?v=1781635106',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S51013ecac5ab4d8d81e73abfb350e236o.webp?v=1781635106',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S9c981ecd0f83478a832ce03b480d9ffeu.webp?v=1781635106'
+    ],
     desc:'מצלמה פנימית 4K WiFi בגודל מיני קומפקטי. ניטור מרחוק דרך אפליקציה, ראיית לילה IR, שמע דו-כיווני ואחסון על כרטיס SD. התקנה פשוטה תוך דקות.',
     specs:[['רזולוציה','4K'],['גודל','מיני קומפקטי'],['ניטור','מרחוק 24/7'],['ראיית לילה','IR'],['שמע','דו-כיווני'],['אחסון','כרטיס SD']] },
 
   { id:'8mp-ptz-24g', variantId:50747409793164, name:'מצלמה PTZ 8MP | WiFi 2.4G | ראיית לילה | Baby Monitor', price:70, badge:'חדש', cat:'אינדור',
     img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S6764deef32d648e1bcd8d02fa9b03db2B.webp',
+    images:[
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S6764deef32d648e1bcd8d02fa9b03db2B.webp?v=1781635106',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S712115b1094046419ec3cea5e3af124ey.webp?v=1781635106',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S4cce2c7b2fb8421a9334e569f7f5cd54J.webp?v=1781635106',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sfe4e9ab63cbd4a3abd375e8a787d5d25n.webp?v=1781635106',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Se629156506ad4d779477a0fbbe820d73R.webp?v=1781635106',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S3c83e3c74b1c44f4bca003dbae99efa2k.webp?v=1781635107',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sdee47f7633fd454281ba0b9b2b7a3eb9P.webp?v=1781635107'
+    ],
     desc:'מצלמה PTZ 8MP עם חיבור WiFi 2.4G. סיבוב Pan-Tilt אוטומטי, ראיית לילה IR, זיהוי תנועה חכם ו-2 אנטנות לקליטה יציבה. אידיאלית לניטור ילדים, חיות מחמד ושמירה על הבית.',
     specs:[['רזולוציה','8MP'],['סיבוב','Pan-Tilt (PTZ)'],['חיבור','WiFi 2.4G'],['ראיית לילה','IR'],['אנטנות','2 — קליטה מעולה'],['שימוש','Baby Monitor']] },
 
   { id:'jooan-solar-4k', variantId:50747409694860, name:'מצלמת JOOAN סולארית 4K | עדשה כפולה | PIR | סוללה', price:495, badge:'חדש', cat:'סולארי',
     img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S7913a345182b4d3b9a5e5a11b1585a96Q.webp',
+    images:[
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S7913a345182b4d3b9a5e5a11b1585a96Q.webp?v=1781635106',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S4eff31c1f6f34370ba83ede71634e8e3i.webp?v=1781635106',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sefe3dfa5242a49709b6d576d29ff5e7bj.webp?v=1781635110',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sa12a355435f140d798929e21e57a0047v.webp?v=1781635107',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S166692367fa74398b4dd4d2d17c47379s.webp?v=1781635106',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sf19ae3602a0c4a42b55772e1cd887655N.webp?v=1781635106'
+    ],
     desc:'מצלמה סולארית 4K של JOOAN עם עדשה כפולה וסוללה נטענת. זיהוי PIR מדויק להפחתת התראות שווא, ראיית לילה צבעונית, שמע דו-כיווני ואחסון ענן/SD. ללא חיווט, ללא חשמל.',
     specs:[['מותג','JOOAN'],['רזולוציה','4K'],['אנרגיה','סולארית + סוללה'],['עדשה','כפולה — רחב + זום'],['זיהוי','PIR מדויק'],['ראיית לילה','צבעונית']] },
 
   { id:'battery-2k-spotlight', variantId:50747409858700, name:'מצלמת סוללה 2K | זרקור LED | WiFi | PIR | IP65', price:548, badge:'חדש', cat:'אאוטדור',
     img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S3cdc0d82f8d84e5798d76be868d12b58Y.webp',
+    images:[
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S3cdc0d82f8d84e5798d76be868d12b58Y.webp?v=1781635107',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S4d0290f42654487f90f5ae01811944edd.webp?v=1781635107',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Se927bab50e034ec2a9f43103feec2c64V.webp?v=1781635108',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S3af08f6805584749a56e8c4e57c67d37A.webp?v=1781635107',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S99b8817acfaf4a39a82dbc918b75c463a.webp?v=1781635107',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S13149270a6be40238157ca5dd7bd5358O.webp?v=1781635107',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S16ab495782fb4eb589a09bb78814d99fU.webp?v=1781635107',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S98c8e25e338a447b83b6cde0c1fe26bcU.webp?v=1781635107',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sf7782935f89147459bf9b59ccc6432a1A.webp?v=1781635108',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sefe036ae1d814752abcbfca5b55b67c4b.webp?v=1781635107'
+    ],
     desc:'מצלמה על סוללה נטענת עם זרקור LED עוצמתי לשימוש חוץ. רזולוציה 2K, זיהוי PIR מדויק, ראיית לילה צבעונית עם אור לבן, עמידות IP65 ואזעקה חזקה. ניתן לטעינה סולארית (פאנל נמכר בנפרד).',
     specs:[['רזולוציה','2K / 4MP'],['אנרגיה','סוללה נטענת'],['זרקור','LED לבן עוצמתי'],['זיהוי','PIR מדויק'],['ראיית לילה','צבעונית'],['עמידות','IP65'],['אזעקה','קול + אור']] },
 
   { id:'4g-bulb-e27-3mp', variantId:50747410415756, name:'נורה E27 מצלמה 3MP | 4G | ללא WiFi | IP66 | חיצוני', price:81, badge:'חדש', cat:'אינדור',
     img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S99b056347f5c4d109d96a63261051a3fJ.webp',
+    images:[
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S99b056347f5c4d109d96a63261051a3fJ.webp?v=1781635107',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S4a147e58c2dd4282a0f48066c1a037d7C.webp?v=1781635108',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S1bbcc831b2f24a5480014e27a7bfb2daw.webp?v=1781635108',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sbc83dabeb1034746822976eae6949ecfd.webp?v=1781635107',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sa08072ebe4e24d90a4d763ea6258323cw.webp?v=1781635107',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S21749787bf1444fe8d7d2ed545e32928v.webp?v=1781635108',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sbe4f4ef77d36408ca536aed4ce76fbeb9.webp?v=1781635107'
+    ],
     desc:'מצלמה בצורת נורה E27 עם חיבור 4G — לא צריך WiFi! מתקינים בבסיס נורה רגיל ועובד מיד. מצוינת לחוץ, עמידות IP66, ראיית לילה ושמע דו-כיווני. פתרון מושלם לאזורים ללא WiFi.',
     specs:[['רזולוציה','3MP'],['התקנה','בסיס E27 רגיל'],['חיבור','4G — ללא WiFi'],['עמידות','IP66'],['ראיית לילה','כן'],['שמע','דו-כיווני']] },
 
   { id:'carecam-5mp-355', variantId:50747410972812, name:'Carecam Pro 5MP | 355° פנורמי | WiFi | ניטור ביתי', price:125, badge:'חדש', cat:'אינדור',
     img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S2c7afd7834bb4ae9bd2739760ae234d0E.webp',
+    images:[
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S2c7afd7834bb4ae9bd2739760ae234d0E.webp?v=1781635110',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S40a6bf9bf4a4408c84fdcb349ea2b432N.webp?v=1781635110',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S5e67cec969724c78b46f51ccbbb236fcf.webp?v=1781635110',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sb7ea2016da8f4bc494a2848b011591d3a.webp?v=1781635110',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S7467f4fb3e9849868e98c89c3aca8cd24.webp?v=1781635110',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S28331fee01d24c18b935daa17a28911bc.webp?v=1781635109'
+    ],
     desc:'מצלמה פנימית Carecam Pro עם כיסוי 355° כמעט-מלא ורזולוציה 5MP. שלט דרך אפליקציה חכמה, ראיית לילה IR, שמע דו-כיווני וזיהוי תנועה עם התראות מיידיות. מושלמת לניטור ילדים וחיות מחמד.',
     specs:[['מותג','Carecam Pro'],['רזולוציה','5MP'],['כיסוי','355° פנורמי'],['ראיית לילה','IR'],['שמע','דו-כיווני'],['זיהוי תנועה','כן + התראות']] },
 
   { id:'a7-360-1080p', variantId:50747410907276, name:'מצלמה A7 360° 1080P WiFi | Baby Monitor | שמע דו-כיווני', price:64, badge:'חדש', cat:'אינדור',
     img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S981656dcb8b1401597eca1a8fa716745P.webp',
+    images:[
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S981656dcb8b1401597eca1a8fa716745P.webp?v=1781635109',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S43777c1285b64d6eaa57c51e82fcbd5fI.webp?v=1781635109',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S25a244cd4f9e47689c3b1647be24a107Y.webp?v=1781635109',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S9edbf312ca5b4418bcd5b7fc650f21e9r.webp?v=1781635109',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S9b66c0f47ca44619a2c60006addc42a6F.webp?v=1781635109',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sc40531b8868445f28614f74f80e27d11s.webp?v=1781635109',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S773dcdb0d89f4b7c8306e3fd94358df3x.webp?v=1781635109'
+    ],
     desc:'מצלמה קומפקטית A7 עם כיסוי 360° מלא ורזולוציה 1080P. Baby Monitor אידיאלי — שמע דו-כיווני לשיחה עם הילד, ראיית לילה, התראות תנועה וניטור מרחוק בכל זמן. פשוטה ונוחה לשימוש.',
     specs:[['רזולוציה','1080P'],['כיסוי','360° מלא'],['שימוש','Baby Monitor'],['שמע','דו-כיווני'],['ראיית לילה','IR'],['ניטור','מרחוק 24/7']] },
 
   { id:'indoor-8mp-4k-5x', variantId:50747411103884, name:'מצלמה פנימית 8MP 4K | זום אופטי 5x | WiFi | AI', price:214, badge:'חדש', cat:'אינדור',
     img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S8e0dde5611bf4487b0d94256830fa937R.webp',
+    images:[
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S8e0dde5611bf4487b0d94256830fa937R.webp?v=1781635110',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Se6912f53f9194f3d94d0e9aefd4b14a2b.webp?v=1781635110',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S548577e2f8b749aba9cd86b8807fc497h.webp?v=1781635110',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sdd2f9dfa48a048329f608657b757a52b7.webp?v=1781635110',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sc78759283bbb4da2ad55e20cfc4a1afec.webp?v=1781635111',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S02947e465b5f42e1bafcdb862dc174e8h.webp?v=1781635110'
+    ],
     desc:'מצלמה פנימית 4K עם זום אופטי 5x — מתאים לחדרים גדולים ומשרדים. מעקב אוטומטי אחר אנשים ורכבים בזיהוי AI, ראיית לילה, שמע דו-כיווני ואחסון SD/ענן. תמונה חדה ומפורטת גם מרחוק.',
     specs:[['רזולוציה','8MP / 4K'],['זום','אופטי 5x'],['מעקב','AI אוטומטי'],['ראיית לילה','HD'],['שמע','דו-כיווני'],['אחסון','SD + ענן']] },
 
   { id:'ptz-8mp-4x', variantId:50747411464332, name:'מצלמה PTZ 8MP | זום 4x | WiFi | מעקב AI | פנים וחוץ', price:72, badge:'חדש', cat:'אאוטדור',
     img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S15168ba2c26843e4b4b26ae3d6b7463dx.webp',
+    images:[
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S15168ba2c26843e4b4b26ae3d6b7463dx.webp?v=1781635111',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Af84dcd3ed10942cd9f49c479b5ea4430T.webp?v=1781635111',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Adec2fd2b801449cd9d7a6fc595c085d3M.webp?v=1781635111',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Abe3314aec2804212842360b72d133183M.webp?v=1781635112',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/A78b83bb4e93b494ea9382c4a8d572835Z.webp?v=1781635112',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/A38aefeae97cc42d5b5a554f6fdf09e258.webp?v=1781635111'
+    ],
     desc:'מצלמה PTZ 8MP עם זום 4x ומעקב AI אוטומטי. מתאימה לפנים ולחוץ — סיבוב PTZ, זיהוי בני אדם, ראיית לילה עמוקה ושמע דו-כיווני. שלט מרחוק מלא דרך האפליקציה בכל זמן.',
     specs:[['רזולוציה','8MP'],['זום','4x'],['סיבוב','PTZ — Pan/Tilt'],['מעקב','AI אוטומטי'],['שימוש','פנים + חוץ'],['שמע','דו-כיווני']] }
 ];
