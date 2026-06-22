@@ -757,6 +757,8 @@ html.a11y-motion *::after {
   section { padding: 56px 20px; }
   .cta-band { margin: 0 20px 56px; padding: 32px 24px; flex-direction: column; align-items: flex-start; }
   .pdp { grid-template-columns: 1fr; padding: 32px 20px; }
+  .pdp .pdp-gallery, .pdp .pdp-gallery-multi { order: 1; }
+  .pdp .pdp-info { order: 2; }
   .page-head, .content, .cart-wrap { padding-left: 20px; padding-right: 20px; }
   footer { padding: 32px 20px; }
 }
