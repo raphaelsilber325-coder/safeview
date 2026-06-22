@@ -572,10 +572,10 @@ var PRODUCTS = [
     specs:[['מותג','SONOFF'],['כיסוי','360° פנורמי'],['ראיית לילה','HD'],['Smart Home','Alexa + Google'],['שמע','דו-כיווני'],['ניטור','24/7']] },
 
   { id:'4k-indoor-mini', variantId:50747409629324, name:'מצלמה פנימית 4K WiFi מיני | ניטור מרחוק | שמע דו-כיווני', price:49, badge:'חדש', cat:'אינדור',
-    img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sf4425dabd92d4fe89308d5453f524076T.webp',
+    img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S1898663997384fccbabc00cd1eb7aa6aQ.webp?v=1781635106',
     images:[
-      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sf4425dabd92d4fe89308d5453f524076T.webp?v=1781635105',
       'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S1898663997384fccbabc00cd1eb7aa6aQ.webp?v=1781635106',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sf4425dabd92d4fe89308d5453f524076T.webp?v=1781635105',
       'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sbde4c5b7cd2a4d6f90825c00ef858742i.webp?v=1781635106',
       'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sdebb74041a714f2a9430735b368895c1T.webp?v=1781635106',
       'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S51013ecac5ab4d8d81e73abfb350e236o.webp?v=1781635106',
@@ -656,10 +656,10 @@ var PRODUCTS = [
     specs:[['מותג','Carecam Pro'],['רזולוציה','5MP'],['כיסוי','355° פנורמי'],['ראיית לילה','IR'],['שמע','דו-כיווני'],['זיהוי תנועה','כן + התראות']] },
 
   { id:'a7-360-1080p', variantId:50747410907276, name:'מצלמה A7 360° 1080P WiFi | Baby Monitor | שמע דו-כיווני', price:64, badge:'חדש', cat:'אינדור',
-    img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S981656dcb8b1401597eca1a8fa716745P.webp',
+    img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S43777c1285b64d6eaa57c51e82fcbd5fI.webp?v=1781635109',
     images:[
-      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S981656dcb8b1401597eca1a8fa716745P.webp?v=1781635109',
       'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S43777c1285b64d6eaa57c51e82fcbd5fI.webp?v=1781635109',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S981656dcb8b1401597eca1a8fa716745P.webp?v=1781635109',
       'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S25a244cd4f9e47689c3b1647be24a107Y.webp?v=1781635109',
       'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S9edbf312ca5b4418bcd5b7fc650f21e9r.webp?v=1781635109',
       'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S9b66c0f47ca44619a2c60006addc42a6F.webp?v=1781635109',
