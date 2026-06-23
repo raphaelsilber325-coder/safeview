@@ -183,6 +183,8 @@
       galleryHtml +
       renderReviewsSection(p.id);
 
+    injectProductJsonLd(p);
+
     // related — אותה קטגוריה, עד 3 (מהמוצרים שנטענו מ-Shopify)
     fetchShopifyProducts().then(function(all){
       var rel = all.filter(function(x){ return x.cat === p.cat && x.id !== p.id; });

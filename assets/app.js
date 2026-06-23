@@ -1207,6 +1207,84 @@ function injectSeoMeta(){
   add('link', { rel:'dns-prefetch', href:'https://cdn.shopify.com' });
 }
 
+// ===== JSON-LD Schema.org — Rich Snippets לגוגל =====
+function injectProductJsonLd(product) {
+  if (!product) return;
+  var sum = getReviewSummary(product.id);
+  var reviews = getProductReviews(product.id);
+  var data = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: product.name,
+    description: product.desc || product.name,
+    image: product.images || [product.img],
+    sku: product.id,
+    brand: { '@type': 'Brand', name: 'SafeView' },
+    offers: {
+      '@type': 'Offer',
+      url: location.href.split('#')[0],
+      priceCurrency: 'ILS',
+      price: String(product.price),
+      availability: 'https://schema.org/InStock',
+      itemCondition: 'https://schema.org/NewCondition',
+      seller: { '@type': 'Organization', name: 'SafeView' }
+    }
+  };
+  if (sum) {
+    data.aggregateRating = {
+      '@type': 'AggregateRating',
+      ratingValue: String(sum.avg),
+      reviewCount: String(sum.count),
+      bestRating: '5',
+      worstRating: '1'
+    };
+    data.review = reviews.slice(0, 5).map(function(r){
+      return {
+        '@type': 'Review',
+        author: { '@type': 'Person', name: r.name },
+        datePublished: r.date,
+        reviewBody: r.text,
+        name: r.title,
+        reviewRating: {
+          '@type': 'Rating',
+          ratingValue: String(r.rating),
+          bestRating: '5',
+          worstRating: '1'
+        }
+      };
+    });
+  }
+  var script = document.createElement('script');
+  script.type = 'application/ld+json';
+  script.textContent = JSON.stringify(data);
+  document.head.appendChild(script);
+}
+
+function injectOrganizationJsonLd() {
+  if (document.querySelector('script[data-ld="org"]')) return;
+  var data = {
+    '@context': 'https://schema.org',
+    '@type': 'Store',
+    name: 'SafeView',
+    url: location.origin + location.pathname.replace(/\/[^\/]*$/, '/'),
+    logo: location.origin + '/safeview/assets/logo.svg',
+    description: 'חנות מצלמות אבטחה חכמות בישראל. משלוח חינם מעל 200₪, אחריות שנה, תמיכה בעברית',
+    contactPoint: {
+      '@type': 'ContactPoint',
+      telephone: '+972586343786',
+      contactType: 'customer service',
+      areaServed: 'IL',
+      availableLanguage: ['Hebrew']
+    },
+    sameAs: ['https://wa.me/972586343786']
+  };
+  var script = document.createElement('script');
+  script.type = 'application/ld+json';
+  script.dataset.ld = 'org';
+  script.textContent = JSON.stringify(data);
+  document.head.appendChild(script);
+}
+
 // ===== Service Worker (PWA) =====
 function registerSW(){
   if (!('serviceWorker' in navigator)) return;
@@ -1559,6 +1637,7 @@ function startCountdown(elId){
 
 document.addEventListener('DOMContentLoaded', function(){
   injectSeoMeta();
+  injectOrganizationJsonLd();
   injectChrome();
   initReveal();
   initFaq();
