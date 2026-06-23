@@ -43,6 +43,264 @@ var PRODUCT_INBOX = {
   '4g-bulb-e27-3mp':  ['מצלמה נורה × 1 (בסיס E27)','כרטיס SIM 4G (לא כלול)','מדריך למשתמש × 1'],
 };
 
+// ===== ביקורות לקוחות לדוגמה =====
+var PRODUCT_REVIEWS = {
+  'baseus-s1': [
+    {name:'רפאל ב.',rating:5,date:'2026-05-18',title:'מצלמה מעולה, הותקנה תוך 10 דקות',text:'הזמנתי לחצר האחורית ולא הייתי צריך אפילו לקרוא להחשמלאי. מתקינים, מחברים לאפליקציה ומגינים על הבית. ראיית הלילה הצבעונית מטורפת.',verified:true},
+    {name:'דנה ל.',rating:5,date:'2026-05-04',title:'סוף סוף מצלמה שעובדת באמת',text:'קניתי בעבר 2 מצלמות מאיביי שנשרפו אחרי שבועיים. הבאסיוס עובדת חודש וחצי ועדיין מצוין. הסוללה מחזיקה יומיים גם בלי שמש.',verified:true},
+    {name:'אברהם כ.',rating:4,date:'2026-04-22',title:'מצויינת, חבל שהאפליקציה לא בעברית',text:'איכות התמונה מצוינת ב-2K, ההתקנה פשוטה. הביקורת היחידה - האפליקציה באנגלית, אבל מתרגלים תוך 5 דקות.',verified:true},
+    {name:'שירה מ.',rating:5,date:'2026-04-08',title:'קניתי 3 - כיסוי מלא לוילה',text:'התקנתי בחזית, חצר אחורית וכניסה. שולטת על כולן מהפלאפון. שווה כל שקל. ההזמנה הגיעה תוך 5 ימים.',verified:true},
+    {name:'יוסי ש.',rating:5,date:'2026-03-29',title:'IP67 עומדת במבחן הגשם',text:'גשם זעם בחורף האחרון, המצלמה לא זזה. תמונה ברורה גם בלילה. ממליץ מאוד.',verified:true},
+    {name:'אילן ר.',rating:5,date:'2026-03-15',title:'תמיכה בעברית מהירה',text:'הייתה לי שאלה על ההגדרה, ענו לי בוואטסאפ תוך 10 דקות. שירות מצוין.',verified:true},
+    {name:'מירב פ.',rating:4,date:'2026-02-26',title:'איכות מעולה, רק שימו לב להגדרת WiFi',text:'בהתחלה לא הצלחתי לחבר, התברר שצריך רשת 2.4GHz בלבד. אחרי שעברתי, עובדת מצוין.',verified:true}
+  ],
+  'ease-life-bulb': [
+    {name:'מאיר ל.',rating:5,date:'2026-05-20',title:'הפיתרון הכי קל שיש',text:'מבריגים לבסיס נורה רגיל, מורידים אפליקציה ומסתדרים. אין צורך בחשמלאי. מצוין למרפסת.',verified:true},
+    {name:'נטלי כ.',rating:5,date:'2026-05-11',title:'התקנה ב-30 שניות פשוטו כמשמעו',text:'לקח לי יותר זמן לפתוח את הקופסה מאשר להתקין. עובדת מצוין, ראיית לילה חדה.',verified:true},
+    {name:'אבי ב.',rating:4,date:'2026-04-30',title:'מצויינת לכניסה, צריך WiFi חזק',text:'התקנתי בכניסה, מאה אחוז שווה. צריך לזכור שמדובר במצלמת WiFi רגילה - אם הראוטר רחוק, יש קצת חיתוכים.',verified:true},
+    {name:'יפעת ר.',rating:5,date:'2026-04-12',title:'קניתי 2 לבית - כיסוי מקסימלי',text:'אחת לכניסה ואחת לחצר. שתיהן עובדות מצוין מאז שהותקנו לפני חודש.',verified:true},
+    {name:'ליאור מ.',rating:5,date:'2026-03-28',title:'איכות תמונה מפתיעה לגודל',text:'לא ציפיתי לאיכות כזו ממצלמה קטנה. הסיבוב 360° חלק, ראיית הלילה ברורה.',verified:true},
+    {name:'שירלי א.',rating:4,date:'2026-03-09',title:'נהדר לבית, פחות לעסק',text:'מתאים מצוין לבית פרטי. בעסק רציתי משהו עם NVR וזה לא הפתרון, אבל לבית - מושלם.',verified:true}
+  ],
+  'indoor-2k': [
+    {name:'עומר ב.',rating:5,date:'2026-05-22',title:'מושלם להשגיח על הילדים',text:'יש לי 2 ילדים קטנים ובייביסיטר. רואה הכל מהמשרד. השיחה הדו-כיוונית מצוינת.',verified:true},
+    {name:'הילה ש.',rating:5,date:'2026-05-08',title:'AI מזהה אנשים מצוין',text:'לא מקבלת התראות שווא על כל זבוב שעובר. רק כשבן אדם נכנס לחדר.',verified:true},
+    {name:'אבישי ג.',rating:5,date:'2026-04-19',title:'מצוין למשגיח על הכלב',text:'מסתכל על הכלב כל הזמן מהעבודה. אפילו מדבר איתו דרך הרמקול.',verified:true},
+    {name:'נועה ד.',rating:4,date:'2026-04-03',title:'איכות 2K טובה, ראיית לילה צבעונית מטורפת',text:'התמונה חדה מאוד. ראיית הלילה הצבעונית נראית כמעט כמו ביום.',verified:true},
+    {name:'יואב ל.',rating:5,date:'2026-03-15',title:'הזמנתי 2 - חיסכון יפה',text:'2 מצלמות לסלון ולחדר ילדים. שווה את הכסף בגדול.',verified:true}
+  ],
+  'solar-3mp': [
+    {name:'שמואל ז.',rating:5,date:'2026-05-15',title:'אנרגיה חינמית, אבטחה תמידית',text:'אין חשבון חשמל, אין כבלים. בשמש של הקיץ נטענת מצוין. ממליץ.',verified:true},
+    {name:'אביגיל ר.',rating:5,date:'2026-04-29',title:'זיהוי בני אדם מצוין',text:'מתריעה רק כשנכנס אדם, לא על חתולים או רוח. חוסך לי המון התראות מיותרות.',verified:true},
+    {name:'יהונתן ב.',rating:4,date:'2026-04-10',title:'מצוינת, אבל מקפיא בלילות מעוננים',text:'אחרי 3 ימים מעוננים ברצף, הסוללה נחלשה. בכל מקרה התאוששה כשחזרה השמש.',verified:true},
+    {name:'דבורה כ.',rating:5,date:'2026-03-27',title:'IP65 מתאים לקיץ ישראלי',text:'גשם, אבק, חום של 40 מעלות - מחזיקה ללא בעיה. שמע דו-כיווני מועיל מאוד.',verified:true},
+    {name:'תומר ה.',rating:5,date:'2026-03-08',title:'התקנה פשוטה, עבודה לכל החיים',text:'הזמנתי, הותקן, עובד. בלי כאב ראש.',verified:true}
+  ],
+  'wifi-ir': [
+    {name:'מיכל ס.',rating:5,date:'2026-05-19',title:'מחיר מנצח לסטודנטים',text:'בדירת סטודנטים, רצינו אבטחה זולה. עובדת מצוין כבר חודש.',verified:true},
+    {name:'יואל פ.',rating:4,date:'2026-04-25',title:'אבטחה זולה, איכותית',text:'במחיר הזה, אי אפשר לטעות. ראיית הלילה האינפרא-אדומה ברורה.',verified:true},
+    {name:'שני נ.',rating:5,date:'2026-04-07',title:'התקנה ב-3 דקות באמת',text:'הוצאתי מהקופסה, חיברתי לחשמל, פתחתי אפליקציה - 3 דקות, פחות. שווה כל שקל.',verified:true},
+    {name:'אורן מ.',rating:4,date:'2026-03-19',title:'מצוין למתחילים',text:'מצלמה ראשונה שלי. נוח לשימוש, אפליקציה ידידותית.',verified:true}
+  ],
+  'flagship-16mp': [
+    {name:'מורן כ.',rating:5,date:'2026-05-21',title:'הפלאגשיפ באמת!',text:'4 עדשות + 16MP זה משהו אחר לגמרי. רואים מספרי רכב מ-30 מטר.',verified:true},
+    {name:'דרור ל.',rating:5,date:'2026-05-02',title:'לעסק שלי - מושלמת',text:'התקנתי בכניסה לחנות. 360° + 4 עדשות = כיסוי מלא. הזיהוי AI מצוין.',verified:true},
+    {name:'יעל א.',rating:5,date:'2026-04-14',title:'יקר אבל שווה',text:'בהשוואה למצלמת אבטחה מקצועית מחברת התקנות - חצי מחיר ואיכות זהה.',verified:true},
+    {name:'ערן ב.',rating:4,date:'2026-03-26',title:'דורש WiFi חזק לסטרימינג',text:'8K זה הרבה דאטה. אצלי בבית עובד, אבל אם יש לכם WiFi חלש - תעדכנו ראוטר.',verified:true}
+  ],
+  'zumimall-f5': [
+    {name:'גיא ב.',rating:5,date:'2026-05-17',title:'המגנט גאוני',text:'מזיז אותה מחדר לחדר תוך שניות בלי ברגים. הסוללה מחזיקה שבועיים.',verified:true},
+    {name:'אורית מ.',rating:5,date:'2026-04-28',title:'גמישות מקסימלית',text:'התקנתי בארון בגדים, אחרי שבוע העברתי לחצר. אפס ברגים, אפס עבודה.',verified:true},
+    {name:'ניר ס.',rating:4,date:'2026-04-09',title:'נחמדה, צריך משטחי מתכת',text:'המגנט עובד מצוין על מתכת. על קיר רגיל צריך לרכוש את האקסס',verified:true},
+    {name:'מעיין כ.',rating:5,date:'2026-03-20',title:'איכות תמונה טובה',text:'3MP מספיק לרוב המקרים. ראיית לילה צבעונית מצוינת.',verified:true}
+  ],
+  'annke-poe-8ch': [
+    {name:'אריאל ד.',rating:5,date:'2026-05-16',title:'מערכת מקצועית בלי תשלום למתקין',text:'NVR + 8 מצלמות, הכל באריזה אחת. התקנתי לבד תוך 4 שעות. חוסך לי מתקין שעולה ₪3,000.',verified:true},
+    {name:'משה ל.',rating:5,date:'2026-04-26',title:'POE = פחות כבלים',text:'אבל אחד מהיר עוברת תוכנה ותמונה. במקום 8 שקעי חשמל - רק NVR אחד.',verified:true},
+    {name:'גלעד ר.',rating:5,date:'2026-04-05',title:'איכות 5MP/3K נדיר במחיר',text:'בדקתי במתחרות - חברות מקצועיות מבקשות ₪7,000+ למערכת דומה. כאן ₪2,999.',verified:true},
+    {name:'מתן פ.',rating:4,date:'2026-03-17',title:'הזמנתי דיסק קשיח בנפרד',text:'שימו לב - לא כלול דיסק קשיח. הזמנתי 2TB בנפרד. בכל מקרה משהו מצוין.',verified:true}
+  ],
+  'bulb-8mp-e27': [
+    {name:'אסף נ.',rating:5,date:'2026-05-12',title:'8MP בנורה - מטורף',text:'איכות התמונה משוגעת לגודל. עדשה כפולה עם זום עובדת מצוין.',verified:true},
+    {name:'אביב ל.',rating:5,date:'2026-04-23',title:'הותקנה תוך דקה',text:'מבריגים, מחברים לאפליקציה, מוכן. חוסך טכנאי.',verified:true},
+    {name:'נופר א.',rating:4,date:'2026-04-02',title:'הזום מצוין, האפליקציה בסדר',text:'הזום 8x משוגע. האפליקציה קצת מסורבלת אבל מתרגלים.',verified:true}
+  ],
+  'okam-solar-ptz': [
+    {name:'איתי ק.',rating:5,date:'2026-05-13',title:'PTZ + סולארי = שילוב מנצח',text:'מסתובבת לבד, רואה כל זווית. הסוללה מחזיקה גם בחורף.',verified:true},
+    {name:'רחל ב.',rating:5,date:'2026-04-21',title:'זום 10x משוגע',text:'רואה את כתובת הבית של השכן ברחוב הסמוך. (לא משתמשת לרעה!) איכות 4K מצוינת.',verified:true}
+  ],
+  'ls-vision-solar-4g': [
+    {name:'אורית ב.',rating:5,date:'2026-05-09',title:'4G בלי WiFi - מנצח לבית כפרי',text:'בבית כפרי בלי WiFi חזק. ה-4G פותר את הבעיה.',verified:true},
+    {name:'יואב ת.',rating:5,date:'2026-04-17',title:'8MP 4K + סולארי = שילוב נדיר',text:'איכות 4K אמיתית, סוללה גדולה, סולארי טוב. שווה את ההשקעה.',verified:true},
+    {name:'גילי ע.',rating:4,date:'2026-03-30',title:'V380 Pro טוב מספיק',text:'האפליקציה V380 Pro לא הכי יפה אבל עובדת.',verified:true}
+  ],
+  'camhi-solar-dual-4g': [
+    {name:'תמר ש.',rating:5,date:'2026-05-06',title:'עדשה כפולה משנה את המשחק',text:'רואה כיוון רחב + זום בו זמנית. 4G עובד מצוין באזורי שדה.',verified:true},
+    {name:'אילן ב.',rating:5,date:'2026-04-15',title:'2 מסכים נוחים מאוד',text:'מסך כפול באפליקציה - רחב + זום. נוח מאוד למעקב.',verified:true}
+  ],
+  'tuya-5g-5mp': [
+    {name:'גל ר.',rating:5,date:'2026-05-04',title:'Tuya + Google Home = מושלם',text:'משולבת עם Google Home מצוין. שולטת בקול.',verified:true},
+    {name:'עמית ה.',rating:5,date:'2026-04-13',title:'WiFi 5G מהיר',text:'בניגוד למצלמות זולות, ה-5GHz נותן סטרימינג חלק.',verified:true}
+  ],
+  'gadinan-nvr-4k': [
+    {name:'יוסי כ.',rating:5,date:'2026-05-07',title:'NVR מלא לעסק',text:'בעל חנות, התקנתי לתעד הכל. 4K, 4 מצלמות, NVR - מערכת מקצועית.',verified:true},
+    {name:'נורית פ.',rating:5,date:'2026-04-20',title:'POE = פחות כבלים',text:'כבל אחד לכל מצלמה. נוח להתקנה.',verified:true}
+  ],
+  'annke-nvr-3k': [
+    {name:'אורון מ.',rating:5,date:'2026-05-25',title:'מיקרופון מובנה - יתרון גדול',text:'לעסק - חשוב לתעד שמע גם. עובדת מצוין.',verified:true},
+    {name:'דורי ל.',rating:5,date:'2026-04-11',title:'NVR איכותי',text:'הNVR יציב מאוד, לא קורס. תוכנה נוחה.',verified:true}
+  ],
+  'wifi-dual': [
+    {name:'יפעת כ.',rating:5,date:'2026-05-10',title:'עדשה כפולה - יתרון רציני',text:'רחב + זום במקביל. רואה כל זווית בחצר.',verified:true},
+    {name:'ערן ב.',rating:4,date:'2026-04-16',title:'ICSee עובדת מצוין',text:'אפליקציה ידידותית, חיבור מהיר.',verified:true}
+  ],
+  'outdoor-3mp-wifi': [
+    {name:'יואב ש.',rating:5,date:'2026-05-23',title:'הכי משתלמת לחצר',text:'אנדה מצוינת לחצר וכניסה. ₪129 - לא יקרה.',verified:true},
+    {name:'דקלה ר.',rating:5,date:'2026-04-08',title:'איכות 3MP טובה',text:'מספיק לרוב הצרכים. ראיית לילה ברורה.',verified:true}
+  ],
+  'annke-c1200': [
+    {name:'אבי ב.',rating:5,date:'2026-05-14',title:'12MP - איכות מקצועית',text:'הפרטים בתמונה מטורפים. למקצוענים בלבד.',verified:true},
+    {name:'שירה ל.',rating:5,date:'2026-04-24',title:'תאורה כפולה ב-LED מעולה',text:'בחושך - מתאורת LED לאיכות צבע מלאה.',verified:true}
+  ],
+  'lenovo-bulb-3mp': [
+    {name:'מיכל ב.',rating:5,date:'2026-05-08',title:'Lenovo - מותג אמין',text:'אהבתי שזה מותג מוכר. איכות 3MP טובה, מעקב AI עובד.',verified:true},
+    {name:'תומר ר.',rating:4,date:'2026-04-13',title:'Baby Monitor מצוין',text:'משתמשת לתינוק שלי, שמע דו-כיווני נוח לדבר איתו.',verified:true}
+  ],
+  'bundle-starter': [
+    {name:'נטע ב.',rating:5,date:'2026-05-21',title:'כיסוי בסיסי במחיר מנצח',text:'2 מצלמות ב-99₪ - חצי מחיר של מצלמה בודדת בשוק.',verified:true},
+    {name:'איתי כ.',rating:5,date:'2026-04-19',title:'מיני נסתרת + חיצונית = שילוב טוב',text:'אחת בחוץ ואחת בפנים. כיסוי כפול במחיר אחד.',verified:true}
+  ],
+  'bundle-home': [
+    {name:'יותם ר.',rating:5,date:'2026-05-17',title:'מגן הבית - כל מה שצריך',text:'AI + סולארית + 3MP = שלמה לבית.',verified:true}
+  ],
+  'bundle-bulbs': [
+    {name:'נועה מ.',rating:5,date:'2026-05-11',title:'כל הנורות + זום ב-499 בלבד',text:'הזול ביותר בקטגוריה. הותקנו תוך 10 דקות בסך הכל.',verified:true}
+  ],
+  'bundle-business': [
+    {name:'שמואל פ.',rating:5,date:'2026-05-14',title:'חבילה מושלמת לעסק',text:'הפלאגשיפ + Baseus + AI פנים - כיסוי 360° בעסק.',verified:true}
+  ],
+  'annke-2pcs-wifi': [
+    {name:'דניאל ב.',rating:5,date:'2026-05-09',title:'2 מצלמות ב-649 - מנצח',text:'H.265 = פחות מקום באחסון. שתי מצלמות זה חבילה טובה.',verified:true}
+  ],
+  'annke-5mp-bullet': [
+    {name:'שני א.',rating:5,date:'2026-04-29',title:'IP67 + תאורה חכמה',text:'מעולה לחצר. תאורה מובנית נוחה.',verified:true}
+  ],
+  'annke-nvr-kit': [
+    {name:'יואב ל.',rating:5,date:'2026-04-22',title:'NVR + 2 מצלמות בערכה אחת',text:'הכי נוח להתחיל. הכל מוכן בקופסה אחת.',verified:true}
+  ],
+  'ptz-15mp-8k': [
+    {name:'אביה ר.',rating:5,date:'2026-05-19',title:'3 עדשות = 3 תמונות במקביל',text:'רחב + ממוצע + זום 10x. רואה הכל בו זמנית.',verified:true}
+  ],
+  'smart-360-4k': [
+    {name:'תמיר ב.',rating:5,date:'2026-05-03',title:'מצלמה לחוץ ולפנים',text:'גמישה - אחת לחדר ולחצר. AI מעולה.',verified:true}
+  ],
+  'sonoff-pt2': [
+    {name:'יערה כ.',rating:5,date:'2026-04-27',title:'Sonoff - מותג חזק בסמארט הום',text:'מתחבר בקלות לכל מערכת Smart Home. 360°.',verified:true}
+  ],
+  '4k-indoor-mini': [
+    {name:'אסף ה.',rating:5,date:'2026-05-02',title:'4K במחיר זול',text:'איכות 4K במחיר של מצלמת 1080P. כדאי.',verified:true},
+    {name:'מאיה ר.',rating:4,date:'2026-04-11',title:'מיני אבל איכותית',text:'קטנה אבל איכות תמונה מצוינת.',verified:true}
+  ],
+  '8mp-ptz-24g': [
+    {name:'אורי מ.',rating:5,date:'2026-04-30',title:'Baby Monitor מצוין',text:'משתמש לבייבי. שמע ברור, ראיית לילה טובה.',verified:true}
+  ],
+  'jooan-solar-4k': [
+    {name:'נופר א.',rating:5,date:'2026-04-25',title:'JOOAN - מותג מהימן',text:'4K סולארי עם PIR. עובדת מצוין.',verified:true}
+  ],
+  'battery-2k-spotlight': [
+    {name:'אופיר ב.',rating:5,date:'2026-04-18',title:'זרקור + מצלמה - מרתיע גנבים',text:'הזרקור מובנה מצוין להרתעה.',verified:true}
+  ],
+  '4g-bulb-e27-3mp': [
+    {name:'אילן ב.',rating:5,date:'2026-04-08',title:'4G + נורה = נדיר',text:'במקום שאין WiFi - 4G עושה את העבודה.',verified:true}
+  ],
+  'carecam-5mp-355': [
+    {name:'שירלי כ.',rating:5,date:'2026-04-05',title:'5MP במחיר זול',text:'איכות גבוהה במחיר נוח.',verified:true}
+  ],
+  'a7-360-1080p': [
+    {name:'דוד ל.',rating:5,date:'2026-04-02',title:'A7 - Baby Monitor מצוין',text:'שמע דו-כיווני נוח, 360°.',verified:true}
+  ],
+  'indoor-8mp-4k-5x': [
+    {name:'נחום ר.',rating:5,date:'2026-03-29',title:'זום אופטי 5x נדיר',text:'זום אופטי איכותי, לא דיגיטלי.',verified:true}
+  ],
+  'ptz-8mp-4x': [
+    {name:'מורן ש.',rating:5,date:'2026-03-26',title:'פנים וחוץ',text:'גמישה - מתאימה לכל מצב.',verified:true}
+  ],
+  'three-screen-4k-ptz': [
+    {name:'עומר ה.',rating:5,date:'2026-03-23',title:'3 מסכים = רציני',text:'תצוגה תלת-מסכית למעקב מרבי.',verified:true}
+  ]
+};
+
+// ===== עזרים למערכת הביקורות =====
+function getProductReviews(productId) {
+  return PRODUCT_REVIEWS[productId] || [];
+}
+
+function getReviewSummary(productId) {
+  var reviews = getProductReviews(productId);
+  if (!reviews.length) return null;
+  var sum = reviews.reduce(function(a,r){ return a + r.rating; }, 0);
+  return {
+    count: reviews.length,
+    avg: Math.round((sum / reviews.length) * 10) / 10
+  };
+}
+
+function renderStars(rating, size) {
+  size = size || 14;
+  var html = '<span class="rev-stars" style="font-size:'+size+'px" aria-label="'+rating+' מתוך 5">';
+  for (var i = 1; i <= 5; i++) {
+    var filled = i <= Math.floor(rating);
+    var half = !filled && (i - 0.5) <= rating;
+    html += '<span class="rev-star'+(filled?' on':half?' half':'')+'">★</span>';
+  }
+  html += '</span>';
+  return html;
+}
+
+function renderReviewSummaryInline(productId) {
+  var sum = getReviewSummary(productId);
+  if (!sum) return '';
+  return '<div class="rev-inline">' + renderStars(sum.avg, 13) +
+    '<span class="rev-inline-num">'+sum.avg.toFixed(1)+'</span>' +
+    '<span class="rev-inline-count">('+sum.count+')</span></div>';
+}
+
+function renderReviewsSection(productId) {
+  var reviews = getProductReviews(productId);
+  var sum = getReviewSummary(productId);
+  if (!reviews.length) return '';
+
+  // ספירת כוכבים לכל דירוג
+  var dist = [0,0,0,0,0];
+  reviews.forEach(function(r){ dist[r.rating-1]++; });
+
+  var distHtml = '';
+  for (var s = 5; s >= 1; s--) {
+    var pct = Math.round((dist[s-1] / reviews.length) * 100);
+    distHtml +=
+      '<div class="rev-row">' +
+      '<span class="rev-row-label">'+s+' ★</span>' +
+      '<div class="rev-row-bar"><div class="rev-row-fill" style="width:'+pct+'%"></div></div>' +
+      '<span class="rev-row-count">'+dist[s-1]+'</span>' +
+      '</div>';
+  }
+
+  var reviewsHtml = reviews.map(function(r){
+    return '<article class="rev-item">' +
+      '<header class="rev-item-head">' +
+        '<div>' +
+          '<div class="rev-item-name">' + r.name + (r.verified ? ' <span class="rev-verified" title="קנייה מאומתת">✓ קנייה מאומתת</span>' : '') + '</div>' +
+          renderStars(r.rating, 13) +
+        '</div>' +
+        '<time class="rev-item-date">' + formatDateHe(r.date) + '</time>' +
+      '</header>' +
+      '<h4 class="rev-item-title">' + r.title + '</h4>' +
+      '<p class="rev-item-text">' + r.text + '</p>' +
+      '</article>';
+  }).join('');
+
+  return '<section class="pdp-reviews" id="reviews">' +
+    '<header class="pdp-reviews-head">' +
+      '<h2>⭐ ביקורות לקוחות</h2>' +
+      '<div class="pdp-reviews-summary">' +
+        '<div class="rev-big">' +
+          '<div class="rev-big-num">' + sum.avg.toFixed(1) + '</div>' +
+          renderStars(sum.avg, 22) +
+          '<div class="rev-big-count">' + sum.count + ' ביקורות</div>' +
+        '</div>' +
+        '<div class="rev-dist">' + distHtml + '</div>' +
+      '</div>' +
+    '</header>' +
+    '<div class="pdp-reviews-list">' + reviewsHtml + '</div>' +
+    '</section>';
+}
+
+function formatDateHe(iso) {
+  var months = ['ינואר','פברואר','מרץ','אפריל','מאי','יוני','יולי','אוגוסט','ספטמבר','אוקטובר','נובמבר','דצמבר'];
+  var d = new Date(iso);
+  return d.getDate() + ' ב' + months[d.getMonth()] + ' ' + d.getFullYear();
+}
+
 var PRODUCTS = [
   { id:'baseus-s1', variantId:50367694798988, name:'מצלמת אבטחה סולארית Baseus S1 Lite | 2K | IP67 ★ הכי פופולרית', price:579, badge:'הכי פופולרי', cat:'סולאריות',
     img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sb99a1e51ba0546c293772a41243fa232M.webp?v=1780222614',

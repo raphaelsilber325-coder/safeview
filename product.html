@@ -180,7 +180,8 @@
           '<div><span class="pdp-trust-icon">'+ICON.lock+'</span>תשלום מאובטח</div>' +
         '</div>' +
       '</div>' +
-      galleryHtml;
+      galleryHtml +
+      renderReviewsSection(p.id);
 
     // related — אותה קטגוריה, עד 3 (מהמוצרים שנטענו מ-Shopify)
     fetchShopifyProducts().then(function(all){
@@ -194,6 +195,7 @@
             (x.badge ? '<div class="prod-badge">'+x.badge+'</div>' : '') +
           '</div>' +
           '<div class="prod-body"><a class="prod-name" href="product.html?id='+x.id+'">'+x.name+'</a>' +
+            renderReviewSummaryInline(x.id) +
             '<div class="prod-footer"><span class="prod-price">'+fmt(x.price)+'</span><span class="prod-stock">במלאי</span></div>' +
             '<div class="prod-actions"><button class="prod-add" onclick="addToCart(\''+x.id+'\')">הוסף לעגלה</button>' +
             '<a class="prod-order" href="'+waLink(m)+'" target="_blank" rel="noopener" aria-label="וואטסאפ">'+ICON.wa+'</a></div>' +
