@@ -1636,6 +1636,116 @@ function startCountdown(elId){
   tick(); setInterval(tick, 1000);
 }
 
+// ===== Countdown Timer לבאנר עליון =====
+function initCountdownBanner() {
+  if (document.getElementById('countdownBanner')) return;
+  // ספירה לאחור עד סוף החודש הקרוב
+  var now = new Date();
+  var end = new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59);
+
+  var hero = document.querySelector('.hero, .page-head');
+  if (!hero) return;
+
+  var banner = document.createElement('div');
+  banner.id = 'countdownBanner';
+  banner.className = 'countdown-bar';
+  banner.innerHTML =
+    '<span class="countdown-label">🔥 מבצע סוף החודש — עד 15% הנחה עם קוד SAFE15</span>' +
+    '<div class="countdown-timer">' +
+      '<div class="countdown-unit"><span class="countdown-num" id="cd-d">--</span><span class="countdown-cap">ימים</span></div>' +
+      '<div class="countdown-unit"><span class="countdown-num" id="cd-h">--</span><span class="countdown-cap">שעות</span></div>' +
+      '<div class="countdown-unit"><span class="countdown-num" id="cd-m">--</span><span class="countdown-cap">דקות</span></div>' +
+      '<div class="countdown-unit"><span class="countdown-num" id="cd-s">--</span><span class="countdown-cap">שניות</span></div>' +
+    '</div>';
+  hero.parentNode.insertBefore(banner, hero.nextSibling);
+
+  function tick() {
+    var diff = end - new Date();
+    if (diff <= 0) { banner.style.display = 'none'; return; }
+    var d = Math.floor(diff / 86400000);
+    var h = Math.floor((diff % 86400000) / 3600000);
+    var m = Math.floor((diff % 3600000) / 60000);
+    var s = Math.floor((diff % 60000) / 1000);
+    var el;
+    if ((el = document.getElementById('cd-d'))) el.textContent = String(d).padStart(2, '0');
+    if ((el = document.getElementById('cd-h'))) el.textContent = String(h).padStart(2, '0');
+    if ((el = document.getElementById('cd-m'))) el.textContent = String(m).padStart(2, '0');
+    if ((el = document.getElementById('cd-s'))) el.textContent = String(s).padStart(2, '0');
+  }
+  tick();
+  setInterval(tick, 1000);
+}
+
+// ===== Exit Intent Popup =====
+function initExitPopup() {
+  if (sessionStorage.getItem('exitPopupShown')) return;
+  if (location.pathname.indexOf('cart') !== -1) return;
+
+  var shown = false;
+  var popup = document.createElement('div');
+  popup.className = 'exit-popup-bg';
+  popup.innerHTML =
+    '<div class="exit-popup" role="dialog" aria-labelledby="exitTitle">' +
+      '<button class="exit-popup-close" aria-label="סגור" onclick="closeExitPopup()">×</button>' +
+      '<div class="exit-popup-emoji">🎁</div>' +
+      '<h2 id="exitTitle">חכו! מתנה לפני שתעזבו</h2>' +
+      '<p>10% הנחה על הקנייה הראשונה — תקף לעוד 24 שעות</p>' +
+      '<div class="exit-coupon" onclick="copyExitCoupon(this)">WELCOME10</div>' +
+      '<div class="exit-popup-sub">הקליקו על הקופון להעתקה</div>' +
+      '<a class="exit-popup-action" href="index.html#products" onclick="closeExitPopup()">קח אותי למוצרים ←</a>' +
+    '</div>';
+  document.body.appendChild(popup);
+
+  function trigger() {
+    if (shown) return;
+    shown = true;
+    popup.classList.add('show');
+    sessionStorage.setItem('exitPopupShown', '1');
+  }
+
+  // Desktop: mouseleave at top
+  document.addEventListener('mouseleave', function(e) {
+    if (e.clientY < 10 && !shown) trigger();
+  });
+
+  // Mobile: scroll back up fast
+  var lastY = 0;
+  document.addEventListener('scroll', function() {
+    var y = window.scrollY;
+    if (lastY - y > 80 && y < 300 && !shown) trigger();
+    lastY = y;
+  });
+
+  // Time-based fallback (45 sec on page)
+  setTimeout(function() { if (!shown) trigger(); }, 45000);
+}
+
+window.closeExitPopup = function() {
+  var p = document.querySelector('.exit-popup-bg');
+  if (p) p.classList.remove('show');
+};
+
+window.copyExitCoupon = function(el) {
+  navigator.clipboard.writeText('WELCOME10');
+  el.style.background = 'linear-gradient(135deg, #00b478, #00d4aa)';
+  var orig = el.textContent;
+  el.textContent = '✓ הועתק!';
+  setTimeout(function() { el.textContent = orig; el.style.background = ''; }, 1500);
+};
+
+// ===== Low Stock Indicator =====
+function getLowStockBadge(productId) {
+  // אלגוריתם פסאודו-רנדומלי: 30% מהמוצרים מציגים "נשארו רק X"
+  var hash = 0;
+  for (var i = 0; i < productId.length; i++) hash = ((hash << 5) - hash) + productId.charCodeAt(i);
+  hash = Math.abs(hash);
+  if (hash % 10 < 3) {
+    var qty = (hash % 7) + 3; // 3-9
+    return '<div class="low-stock">נשארו רק ' + qty + ' במלאי!</div>';
+  }
+  return '';
+}
+
 document.addEventListener('DOMContentLoaded', function(){
   injectSeoMeta();
   injectOrganizationJsonLd();
@@ -1646,6 +1756,12 @@ document.addEventListener('DOMContentLoaded', function(){
   registerSW();
   showCookieBanner();
   initBackToTop();
+  // הצג ספירה לאחור רק בעמוד הבית
+  if (location.pathname === '/' || location.pathname.endsWith('/index.html') || location.pathname.endsWith('/safeview/')) {
+    initCountdownBanner();
+  }
+  // פופ-אפ יציאה בכל העמודים חוץ מ-checkout
+  initExitPopup();
   (function(){
     var shown = false;
     function tryShow(){

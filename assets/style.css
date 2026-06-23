@@ -841,3 +841,34 @@ html.a11y-motion *::after {
   .rev-item-date { font-size: 11px; }
 }
 
+
+/* ===== UX Features ===== */
+/* ספירה לאחור */
+.countdown-bar { display: flex; align-items: center; justify-content: center; gap: 16px; padding: 12px 20px; background: linear-gradient(90deg, rgba(255,80,0,.15), rgba(255,130,0,.1), rgba(255,80,0,.15)); border: 1px solid rgba(255,130,0,.3); border-radius: 10px; margin: 16px 0 24px; flex-wrap: wrap; }
+.countdown-label { font-size: 14px; color: var(--text); font-weight: 500; }
+.countdown-timer { display: flex; gap: 6px; font-family: 'Rajdhani', sans-serif; font-weight: 700; }
+.countdown-unit { display: flex; flex-direction: column; align-items: center; padding: 6px 10px; background: rgba(255,80,0,.2); border-radius: 6px; min-width: 44px; }
+.countdown-num { font-size: 18px; color: #ff7a00; line-height: 1; }
+.countdown-cap { font-size: 9px; color: var(--text2); text-transform: uppercase; letter-spacing: 1px; margin-top: 2px; }
+
+/* מלאי נמוך */
+.low-stock { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: #ff5a00; font-weight: 600; background: rgba(255,90,0,.1); padding: 4px 10px; border-radius: 12px; border: 1px solid rgba(255,90,0,.25); margin-top: 6px; }
+.low-stock::before { content: '🔥'; }
+
+/* Exit Popup */
+.exit-popup-bg { position: fixed; inset: 0; background: rgba(0,0,0,.7); backdrop-filter: blur(4px); display: none; align-items: center; justify-content: center; z-index: 99999; padding: 20px; }
+.exit-popup-bg.show { display: flex; animation: fadeIn 0.3s; }
+.exit-popup { background: linear-gradient(135deg, #0f1419, #1a2030); border: 2px solid var(--blue); border-radius: 16px; padding: 36px 28px; max-width: 480px; width: 100%; text-align: center; position: relative; animation: popupIn 0.4s; }
+.exit-popup-close { position: absolute; top: 12px; left: 12px; background: none; border: none; color: var(--text2); font-size: 24px; cursor: pointer; padding: 4px 10px; }
+.exit-popup-close:hover { color: var(--text); }
+.exit-popup-emoji { font-size: 48px; margin-bottom: 12px; }
+.exit-popup h2 { font-size: 26px; font-weight: 500; color: var(--text); margin-bottom: 10px; line-height: 1.3; }
+.exit-popup p { color: var(--text2); margin-bottom: 24px; line-height: 1.6; }
+.exit-coupon { display: inline-block; background: linear-gradient(135deg, var(--blue), #00d4ff); color: #fff; padding: 14px 32px; border-radius: 10px; font-family: 'Rajdhani', sans-serif; font-size: 22px; font-weight: 700; letter-spacing: 3px; margin-bottom: 20px; cursor: pointer; }
+.exit-coupon:hover { transform: scale(1.05); }
+.exit-popup-sub { font-size: 13px; color: var(--text3); }
+.exit-popup-action { display: inline-block; margin-top: 16px; padding: 12px 32px; background: var(--blue); color: #fff; border-radius: 10px; text-decoration: none; font-weight: 500; transition: all 0.2s; }
+.exit-popup-action:hover { background: #2284e0; }
+@keyframes fadeIn { from { opacity: 0 } to { opacity: 1 } }
+@keyframes popupIn { from { opacity: 0; transform: scale(0.9) translateY(20px) } to { opacity: 1; transform: scale(1) translateY(0) } }
+
