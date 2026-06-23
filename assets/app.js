@@ -5,6 +5,35 @@
 var WA_NUMBER = '972586343786';
 var STORE_EMAIL = 'info@safeview.co.il';
 var FREE_SHIP_THRESHOLD = 200;
+// PAYPAL_EMAIL — מייל PayPal Business של החנות (יש לעדכן למייל אמיתי כשנפתח חשבון)
+var PAYPAL_EMAIL = 'info@safeview.co.il';
+var SITE_URL = 'https://raphaelsilber325-coder.github.io/safeview/';
+
+// PayPal Direct Checkout — מעבר ישיר ל-PayPal עם המוצר והמחיר
+function paypalCheckoutLink(product) {
+  var params = [
+    'cmd=_xclick',
+    'business=' + encodeURIComponent(PAYPAL_EMAIL),
+    'item_name=' + encodeURIComponent(product.name.substring(0, 127)),
+    'item_number=' + encodeURIComponent(product.id),
+    'amount=' + encodeURIComponent(product.price),
+    'currency_code=ILS',
+    'no_shipping=2',
+    'return=' + encodeURIComponent(SITE_URL + 'thank-you.html'),
+    'cancel_return=' + encodeURIComponent(SITE_URL + 'product.html?id=' + product.id),
+    'image_url=' + encodeURIComponent(product.img),
+    'lc=IL'
+  ].join('&');
+  return 'https://www.paypal.com/cgi-bin/webscr?' + params;
+}
+
+// הודעת "שלח לחבר" — חברך מקבל קופון 50₪ הנחה
+function buildFriendShareMsg(product) {
+  return 'היי, מצאתי מצלמה מגניבה שחשבתי שתתאים לך – ' + product.name + ' (' + fmt(product.price) + ').\n\n' +
+    'היש גם קופון מיוחד: השתמש בקוד FRIEND50 ותקבל 50₪ הנחה בקנייה הראשונה!\n\n' +
+    'להזמנה: ' + SITE_URL + 'product.html?id=' + product.id + '\n\n' +
+    'ממליץ בחם! 🛡️';
+}
 
 function waLink(text) {
   return 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(text);
@@ -717,10 +746,10 @@ var PRODUCTS = [
     desc:'מצלמת ANNKE 5MP עם תאורה כפולה חכמה — LED לבן לראיית לילה צבעונית + אינפרא-אדום לגיבוי, מופעלת אוטומטית רק כשיש תנועה. 5MP חדה, IP67 עמידות מקסימלית, עדשה 2.8mm שדה ראייה רחב. מותג ANNKE המוכר והאמין. ₪369 למצלמה אחת | ₪670 לשתיים | ₪960 לשלוש.',
     specs:[['רזולוציה','5MP'],['תאורה','כפולה חכמה'],['עמידות','IP67'],['עדשה','2.8mm'],['מותג','ANNKE'],['שימוש','פנים + חוץ']] },
   { id:'annke-nvr-kit', variantId:50740852129932, name:'ערכת ANNKE | NVR 4 ערוצים + מצלמות WiFi 3MP/5MP | IP66', price:679, badge:'מערכת', cat:'מערכות',
-    img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S1e83550a8b8744e4beccce5ab55b9034E.webp?v=1781270988',
+    img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S19bf1abb0b234059bce33f5ecec154f8x.webp?v=1781270988',
     images:[
-      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S1e83550a8b8744e4beccce5ab55b9034E.webp?v=1781270988',
       'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S19bf1abb0b234059bce33f5ecec154f8x.webp?v=1781270988',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S1e83550a8b8744e4beccce5ab55b9034E.webp?v=1781270988',
       'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S2bd09b9f94964a53bc973016c2bfe329t.webp?v=1781270988',
       'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S0dc6c5cb3b7944b8bff4100a1665623fi.webp?v=1781270988',
       'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sf529954793c64756999662f98323c85aK.webp?v=1781270988',
@@ -816,10 +845,11 @@ var PRODUCTS = [
     specs:[['רזולוציה','4K'],['כיסוי','360° פנורמי'],['שימוש','פנים + חוץ'],['זיהוי','AI — בני אדם'],['ראיית לילה','צבעונית'],['שמע','דו-כיווני']] },
 
   { id:'sonoff-pt2', variantId:50747409498252, name:'SONOFF CAM PT2 | 360° פנורמי | Smart Home | WiFi', price:229, badge:'חדש', cat:'אינדור',
-    img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S27cefefa4dfd4869803eeb762130cdaay.webp',
+    img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S92b65891ddc94aa5abeb91b15a421104F.webp?v=1781635106',
     images:[
-      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S27cefefa4dfd4869803eeb762130cdaay.webp?v=1781635105',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S92b65891ddc94aa5abeb91b15a421104F.webp?v=1781635106',
       'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sf5325cc5f73a4d1e9c450ef9092de89ad.webp?v=1781635105',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S27cefefa4dfd4869803eeb762130cdaay.webp?v=1781635105',
       'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S92b65891ddc94aa5abeb91b15a421104F.webp?v=1781635106',
       'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S4b147346e1c348069397353e5c3ba07dI.webp?v=1781635105',
       'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sacbcb4b1480f4dc2a04e1a4ed93c476bF.webp?v=1781635105',
@@ -928,12 +958,9 @@ var PRODUCTS = [
     specs:[['רזולוציה','1080P'],['כיסוי','360° מלא'],['שימוש','Baby Monitor'],['שמע','דו-כיווני'],['ראיית לילה','IR'],['ניטור','מרחוק 24/7']] },
 
   { id:'indoor-8mp-4k-5x', variantId:50747411103884, name:'מצלמה פנימית 8MP 4K | זום אופטי 5x | WiFi | AI', price:214, badge:'חדש', cat:'אינדור',
-    img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S8e0dde5611bf4487b0d94256830fa937R.webp',
+    img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Se6912f53f9194f3d94d0e9aefd4b14a2b.webp?v=1781635110',
     images:[
-      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S8e0dde5611bf4487b0d94256830fa937R.webp?v=1781635110',
       'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Se6912f53f9194f3d94d0e9aefd4b14a2b.webp?v=1781635110',
-      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S548577e2f8b749aba9cd86b8807fc497h.webp?v=1781635110',
-      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sdd2f9dfa48a048329f608657b757a52b7.webp?v=1781635110',
       'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Sc78759283bbb4da2ad55e20cfc4a1afec.webp?v=1781635111',
       'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S02947e465b5f42e1bafcdb862dc174e8h.webp?v=1781635110'
     ],
@@ -941,10 +968,10 @@ var PRODUCTS = [
     specs:[['רזולוציה','8MP / 4K'],['זום','אופטי 5x'],['מעקב','AI אוטומטי'],['ראיית לילה','HD'],['שמע','דו-כיווני'],['אחסון','SD + ענן']] },
 
   { id:'ptz-8mp-4x', variantId:50747411464332, name:'מצלמה PTZ 8MP | זום 4x | WiFi | מעקב AI | פנים וחוץ', price:72, badge:'חדש', cat:'אאוטדור',
-    img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S15168ba2c26843e4b4b26ae3d6b7463dx.webp',
+    img:'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Af84dcd3ed10942cd9f49c479b5ea4430T.webp?v=1781635111',
     images:[
-      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S15168ba2c26843e4b4b26ae3d6b7463dx.webp?v=1781635111',
       'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Af84dcd3ed10942cd9f49c479b5ea4430T.webp?v=1781635111',
+      'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/S15168ba2c26843e4b4b26ae3d6b7463dx.webp?v=1781635111',
       'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Adec2fd2b801449cd9d7a6fc595c085d3M.webp?v=1781635111',
       'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/Abe3314aec2804212842360b72d133183M.webp?v=1781635112',
       'https://cdn.shopify.com/s/files/1/0774/8098/4716/files/A78b83bb4e93b494ea9382c4a8d572835Z.webp?v=1781635112',
@@ -1733,17 +1760,56 @@ window.copyExitCoupon = function(el) {
   setTimeout(function() { el.textContent = orig; el.style.background = ''; }, 1500);
 };
 
-// ===== Low Stock Indicator =====
+// ===== Low Stock Indicator — מגוון, לא חוזר =====
 function getLowStockBadge(productId) {
-  // אלגוריתם פסאודו-רנדומלי: 30% מהמוצרים מציגים "נשארו רק X"
   var hash = 0;
   for (var i = 0; i < productId.length; i++) hash = ((hash << 5) - hash) + productId.charCodeAt(i);
   hash = Math.abs(hash);
-  if (hash % 10 < 3) {
-    var qty = (hash % 7) + 3; // 3-9
-    return '<div class="low-stock">נשארו רק ' + qty + ' במלאי!</div>';
+  if (hash % 10 >= 4) return ''; // 40% מהמוצרים מציגים אינדיקטור
+
+  var variants = [
+    { emoji: '🔥', text: 'מבצע חם — מלאי אחרון' },
+    { emoji: '⚡', text: 'מלאי מוגבל מאוד' },
+    { emoji: '📦', text: 'נותרו ' + ((hash % 12) + 4) + ' יחידות' },
+    { emoji: '⏰', text: 'אזל כמעט — ' + ((hash % 8) + 3) + ' אחרונות' },
+    { emoji: '🚨', text: 'המלאי הולך ואוזל' },
+    { emoji: '💨', text: 'נמכר מהר — ' + ((hash % 15) + 5) + ' זמינות' },
+    { emoji: '🎯', text: 'הזמנה אחרונה היום לפני 24 שעות' },
+    { emoji: '⭐', text: 'הכי פופולרי השבוע' },
+    { emoji: '🔥', text: '' + ((hash % 11) + 4) + ' נותרו במלאי' },
+    { emoji: '⚡', text: 'מבצע מסתיים בקרוב' }
+  ];
+  var v = variants[hash % variants.length];
+  return '<div class="low-stock"><span style="margin-left:6px">'+v.emoji+'</span>'+v.text+'</div>';
+}
+
+// ===== Old Price (מחיר ישן עם קו) — לחלק מהמוצרים =====
+function getOldPrice(p) {
+  // 40% מהמוצרים מקבלים מחיר ישן (מבצע ויזואלי)
+  var hash = 0;
+  for (var i = 0; i < p.id.length; i++) hash = ((hash << 5) - hash) + p.id.charCodeAt(i);
+  hash = Math.abs(hash);
+  if (hash % 10 >= 4) return null;
+  // הנחה של 15-30%
+  var pct = 15 + (hash % 16); // 15-30
+  var old = Math.round(p.price / (1 - pct/100));
+  // עיגול ל-9 (₪249, ₪399 וכו')
+  old = Math.round(old / 10) * 10 - 1;
+  if (old <= p.price) old = p.price + 50;
+  return { price: old, pct: pct };
+}
+
+// ===== מה באריזה — תצוגה קומפקטית =====
+function getCompactInbox(productId) {
+  var inbox = PRODUCT_INBOX[productId];
+  if (!inbox || !inbox.length) {
+    // ברירת מחדל למוצרים ללא רשומה
+    inbox = ['מצלמה × 1', 'ערכת התקנה', 'מדריך למשתמש'];
   }
-  return '';
+  // הצג 3 פריטים ראשונים + "ועוד" אם יש יותר
+  var items = inbox.slice(0, 3);
+  var more = inbox.length > 3 ? ' <span style="color:var(--text3)">+'+(inbox.length-3)+'</span>' : '';
+  return '<div class="prod-inbox">📦 כולל: ' + items.join(' · ') + more + '</div>';
 }
 
 document.addEventListener('DOMContentLoaded', function(){

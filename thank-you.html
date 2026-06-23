@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>תודה על ההזמנה! | SafeView</title>
+<meta name="description" content="ההזמנה התקבלה בהצלחה. תודה שבחרתם ב-SafeView!">
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Noto+Sans+Hebrew:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="preload" href="assets/app.js" as="script">
+<style>
+  .thank-wrap { max-width: 700px; margin: 0 auto; padding: 64px 20px; text-align: center; }
+  .thank-emoji { font-size: 80px; margin-bottom: 16px; animation: bounce 0.8s ease-out; }
+  @keyframes bounce { 0%{transform:scale(0);opacity:0} 60%{transform:scale(1.2)} 100%{transform:scale(1);opacity:1} }
+  .thank-title { font-size: 36px; font-weight: 400; color: var(--text); margin-bottom: 12px; }
+  .thank-sub { font-size: 17px; color: var(--text2); line-height: 1.7; margin-bottom: 24px; }
+  .thank-order { background: var(--bg3); border: 1px solid var(--border2); border-radius: 12px; padding: 20px 24px; margin: 24px 0; display: inline-block; font-family: 'Rajdhani', sans-serif; }
+  .thank-order-num { font-size: 28px; font-weight: 700; color: var(--blue); letter-spacing: 2px; }
+  .thank-steps { text-align: right; margin: 32px auto; max-width: 500px; background: rgba(58,159,255,.05); border: 1px solid rgba(58,159,255,.15); border-radius: 12px; padding: 24px; }
+  .thank-steps h3 { font-size: 17px; color: var(--text); margin: 0 0 14px; }
+  .thank-steps ul { margin: 0; padding-right: 24px; }
+  .thank-steps li { color: var(--text2); padding: 6px 0; line-height: 1.6; }
+  .thank-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 32px; }
+</style>
+</head>
+<body>
+<div id="nav-mount"></div>
+
+<div class="thank-wrap">
+  <div class="thank-emoji">🎉</div>
+  <h1 class="thank-title">תודה על ההזמנה!</h1>
+  <p class="thank-sub">ההזמנה התקבלה בהצלחה ואנחנו כבר מתחילים להכין אותה למשלוח.</p>
+
+  <div class="thank-order">
+    <div style="font-size:12px;color:var(--text3);margin-bottom:4px">מספר הזמנה</div>
+    <div class="thank-order-num" id="orderNum">--------</div>
+  </div>
+
+  <div class="thank-steps">
+    <h3>📋 מה הלאה?</h3>
+    <ul>
+      <li><strong>תוך 30 דקות</strong> – תקבלו מייל אישור עם פרטי ההזמנה</li>
+      <li><strong>תוך 24 שעות</strong> – יישלח מספר מעקב למשלוח</li>
+      <li><strong>3-7 ימי עסקים</strong> – החבילה מגיעה לבית</li>
+      <li><strong>14 ימים</strong> – תקופת החזרה ללא שאלות</li>
+      <li><strong>שנה מלאה</strong> – אחריות יצרן + תמיכה בעברית</li>
+    </ul>
+  </div>
+
+  <p style="color:var(--text2);font-size:14px">שאלות? פנו אלינו ב-WhatsApp ונענה תוך 10 דקות</p>
+
+  <div class="thank-actions">
+    <a class="btn-wa" id="thankWa" href="#">דברו איתנו בוואטסאפ</a>
+    <a class="btn-primary" href="index.html#products" style="text-decoration:none;display:inline-flex;align-items:center;padding:14px 28px">המשך לקנות</a>
+  </div>
+</div>
+
+<div id="footer-mount"></div>
+
+<script src="assets/app.js" defer></script>
+<script>
+  // יצירת מספר הזמנה אקראי
+  var orderNum = 'SV' + Date.now().toString().slice(-7);
+  document.getElementById('orderNum').textContent = orderNum;
+
+  // הודעת WhatsApp
+  setTimeout(function() {
+    var waEl = document.getElementById('thankWa');
+    if (waEl && typeof waLink === 'function') {
+      waEl.href = waLink('שלום! ביצעתי הזמנה במספר ' + orderNum + ', רציתי לוודא שהתקבלה.');
+    }
+  }, 300);
+
+  // ניקוי עגלה אחרי קנייה מוצלחת
+  try { localStorage.removeItem('safeviewCart'); } catch(e) {}
+</script>
+</body>
+</html>
