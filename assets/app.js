@@ -1300,6 +1300,7 @@ function injectChrome(active){
   var navLinks = [
     ['index.html#products','מוצרים'],
     ['index.html#categories','קטגוריות'],
+    ['buying-guide.html','איזו מצלמה לי?'],
     ['compare.html','השוואה'],
     ['blog.html','מדריכים'],
     ['about.html','אודות'],

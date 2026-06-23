@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>איך לבחור מצלמת אבטחה? מדריך אינטראקטיבי | SafeView</title>
+<meta name="description" content="לא יודעים איזו מצלמת אבטחה לקנות? ענו על 4 שאלות פשוטות וקבלו המלצה אישית. סולאריות, פנימיות, חיצוניות - מה מתאים לכם.">
+<meta name="keywords" content="איך לבחור מצלמת אבטחה, מדריך קנייה, מצלמת אבטחה לבית, מצלמה לעסק, מצלמה לחצר">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Noto+Sans+Hebrew:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="preload" href="assets/app.js" as="script">
+<style>
+  .guide-wrap { max-width: 800px; margin: 0 auto; padding: 32px 20px; }
+  .guide-progress { display: flex; gap: 6px; margin-bottom: 32px; }
+  .guide-progress-step { flex: 1; height: 4px; background: var(--bg3); border-radius: 2px; transition: background 0.3s; }
+  .guide-progress-step.active { background: var(--blue); }
+  .guide-question { background: var(--bg3); border: 1px solid var(--border2); border-radius: 14px; padding: 32px 28px; margin-bottom: 16px; }
+  .guide-q-num { font-family: 'Rajdhani', sans-serif; font-size: 14px; color: var(--blue); letter-spacing: 2px; margin-bottom: 6px; }
+  .guide-q-title { font-size: 22px; font-weight: 500; color: var(--text); margin-bottom: 6px; line-height: 1.4; }
+  .guide-q-sub { font-size: 14px; color: var(--text2); margin-bottom: 20px; }
+  .guide-options { display: grid; gap: 10px; }
+  .guide-option { width: 100%; padding: 16px 18px; background: var(--bg2); border: 2px solid var(--border2); border-radius: 10px; cursor: pointer; text-align: right; transition: all 0.2s; font-family: inherit; color: var(--text); font-size: 15px; }
+  .guide-option:hover { border-color: var(--blue); background: rgba(58,159,255,.05); }
+  .guide-option-selected { border-color: var(--blue); background: rgba(58,159,255,.1); }
+  .guide-option-emoji { font-size: 22px; margin-left: 10px; }
+  .guide-option-title { font-weight: 500; }
+  .guide-option-sub { font-size: 12px; color: var(--text2); margin-top: 3px; }
+  .guide-nav { display: flex; justify-content: space-between; margin-top: 24px; gap: 12px; }
+  .guide-btn { padding: 14px 28px; border-radius: 10px; font-family: inherit; font-size: 15px; font-weight: 500; cursor: pointer; transition: all 0.2s; border: none; }
+  .guide-btn-primary { background: var(--blue); color: #fff; }
+  .guide-btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
+  .guide-btn-primary:not(:disabled):hover { background: #2284e0; }
+  .guide-btn-secondary { background: var(--bg3); color: var(--text); border: 1px solid var(--border2); }
+  .guide-result { display: none; }
+  .guide-result.show { display: block; }
+  .guide-result-head { text-align: center; padding: 32px 20px; background: linear-gradient(135deg, rgba(58,159,255,.12), rgba(0,212,255,.08)); border-radius: 14px; margin-bottom: 24px; border: 1px solid var(--border); }
+  .guide-result-title { font-size: 28px; font-weight: 400; color: var(--text); margin-bottom: 8px; }
+  .guide-result-sub { font-size: 15px; color: var(--text2); }
+  .guide-recommendations { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .guide-reset { display: block; margin: 24px auto 0; }
+  @media (max-width: 600px) {
+    .guide-question { padding: 24px 20px; }
+    .guide-q-title { font-size: 18px; }
+  }
+</style>
+</head>
+<body>
+<div id="nav-mount"></div>
+
+<div class="page-head"><h1>מדריך קנייה <strong>אינטראקטיבי</strong></h1><p>4 שאלות פשוטות, ואני אמליץ לך על המצלמה האידיאלית</p></div>
+
+<div class="guide-wrap">
+  <div class="guide-progress" id="progress">
+    <div class="guide-progress-step active"></div>
+    <div class="guide-progress-step"></div>
+    <div class="guide-progress-step"></div>
+    <div class="guide-progress-step"></div>
+  </div>
+
+  <div id="quiz"></div>
+
+  <div class="guide-nav">
+    <button class="guide-btn guide-btn-secondary" id="backBtn" style="visibility:hidden">← חזרה</button>
+    <button class="guide-btn guide-btn-primary" id="nextBtn" disabled>הבא ←</button>
+  </div>
+
+  <div class="guide-result" id="result">
+    <div class="guide-result-head">
+      <div class="guide-result-title">🎯 המצלמה האידיאלית בשבילך</div>
+      <div class="guide-result-sub" id="resultSub">המלצנו לך על הדגמים האלה לפי התשובות שלך</div>
+    </div>
+    <div class="guide-recommendations" id="recommendations"></div>
+    <button class="guide-btn guide-btn-secondary guide-reset" onclick="resetQuiz()">↻ התחל מחדש</button>
+  </div>
+</div>
+
+<div id="footer-mount"></div>
+
+<script src="assets/app.js" defer></script>
+<script>
+var QUESTIONS = [
+  { id:'where', num:'שאלה 1 מתוך 4', title:'איפה תתקין את המצלמה?', sub:'בחר את המיקום המרכזי',
+    options:[
+      { val:'outdoor', emoji:'🏡', title:'בחוץ - חצר, כניסה, מרפסת', sub:'עמידות למזג אוויר חיונית' },
+      { val:'indoor', emoji:'🛋️', title:'בפנים - סלון, חדר, משרד', sub:'איכות תמונה ושמע חשובים' },
+      { val:'both', emoji:'🏠', title:'גם וגם - בית שלם', sub:'כיסוי מקיף' }
+    ]
+  },
+  { id:'power', num:'שאלה 2 מתוך 4', title:'איך החיבור לחשמל ול-WiFi?', sub:'זה הכי משפיע על איזו טכנולוגיה תתאים',
+    options:[
+      { val:'both', emoji:'⚡', title:'יש לי גם חשמל וגם WiFi חזק', sub:'הכי גמיש - כל אופציה תתאים' },
+      { val:'wifi-only', emoji:'📶', title:'יש WiFi אבל אין שקע חשמל קרוב', sub:'מצלמת סוללה / סולארית' },
+      { val:'none', emoji:'🌳', title:'אין WiFi חזק / מיקום מרוחק', sub:'צריך 4G + סולארי' },
+      { val:'easy', emoji:'💡', title:'יש לי שקע נורה E27 פנוי', sub:'מצלמת נורה - הכי קל להתקנה' }
+    ]
+  },
+  { id:'budget', num:'שאלה 3 מתוך 4', title:'מה התקציב שלך?', sub:'בלי בושה - לכל תקציב יש פתרון מצוין',
+    options:[
+      { val:'low', emoji:'💰', title:'עד ₪200', sub:'התחלתי, חכם וחסכוני' },
+      { val:'med', emoji:'💰💰', title:'₪200 - ₪500', sub:'איכות מצוינת ופיצ\'רים מתקדמים' },
+      { val:'high', emoji:'💰💰💰', title:'₪500+', sub:'פלאגשיפ, מקצועי, ללא פשרות' },
+      { val:'bundle', emoji:'📦', title:'חבילה שלמה לבית/עסק', sub:'מספר מצלמות עם הנחה' }
+    ]
+  },
+  { id:'need', num:'שאלה 4 מתוך 4', title:'מה הצורך העיקרי שלך?', sub:'זה יעזור לי להמליץ על הפיצ\'ר הכי חשוב',
+    options:[
+      { val:'security', emoji:'🛡️', title:'אבטחה - הרתעת גנבים', sub:'IP66/67, ראיית לילה, AI' },
+      { val:'family', emoji:'👶', title:'מעקב משפחתי - ילדים, הורים, חיות', sub:'שיחה דו-כיוונית, AI חכם' },
+      { val:'business', emoji:'🏢', title:'עסק - חנות, משרד, מחסן', sub:'NVR, 24/7, מקצועי' },
+      { val:'simple', emoji:'⚡', title:'פשטות - שיהיה קל ומהיר', sub:'התקנה ב-3 דקות, פעולה אוטומטית' }
+    ]
+  }
+];
+
+var answers = {};
+var currentStep = 0;
+
+function renderQuestion() {
+  var q = QUESTIONS[currentStep];
+  var quiz = document.getElementById('quiz');
+  quiz.innerHTML =
+    '<div class="guide-question">' +
+      '<div class="guide-q-num">' + q.num + '</div>' +
+      '<h2 class="guide-q-title">' + q.title + '</h2>' +
+      '<p class="guide-q-sub">' + q.sub + '</p>' +
+      '<div class="guide-options">' +
+        q.options.map(function(opt){
+          var sel = answers[q.id] === opt.val ? ' guide-option-selected' : '';
+          return '<button type="button" class="guide-option'+sel+'" data-val="'+opt.val+'" onclick="selectOption(\''+q.id+'\',\''+opt.val+'\')">' +
+            '<span class="guide-option-emoji">'+opt.emoji+'</span>' +
+            '<span><span class="guide-option-title">'+opt.title+'</span>' +
+            '<div class="guide-option-sub">'+opt.sub+'</div></span>' +
+          '</button>';
+        }).join('') +
+      '</div>' +
+    '</div>';
+
+  // עדכן פס התקדמות
+  document.querySelectorAll('.guide-progress-step').forEach(function(s, i){
+    s.classList.toggle('active', i <= currentStep);
+  });
+
+  // עדכן כפתורים
+  document.getElementById('backBtn').style.visibility = currentStep > 0 ? 'visible' : 'hidden';
+  document.getElementById('nextBtn').disabled = !answers[q.id];
+  document.getElementById('nextBtn').textContent = currentStep < QUESTIONS.length - 1 ? 'הבא ←' : 'קבל המלצה 🎯';
+}
+
+window.selectOption = function(qId, val) {
+  answers[qId] = val;
+  renderQuestion();
+};
+
+document.getElementById('nextBtn').onclick = function() {
+  if (currentStep < QUESTIONS.length - 1) {
+    currentStep++;
+    renderQuestion();
+  } else {
+    showResult();
+  }
+};
+
+document.getElementById('backBtn').onclick = function() {
+  if (currentStep > 0) {
+    currentStep--;
+    renderQuestion();
+  }
+};
+
+function showResult() {
+  // הסתר שאלון
+  document.getElementById('quiz').style.display = 'none';
+  document.querySelector('.guide-nav').style.display = 'none';
+  document.getElementById('progress').style.display = 'none';
+
+  // לוגיקת המלצה
+  var recs = recommendProducts(answers);
+
+  var html = recs.map(function(id){
+    var p = PRODUCTS.find(function(x){ return x.id === id; });
+    if (!p) return '';
+    var msg = 'שלום SafeView! אני מעוניין/ת במצלמה: ' + p.name + ' (' + fmt(p.price) + ').';
+    return '<div class="prod-card">' +
+      '<div class="prod-img"><a href="product.html?id='+p.id+'"><img src="'+p.img+'" alt="'+p.name+'" loading="lazy"></a>' +
+        (p.badge ? '<div class="prod-badge">'+p.badge+'</div>' : '') +
+      '</div>' +
+      '<div class="prod-body"><a class="prod-name" href="product.html?id='+p.id+'">'+p.name+'</a>' +
+        renderReviewSummaryInline(p.id) +
+        '<div class="prod-footer"><span class="prod-price">'+fmt(p.price)+'</span><span class="prod-stock">במלאי</span></div>' +
+        '<div class="prod-actions"><a class="prod-add" href="product.html?id='+p.id+'" style="text-align:center;text-decoration:none;display:block">לפרטים נוספים</a>' +
+        '<a class="prod-order" href="'+waLink(msg)+'" target="_blank" rel="noopener" aria-label="וואטסאפ">'+ICON.wa+'</a></div>' +
+      '</div></div>';
+  }).join('');
+
+  document.getElementById('recommendations').innerHTML = html;
+  document.getElementById('result').classList.add('show');
+  document.getElementById('result').scrollIntoView({behavior:'smooth'});
+}
+
+function recommendProducts(a) {
+  var recs = [];
+
+  // לוגיקה לפי שילובי תשובות
+  if (a.power === 'easy') {
+    if (a.budget === 'low') recs = ['ease-life-bulb', 'lenovo-bulb-3mp', '4g-bulb-e27-3mp'];
+    else recs = ['bulb-8mp-e27', 'ease-life-bulb', 'lenovo-bulb-3mp'];
+  } else if (a.power === 'none') {
+    recs = ['baseus-s1', 'ls-vision-solar-4g', 'okam-solar-ptz'];
+  } else if (a.where === 'outdoor') {
+    if (a.power === 'wifi-only') recs = ['baseus-s1', 'solar-3mp', 'zumimall-f5'];
+    else if (a.budget === 'high') recs = ['flagship-16mp', 'annke-c1200', 'ptz-15mp-8k'];
+    else if (a.budget === 'low') recs = ['wifi-ir', 'outdoor-3mp-wifi', 'annke-5mp-bullet'];
+    else recs = ['wifi-dual', 'tuya-5g-5mp', 'zumimall-f5'];
+  } else if (a.where === 'indoor') {
+    if (a.need === 'family') recs = ['indoor-2k', 'smart-360-4k', '8mp-ptz-24g'];
+    else if (a.budget === 'low') recs = ['4k-indoor-mini', 'a7-360-1080p', 'lenovo-bulb-3mp'];
+    else recs = ['indoor-2k', 'bulb-8mp-e27', 'sonoff-pt2'];
+  } else if (a.where === 'both' || a.budget === 'bundle') {
+    if (a.need === 'business' || a.budget === 'high') recs = ['bundle-business', 'annke-poe-8ch', 'annke-nvr-3k'];
+    else if (a.budget === 'low') recs = ['bundle-starter', 'bundle-home', 'bundle-bulbs'];
+    else recs = ['bundle-home', 'bundle-business', 'bundle-bulbs'];
+  } else if (a.need === 'business') {
+    recs = ['annke-poe-8ch', 'gadinan-nvr-4k', 'annke-nvr-3k'];
+  }
+
+  // ברירת מחדל אם לא מצאנו
+  if (!recs.length) recs = ['baseus-s1', 'indoor-2k', 'ease-life-bulb'];
+
+  return recs.slice(0, 3);
+}
+
+window.resetQuiz = function() {
+  answers = {};
+  currentStep = 0;
+  document.getElementById('quiz').style.display = '';
+  document.querySelector('.guide-nav').style.display = '';
+  document.getElementById('progress').style.display = '';
+  document.getElementById('result').classList.remove('show');
+  renderQuestion();
+  window.scrollTo({top:0, behavior:'smooth'});
+};
+
+renderQuestion();
+</script>
+</body>
+</html>

@@ -40,7 +40,8 @@
       "PowerShell($h = @{ \"Accept\" = \"application/vnd.github+json\" }; try { $r = Invoke-RestMethod -Uri \"https://api.github.com/repos/raphaelsilber325-coder/safeview/pages/builds?per_page=3\" -Headers $h; $r | ForEach-Object { Write-Output \"$\\($_.created_at\\) - $\\($_.status\\) - $\\($_.commit.Substring\\(0,7\\)\\)\" } } catch { Write-Output \"Error: $\\($_.Exception.Message\\)\" })",
       "Bash(git commit *)",
       "Bash(kill %1)",
-      "Bash(git rm *)"
+      "Bash(git rm *)",
+      "Bash(start \"\" \"index.html\")"
     ]
   }
 }
