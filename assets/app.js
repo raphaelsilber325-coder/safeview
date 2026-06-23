@@ -1326,7 +1326,8 @@ function registerSW(){
 function injectChrome(active){
   var navLinks = [
     ['index.html#products','מוצרים'],
-    ['index.html#categories','קטגוריות'],
+    ['deals.html','🔥 מבצעים'],
+    ['collection.html?type=best-sellers','הנמכרים ביותר'],
     ['buying-guide.html','איזו מצלמה לי?'],
     ['compare.html','השוואה'],
     ['blog.html','מדריכים'],

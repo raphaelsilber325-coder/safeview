@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>קולקציה מובחרת | SafeView</title>
+<meta name="description" content="מוצרים מובחרים לפי קטגוריה - הנמכרים ביותר, מתחת ל-200₪, פלאגשיפ ועוד.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Noto+Sans+Hebrew:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="preload" href="assets/app.js" as="script">
+</head>
+<body>
+<div id="nav-mount"></div>
+<div class="page-head"><h1 id="collTitle">קולקציה</h1><p id="collSub">טוען...</p></div>
+
+<section style="padding-top:32px">
+  <div class="products-grid" id="collGrid"></div>
+  <p id="collEmpty" style="text-align:center;color:var(--text2);margin-top:48px;display:none">אין כרגע מוצרים בקטגוריה הזו. <a href="index.html" style="color:var(--blue)">חזרה לחנות</a></p>
+</section>
+
+<div id="footer-mount"></div>
+
+<script src="assets/app.js" defer></script>
+<script>
+var COLLECTIONS = {
+  'best-sellers': {
+    title: 'הנמכרים ביותר',
+    sub: 'המוצרים הכי פופולריים אצלנו — מומלצי לקוחות, אלפי ביקורות חיוביות',
+    filter: function(p) {
+      var sum = getReviewSummary(p.id);
+      return sum && sum.count >= 4;
+    },
+    sort: function(a, b) {
+      var sa = getReviewSummary(a.id) || { count: 0 };
+      var sb = getReviewSummary(b.id) || { count: 0 };
+      return sb.count - sa.count;
+    }
+  },
+  'budget': {
+    title: 'מתחת ל-₪200',
+    sub: 'מצלמות אבטחה איכותיות במחיר חסכוני — מושלמות להתחלה',
+    filter: function(p) { return p.price <= 199; },
+    sort: function(a, b) { return a.price - b.price; }
+  },
+  'premium': {
+    title: 'פלאגשיפ — הכי מתקדמות',
+    sub: 'המצלמות הכי מתוחכמות שלנו — איכות מקצועית, ללא פשרות',
+    filter: function(p) { return p.price >= 500 && p.cat !== 'חבילות'; },
+    sort: function(a, b) { return b.price - a.price; }
+  },
+  'business': {
+    title: 'לעסקים',
+    sub: 'מערכות מצלמות לעסקים — NVR, POE, ריבוי מצלמות עם ניהול מרכזי',
+    filter: function(p) { return p.cat === 'מערכות' || p.id === 'bundle-business' || p.id === 'flagship-16mp' || p.id === 'ptz-15mp-8k'; },
+    sort: function(a, b) { return b.price - a.price; }
+  },
+  'sale': {
+    title: 'במבצע עכשיו',
+    sub: 'מוצרים עם הנחה פעילה — מלאי מוגבל',
+    filter: function(p) { return !!getOldPrice(p); },
+    sort: function(a, b) {
+      var oA = getOldPrice(a); var oB = getOldPrice(b);
+      return (oB ? oB.pct : 0) - (oA ? oA.pct : 0);
+    }
+  }
+};
+
+function getParam(name) {
+  var m = location.search.match(new RegExp('[?&]' + name + '=([^&]+)'));
+  return m ? decodeURIComponent(m[1]) : null;
+}
+
+function renderCollection() {
+  var type = getParam('type') || 'best-sellers';
+  var coll = COLLECTIONS[type] || COLLECTIONS['best-sellers'];
+
+  document.title = coll.title + ' | SafeView';
+  document.getElementById('collTitle').textContent = coll.title;
+  document.getElementById('collSub').textContent = coll.sub;
+  var descMeta = document.querySelector('meta[name="description"]');
+  if (descMeta) descMeta.setAttribute('content', coll.sub + ' — SafeView');
+
+  if (typeof PRODUCTS === 'undefined') { setTimeout(renderCollection, 100); return; }
+
+  var products = PRODUCTS.filter(coll.filter).sort(coll.sort);
+  var grid = document.getElementById('collGrid');
+
+  if (!products.length) {
+    document.getElementById('collEmpty').style.display = 'block';
+    return;
+  }
+
+  grid.innerHTML = products.map(function(p){
+    var msg = 'שלום SafeView! אני מעוניין/ת במצלמה: ' + p.name + ' (' + fmt(p.price) + ').';
+    var oldP = getOldPrice(p);
+    return '<div class="prod-card">' +
+      '<div class="prod-img"><a href="product.html?id='+p.id+'"><img src="'+p.img+'" alt="'+p.name+'" loading="lazy"></a>' +
+        (p.badge==='הכי פופולרי' ? '<div class="prod-badge prod-badge-hot"><span class="fire-emoji">🔥</span> הכי פופולרי</div>' : p.badge==='קל להרכבה' ? '<div class="prod-badge prod-badge-easy">⚡ קל להרכבה</div>' : (p.badge ? '<div class="prod-badge">'+p.badge+'</div>' : '')) +
+      '</div>' +
+      '<div class="prod-body">' +
+        '<a class="prod-name" href="product.html?id='+p.id+'">'+p.name+'</a>' +
+        renderReviewSummaryInline(p.id) +
+        getCompactInbox(p.id) +
+        '<div class="prod-footer">' +
+          (oldP ?
+            '<span class="prod-price-wrap"><span class="prod-price-old">'+fmt(oldP.price)+'</span><span class="prod-price">'+fmt(p.price)+'</span><span class="prod-discount-tag">-'+oldP.pct+'%</span></span>' :
+            '<span class="prod-price">'+fmt(p.price)+'</span>'
+          ) +
+          '<span class="prod-stock">במלאי</span>' +
+        '</div>' +
+        getLowStockBadge(p.id) +
+        '<div class="prod-actions"><button class="prod-add" onclick="addToCart(\''+p.id+'\')">הוסף לעגלה</button>' +
+          '<a class="prod-order" href="'+waLink(msg)+'" target="_blank" rel="noopener" aria-label="וואטסאפ">'+ICON.wa+'</a>' +
+        '</div>' +
+      '</div></div>';
+  }).join('');
+}
+
+document.addEventListener('DOMContentLoaded', renderCollection);
+</script>
+</body>
+</html>

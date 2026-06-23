@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>מבצעים והנחות פעילים | SafeView</title>
+<meta name="description" content="כל המבצעים, הקופונים והנחות הפעילים על מצלמות אבטחה. WELCOME10, SAFE15, FRIEND50 ועוד.">
+<meta name="keywords" content="קופון מצלמות אבטחה, מבצע מצלמות, הנחות SafeView, קוד הנחה">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Noto+Sans+Hebrew:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="preload" href="assets/app.js" as="script">
+<style>
+  .coupon-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; max-width: 1100px; margin: 32px auto; padding: 0 20px; }
+  .coupon-card { background: linear-gradient(135deg, var(--bg3), rgba(58,159,255,.06)); border: 2px dashed var(--blue); border-radius: 14px; padding: 24px; text-align: center; position: relative; overflow: hidden; }
+  .coupon-card::before { content: ''; position: absolute; top: -50%; right: -50%; width: 100%; height: 100%; background: radial-gradient(circle, rgba(58,159,255,.15), transparent 70%); }
+  .coupon-discount { font-family: 'Rajdhani', sans-serif; font-size: 56px; font-weight: 700; color: var(--blue); line-height: 1; margin-bottom: 6px; position: relative; }
+  .coupon-title { font-size: 16px; color: var(--text); margin-bottom: 16px; position: relative; }
+  .coupon-code { display: inline-block; background: var(--blue); color: #fff; padding: 12px 28px; border-radius: 10px; font-family: 'Rajdhani', sans-serif; font-size: 22px; font-weight: 700; letter-spacing: 3px; cursor: pointer; transition: all 0.2s; position: relative; }
+  .coupon-code:hover { transform: scale(1.05); background: #2284e0; }
+  .coupon-sub { font-size: 12px; color: var(--text2); margin-top: 12px; position: relative; }
+</style>
+</head>
+<body>
+<div id="nav-mount"></div>
+
+<div class="page-head"><h1>🎁 מבצעים <strong>פעילים</strong></h1><p>הקופונים שיחסכו לכם — תקפים עד סוף החודש</p></div>
+
+<div class="coupon-grid">
+  <div class="coupon-card">
+    <div class="coupon-discount">10%</div>
+    <div class="coupon-title">הנחה לקנייה ראשונה</div>
+    <div class="coupon-code" onclick="copyCoupon(this,'WELCOME10')">WELCOME10</div>
+    <div class="coupon-sub">תקף לכל הקטלוג · קליק להעתקה</div>
+  </div>
+
+  <div class="coupon-card">
+    <div class="coupon-discount">15%</div>
+    <div class="coupon-title">קנייה מעל ₪500</div>
+    <div class="coupon-code" onclick="copyCoupon(this,'SAFE15')">SAFE15</div>
+    <div class="coupon-sub">חבילות וקניות גדולות</div>
+  </div>
+
+  <div class="coupon-card">
+    <div class="coupon-discount">25%</div>
+    <div class="coupon-title">מבצע חיסול ענק</div>
+    <div class="coupon-code" onclick="copyCoupon(this,'SAFE25')">SAFE25</div>
+    <div class="coupon-sub">מלאי מוגבל בלבד</div>
+  </div>
+
+  <div class="coupon-card" style="border-color:#25D366">
+    <div class="coupon-discount" style="color:#25D366">₪50</div>
+    <div class="coupon-title">חברך שולח – אתה חוסך</div>
+    <div class="coupon-code" style="background:#25D366" onclick="copyCoupon(this,'FRIEND50')">FRIEND50</div>
+    <div class="coupon-sub">הגיע מחבר ב-WhatsApp? זה הקופון שלך</div>
+  </div>
+</div>
+
+<section style="padding-top:32px">
+  <div class="section-head"><h2 class="section-title">המוצרים <strong>במבצע</strong></h2><p>מצלמות עם הנחה ויזואלית פעילה — כל מה שצריך לדעת</p></div>
+  <div class="products-grid" id="dealsGrid"></div>
+</section>
+
+<div id="footer-mount"></div>
+
+<script src="assets/app.js" defer></script>
+<script>
+window.copyCoupon = function(el, code) {
+  navigator.clipboard.writeText(code);
+  var orig = el.textContent;
+  el.textContent = '✓ הועתק!';
+  el.style.background = '#00b478';
+  setTimeout(function(){ el.textContent = orig; el.style.background = ''; }, 1500);
+};
+
+document.addEventListener('DOMContentLoaded', function(){
+  setTimeout(function(){
+    if (typeof PRODUCTS === 'undefined') return;
+    // קח רק מוצרים שיש להם oldPrice
+    var deals = PRODUCTS.filter(function(p){ return !!getOldPrice(p); });
+    var grid = document.getElementById('dealsGrid');
+    grid.innerHTML = deals.map(function(p){
+      var msg = 'שלום SafeView! אני מעוניין/ת במצלמה: ' + p.name + ' (' + fmt(p.price) + ').';
+      var oldP = getOldPrice(p);
+      return '<div class="prod-card">' +
+        '<div class="prod-img"><a href="product.html?id='+p.id+'"><img src="'+p.img+'" alt="'+p.name+'" loading="lazy"></a>' +
+          '<div class="prod-badge prod-badge-hot"><span class="fire-emoji">🔥</span> -'+oldP.pct+'%</div>' +
+        '</div>' +
+        '<div class="prod-body"><a class="prod-name" href="product.html?id='+p.id+'">'+p.name+'</a>' +
+          renderReviewSummaryInline(p.id) +
+          getCompactInbox(p.id) +
+          '<div class="prod-footer"><span class="prod-price-wrap"><span class="prod-price-old">'+fmt(oldP.price)+'</span><span class="prod-price">'+fmt(p.price)+'</span></span><span class="prod-stock">במלאי</span></div>' +
+          getLowStockBadge(p.id) +
+          '<div class="prod-actions"><button class="prod-add" onclick="addToCart(\''+p.id+'\')">הוסף לעגלה</button>' +
+          '<a class="prod-order" href="'+waLink(msg)+'" target="_blank" rel="noopener" aria-label="וואטסאפ">'+ICON.wa+'</a></div>' +
+        '</div></div>';
+    }).join('');
+  }, 100);
+});
+</script>
+</body>
+</html>
