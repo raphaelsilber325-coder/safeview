@@ -1278,6 +1278,11 @@ function checkoutWhatsApp(couponCode, discount) {
   var ship = rawTotal >= FREE_SHIP_THRESHOLD ? 'משלוח חינם' : 'בתוספת משלוח';
   lines.push('(' + ship + ')');
   window.open(waLink(lines.join('\n')), '_blank');
+  // מנקה עגלה וקופון אחרי שליחת ההזמנה
+  try { localStorage.removeItem('sv_cart'); } catch(e) {}
+  try { sessionStorage.removeItem('sv_cart_coupon'); } catch(e) {}
+  updateCartCount();
+  setTimeout(function(){ if (location.pathname.indexOf('cart') !== -1) location.href = 'thank-you.html'; }, 800);
 }
 
 // Checkout דרך Shopify — בניית URL ישיר לעגלת Shopify
@@ -1749,11 +1754,13 @@ function openQuickView(id){
   var content = document.getElementById('qvContent');
   var modal = document.getElementById('qvModal');
   if (!content || !modal) return;
-  var desc = p.desc ? (p.desc.length > 200 ? p.desc.substring(0,200)+'...' : p.desc) : '';
+  var rawDesc = p.desc ? (p.desc.length > 200 ? p.desc.substring(0,200)+'...' : p.desc) : '';
+  // sanitize — מונע XSS אם תיאור מכיל תגי HTML
+  var desc = rawDesc.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   content.innerHTML =
-    '<div class="qv-img"><img src="'+p.img+'" alt="'+p.name+'" loading="lazy"></div>'+
+    '<div class="qv-img"><img src="'+p.img+'" alt="'+p.name.replace(/"/g,'&quot;')+'" loading="lazy"></div>'+
     '<div class="qv-info">'+
-      '<h2>'+p.name+'</h2>'+
+      '<h2>'+p.name.replace(/</g,'&lt;')+'</h2>'+
       '<div class="qv-price">'+fmt(p.price)+'</div>'+
       '<p class="qv-desc">'+desc+'</p>'+
       '<div class="qv-actions">'+
