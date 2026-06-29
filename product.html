@@ -173,6 +173,7 @@
           '<button class="btn-primary" onclick="addToCart(\''+p.id+'\',1,window._selVid,window._selPrice)">🛒 הוסף לעגלה</button>' +
           '<a class="btn-wa" href="'+waLink(msg)+'" target="_blank" rel="noopener">'+ICON.wa+' הזמן בוואטסאפ</a>' +
           '<a class="share-friend" href="'+waLink(buildFriendShareMsg(p))+'" target="_blank" rel="noopener">🎁 שלח לחבר — וקבל קופון משותף</a>' +
+          '<a class="btn-paypal" href="'+paypalCheckoutLink(p)+'" target="_blank" rel="noopener">'+ICON.paypal+' שלם ב-PayPal</a>' +
           '<button class="btn-secondary" style="justify-content:center;gap:8px" onclick="toggleWishlist(\''+p.id+'\',this)" id="pdpWlBtn">'+
             (isInWishlist(p.id) ? '♥ הסר ממועדפים' : '♡ שמור למועדפים')+
           '</button>' +
