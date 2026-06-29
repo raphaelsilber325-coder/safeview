@@ -346,9 +346,9 @@ function _spreadRatings(reviews, productId) {
     if (r.rating < 5) return r; // לא משנה ביקורות שכבר לא 5
     var seed = (h ^ (idx * 2654435761)) >>> 0;
     var roll = seed % 10;
-    if (roll === 0) return Object.assign({}, r, { rating: 3 }); // 10% → 3 כוכבים
-    if (roll <= 2) return Object.assign({}, r, { rating: 4 }); // 20% → 4 כוכבים
-    return r; // 70% נשאר 5
+    if (roll <= 1) return Object.assign({}, r, { rating: 3 }); // 20% → 3 כוכבים
+    if (roll <= 5) return Object.assign({}, r, { rating: 4 }); // 40% → 4 כוכבים
+    return r; // 40% נשאר 5
   });
 }
 
