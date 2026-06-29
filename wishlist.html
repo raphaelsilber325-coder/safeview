@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>המועדפים שלי | SafeView</title>
+<meta name="description" content="המוצרים שמירת למועדפים ב-SafeView. הצג והשווה מצלמות שאהבת.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Noto+Sans+Hebrew:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<div id="nav-mount"></div>
+
+<div class="page-head">
+  <h1>♥ המועדפים <strong>שלי</strong></h1>
+  <p>המוצרים ששמרת — במקום אחד</p>
+</div>
+
+<div style="max-width:1200px;margin:0 auto;padding:0 20px 60px">
+  <div id="wlEmpty" style="display:none;text-align:center;padding:80px 24px">
+    <div style="font-size:64px;margin-bottom:24px;opacity:.4">♡</div>
+    <p style="color:var(--text2);font-size:18px;margin-bottom:28px">לא שמרת מוצרים עדיין.</p>
+    <a class="btn-primary" href="index.html#products">לכל המצלמות ←</a>
+  </div>
+  <div class="products-grid" id="wlGrid"></div>
+  <div id="wlFooter" style="display:none;text-align:center;margin-top:40px">
+    <button class="btn-secondary" onclick="clearAll()" style="color:var(--text2);border-color:var(--bg4)">הסר הכל מהמועדפים</button>
+  </div>
+</div>
+
+<div id="footer-mount"></div>
+
+<script src="assets/app.js"></script>
+<script>
+  function render() {
+    var ids = getWishlist();
+    var grid = document.getElementById('wlGrid');
+    var empty = document.getElementById('wlEmpty');
+    var footer = document.getElementById('wlFooter');
+
+    if (!ids.length) {
+      grid.innerHTML = '';
+      empty.style.display = 'block';
+      footer.style.display = 'none';
+      return;
+    }
+    empty.style.display = 'none';
+    footer.style.display = 'block';
+
+    var products = ids.map(function(id) { return getProduct(id); }).filter(Boolean);
+
+    grid.innerHTML = products.map(function(p) {
+      var msg = 'שלום SafeView! אני מעוניין/ת במצלמה: ' + p.name + ' (' + fmt(p.price) + '). אפשר פרטים?';
+      return '<div class="prod-card">' +
+        '<div class="prod-img"><a href="product.html?id=' + p.id + '"><img src="' + p.img + '" alt="' + p.name + '" loading="lazy"></a>' +
+          (p.badge ? '<div class="prod-badge">' + p.badge + '</div>' : '') +
+          renderWishlistBtn(p.id) +
+        '</div>' +
+        '<div class="prod-body">' +
+          '<a class="prod-name" href="product.html?id=' + p.id + '">' + p.name + '</a>' +
+          renderReviewSummaryInline(p.id) +
+          '<div class="prod-footer">' +
+            (function() {
+              var oldP = getOldPrice(p);
+              if (oldP) return '<span class="prod-price-wrap"><span class="prod-price-old">' + fmt(oldP.price) + '</span><span class="prod-price">' + fmt(p.price) + '</span><span class="prod-discount-tag">-' + oldP.pct + '%</span></span>';
+              return '<span class="prod-price">' + fmt(p.price) + '</span>';
+            })() +
+            '<span class="prod-stock">במלאי</span>' +
+          '</div>' +
+          '<div class="prod-actions">' +
+            '<button class="prod-add" onclick="addToCart(\'' + p.id + '\',1,null,null,this)">הוסף לעגלה</button>' +
+            '<a class="prod-order" href="' + waLink('שלום SafeView! אני מעוניין/ת במצלמה: ' + p.name + ' (' + fmt(p.price) + '). אפשר פרטים?') + '" target="_blank" rel="noopener" aria-label="הזמן בוואטסאפ">' + ICON.wa + '</a>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+
+    // כשמסירים ממועדפים מתוך הדף הזה — מרנדרים מחדש
+    document.querySelectorAll('.wl-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        setTimeout(render, 50);
+      });
+    });
+  }
+
+  window.clearAll = function() {
+    if (confirm('להסיר את כל המוצרים מהמועדפים?')) {
+      localStorage.removeItem('sv_wishlist');
+      render();
+    }
+  };
+
+  render();
+</script>
+</body>
+</html>

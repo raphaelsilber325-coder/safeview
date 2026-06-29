@@ -24,7 +24,7 @@ var SHIP_STORAGE_KEY = 'sv_ship_method';
 var COUPONS = {
   'WELCOME10': { type: 'pct',   value: 10, firstOnly: true,  minOrder: 0,   label: '10% הנחה - ברוך הבא!' },
   'SAFE15':    { type: 'pct',   value: 15, firstOnly: false, minOrder: 500, label: '15% הנחה על קנייה מעל ₪500' },
-  'FRIEND50':  { type: 'fixed', value: 25, firstOnly: false, minOrder: 200, label: '25₪ הנחה לחבר/ה על קנייה מעל ₪200' }
+  'FRIEND25':  { type: 'fixed', value: 25, firstOnly: false, minOrder: 200, label: '25₪ הנחה לחבר/ה על קנייה מעל ₪200' }
 };
 
 // fingerprint דפדפן — מונע שימוש כפול בקופון ראשון
@@ -127,7 +127,7 @@ function getShipCost(rawTotal, method) {
 // הודעת "שלח לחבר" — חברך מקבל קופון 50₪ הנחה
 function buildFriendShareMsg(product) {
   return 'היי, מצאתי מצלמה מגניבה שחשבתי שתתאים לך – ' + product.name + ' (' + fmt(product.price) + ').\n\n' +
-    'יש גם קופון מיוחד: השתמש בקוד FRIEND50 ותקבל 25₪ הנחה על קנייה מעל ₪200!\n\n' +
+    'יש גם קופון מיוחד: השתמש בקוד FRIEND25 ותקבל 25₪ הנחה על קנייה מעל ₪200!\n\n' +
     'להזמנה: ' + SITE_URL + 'product.html?id=' + product.id + '\n\n' +
     'ממליץ בחם! 🛡️';
 }
@@ -1523,6 +1523,7 @@ function injectChrome(active){
         '<ul class="nav-links" id="navLinks">' +
           navLinks.map(function(l){ return '<li><a href="'+l[0]+'">'+l[1]+'</a></li>'; }).join('') +
         '</ul>' +
+        '<a href="wishlist.html" class="nav-cart" aria-label="מועדפים" style="margin-left:4px;font-size:20px">♡<span class="nav-wl-count" id="navWlCount" style="display:none"></span></a>' +
         '<a href="cart.html" class="nav-cart" aria-label="עגלה">' + ICON.cart + '<span class="nav-cart-count">0</span></a>' +
         '<button class="nav-burger" id="burger" aria-label="תפריט"><span></span><span></span><span></span></button>' +
       '</div>' +
@@ -1545,7 +1546,7 @@ function injectChrome(active){
           '<p>חנות מצלמות האבטחה החכמות של ישראל. מצלמות סולאריות, פנימיות וחיצוניות עם אחריות מלאה ותמיכה בעברית.</p>' +
         '</div>' +
         '<div class="footer-col"><h4>חנות</h4>' +
-          '<a href="index.html#products">כל המצלמות</a><a href="index.html#categories">קטגוריות</a><a href="index.html#bundles">חבילות במבצע</a><a href="compare.html">השוואה</a><a href="cart.html">עגלת קניות</a></div>' +
+          '<a href="index.html#products">כל המצלמות</a><a href="index.html#categories">קטגוריות</a><a href="index.html#bundles">חבילות במבצע</a><a href="compare.html">השוואה</a><a href="cart.html">עגלת קניות</a><a href="wishlist.html">♥ המועדפים שלי</a></div>' +
         '<div class="footer-col"><h4>מידע</h4>' +
           '<a href="about.html">אודות</a><a href="blog.html">מדריכים</a><a href="faq.html">שאלות נפוצות</a><a href="contact.html">צור קשר</a></div>' +
         '<div class="footer-col"><h4>מדיניות</h4>' +

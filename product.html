@@ -22,19 +22,6 @@
 
 <div class="pdp" id="pdp"></div>
 
-<!-- מקטע ביקורות — מוכן ל-Judge.me (להחליף את ה-data-judgeme-id לאחר התקנת האפליקציה) -->
-<section class="reveal reviews-section" style="padding-top:0">
-  <div class="section-label">// ביקורות לקוחות</div>
-  <div class="section-title">מה <strong>הלקוחות אומרים</strong></div>
-  <div class="section-sub" style="margin-bottom:24px">ביקורות אמיתיות מלקוחות שקנו את המוצר</div>
-  <!-- Judge.me Product Reviews Widget -->
-  <div id="judgeme_product_reviews" data-id="" class="reviews-empty">
-    <div class="reviews-empty-text">
-      <strong>אנחנו אוספים ביקורות אמיתיות.</strong> רכשת את המוצר? נשמח לשמוע מה דעתך — פנה אלינו בוואטסאפ אחרי שתקבל ותתנסה.
-    </div>
-    <a class="btn-wa" id="reviewWa" href="#">שלח את חוות הדעת שלך</a>
-  </div>
-</section>
 
 <section id="rvSection" style="display:none;padding-top:0">
   <div class="section-label">// נצפו לאחרונה</div>
@@ -88,6 +75,10 @@
       "offers":{"@type":"Offer","priceCurrency":"ILS","price": p.price,
         "availability":"https://schema.org/InStock","seller":{"@type":"Organization","name":"SafeView"}}
     };
+    var _rvSum = getReviewSummary(p.id);
+    if (_rvSum) {
+      jsonLd.aggregateRating = {"@type":"AggregateRating","ratingValue":_rvSum.avg.toFixed(1),"reviewCount":_rvSum.count,"bestRating":"5","worstRating":"1"};
+    }
     var s = document.createElement('script'); s.type = 'application/ld+json'; s.textContent = JSON.stringify(jsonLd); document.head.appendChild(s);
 
     var baseUrl = location.origin + location.pathname.replace(/[^/]+$/, '');
@@ -189,8 +180,7 @@
           '<div class="pdp-sticky-price">'+fmt(p.price)+'</div>' +
           '<button class="btn-primary" onclick="addToCart(\''+p.id+'\',1,window._selVid,window._selPrice)">הוסף לעגלה</button>' +
         '</div>' +
-        (PRODUCT_INBOX[p.id] ? '<div class="pdp-inbox-prominent"><h3>📦 מה כלול בקופסה</h3><ul>'+PRODUCT_INBOX[p.id].map(function(item){ return '<li>'+item+'</li>'; }).join('')+'</ul></div>' : '') +
-        (p.specs && p.specs.length ? '<div class="pdp-specs">'+p.specs.map(function(sp){ return '<div class="pdp-spec"><span>'+sp[0]+'</span><span>'+sp[1]+'</span></div>'; }).join('')+'</div>' : '') +
+        (p.specs && p.specs.length ?<div class="pdp-specs">'+p.specs.map(function(sp){ return '<div class="pdp-spec"><span>'+sp[0]+'</span><span>'+sp[1]+'</span></div>'; }).join('')+'</div>' : '') +
         '<div class="pdp-trust">' +
           '<div><span class="pdp-trust-icon">'+ICON.truck+'</span>משלוח חינם בהזמנה מעל ₪200</div>' +
           '<div><span class="pdp-trust-icon">'+ICON.shield+'</span>אחריות מלאה לשנה + תמיכה בעברית</div>' +
