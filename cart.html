@@ -53,12 +53,19 @@
         '</div>';
       }).join('');
 
-      var total = c.reduce(function(s,i){
+      var rawTotal = c.reduce(function(s,i){
         var p = map[i.id] || getProduct(i.id);
         return s + (p ? (i.price || p.price) * i.qty : 0);
       }, 0);
-      var remaining = FREE_SHIP_THRESHOLD - total;
-      var pct = Math.min(100, Math.round(total / FREE_SHIP_THRESHOLD * 100));
+
+      // קופון פעיל
+      var _coupon = null;
+      try { _coupon = JSON.parse(sessionStorage.getItem('sv_cart_coupon') || 'null'); } catch(e){}
+      var discount = (_coupon && _coupon.discount) ? _coupon.discount : 0;
+      var total = rawTotal - discount;
+
+      var remaining = FREE_SHIP_THRESHOLD - rawTotal;
+      var pct = Math.min(100, Math.round(rawTotal / FREE_SHIP_THRESHOLD * 100));
       var shipMsg = '<div style="margin:12px 0 6px">' +
         '<div style="display:flex;justify-content:space-between;font-size:12px;color:var(--text2);margin-bottom:6px">' +
           (remaining > 0
@@ -71,18 +78,66 @@
         '</div>' +
       '</div>';
 
+      var discountRow = discount > 0
+        ? '<div class="cart-row cart-discount-row"><span>הנחת קופון ('+_coupon.code+')</span><span>-'+fmt(discount)+'</span></div>'
+        : '';
+      var couponResultHtml = _coupon
+        ? '<div class="coupon-result ok">✓ קופון <strong>'+_coupon.code+'</strong> — '+_coupon.label+'<button class="coupon-remove" onclick="removeCoupon()" aria-label="הסר קופון">×</button></div>'
+        : '<div class="coupon-result" id="cpnResult"></div>';
+
       wrap.innerHTML = itemsHtml +
         '<div class="cart-summary">' +
-          '<div class="cart-row"><span>סכום ביניים</span><span>'+fmt(total)+'</span></div>' +
+          '<div class="cart-row"><span>סכום ביניים</span><span>'+fmt(rawTotal)+'</span></div>' +
+          discountRow +
           shipMsg +
-          '<div class="cart-total"><span>סה"כ</span><strong>'+fmt(total)+'</strong></div>' +
-          '<div class="cart-coupon"><input type="text" placeholder="יש לך קוד קופון?" class="cart-coupon-input" dir="rtl"><button class="cart-coupon-btn" onclick="toast(\'קוד קופון יאושר עם הנציג בוואטסאפ\')">החל</button></div>' +
-          '<button class="btn-primary" id="checkoutBtn" style="width:100%;margin-top:18px;padding:15px;font-size:17px" onclick="createShopifyCheckout()">לתשלום מאובטח ←</button>' +
-          '<button class="btn-wa" style="width:100%;margin-top:10px;padding:13px" onclick="checkoutWhatsApp()">'+ICON.wa+' הזמן בוואטסאפ</button>' +
+          '<div class="cart-total"><span>סה"כ לתשלום</span><strong>'+fmt(total)+'</strong></div>' +
+          '<div class="cart-coupon">' +
+            '<input type="text" id="cpnInput" placeholder="יש לך קוד קופון?" class="cart-coupon-input" dir="ltr" style="text-transform:uppercase" oninput="this.value=this.value.toUpperCase()" onkeydown="if(event.key===\'Enter\')applyCartCoupon()">' +
+            '<button class="cart-coupon-btn" onclick="applyCartCoupon()">החל</button>' +
+          '</div>' +
+          couponResultHtml +
+          '<a class="btn-paypal" id="paypalBtn" style="width:100%;margin-top:18px;padding:15px;font-size:15px;text-align:center;display:block" href="#" target="_blank" rel="noopener">PayPal — תשלום מאובטח</a>' +
+          '<button class="btn-wa" style="width:100%;margin-top:10px;padding:13px" id="waCheckoutBtn" onclick="doWaCheckout()">'+ICON.wa+' הזמן בוואטסאפ</button>' +
           '<a class="btn-secondary" style="width:100%;margin-top:10px;justify-content:center" href="index.html#products">המשך בקנייה</a>' +
         '</div>';
+
+      // PayPal link — מוצר ראשון בעגלה (ל-MVP, ניתן לשדרג לסל מלא)
+      (function(){
+        var btn = document.getElementById('paypalBtn');
+        if (!btn) return;
+        var firstItem = c[0];
+        var fp = map[firstItem.id] || getProduct(firstItem.id);
+        if (fp) btn.href = paypalCheckoutLink({ id: fp.id, name: fp.name, price: total, img: fp.img });
+      })();
     });
   }
+
+  window.applyCartCoupon = function() {
+    var input = document.getElementById('cpnInput');
+    if (!input) return;
+    var code = input.value.trim().toUpperCase();
+    var result = document.getElementById('cpnResult');
+    var rawTotal = getCart().reduce(function(s,i){ var p = getProduct(i.id); return s + (p ? (i.price||p.price)*i.qty : 0); }, 0);
+    var v = validateCoupon(code, rawTotal);
+    if (v.ok) {
+      sessionStorage.setItem('sv_cart_coupon', JSON.stringify({ code: v.code, label: v.label, discount: v.discount }));
+      renderCart();
+    } else {
+      if (result) { result.className = 'coupon-result err'; result.textContent = '✗ ' + v.msg; }
+    }
+  };
+
+  window.removeCoupon = function() {
+    sessionStorage.removeItem('sv_cart_coupon');
+    renderCart();
+  };
+
+  window.doWaCheckout = function() {
+    var coupon = null;
+    try { coupon = JSON.parse(sessionStorage.getItem('sv_cart_coupon') || 'null'); } catch(e){}
+    checkoutWhatsApp(coupon ? coupon.code : null, coupon ? coupon.discount : 0);
+  };
+
   function chg(id, d){ var it = getCart().filter(function(i){return i.id===id;})[0]; if(it){ setQty(id, it.qty + d); renderCart(); } }
   function rm(id){ removeFromCart(id); renderCart(); }
   renderCart();

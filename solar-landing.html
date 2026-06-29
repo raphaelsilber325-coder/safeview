@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>מצלמות אבטחה סולאריות | SafeView — ללא חשמל, ללא כבלים</title>
+<meta name="description" content="מצלמות אבטחה סולאריות — עובדות בלי חשמל, בלי כבלים, בכל מקום. ראיית לילה צבעונית, WiFi ו-4G, התקנה ב-10 דקות. ממשלוח חינם מעל ₪200.">
+<link rel="canonical" href="https://raphaelsilber325-coder.github.io/safeview/solar-landing.html">
+<meta property="og:title" content="מצלמות סולאריות — ללא חשמל, ללא כבלים | SafeView">
+<meta property="og:description" content="אבטחת הבית שלך בלי לגעת בחשמל. 5 דגמים סולאריים מ-₪149.">
+<meta property="og:image" content="https://ae01.alicdn.com/kf/S8c5a3d3e3a8e4c7e8b9d2f1a0e6b3c4d5.jpg">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Noto+Sans+Hebrew:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+.solar-hero {
+  min-height: 92vh;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 60px 24px 40px;
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(245,166,35,0.12) 0%, transparent 70%),
+              radial-gradient(ellipse 60% 40% at 80% 80%, rgba(58,159,255,0.08) 0%, transparent 60%);
+  position: relative;
+}
+.solar-hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(245,166,35,0.12); border: 1px solid rgba(245,166,35,0.35);
+  color: var(--gold); padding: 6px 18px; border-radius: 20px; font-size: 13px; font-weight: 500;
+  margin-bottom: 28px;
+}
+.solar-hero h1 {
+  font-family: 'Rajdhani', sans-serif; font-size: clamp(38px, 8vw, 72px);
+  font-weight: 700; line-height: 1.1; margin-bottom: 20px;
+  background: linear-gradient(135deg, #fff 0%, #f5a623 50%, #3a9fff 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.solar-hero-sub { font-size: 18px; color: var(--text2); max-width: 560px; margin: 0 auto 36px; line-height: 1.7; }
+.solar-hero-cta { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+.solar-features {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px; max-width: 900px; margin: 60px auto; padding: 0 24px;
+}
+.solar-feat {
+  background: var(--bg2); border: 1px solid var(--border); border-radius: 16px;
+  padding: 28px 20px; text-align: center;
+}
+.solar-feat-icon { font-size: 36px; margin-bottom: 12px; }
+.solar-feat h3 { font-family: 'Rajdhani', sans-serif; font-size: 18px; color: var(--blue); margin-bottom: 8px; }
+.solar-feat p { font-size: 14px; color: var(--text2); line-height: 1.6; }
+.solar-products { max-width: 1100px; margin: 0 auto; padding: 0 24px 80px; }
+.solar-products h2 { font-family: 'Rajdhani', sans-serif; font-size: 32px; text-align: center; margin-bottom: 36px; }
+.solar-prod-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 24px; }
+.solar-prod-card {
+  background: var(--bg2); border: 1px solid var(--border); border-radius: 16px;
+  overflow: hidden; transition: transform .2s, box-shadow .2s;
+  display: flex; flex-direction: column;
+}
+.solar-prod-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(58,159,255,0.12); }
+.solar-prod-img { aspect-ratio: 1/1; overflow: hidden; }
+.solar-prod-img img { width: 100%; height: 100%; object-fit: contain; padding: 12px; transition: transform .3s; }
+.solar-prod-card:hover .solar-prod-img img { transform: scale(1.04); }
+.solar-prod-body { padding: 16px; flex: 1; display: flex; flex-direction: column; }
+.solar-prod-name { font-size: 15px; font-weight: 500; margin-bottom: 8px; color: var(--text); text-decoration: none; display: block; }
+.solar-prod-name:hover { color: var(--blue); }
+.solar-prod-price { font-family: 'Rajdhani', sans-serif; font-size: 24px; color: var(--blue); font-weight: 700; margin-bottom: 14px; }
+.solar-prod-btns { display: flex; gap: 8px; margin-top: auto; }
+.solar-prod-btns .btn-primary { flex: 1; padding: 10px; font-size: 13px; text-align: center; }
+.solar-trust { background: var(--bg2); border-top: 1px solid var(--border); padding: 40px 24px; }
+.solar-trust-inner { max-width: 800px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 24px; text-align: center; }
+.solar-trust-item { color: var(--text2); font-size: 13px; }
+.solar-trust-item strong { display: block; font-size: 22px; font-family: 'Rajdhani', sans-serif; color: var(--blue); margin-bottom: 4px; }
+.solar-faq { max-width: 720px; margin: 60px auto; padding: 0 24px; }
+.solar-faq h2 { font-family: 'Rajdhani', sans-serif; font-size: 28px; text-align: center; margin-bottom: 28px; }
+</style>
+</head>
+<body>
+<div id="nav-mount"></div>
+
+<!-- HERO -->
+<section class="solar-hero">
+  <div class="solar-hero-badge">☀️ אנרגיה סולארית — ללא חשמל וללא כבלים</div>
+  <h1>מצלמות אבטחה<br>סולאריות</h1>
+  <p class="solar-hero-sub">מחברים לשמש, לא לשקע. ראיית לילה צבעונית, התראות AI, WiFi ו-4G — מגינים על הבית גם בפינה הכי מרוחקת.</p>
+  <div class="solar-hero-cta">
+    <a class="btn-primary" href="#solar-products" style="padding:15px 36px;font-size:16px">לכל המצלמות הסולאריות ↓</a>
+    <a class="btn-wa" id="heroWa" href="#" style="padding:15px 28px;font-size:15px"></a>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="solar-features">
+  <div class="solar-feat">
+    <div class="solar-feat-icon">⚡</div>
+    <h3>אפס חשמל</h3>
+    <p>לא צריך חשמלאי, לא צריך שקע. הלוח הסולארי טוען את הסוללה כל יום.</p>
+  </div>
+  <div class="solar-feat">
+    <div class="solar-feat-icon">🔧</div>
+    <h3>התקנה ב-10 דקות</h3>
+    <p>ברגי הרכבה כלולים. תולים, מכוונים, מחברים לאפליקציה — גמור.</p>
+  </div>
+  <div class="solar-feat">
+    <div class="solar-feat-icon">🌙</div>
+    <h3>ראיית לילה צבעונית</h3>
+    <p>תאורת LED צבעונית — רואים הכל בחושך, בצבעים מלאים, לא רק שחור-לבן.</p>
+  </div>
+  <div class="solar-feat">
+    <div class="solar-feat-icon">📱</div>
+    <h3>שליטה מהמובייל</h3>
+    <p>צפייה חיה, פלייבק, שיחה דו-כיוונית — מכל מקום בעולם.</p>
+  </div>
+  <div class="solar-feat">
+    <div class="solar-feat-icon">🤖</div>
+    <h3>זיהוי AI</h3>
+    <p>מבחין בין בני אדם לחתולים. רק התראות אמיתיות, בלי רעש.</p>
+  </div>
+  <div class="solar-feat">
+    <div class="solar-feat-icon">🌧️</div>
+    <h3>IP65/IP67</h3>
+    <p>גשם, אבק, חום ישראלי. עמידות מוכחת לכל תנאי מזג האוויר.</p>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section id="solar-products" class="solar-products">
+  <h2>⭐ <strong>5 המצלמות הסולאריות</strong> שלנו</h2>
+  <div class="solar-prod-grid" id="solarGrid"></div>
+</section>
+
+<!-- TRUST -->
+<div class="solar-trust">
+  <div class="solar-trust-inner">
+    <div class="solar-trust-item"><strong>500+</strong>לקוחות מרוצים</div>
+    <div class="solar-trust-item"><strong>12 חודש</strong>אחריות מלאה</div>
+    <div class="solar-trust-item"><strong>₪200</strong>משלוח חינם מעל</div>
+    <div class="solar-trust-item"><strong>14 יום</strong>החזר ללא שאלות</div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<section class="solar-faq">
+  <h2>שאלות נפוצות על מצלמות סולאריות</h2>
+  <div class="faq-list" id="solarFaq"></div>
+</section>
+
+<div id="footer-mount"></div>
+
+<script src="assets/app.js"></script>
+<script>
+  document.getElementById('heroWa').href = waLink('שלום! אני מעוניין/ת במצלמה סולארית, איזו מתאימה לי?');
+  document.querySelector('.solar-hero-cta .btn-wa').textContent = 'שאל/י אותנו בוואטסאפ';
+
+  // מצלמות סולאריות
+  var SOLAR_IDS = ['baseus-s1','solar-3mp','ls-vision-solar','okam-solar-ptz','camhi-solar-dual-4g'];
+  var grid = document.getElementById('solarGrid');
+  grid.innerHTML = SOLAR_IDS.map(function(id){
+    var p = getProduct(id);
+    if (!p) return '';
+    var msg = 'שלום SafeView! אני מעוניין/ת ב'+p.name+' ('+fmt(p.price)+'). אפשר פרטים?';
+    return '<div class="solar-prod-card">' +
+      '<div class="solar-prod-img"><img src="'+p.img+'" alt="'+p.name+'" loading="lazy"></div>' +
+      '<div class="solar-prod-body">' +
+        '<a class="solar-prod-name" href="product.html?id='+p.id+'">'+p.name+'</a>' +
+        renderReviewSummaryInline(p.id) +
+        '<div class="solar-prod-price">'+fmt(p.price)+'</div>' +
+        '<div class="solar-prod-btns">' +
+          '<button class="btn-primary" onclick="addToCart(\''+p.id+'\',1,null,null,this)">הוסף לעגלה</button>' +
+          '<a class="btn-wa" href="'+waLink(msg)+'" target="_blank" rel="noopener" style="padding:10px 14px">'+ICON.wa+'</a>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+
+  // FAQ סולארי
+  var SOLAR_FAQS = [
+    ['כמה שעות שמש נדרשות לטעינה?','רוב המצלמות הסולאריות שלנו נטענות ב-4-6 שעות שמש ישירה. בישראל — זה יומיומי. בחורף, המצלמה עדיין עובדת מהסוללה ומתטענת ביניים.'],
+    ['מה קורה בלילה או בימים מעוננים?','המצלמה עובדת על סוללה מובנית. רוב הדגמים שלנו מחזיקים 2-5 ימים ללא שמש — תלוי בכמות ההקלטות.'],
+    ['האם צריך WiFi?','רוב הדגמים עובדים עם WiFi 2.4GHz. דגמי 4G (LS Vision, Camhi) עובדים גם בלי WiFi — עם כרטיס SIM בלבד.'],
+    ['האם ניתן להתקין לבד?','בהחלט. כל המצלמות מגיעות עם ברגי הרכבה ומדריך בעברית. ממוצע התקנה — 10-15 דקות.'],
+    ['האם המצלמה עמידה לגשם?','כן. כל המצלמות הסולאריות שלנו מדורגות IP65 לפחות — עמידות לגשם, אבק וחום.']
+  ];
+  document.getElementById('solarFaq').innerHTML = SOLAR_FAQS.map(function(f,i){
+    return '<div class="faq-item"><button class="faq-q" aria-expanded="false">'+f[0]+'<span class="faq-arrow">▼</span></button><div class="faq-a">'+f[1]+'</div></div>';
+  }).join('');
+  initFaq();
+</script>
+</body>
+</html>

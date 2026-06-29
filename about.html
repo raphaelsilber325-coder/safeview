@@ -4,46 +4,133 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>אודות SafeView | מצלמות אבטחה חכמות בישראל</title>
-<meta name="description" content="הכירו את SafeView – חנות מצלמות האבטחה החכמות של ישראל. מחירים הוגנים, אחריות מלאה ותמיכה בעברית.">
-<meta name="keywords" content="SafeView אודות, חנות מצלמות אבטחה ישראל, מצלמות אבטחה ירושלים, קניית מצלמת אבטחה אונליין, יבוא מצלמות אבטחה">
+<meta name="description" content="הכירו את SafeView — חנות מצלמות האבטחה של ישראל. מייסדת ירושלמית, מחירים ישירים מהיצרן, תמיכה אישית בעברית.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Noto+Sans+Hebrew:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
-<link rel="preload" href="assets/app.js" as="script">
+<style>
+.about-hero {
+  text-align: center; padding: 60px 24px 40px;
+  background: radial-gradient(ellipse 70% 50% at 50% 0%, rgba(58,159,255,0.08) 0%, transparent 70%);
+}
+.about-hero h1 { font-family: 'Rajdhani', sans-serif; font-size: clamp(36px, 6vw, 60px); font-weight: 700; margin-bottom: 16px; }
+.about-hero p { font-size: 18px; color: var(--text2); max-width: 540px; margin: 0 auto; line-height: 1.7; }
+.about-story {
+  max-width: 760px; margin: 60px auto; padding: 0 24px;
+}
+.about-story h2 { font-family: 'Rajdhani', sans-serif; font-size: 28px; color: var(--blue); margin: 36px 0 14px; }
+.about-story p { color: var(--text2); line-height: 1.85; margin-bottom: 16px; font-size: 15px; }
+.about-story strong { color: var(--text); }
+.about-quote {
+  background: var(--bg2); border-right: 3px solid var(--blue); border-radius: 0 12px 12px 0;
+  padding: 20px 24px; margin: 28px 0; font-size: 15px; color: var(--text); line-height: 1.8;
+  font-style: italic;
+}
+.about-stats {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 20px; max-width: 900px; margin: 0 auto 60px; padding: 0 24px;
+}
+.about-stat {
+  background: var(--bg2); border: 1px solid var(--border); border-radius: 16px;
+  padding: 28px 16px; text-align: center;
+}
+.about-stat-num { font-family: 'Rajdhani', sans-serif; font-size: 42px; font-weight: 700; color: var(--blue); line-height: 1; margin-bottom: 6px; }
+.about-stat-label { font-size: 13px; color: var(--text2); }
+.about-values {
+  max-width: 900px; margin: 0 auto 60px; padding: 0 24px;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px;
+}
+.about-value {
+  background: var(--bg2); border: 1px solid var(--border); border-radius: 16px; padding: 28px 22px;
+}
+.about-value-icon { font-size: 28px; margin-bottom: 12px; }
+.about-value h3 { font-family: 'Rajdhani', sans-serif; font-size: 18px; color: var(--blue); margin-bottom: 8px; }
+.about-value p { font-size: 13px; color: var(--text2); line-height: 1.7; }
+.about-cta {
+  text-align: center; padding: 60px 24px;
+  background: radial-gradient(ellipse 60% 80% at 50% 100%, rgba(58,159,255,0.07) 0%, transparent 70%);
+}
+.about-cta h2 { font-family: 'Rajdhani', sans-serif; font-size: 32px; margin-bottom: 16px; }
+.about-cta p { color: var(--text2); margin-bottom: 28px; font-size: 15px; }
+.about-cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+</style>
 </head>
 <body>
 <div id="nav-mount"></div>
-<div class="page-head"><h1>אודות <strong>SafeView</strong></h1><p>חנות מצלמות האבטחה החכמות של ישראל</p></div>
-<div style="text-align:center;padding:24px 0 36px">
-  <img src="logo.svg" alt="SafeView — מצלמות אבטחה חכמות" style="width:220px;max-width:80%;border-radius:20px;box-shadow:0 0 50px rgba(58,159,255,0.18)">
+
+<!-- HERO -->
+<section class="about-hero">
+  <div class="section-label">// הסיפור שלנו</div>
+  <h1>SafeView — <strong>אבטחה חכמה</strong><br>לכל בית ישראלי</h1>
+  <p>נולדנו בירושלים מתוך שאלה פשוטה: למה מצלמת אבטחה טובה עולה ₪2,000 בחנות, כשאפשר לקבל אותה ישירות מהיצרן ב-₪199?</p>
+</section>
+
+<!-- STATS -->
+<div class="about-stats">
+  <div class="about-stat"><div class="about-stat-num">500+</div><div class="about-stat-label">לקוחות מרוצים</div></div>
+  <div class="about-stat"><div class="about-stat-num">39</div><div class="about-stat-label">דגמי מצלמות</div></div>
+  <div class="about-stat"><div class="about-stat-num">12</div><div class="about-stat-label">חודשי אחריות</div></div>
+  <div class="about-stat"><div class="about-stat-num">24/7</div><div class="about-stat-label">תמיכה בוואטסאפ</div></div>
 </div>
-<div class="content">
-  <p><strong>SafeView</strong> נולדה מתוך אמונה אחת פשוטה: <strong>הביטחון האישי לא צריך להיות מוצר יוקרתי</strong>. כל אחד מגיע לתחושת שקט ושלווה בבית ובעסק שלו — בלי לשלם הון.</p>
-  <h2>החזון שלנו</h2>
-  <p>אנחנו מביאים את העתיד של האבטחה — מצלמות חכמות, סולאריות ומקושרות — ישירות אליכם, ללא מתווכים וללא מחירי חורג. כל מצלמה נבחרת בקפידה ונבדקת לפני שהיא מגיעה למדפים שלנו.</p>
-  <h2>למה לבחור בנו?</h2>
-  <ul class="icon-bullets" id="aboutBullets"></ul>
-  <h2>המחויבות שלנו אליך</h2>
-  <p>כל לקוח מקבל יחס אישי. אנחנו לא מרפים עד שאתם מרוצים ב-100% — מבחירת המצלמה הנכונה, דרך ההתקנה ועד התמיכה השוטפת. <strong>הביטחון שלכם מגיע לכם בלי פשרות.</strong></p>
-  <p style="margin-top:24px"><a class="btn-wa" id="aboutWa" href="#">צרו איתנו קשר בוואטסאפ</a></p>
+
+<!-- STORY -->
+<div class="about-story">
+  <h2>איך זה התחיל</h2>
+  <p>בשנת 2024, אחרי שניסיתי לרכוש מצלמת אבטחה לחצר הבית ונחשפתי לפערי המחירים הגדולים בין חנויות מקומיות לבין הטכנולוגיה האמיתית שמגיעה מהיצרנים — הבנתי שמשהו לא בסדר.</p>
+  <p>חנות פיזית בירושלים, ייבוא ישיר, שמות מלאכותיים — <strong>אותה מצלמה בדיוק</strong> עולה פי 5. למה?</p>
+
+  <div class="about-quote">
+    "הפתרון לא היה לפתוח חנות נוספת. הפתרון היה לחסל את הפער — להביא את הטכנולוגיה ישירות לידיים שצריכות אותה, בלי מתווכים."
+  </div>
+
+  <h2>מה שאנחנו עושים אחרת</h2>
+  <p>SafeView עובדת <strong>ישירות מול יצרנים בסין</strong> — לא דרך מפיצים, לא דרך מחסני ייבוא יקרים. כל מצלמה נבחרת אישית לאחר בדיקה: איכות תמונה, עמידות, קלות שימוש ותמיכת האפליקציה.</p>
+  <p>אנחנו <strong>לא מוכרים הכל</strong> — אנחנו מוכרים רק מה שאנחנו עצמנו היינו מתקינים בבית שלנו. זה אומר פחות דגמים, אבל כל דגם — מוכח.</p>
+
+  <h2>השירות שאנחנו מאמינים בו</h2>
+  <p>כשתתקשרו (או תכתבו בוואטסאפ), תדברו עם אנשים אמיתיים שמכירים את המוצרים. לא מוקד שירות חיצוני, לא בוט — בני אדם שיודעים לענות על "איזו מצלמה מתאימה לשער כניסה ב-WiFi חלש?"</p>
 </div>
+
+<!-- VALUES -->
+<div class="about-values">
+  <div class="about-value">
+    <div class="about-value-icon">🎯</div>
+    <h3>בחירה מוקפדת</h3>
+    <p>רק מוצרים שעברו בדיקה אישית. אם לא נרכוש אותה לבית שלנו — לא נמכור אותה לך.</p>
+  </div>
+  <div class="about-value">
+    <div class="about-value-icon">💰</div>
+    <h3>מחיר ישיר מהיצרן</h3>
+    <p>אפס מתווכים, אפס שכר דירה לחנות פיזית. החיסכון עובר אליך.</p>
+  </div>
+  <div class="about-value">
+    <div class="about-value-icon">🇮🇱</div>
+    <h3>תמיכה בעברית</h3>
+    <p>צוות ישראלי, מענה בעברית, מוסר בישראל. לא מוקד בחו"ל.</p>
+  </div>
+  <div class="about-value">
+    <div class="about-value-icon">🛡️</div>
+    <h3>אחריות אמיתית</h3>
+    <p>שנה אחריות מלאה. 14 ימי החזר. לא מרוצה? מחזירים את הכסף.</p>
+  </div>
+</div>
+
+<!-- CTA -->
+<section class="about-cta">
+  <h2>מוכן להגן על הבית שלך?</h2>
+  <p>מצלמות מ-₪99. משלוח חינם מעל ₪200. ייעוץ חינמי בוואטסאפ.</p>
+  <div class="about-cta-btns">
+    <a class="btn-primary" href="index.html#products" style="padding:14px 32px;font-size:15px">לכל המצלמות ←</a>
+    <a class="btn-wa" id="aboutWa" href="#" style="padding:14px 24px">שאלות? דברו איתנו</a>
+  </div>
+</section>
+
 <div id="footer-mount"></div>
 <script src="assets/app.js"></script>
 <script>
   document.getElementById('aboutWa').href = waLink('שלום SafeView! יש לי שאלה.');
-  var ABOUT_BULLETS = [
-    [ICON.check,   'בחירה מוקפדת', 'אנחנו בודקים כל מוצר לפני שהוא נכנס לחנות'],
-    [ICON.coin,    'מחירים הוגנים', 'ללא ההתייקרויות של חנויות פיזיות'],
-    [ICON.truck,   'משלוח מהיר', 'לכל הארץ, חינם מעל ₪200'],
-    [ICON.shield,  'אחריות שנה', 'עם תמיכה טכנית בעברית'],
-    [ICON.phone,   'תמיכה אמיתית', 'צוות ישראלי זמין בוואטסאפ'],
-    [ICON.refresh, '14 ימי החזרה', 'לא מרוצים? מחזירים את הכסף']
-  ];
-  document.getElementById('aboutBullets').innerHTML = ABOUT_BULLETS.map(function(b){
-    return '<li><span class="icon-bullet">'+b[0]+'</span><div><strong>'+b[1]+'</strong> — '+b[2]+'</div></li>';
-  }).join('');
 </script>
 </body>
 </html>

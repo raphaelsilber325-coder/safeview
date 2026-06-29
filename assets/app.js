@@ -9,6 +9,69 @@ var FREE_SHIP_THRESHOLD = 200;
 var PAYPAL_EMAIL = 'info@safeview.co.il';
 var SITE_URL = 'https://raphaelsilber325-coder.github.io/safeview/';
 
+// ===== מערכת קופונים =====
+var COUPONS = {
+  'WELCOME10': { type: 'pct',   value: 10, firstOnly: true,  label: '10% הנחה - ברוך הבא!' },
+  'SAFE15':    { type: 'pct',   value: 15, firstOnly: false, label: '15% הנחה על כל הקנייה' },
+  'SAFE25':    { type: 'pct',   value: 25, firstOnly: false, label: '25% הנחה על כל הקנייה' },
+  'FRIEND50':  { type: 'fixed', value: 50, firstOnly: false, label: '50₪ הנחה מחבר/ה' }
+};
+
+// fingerprint דפדפן — מונע שימוש כפול בקופון ראשון
+function getBrowserFingerprint() {
+  var parts = [
+    navigator.userAgent || '',
+    screen.width, screen.height, screen.colorDepth,
+    (Intl && Intl.DateTimeFormat) ? Intl.DateTimeFormat().resolvedOptions().timeZone : '',
+    navigator.language || '',
+    navigator.hardwareConcurrency || 0
+  ].join('|');
+  var h = 5381;
+  for (var i = 0; i < parts.length; i++) h = Math.imul(h, 33) ^ parts.charCodeAt(i);
+  return String(Math.abs(h >>> 0));
+}
+
+function _cpnKey(code){ return 'sv_cpn_' + code.toUpperCase(); }
+
+function markCouponUsed(code) {
+  code = code.toUpperCase();
+  try { localStorage.setItem(_cpnKey(code), '1'); } catch(e){}
+  var exp = new Date(); exp.setFullYear(exp.getFullYear() + 1);
+  document.cookie = _cpnKey(code) + '=1;expires=' + exp.toUTCString() + ';path=/;SameSite=Lax';
+  if (COUPONS[code] && COUPONS[code].firstOnly) {
+    try { localStorage.setItem('sv_fp_' + code, getBrowserFingerprint()); } catch(e){}
+    // cookie נוסף עם fingerprint
+    document.cookie = 'sv_fp_' + code + '=' + getBrowserFingerprint() + ';expires=' + exp.toUTCString() + ';path=/;SameSite=Lax';
+  }
+}
+
+function wasCouponUsed(code) {
+  code = code.toUpperCase();
+  try { if (localStorage.getItem(_cpnKey(code))) return true; } catch(e){}
+  if (document.cookie.indexOf(_cpnKey(code) + '=1') !== -1) return true;
+  // בדיקת fingerprint — גם אם ניקו cache, אם ה-fingerprint מוכר — חסום
+  try {
+    var storedFp = localStorage.getItem('sv_fp_' + code);
+    if (storedFp && storedFp === getBrowserFingerprint()) return true;
+  } catch(e){}
+  // בדיקת cookie fingerprint
+  var fpMatch = document.cookie.match(new RegExp('sv_fp_' + code + '=([^;]+)'));
+  if (fpMatch && fpMatch[1] === getBrowserFingerprint()) return true;
+  return false;
+}
+
+function validateCoupon(code, total) {
+  code = (code || '').trim().toUpperCase();
+  if (!code) return { ok: false, msg: 'הכנס קוד קופון' };
+  var c = COUPONS[code];
+  if (!c) return { ok: false, msg: 'קוד קופון לא קיים' };
+  if (c.firstOnly && wasCouponUsed(code)) {
+    return { ok: false, msg: 'קופון זה כבר מומש — תקף לקנייה ראשונה בלבד' };
+  }
+  var discount = c.type === 'pct' ? Math.round(total * c.value / 100) : Math.min(c.value, total);
+  return { ok: true, code: code, label: c.label, discount: discount, finalTotal: total - discount };
+}
+
 // PayPal Direct Checkout — מעבר ישיר ל-PayPal עם המוצר והמחיר
 function paypalCheckoutLink(product) {
   var params = [
@@ -1130,20 +1193,70 @@ function setQty(id, qty){
   saveCart(c);
 }
 function removeFromCart(id){ saveCart(getCart().filter(function(i){ return i.id!==id; })); }
+
+// ===== Wishlist (רשימת מועדפים) =====
+var WL_KEY = 'sv_wishlist';
+function getWishlist(){ try { return JSON.parse(localStorage.getItem(WL_KEY) || '[]'); } catch(e){ return []; } }
+function saveWishlist(wl){ try { localStorage.setItem(WL_KEY, JSON.stringify(wl)); } catch(e){} }
+function isInWishlist(id){ return getWishlist().indexOf(id) !== -1; }
+function toggleWishlist(id, btn) {
+  var wl = getWishlist();
+  var idx = wl.indexOf(id);
+  if (idx === -1) {
+    wl.push(id); saveWishlist(wl);
+    if (btn) {
+      btn.classList.add('wl-active');
+      btn.setAttribute('aria-label','הסר ממועדפים');
+      if (btn.id === 'pdpWlBtn') btn.textContent = '♥ הסר ממועדפים';
+    }
+    toast('נוסף למועדפים ♥');
+  } else {
+    wl.splice(idx, 1); saveWishlist(wl);
+    if (btn) {
+      btn.classList.remove('wl-active');
+      btn.setAttribute('aria-label','שמור למועדפים');
+      if (btn.id === 'pdpWlBtn') btn.textContent = '♡ שמור למועדפים';
+    }
+    toast('הוסר מהמועדפים');
+  }
+}
+function renderWishlistBtn(productId) {
+  var active = isInWishlist(productId);
+  return '<button class="wl-btn'+(active?' wl-active':'')+'" '+
+    'aria-label="'+(active?'הסר ממועדפים':'שמור למועדפים')+'" '+
+    'onclick="event.preventDefault();event.stopPropagation();toggleWishlist(\''+productId+'\',this)" title="מועדפים">♥</button>';
+}
 function updateCartCount(){
   document.querySelectorAll('.nav-cart-count').forEach(function(el){
     var n = cartCount(); el.textContent = n; el.style.display = n>0 ? 'flex' : 'none';
   });
 }
 
-// צ'קאאוט דרך וואטסאפ — שולח את כל ההזמנה
-function checkoutWhatsApp(){
+// צ'קאאוט דרך וואטסאפ — שולח את כל ההזמנה כולל קופון
+function checkoutWhatsApp(couponCode, discount) {
   var c = getCart();
   if (!c.length){ alert('העגלה ריקה'); return; }
-  var lines = ['שלום SafeView!אני רוצה להזמין:', ''];
-  c.forEach(function(i){ var p=getProduct(i.id); if(p){ var unitPrice = i.price || p.price; lines.push('• ' + p.name + ' × ' + i.qty + ' = ' + fmt(unitPrice*i.qty)); } });
-  lines.push(''); lines.push('סה"כ: ' + fmt(cartTotal()));
-  var ship = cartTotal() >= FREE_SHIP_THRESHOLD ? 'משלוח חינם 🎉' : 'בתוספת משלוח';
+  var lines = ['שלום SafeView! אני רוצה להזמין:', ''];
+  var rawTotal = 0;
+  c.forEach(function(i){
+    var p = getProduct(i.id);
+    if (p) {
+      var unitPrice = i.price || p.price;
+      var lineTotal = unitPrice * i.qty;
+      rawTotal += lineTotal;
+      lines.push('• ' + p.name + ' × ' + i.qty + ' = ' + fmt(lineTotal));
+    }
+  });
+  lines.push('');
+  if (couponCode && discount) {
+    lines.push('סה"כ לפני הנחה: ' + fmt(rawTotal));
+    lines.push('קופון ' + couponCode + ': -' + fmt(discount));
+    lines.push('סה"כ לתשלום: ' + fmt(rawTotal - discount));
+    markCouponUsed(couponCode);
+  } else {
+    lines.push('סה"כ: ' + fmt(rawTotal));
+  }
+  var ship = rawTotal >= FREE_SHIP_THRESHOLD ? 'משלוח חינם' : 'בתוספת משלוח';
   lines.push('(' + ship + ')');
   window.open(waLink(lines.join('\n')), '_blank');
 }
@@ -1328,11 +1441,12 @@ function injectChrome(active){
     ['index.html#products','מוצרים'],
     ['deals.html','🔥 מבצעים'],
     ['collection.html?type=best-sellers','הנמכרים ביותר'],
+    ['solar-landing.html','☀️ סולאריות'],
     ['buying-guide.html','איזו מצלמה לי?'],
     ['compare.html','השוואה'],
     ['blog.html','מדריכים'],
+    ['order-tracking.html','מעקב הזמנה'],
     ['about.html','אודות'],
-    ['faq.html','שאלות נפוצות'],
     ['contact.html','צור קשר']
   ];
   var navHtml =
