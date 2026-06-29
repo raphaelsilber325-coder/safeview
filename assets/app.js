@@ -7,6 +7,8 @@ var STORE_EMAIL = 'info@safeview.co.il';
 var FREE_SHIP_THRESHOLD = 200;
 // PAYPAL_EMAIL — מייל PayPal Business של החנות (יש לעדכן למייל אמיתי כשנפתח חשבון)
 var PAYPAL_EMAIL = 'raphaelsilber325@gmail.com';
+// PAYPAL_NCP_URL — קישור PayPal Checkout (תומך Apple Pay + כרטיס אשראי)
+var PAYPAL_NCP_URL = 'https://www.paypal.com/ncp/payment/FH3UFQD52W4PC';
 // PAYPLUS_URL — קישור לדף התשלום ב-PayPlus (העתק מהדאשבורד שלך)
 var PAYPLUS_URL = '';
 var SITE_URL = 'https://raphaelsilber325-coder.github.io/safeview/';
