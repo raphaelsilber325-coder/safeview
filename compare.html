@@ -72,6 +72,10 @@
     </table>
   </div>
 
+  <div style="margin-top:16px;padding:14px 18px;background:var(--bg2);border:1px solid var(--border);border-radius:10px;font-size:13px;color:var(--text2)">
+    🎁 <strong style="color:var(--text)">חבילות המבצע</strong> לא מופיעות בטבלה — הן כוללות מספר מצלמות ואין להשוות ביניהן. <a href="index.html#bundles" style="color:var(--blue)">לצפייה בחבילות ←</a>
+  </div>
+
   <div class="content" style="margin-top:48px;padding:0">
     <h2>איך לבחור את המצלמה הנכונה?</h2>
     <ul>
@@ -144,7 +148,7 @@
   }
 
   function renderTable(){
-    var rows = PRODUCTS.filter(function(p){ return currentCat==='הכל' || p.cat===currentCat; });
+    var rows = PRODUCTS.filter(function(p){ return p.cat !== 'חבילות' && (currentCat==='הכל' || p.cat===currentCat); });
     document.getElementById('cmpBody').innerHTML = rows.map(function(p){
       var s = CMP_SPECS[p.id] || {};
       var msg = 'שלום SafeView! אני מעוניין/ת בייעוץ לגבי: ' + p.name + ' (' + fmt(p.price) + ').';
