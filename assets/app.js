@@ -11,10 +11,9 @@ var SITE_URL = 'https://raphaelsilber325-coder.github.io/safeview/';
 
 // ===== מערכת קופונים =====
 var COUPONS = {
-  'WELCOME10': { type: 'pct',   value: 10, firstOnly: true,  label: '10% הנחה - ברוך הבא!' },
-  'SAFE15':    { type: 'pct',   value: 15, firstOnly: false, label: '15% הנחה על כל הקנייה' },
-  'SAFE25':    { type: 'pct',   value: 25, firstOnly: false, label: '25% הנחה על כל הקנייה' },
-  'FRIEND50':  { type: 'fixed', value: 50, firstOnly: false, label: '50₪ הנחה מחבר/ה' }
+  'WELCOME10': { type: 'pct',   value: 10, firstOnly: true,  minOrder: 0,   label: '10% הנחה - ברוך הבא!' },
+  'SAFE15':    { type: 'pct',   value: 15, firstOnly: false, minOrder: 500, label: '15% הנחה על קנייה מעל ₪500' },
+  'FRIEND50':  { type: 'fixed', value: 25, firstOnly: false, minOrder: 200, label: '25₪ הנחה לחבר/ה על קנייה מעל ₪200' }
 };
 
 // fingerprint דפדפן — מונע שימוש כפול בקופון ראשון
@@ -60,13 +59,17 @@ function wasCouponUsed(code) {
   return false;
 }
 
-function validateCoupon(code, total) {
+function validateCoupon(code, total, activeCoupon) {
   code = (code || '').trim().toUpperCase();
   if (!code) return { ok: false, msg: 'הכנס קוד קופון' };
   var c = COUPONS[code];
   if (!c) return { ok: false, msg: 'קוד קופון לא קיים' };
+  if (activeCoupon && activeCoupon !== code) return { ok: false, msg: 'לא ניתן לצבור קופונים — הסר את הקופון הקיים תחילה' };
   if (c.firstOnly && wasCouponUsed(code)) {
     return { ok: false, msg: 'קופון זה כבר מומש — תקף לקנייה ראשונה בלבד' };
+  }
+  if (c.minOrder && total < c.minOrder) {
+    return { ok: false, msg: 'קופון זה תקף על קנייה מעל ' + fmt(c.minOrder) + ' בלבד' };
   }
   var discount = c.type === 'pct' ? Math.round(total * c.value / 100) : Math.min(c.value, total);
   return { ok: true, code: code, label: c.label, discount: discount, finalTotal: total - discount };
@@ -93,7 +96,7 @@ function paypalCheckoutLink(product) {
 // הודעת "שלח לחבר" — חברך מקבל קופון 50₪ הנחה
 function buildFriendShareMsg(product) {
   return 'היי, מצאתי מצלמה מגניבה שחשבתי שתתאים לך – ' + product.name + ' (' + fmt(product.price) + ').\n\n' +
-    'היש גם קופון מיוחד: השתמש בקוד FRIEND50 ותקבל 50₪ הנחה בקנייה הראשונה!\n\n' +
+    'יש גם קופון מיוחד: השתמש בקוד FRIEND50 ותקבל 25₪ הנחה על קנייה מעל ₪200!\n\n' +
     'להזמנה: ' + SITE_URL + 'product.html?id=' + product.id + '\n\n' +
     'ממליץ בחם! 🛡️';
 }
@@ -303,8 +306,24 @@ var PRODUCT_REVIEWS = {
 };
 
 // ===== עזרים למערכת הביקורות =====
+// מוסיף variance לכוכבים — מונע שכל מוצר יראה 5/5 מושלם (לא ריאלי)
+function _spreadRatings(reviews, productId) {
+  var h = 5381;
+  for (var i = 0; i < productId.length; i++) h = Math.imul(h, 33) ^ productId.charCodeAt(i);
+  h = Math.abs(h >>> 0);
+  return reviews.map(function(r, idx) {
+    if (r.rating < 5) return r; // לא משנה ביקורות שכבר לא 5
+    var seed = (h ^ (idx * 2654435761)) >>> 0;
+    var roll = seed % 10;
+    if (roll === 0) return Object.assign({}, r, { rating: 3 }); // 10% → 3 כוכבים
+    if (roll <= 2) return Object.assign({}, r, { rating: 4 }); // 20% → 4 כוכבים
+    return r; // 70% נשאר 5
+  });
+}
+
 function getProductReviews(productId) {
-  return PRODUCT_REVIEWS[productId] || [];
+  var reviews = PRODUCT_REVIEWS[productId] || [];
+  return _spreadRatings(reviews, productId);
 }
 
 function getReviewSummary(productId) {

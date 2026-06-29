@@ -118,7 +118,9 @@
     var code = input.value.trim().toUpperCase();
     var result = document.getElementById('cpnResult');
     var rawTotal = getCart().reduce(function(s,i){ var p = getProduct(i.id); return s + (p ? (i.price||p.price)*i.qty : 0); }, 0);
-    var v = validateCoupon(code, rawTotal);
+    var existingCoupon = null;
+    try { var ec = JSON.parse(sessionStorage.getItem('sv_cart_coupon') || 'null'); existingCoupon = ec && ec.code; } catch(e){}
+    var v = validateCoupon(code, rawTotal, existingCoupon);
     if (v.ok) {
       sessionStorage.setItem('sv_cart_coupon', JSON.stringify({ code: v.code, label: v.label, discount: v.discount }));
       renderCart();
