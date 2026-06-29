@@ -7,7 +7,16 @@ var STORE_EMAIL = 'info@safeview.co.il';
 var FREE_SHIP_THRESHOLD = 200;
 // PAYPAL_EMAIL — מייל PayPal Business של החנות (יש לעדכן למייל אמיתי כשנפתח חשבון)
 var PAYPAL_EMAIL = 'raphaelsilber325@gmail.com';
+// PAYPLUS_URL — קישור לדף התשלום ב-PayPlus (העתק מהדאשבורד שלך)
+var PAYPLUS_URL = '';
 var SITE_URL = 'https://raphaelsilber325-coder.github.io/safeview/';
+
+// ===== שיטות משלוח =====
+var SHIPPING_METHODS = [
+  { id: 'post',   label: 'דואר ישראל',  days: '5-7 ימי עסקים', price: 29 },
+  { id: 'yello',  label: 'יילו אקספרס', days: '2-3 ימי עסקים', price: 49 }
+];
+var SHIP_STORAGE_KEY = 'sv_ship_method';
 
 // ===== מערכת קופונים =====
 var COUPONS = {
@@ -91,6 +100,26 @@ function paypalCheckoutLink(product) {
     'lc=IL'
   ].join('&');
   return 'https://www.paypal.com/cgi-bin/webscr?' + params;
+}
+
+// PayPlus — סליקה ישראלית
+function payPlusLink(total) {
+  if (!PAYPLUS_URL) return '#';
+  var url = PAYPLUS_URL.replace(/\/$/, '');
+  return url + (url.indexOf('?') === -1 ? '?' : '&') + 'amount=' + total;
+}
+
+// שיטת משלוח — שמור/קרא
+function getShipMethod() {
+  try { return JSON.parse(sessionStorage.getItem(SHIP_STORAGE_KEY) || 'null'); } catch(e) { return null; }
+}
+function setShipMethod(id) {
+  var m = SHIPPING_METHODS.filter(function(s){ return s.id === id; })[0];
+  if (m) sessionStorage.setItem(SHIP_STORAGE_KEY, JSON.stringify(m));
+}
+function getShipCost(rawTotal, method) {
+  if (!method) return 0;
+  return rawTotal >= FREE_SHIP_THRESHOLD ? 0 : method.price;
 }
 
 // הודעת "שלח לחבר" — חברך מקבל קופון 50₪ הנחה
@@ -1251,8 +1280,8 @@ function updateCartCount(){
   });
 }
 
-// צ'קאאוט דרך וואטסאפ — שולח את כל ההזמנה כולל קופון
-function checkoutWhatsApp(couponCode, discount) {
+// צ'קאאוט דרך וואטסאפ — שולח את כל ההזמנה כולל קופון ושיטת משלוח
+function checkoutWhatsApp(couponCode, discount, shipMethod) {
   var c = getCart();
   if (!c.length){ alert('העגלה ריקה'); return; }
   var lines = ['שלום SafeView! אני רוצה להזמין:', ''];
@@ -1267,16 +1296,21 @@ function checkoutWhatsApp(couponCode, discount) {
     }
   });
   lines.push('');
+  var afterCoupon = rawTotal - (discount || 0);
   if (couponCode && discount) {
     lines.push('סה"כ לפני הנחה: ' + fmt(rawTotal));
     lines.push('קופון ' + couponCode + ': -' + fmt(discount));
-    lines.push('סה"כ לתשלום: ' + fmt(rawTotal - discount));
     markCouponUsed(couponCode);
-  } else {
-    lines.push('סה"כ: ' + fmt(rawTotal));
   }
-  var ship = rawTotal >= FREE_SHIP_THRESHOLD ? 'משלוח חינם' : 'בתוספת משלוח';
-  lines.push('(' + ship + ')');
+  var shipCost = shipMethod ? getShipCost(rawTotal, shipMethod) : 0;
+  var grandTotal = afterCoupon + shipCost;
+  if (shipMethod) {
+    var shipLabel = shipCost === 0 ? shipMethod.label + ' (חינם)' : shipMethod.label + ' ' + fmt(shipCost);
+    lines.push('משלוח: ' + shipLabel + ' — ' + shipMethod.days);
+  } else {
+    lines.push(rawTotal >= FREE_SHIP_THRESHOLD ? 'משלוח: חינם' : 'משלוח: לפי בחירה');
+  }
+  lines.push('סה"כ לתשלום: ' + fmt(grandTotal));
   window.open(waLink(lines.join('\n')), '_blank');
   // מנקה עגלה וקופון אחרי שליחת ההזמנה
   try { localStorage.removeItem('sv_cart'); } catch(e) {}

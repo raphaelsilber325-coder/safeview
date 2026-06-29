@@ -78,6 +78,12 @@
         '</div>' +
       '</div>';
 
+      // שיטת משלוח
+      var _ship = getShipMethod();
+      var shipCost = _ship ? getShipCost(rawTotal, _ship) : 0;
+      var afterCoupon = rawTotal - discount;
+      var grandTotal = afterCoupon + shipCost;
+
       var discountRow = discount > 0
         ? '<div class="cart-row cart-discount-row"><span>הנחת קופון ('+_coupon.code+')</span><span>-'+fmt(discount)+'</span></div>'
         : '';
@@ -85,29 +91,52 @@
         ? '<div class="coupon-result ok">✓ קופון <strong>'+_coupon.code+'</strong> — '+_coupon.label+'<button class="coupon-remove" onclick="removeCoupon()" aria-label="הסר קופון">×</button></div>'
         : '<div class="coupon-result" id="cpnResult"></div>';
 
+      var shipMethodsHtml = '<div class="cart-ship">' +
+        '<div class="cart-ship-title">🚚 שיטת משלוח</div>' +
+        SHIPPING_METHODS.map(function(m){
+          var cost = getShipCost(rawTotal, m);
+          var label = cost === 0 ? '<span class="ship-free">חינם!</span>' : fmt(cost);
+          return '<label class="ship-option'+((_ship && _ship.id === m.id) ? ' ship-selected' : '')+'">' +
+            '<input type="radio" name="ship" value="'+m.id+'"'+(_ship && _ship.id === m.id ? ' checked' : '')+' onchange="pickShip(\''+m.id+'\')">' +
+            '<span class="ship-name">'+m.label+'</span>' +
+            '<span class="ship-days">'+m.days+'</span>' +
+            '<span class="ship-price">'+label+'</span>' +
+          '</label>';
+        }).join('') +
+      '</div>';
+
+      var shipRow = _ship
+        ? '<div class="cart-row"><span>משלוח ('+_ship.label+')</span><span>'+(shipCost===0?'<span style="color:var(--accent)">חינם</span>':fmt(shipCost))+'</span></div>'
+        : '';
+
+      var ppLink = PAYPLUS_URL ? payPlusLink(grandTotal) : '';
+
       wrap.innerHTML = itemsHtml +
         '<div class="cart-summary">' +
           '<div class="cart-row"><span>סכום ביניים</span><span>'+fmt(rawTotal)+'</span></div>' +
           discountRow +
+          shipRow +
           shipMsg +
-          '<div class="cart-total"><span>סה"כ לתשלום</span><strong>'+fmt(total)+'</strong></div>' +
+          shipMethodsHtml +
+          '<div class="cart-total"><span>סה"כ לתשלום</span><strong>'+fmt(grandTotal)+'</strong></div>' +
           '<div class="cart-coupon">' +
             '<input type="text" id="cpnInput" placeholder="יש לך קוד קופון?" class="cart-coupon-input" dir="ltr" style="text-transform:uppercase" oninput="this.value=this.value.toUpperCase()" onkeydown="if(event.key===\'Enter\')applyCartCoupon()">' +
             '<button class="cart-coupon-btn" onclick="applyCartCoupon()">החל</button>' +
           '</div>' +
           couponResultHtml +
           '<button class="btn-wa" style="width:100%;margin-top:10px;padding:13px" id="waCheckoutBtn" onclick="doWaCheckout()">'+ICON.wa+' הזמן בוואטסאפ</button>' +
+          (ppLink ? '<a class="btn-payplus" style="width:100%;margin-top:8px" href="'+ppLink+'" target="_blank" rel="noopener">💳 שלם בכרטיס אשראי (PayPlus)</a>' : '') +
           '<a class="btn-paypal" style="width:100%;margin-top:8px" id="paypalBtn" href="#" target="_blank" rel="noopener">'+ICON.paypal+' שלם ב-PayPal</a>' +
           '<a class="btn-secondary" style="width:100%;margin-top:10px;justify-content:center" href="index.html#products">המשך בקנייה</a>' +
         '</div>';
 
-      // PayPal link — מוצר ראשון בעגלה (ל-MVP, ניתן לשדרג לסל מלא)
+      // PayPal link עם הסכום הסופי (אחרי קופון + משלוח)
       (function(){
         var btn = document.getElementById('paypalBtn');
         if (!btn) return;
         var firstItem = c[0];
         var fp = map[firstItem.id] || getProduct(firstItem.id);
-        if (fp) btn.href = paypalCheckoutLink({ id: fp.id, name: fp.name, price: total, img: fp.img });
+        if (fp) btn.href = paypalCheckoutLink({ id: fp.id, name: fp.name, price: grandTotal, img: fp.img });
       })();
     });
   }
@@ -134,10 +163,20 @@
     renderCart();
   };
 
+  window.pickShip = function(id) {
+    setShipMethod(id);
+    document.querySelectorAll('.ship-option').forEach(function(el){ el.classList.remove('ship-selected'); });
+    var sel = document.querySelector('.ship-option input[value="'+id+'"]');
+    if (sel) sel.closest('.ship-option').classList.add('ship-selected');
+    renderCart();
+  };
+
   window.doWaCheckout = function() {
     var coupon = null;
     try { coupon = JSON.parse(sessionStorage.getItem('sv_cart_coupon') || 'null'); } catch(e){}
-    checkoutWhatsApp(coupon ? coupon.code : null, coupon ? coupon.discount : 0);
+    var ship = getShipMethod();
+    if (!ship) { alert('בחר שיטת משלוח לפני ביצוע ההזמנה'); return; }
+    checkoutWhatsApp(coupon ? coupon.code : null, coupon ? coupon.discount : 0, ship);
   };
 
   function chg(id, d){ var it = getCart().filter(function(i){return i.id===id;})[0]; if(it){ setQty(id, it.qty + d); renderCart(); } }
