@@ -140,6 +140,12 @@
       galleryHtml = '<div class="pdp-gallery"><img src="'+p.img+'" alt="'+p.name+'">' + (p.badge ? '<div class="pdp-badge">'+p.badge+'</div>' : '') + '</div>';
     }
 
+    // "מה כלול" מתחת לתמונה
+    var inboxItems = (PRODUCT_INBOX[p.id] || ['מצלמה × 1', 'ערכת התקנה', 'מדריך למשתמש']);
+    galleryHtml += '<div class="pdp-inbox-under-img"><strong>📦 מה כלול בקופסה:</strong><ul>' +
+      inboxItems.map(function(item){ return '<li>'+item+'</li>'; }).join('') +
+    '</ul></div>';
+
     // variant selector
     var variantHtml = '';
     if (p.variants && p.variants.length > 1) {
@@ -209,7 +215,6 @@
           '</div>' +
           '<div class="prod-body"><a class="prod-name" href="product.html?id='+x.id+'">'+x.name+'</a>' +
             renderReviewSummaryInline(x.id) +
-            getCompactInbox(x.id) +
             '<div class="prod-footer">' +
               (function(){
                 var oldP = getOldPrice(x);

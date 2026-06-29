@@ -83,7 +83,6 @@ document.addEventListener('DOMContentLoaded', function(){
         '</div>' +
         '<div class="prod-body"><a class="prod-name" href="product.html?id='+p.id+'">'+p.name+'</a>' +
           renderReviewSummaryInline(p.id) +
-          getCompactInbox(p.id) +
           '<div class="prod-footer"><span class="prod-price-wrap"><span class="prod-price-old">'+fmt(oldP.price)+'</span><span class="prod-price">'+fmt(p.price)+'</span></span><span class="prod-stock">במלאי</span></div>' +
           getLowStockBadge(p.id) +
           '<div class="prod-actions"><button class="prod-add" onclick="addToCart(\''+p.id+'\')">הוסף לעגלה</button>' +

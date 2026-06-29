@@ -103,7 +103,6 @@ function renderCollection() {
       '<div class="prod-body">' +
         '<a class="prod-name" href="product.html?id='+p.id+'">'+p.name+'</a>' +
         renderReviewSummaryInline(p.id) +
-        getCompactInbox(p.id) +
         '<div class="prod-footer">' +
           (oldP ?
             '<span class="prod-price-wrap"><span class="prod-price-old">'+fmt(oldP.price)+'</span><span class="prod-price">'+fmt(p.price)+'</span><span class="prod-discount-tag">-'+oldP.pct+'%</span></span>' :
