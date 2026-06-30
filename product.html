@@ -181,7 +181,7 @@
           '<div class="pdp-sticky-price">'+fmt(p.price)+'</div>' +
           '<button class="btn-primary" onclick="addToCart(\''+p.id+'\',1,window._selVid,window._selPrice)">הוסף לעגלה</button>' +
         '</div>' +
-        (p.specs && p.specs.length ?<div class="pdp-specs">'+p.specs.map(function(sp){ return '<div class="pdp-spec"><span>'+sp[0]+'</span><span>'+sp[1]+'</span></div>'; }).join('')+'</div>' : '') +
+        (p.specs && p.specs.length ? '<div class="pdp-specs">'+p.specs.map(function(sp){ return '<div class="pdp-spec"><span>'+sp[0]+'</span><span>'+sp[1]+'</span></div>'; }).join('')+'</div>' : '') +
         '<div class="pdp-trust">' +
           '<div><span class="pdp-trust-icon">'+ICON.truck+'</span>משלוח חינם בהזמנה מעל ₪200</div>' +
           '<div><span class="pdp-trust-icon">'+ICON.shield+'</span>אחריות מלאה לשנה + תמיכה בעברית</div>' +

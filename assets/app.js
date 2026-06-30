@@ -97,7 +97,7 @@ function paypalCheckoutLink(product) {
     'currency_code=ILS',
     'no_shipping=2',
     'return=' + encodeURIComponent(SITE_URL + 'thank-you.html'),
-    'cancel_return=' + encodeURIComponent(SITE_URL + 'product.html?id=' + product.id),
+    'cancel_return=' + encodeURIComponent(SITE_URL + (product.id === 'cart' ? 'cart.html' : 'product.html?id=' + product.id)),
     'image_url=' + encodeURIComponent(product.img),
     'lc=IL'
   ].join('&');
