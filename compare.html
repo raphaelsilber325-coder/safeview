@@ -167,6 +167,9 @@
 
   // המתן ל-DOMContentLoaded ש-injectChrome ירוץ קודם
   function init(){
+    // אם הגענו מעמוד מוצר עם ?cat=, סנן אוטומטית
+    var urlCat = new URLSearchParams(location.search).get('cat');
+    if (urlCat && CATS.indexOf(urlCat) !== -1) currentCat = urlCat;
     renderFilters();
     renderTable();
     var help = document.getElementById('cmpHelp');
