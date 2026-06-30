@@ -352,25 +352,43 @@ function _spreadRatings(reviews, productId) {
   });
 }
 
+function getUserReviews(productId) {
+  try {
+    return JSON.parse(localStorage.getItem('sv_reviews_' + productId) || '[]');
+  } catch(e) { return []; }
+}
+
+function saveUserReview(productId, review) {
+  var existing = getUserReviews(productId);
+  existing.unshift(review);
+  try { localStorage.setItem('sv_reviews_' + productId, JSON.stringify(existing)); } catch(e) {}
+}
+
 function getProductReviews(productId) {
-  var reviews = PRODUCT_REVIEWS[productId] || [];
-  return _spreadRatings(reviews, productId);
+  var static_ = _spreadRatings(PRODUCT_REVIEWS[productId] || [], productId);
+  var user = getUserReviews(productId);
+  return user.concat(static_);
 }
 
 function getReviewSummary(productId) {
-  var reviews = getProductReviews(productId);
-  if (!reviews.length) return null;
-  // ממוצע דטרמיניסטי בין 4.1 ל-4.9 — נראה אמין יותר מעיגול למספרים שלמים
+  var userRevs = getUserReviews(productId);
+  var staticRevs = _spreadRatings(PRODUCT_REVIEWS[productId] || [], productId);
+  var total = userRevs.length + staticRevs.length;
+  if (!total) return null;
+
+  if (userRevs.length) {
+    // ממוצע אמיתי כשיש ביקורות משתמש
+    var sum = 0;
+    userRevs.forEach(function(r){ sum += r.rating; });
+    staticRevs.forEach(function(r){ sum += r.rating; });
+    return { count: total, avg: Math.round((sum / total) * 10) / 10 };
+  }
+  // ממוצע דטרמיניסטי בין 4.1 ל-4.8 לביקורות סטטיות בלבד
   var h = 5381;
   for (var i = 0; i < productId.length; i++) h = Math.imul(h, 33) ^ productId.charCodeAt(i);
   h = Math.abs(h >>> 0);
   var decimals = [1, 2, 3, 4, 5, 6, 7, 8];
-  var dec = decimals[h % decimals.length];
-  var avg = 4 + dec / 10; // בין 4.1 ל-4.8
-  return {
-    count: reviews.length,
-    avg: avg
-  };
+  return { count: total, avg: 4 + decimals[h % decimals.length] / 10 };
 }
 
 function renderStars(rating, size) {
@@ -427,6 +445,33 @@ function renderReviewsSection(productId) {
       '</article>';
   }).join('');
 
+  var formHtml =
+    '<section class="rev-form-wrap" id="rev-form-wrap">' +
+      '<h3 class="rev-form-title">✍️ כתוב ביקורת</h3>' +
+      '<div class="rev-star-picker" id="rev-star-picker" role="group" aria-label="בחר דירוג">' +
+        '<span class="rsp-star" data-v="1" onclick="setRevStar(1)" onmouseenter="hoverRevStar(1)" onmouseleave="hoverRevStar(0)" tabindex="0" role="radio" aria-label="כוכב 1">★</span>' +
+        '<span class="rsp-star" data-v="2" onclick="setRevStar(2)" onmouseenter="hoverRevStar(2)" onmouseleave="hoverRevStar(0)" tabindex="0" role="radio" aria-label="כוכב 2">★</span>' +
+        '<span class="rsp-star" data-v="3" onclick="setRevStar(3)" onmouseenter="hoverRevStar(3)" onmouseleave="hoverRevStar(0)" tabindex="0" role="radio" aria-label="כוכב 3">★</span>' +
+        '<span class="rsp-star" data-v="4" onclick="setRevStar(4)" onmouseenter="hoverRevStar(4)" onmouseleave="hoverRevStar(0)" tabindex="0" role="radio" aria-label="כוכב 4">★</span>' +
+        '<span class="rsp-star" data-v="5" onclick="setRevStar(5)" onmouseenter="hoverRevStar(5)" onmouseleave="hoverRevStar(0)" tabindex="0" role="radio" aria-label="כוכב 5">★</span>' +
+      '</div>' +
+      '<div id="rev-star-err" class="rev-field-err" style="display:none">אנא בחר דירוג</div>' +
+      '<div class="rev-form-row">' +
+        '<input class="rev-input" id="rev-name" type="text" placeholder="שמך" maxlength="40">' +
+        '<div id="rev-name-err" class="rev-field-err" style="display:none">אנא הזן שם</div>' +
+      '</div>' +
+      '<div class="rev-form-row">' +
+        '<input class="rev-input" id="rev-title" type="text" placeholder="כותרת הביקורת" maxlength="80">' +
+        '<div id="rev-title-err" class="rev-field-err" style="display:none">אנא הזן כותרת</div>' +
+      '</div>' +
+      '<div class="rev-form-row">' +
+        '<textarea class="rev-input rev-textarea" id="rev-text" placeholder="ספר לנו על חוויית השימוש..." maxlength="1000" rows="4"></textarea>' +
+        '<div id="rev-text-err" class="rev-field-err" style="display:none">אנא כתוב ביקורת</div>' +
+      '</div>' +
+      '<button class="rev-submit-btn" onclick="submitReview(\'' + productId + '\')">פרסם ביקורת</button>' +
+      '<div id="rev-success" class="rev-success" style="display:none">✅ תודה! הביקורת שלך פורסמה.</div>' +
+    '</section>';
+
   return '<section class="pdp-reviews" id="reviews">' +
     '<header class="pdp-reviews-head">' +
       '<h2>⭐ ביקורות לקוחות</h2>' +
@@ -439,8 +484,94 @@ function renderReviewsSection(productId) {
         '<div class="rev-dist">' + distHtml + '</div>' +
       '</div>' +
     '</header>' +
-    '<div class="pdp-reviews-list">' + reviewsHtml + '</div>' +
+    '<div class="pdp-reviews-list" id="pdp-reviews-list">' + reviewsHtml + '</div>' +
+    formHtml +
     '</section>';
+}
+
+window._revStar = 0;
+
+window.setRevStar = function(n) {
+  window._revStar = n;
+  document.querySelectorAll('#rev-star-picker .rsp-star').forEach(function(el){
+    el.classList.toggle('on', parseInt(el.dataset.v) <= n);
+  });
+  var err = document.getElementById('rev-star-err');
+  if (err) err.style.display = 'none';
+};
+
+window.hoverRevStar = function(n) {
+  document.querySelectorAll('#rev-star-picker .rsp-star').forEach(function(el){
+    el.classList.toggle('hover', parseInt(el.dataset.v) <= (n || 0));
+    el.classList.toggle('on', !n && parseInt(el.dataset.v) <= window._revStar);
+  });
+};
+
+window.submitReview = function(productId) {
+  var rating = window._revStar;
+  var name   = (document.getElementById('rev-name')  || {}).value || '';
+  var title  = (document.getElementById('rev-title') || {}).value || '';
+  var text   = (document.getElementById('rev-text')  || {}).value || '';
+  var ok = true;
+
+  var starErr  = document.getElementById('rev-star-err');
+  var nameErr  = document.getElementById('rev-name-err');
+  var titleErr = document.getElementById('rev-title-err');
+  var textErr  = document.getElementById('rev-text-err');
+
+  if (!rating)         { if (starErr)  starErr.style.display  = 'block'; ok = false; }
+  if (!name.trim())    { if (nameErr)  nameErr.style.display  = 'block'; ok = false; }
+  if (!title.trim())   { if (titleErr) titleErr.style.display = 'block'; ok = false; }
+  if (!text.trim())    { if (textErr)  textErr.style.display  = 'block'; ok = false; }
+  if (!ok) return;
+
+  var review = {
+    name: escHtml(name.trim().slice(0, 40)),
+    title: escHtml(title.trim().slice(0, 80)),
+    text: escHtml(text.trim().slice(0, 1000)),
+    rating: rating,
+    date: new Date().toISOString().slice(0, 10),
+    verified: false,
+    user: true
+  };
+
+  saveUserReview(productId, review);
+
+  var successEl = document.getElementById('rev-success');
+  var formWrap  = document.getElementById('rev-form-wrap');
+  if (successEl) successEl.style.display = 'block';
+  if (formWrap) {
+    formWrap.querySelectorAll('input, textarea, button.rev-submit-btn').forEach(function(el){ el.disabled = true; });
+  }
+
+  var list = document.getElementById('pdp-reviews-list');
+  if (list) {
+    var item = document.createElement('article');
+    item.className = 'rev-item rev-item-new';
+    item.innerHTML =
+      '<header class="rev-item-head">' +
+        '<div>' +
+          '<div class="rev-item-name">' + review.name + ' <span class="rev-new-badge">חדש</span></div>' +
+          renderStars(rating, 13) +
+        '</div>' +
+        '<time class="rev-item-date">' + formatDateHe(review.date) + '</time>' +
+      '</header>' +
+      '<h4 class="rev-item-title">' + review.title + '</h4>' +
+      '<p class="rev-item-text">' + review.text + '</p>';
+    list.insertBefore(item, list.firstChild);
+  }
+
+  var sum = getReviewSummary(productId);
+  if (sum) {
+    var bigNum = document.querySelector('.rev-big-num');
+    if (bigNum) bigNum.textContent = sum.avg.toFixed(1);
+    var bigCount = document.querySelector('.rev-big-count');
+    if (bigCount) bigCount.textContent = sum.count + ' ביקורות';
+  }
+};
+
+function escHtml(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
 function formatDateHe(iso) {

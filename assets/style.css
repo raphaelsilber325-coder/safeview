@@ -846,6 +846,31 @@ html.a11y-motion *::after {
 }
 
 
+/* ===== Review Form ===== */
+.rev-form-wrap { margin-top: 40px; padding: 28px 32px; background: var(--bg3); border-radius: 14px; border: 1px solid var(--border2); }
+.rev-form-title { font-size: 20px; font-weight: 500; color: var(--text); margin: 0 0 20px; }
+.rev-star-picker { display: flex; flex-direction: row-reverse; gap: 6px; margin-bottom: 6px; }
+.rsp-star { font-size: 36px; cursor: pointer; color: var(--border2); transition: color .15s, transform .1s; user-select: none; line-height: 1; }
+.rsp-star.on, .rsp-star.hover { color: #f5a623; }
+.rsp-star:hover { transform: scale(1.2); }
+.rev-field-err { font-size: 12px; color: #e05c5c; margin: 4px 0 0; }
+.rev-form-row { margin-top: 14px; }
+.rev-input { width: 100%; box-sizing: border-box; background: var(--bg2); border: 1px solid var(--border2); border-radius: 8px; padding: 10px 14px; color: var(--text); font-size: 14px; font-family: inherit; outline: none; transition: border-color .2s; direction: rtl; }
+.rev-input:focus { border-color: var(--blue); }
+.rev-input:disabled { opacity: .5; cursor: not-allowed; }
+.rev-textarea { resize: vertical; min-height: 90px; }
+.rev-submit-btn { margin-top: 18px; padding: 11px 32px; background: var(--blue); color: #fff; border: none; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; font-family: inherit; transition: background .2s, opacity .2s; }
+.rev-submit-btn:hover { background: #5aabff; }
+.rev-submit-btn:disabled { opacity: .5; cursor: not-allowed; }
+.rev-success { margin-top: 14px; padding: 12px 16px; background: rgba(0,180,120,.12); border-radius: 8px; color: #00b478; font-size: 14px; font-weight: 600; }
+.rev-item-new { border-color: var(--blue) !important; animation: revFadeIn .4s ease; }
+.rev-new-badge { font-size: 11px; color: var(--blue); background: rgba(58,159,255,.12); padding: 2px 8px; border-radius: 12px; font-weight: 500; margin-right: 6px; }
+@keyframes revFadeIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
+@media (max-width: 600px) {
+  .rev-form-wrap { padding: 20px 16px; }
+  .rsp-star { font-size: 30px; }
+}
+
 /* ===== UX Features ===== */
 /* ספירה לאחור */
 .countdown-bar { display: flex; align-items: center; justify-content: center; gap: 16px; padding: 12px 20px; background: linear-gradient(90deg, rgba(255,80,0,.15), rgba(255,130,0,.1), rgba(255,80,0,.15)); border: 1px solid rgba(255,130,0,.3); border-radius: 10px; margin: 16px 0 24px; flex-wrap: wrap; }
