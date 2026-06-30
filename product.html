@@ -248,7 +248,20 @@
     if (rWa) rWa.href = waLink('שלום SafeView! רכשתי את ' + p.name + ' ואני רוצה לשתף חוות דעת.');
   }
 
-  fetchShopifyProduct(id).then(renderPdp);
+  fetchShopifyProduct(id).then(function(p) {
+    if (!p) {
+      document.getElementById('pdp').innerHTML =
+        '<div style="text-align:center;padding:60px 24px 80px;max-width:480px;margin:0 auto">' +
+          '<div style="font-size:56px;margin-bottom:20px">📷</div>' +
+          '<h2 style="font-family:Rajdhani,sans-serif;font-size:26px;margin-bottom:12px">מוצר לא נמצא</h2>' +
+          '<p style="color:var(--text2);margin-bottom:28px;line-height:1.7">לא הצלחנו למצוא את המוצר המבוקש.<br>ייתכן שהקישור שגוי או שהמוצר הוסר.</p>' +
+          '<a href="index.html#products" class="btn-primary" style="display:inline-flex;justify-content:center;padding:14px 32px;text-decoration:none">← חזרה לכל המצלמות</a>' +
+        '</div>';
+      document.title = 'מוצר לא נמצא | SafeView';
+      return;
+    }
+    renderPdp(p);
+  });
 </script>
 
 </body>

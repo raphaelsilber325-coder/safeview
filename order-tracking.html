@@ -82,7 +82,7 @@
     <h2>בדוק סטטוס הזמנה</h2>
     <div class="track-input-row">
       <input class="track-input" id="orderNum" type="text" placeholder="SV-2026-XXXXX" maxlength="20">
-      <button class="track-btn" onclick="trackOrder()">חפש</button>
+      <button class="track-btn" onclick="trackOrder()">בדוק סטטוס</button>
     </div>
     <div class="track-result" id="trackResult"></div>
   </div>
@@ -91,17 +91,27 @@
   <div class="track-wa-box">
     <h3>לא מצאת את ההזמנה?</h3>
     <p>פנה אלינו ישירות בוואטסאפ עם מספר ההזמנה ונעדכן אותך בזמן אמת.</p>
-    <a class="btn-wa" id="trackWa" href="#" style="display:inline-flex;padding:13px 28px">שלח הודעה בוואטסאפ</a>
+    <a class="btn-wa" id="trackWa" href="#" style="display:inline-flex;padding:13px 28px"><span id="trackWaLabel">שלח הודעה בוואטסאפ</span></a>
   </div>
 </div>
 
 <div id="footer-mount"></div>
 <script src="assets/app.js"></script>
 <script>
-  document.getElementById('trackWa').href = waLink('שלום SafeView! אני רוצה לבדוק סטטוס הזמנה מספר: ');
+  function updateTrackWa() {
+    var num = document.getElementById('orderNum').value.trim().toUpperCase();
+    var msg = num
+      ? 'שלום SafeView! אני רוצה לבדוק סטטוס הזמנה מספר: ' + num
+      : 'שלום SafeView! אני רוצה לבדוק סטטוס הזמנה שלי.';
+    document.getElementById('trackWa').href = waLink(msg);
+    var label = document.getElementById('trackWaLabel');
+    if (label) label.textContent = num ? 'צור קשר לגבי הזמנה ' + num : 'שלח הודעה בוואטסאפ';
+  }
+  updateTrackWa();
 
-  // enter key support
+  // enter key support + live WA link update
   document.getElementById('orderNum').addEventListener('keydown', function(e){ if(e.key==='Enter') trackOrder(); });
+  document.getElementById('orderNum').addEventListener('input', updateTrackWa);
 
   // דוגמת נתוני הזמנות (בפועל — לחבר ל-backend או לגיליון Google)
   var DEMO_ORDERS = {

@@ -65,7 +65,7 @@
           <th>עמידות</th>
           <th>סוללה/חשמל</th>
           <th>מחיר</th>
-          <th></th>
+          <th>עגלה</th>
         </tr>
       </thead>
       <tbody id="cmpBody"></tbody>
@@ -160,7 +160,7 @@
         '<td>'+(s.ip||'-')+'</td>' +
         '<td>'+(s.power||'-')+'</td>' +
         '<td><span class="cmp-price">'+fmt(p.price)+'</span></td>' +
-        '<td><div class="cmp-actions"><button class="cmp-btn-buy" onclick="addToCart(\''+p.id+'\')">+ עגלה</button><a class="cmp-btn-wa" href="'+waLink(msg)+'" target="_blank" rel="noopener" aria-label="וואטסאפ">'+ICON.wa+'</a></div></td>' +
+        '<td><div class="cmp-actions"><button class="cmp-btn-buy" onclick="addToCart(\''+p.id+'\')">הוסף לעגלה</button><a class="cmp-btn-wa" href="'+waLink(msg)+'" target="_blank" rel="noopener" aria-label="וואטסאפ">'+ICON.wa+'</a></div></td>' +
       '</tr>';
     }).join('');
   }
