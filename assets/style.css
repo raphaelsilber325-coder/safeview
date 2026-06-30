@@ -846,6 +846,21 @@ html.a11y-motion *::after {
 }
 
 
+/* ===== Skeleton Loading ===== */
+@keyframes shimmer { from { background-position: -400px 0; } to { background-position: 400px 0; } }
+.skel-base { background: linear-gradient(90deg, var(--bg3) 25%, var(--bg4) 50%, var(--bg3) 75%); background-size: 800px 100%; animation: shimmer 1.4s infinite; border-radius: 6px; }
+.cart-skeleton { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
+.skel-item { display: flex; gap: 14px; padding: 16px; background: var(--bg3); border-radius: 10px; border: 1px solid var(--border2); }
+.skel-img { width: 72px; height: 72px; border-radius: 8px; flex-shrink: 0; }
+.skel-img, .skel-line { background: linear-gradient(90deg, var(--bg3) 25%, var(--bg4) 50%, var(--bg3) 75%); background-size: 800px 100%; animation: shimmer 1.4s infinite; border-radius: 6px; }
+.skel-lines { flex: 1; display: flex; flex-direction: column; gap: 10px; padding-top: 8px; }
+.skel-line { height: 14px; }
+.skel-line.w70 { width: 70%; }
+.skel-line.w40 { width: 40%; }
+
+/* ===== Nav active link ===== */
+nav a[aria-current="page"] { color: var(--blue) !important; }
+
 /* ===== Order Confirm Modal ===== */
 .ocm-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.7); z-index: 10000; display: flex; align-items: center; justify-content: center; padding: 16px; animation: ocmFadeIn .2s ease; }
 @keyframes ocmFadeIn { from { opacity: 0; } to { opacity: 1; } }

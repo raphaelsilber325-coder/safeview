@@ -1699,7 +1699,12 @@ function injectChrome(active){
       '<a href="index.html" class="nav-logo" dir="ltr"><span class="nav-logo-icon">' + ICON.brand + '</span>Safe<span>View</span></a>' +
       '<div class="nav-right">' +
         '<ul class="nav-links" id="navLinks">' +
-          navLinks.map(function(l){ return '<li><a href="'+l[0]+'">'+l[1]+'</a></li>'; }).join('') +
+          navLinks.map(function(l){
+          var href = l[0].split('#')[0].split('?')[0];
+          var cur = location.pathname.split('/').pop() || 'index.html';
+          var active = cur === href || (cur === '' && href === 'index.html');
+          return '<li><a href="'+l[0]+'"'+(active?' aria-current="page"':'')+'>'+l[1]+'</a></li>';
+        }).join('') +
         '</ul>' +
         '<a href="wishlist.html" class="nav-cart" aria-label="מועדפים" style="margin-left:4px;font-size:20px">♡<span class="nav-wl-count" id="navWlCount" style="display:none"></span></a>' +
         '<a href="cart.html" class="nav-cart" aria-label="עגלה">' + ICON.cart + '<span class="nav-cart-count">0</span></a>' +
@@ -1786,7 +1791,11 @@ function injectChrome(active){
 
   // burger
   var burger = document.getElementById('burger');
-  if (burger) burger.addEventListener('click', function(){ document.getElementById('navLinks').classList.toggle('open'); });
+  if (burger) burger.addEventListener('click', function(){
+    var nl = document.getElementById('navLinks');
+    var open = nl.classList.toggle('open');
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
   document.querySelectorAll('#navLinks a').forEach(function(a){ a.addEventListener('click', function(){ document.getElementById('navLinks').classList.remove('open'); }); });
 
   // סגירת nav במובייל בלחיצה מחוץ לתפריט
@@ -2174,6 +2183,14 @@ function getCompactInbox(productId) {
   var more = inbox.length > 3 ? ' <span style="color:var(--text3)">+'+(inbox.length-3)+'</span>' : '';
   return '<div class="prod-inbox">📦 כולל: ' + items.join(' · ') + more + '</div>';
 }
+
+// preconnect לביצועים
+(function(){
+  [['https://cdn.shopify.com',''],['https://fonts.googleapis.com',''],['https://fonts.gstatic.com','crossorigin']].forEach(function(h){
+    if (document.querySelector('link[href="'+h[0]+'"]')) return;
+    var l = document.createElement('link'); l.rel = 'preconnect'; l.href = h[0]; if (h[1]) l.crossOrigin = ''; document.head.appendChild(l);
+  });
+})();
 
 document.addEventListener('DOMContentLoaded', function(){
   injectSeoMeta();

@@ -35,7 +35,9 @@
       return;
     }
     // שלב 1: skeleton בזמן שהמוצרים נטענים
-    wrap.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text2)">טוען...</div>';
+    wrap.innerHTML = '<div class="cart-skeleton">' +
+      [1,2].map(function(){ return '<div class="skel-item"><div class="skel-img"></div><div class="skel-lines"><div class="skel-line w70"></div><div class="skel-line w40"></div></div></div>'; }).join('') +
+      '</div>';
 
     fetchShopifyProducts().then(function(products){
       var map = {};
