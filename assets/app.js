@@ -124,12 +124,12 @@ function getShipCost(rawTotal, method) {
   return rawTotal >= FREE_SHIP_THRESHOLD ? 0 : method.price;
 }
 
-// הודעת "שלח לחבר" — חברך מקבל קופון 50₪ הנחה
+// הודעת "שלח לחבר" — חברך מקבל קופון FRIEND25 להנחה של 25₪
 function buildFriendShareMsg(product) {
   return 'היי, מצאתי מצלמה מגניבה שחשבתי שתתאים לך – ' + product.name + ' (' + fmt(product.price) + ').\n\n' +
     'יש גם קופון מיוחד: השתמש בקוד FRIEND25 ותקבל 25₪ הנחה על קנייה מעל ₪200!\n\n' +
     'להזמנה: ' + SITE_URL + 'product.html?id=' + product.id + '\n\n' +
-    'ממליץ בחם! 🛡️';
+    'ממליץ בחום! 🛡️';
 }
 
 function waLink(text) {
@@ -1384,7 +1384,7 @@ function removeFromCart(id){ saveCart(getCart().filter(function(i){ return i.id!
 // ===== Wishlist (רשימת מועדפים) =====
 var WL_KEY = 'sv_wishlist';
 function getWishlist(){ try { return JSON.parse(localStorage.getItem(WL_KEY) || '[]'); } catch(e){ return []; } }
-function saveWishlist(wl){ try { localStorage.setItem(WL_KEY, JSON.stringify(wl)); } catch(e){} }
+function saveWishlist(wl){ try { localStorage.setItem(WL_KEY, JSON.stringify(wl)); } catch(e){} updateWlCount(); }
 function isInWishlist(id){ return getWishlist().indexOf(id) !== -1; }
 function toggleWishlist(id, btn) {
   var wl = getWishlist();
@@ -1417,6 +1417,13 @@ function updateCartCount(){
   document.querySelectorAll('.nav-cart-count').forEach(function(el){
     var n = cartCount(); el.textContent = n; el.style.display = n>0 ? 'flex' : 'none';
   });
+}
+function updateWlCount(){
+  var el = document.getElementById('navWlCount');
+  if (!el) return;
+  var n = getWishlist().length;
+  el.textContent = n;
+  el.style.display = n > 0 ? 'flex' : 'none';
 }
 
 // צ'קאאוט דרך וואטסאפ — שולח את כל ההזמנה כולל קופון ושיטת משלוח
@@ -1815,6 +1822,7 @@ function injectChrome(active){
   }, { passive: true });
 
   updateCartCount();
+  updateWlCount();
 }
 
 // ===== Scroll reveal =====
