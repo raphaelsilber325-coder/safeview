@@ -97,7 +97,7 @@ function paypalCheckoutLink(product) {
     'currency_code=ILS',
     'no_shipping=2',
     'return=' + encodeURIComponent(SITE_URL + 'thank-you.html'),
-    'cancel_return=' + encodeURIComponent(SITE_URL + (product.id === 'cart' ? 'cart.html' : 'product.html?id=' + product.id)),
+    'cancel_return=' + encodeURIComponent(SITE_URL + 'payment-failed.html'),
     'image_url=' + encodeURIComponent(product.img),
     'lc=IL'
   ].join('&');
@@ -1687,7 +1687,7 @@ function injectChrome(active){
     ['deals.html','🔥 מבצעים'],
     ['collection.html?type=best-sellers','הנמכרים ביותר'],
     ['solar-landing.html','☀️ סולאריות'],
-    ['buying-guide.html','איזו מצלמה לי?'],
+    ['buying-guide.html','🎯 מצא את המצלמה שלך'],
     ['compare.html','השוואה'],
     ['blog.html','מדריכים'],
     ['order-tracking.html','מעקב הזמנה'],

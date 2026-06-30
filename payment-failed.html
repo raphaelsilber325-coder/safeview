@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>התשלום לא הושלם | SafeView</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Noto+Sans+Hebrew:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  .fail-wrap { max-width: 640px; margin: 0 auto; padding: 60px 20px; text-align: center; }
+  .fail-icon { font-size: 72px; margin-bottom: 16px; animation: shake 0.5s ease-out; }
+  @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-8px)} 75%{transform:translateX(8px)} }
+  .fail-title { font-size: 34px; font-weight: 400; margin-bottom: 12px; color: var(--text); }
+  .fail-sub { font-size: 16px; color: var(--text2); line-height: 1.7; margin-bottom: 28px; }
+  .fail-reasons { text-align: right; background: rgba(255,80,80,.06); border: 1px solid rgba(255,80,80,.2); border-radius: 12px; padding: 20px 24px; margin: 0 auto 28px; }
+  .fail-reasons h3 { font-size: 15px; color: var(--text); margin: 0 0 12px; }
+  .fail-reasons li { color: var(--text2); padding: 5px 0; font-size: 14px; line-height: 1.6; }
+  .fail-actions { display: flex; flex-direction: column; gap: 12px; max-width: 340px; margin: 0 auto; }
+  .btn-retry { background: var(--blue); color: #fff; border: none; border-radius: 10px; padding: 14px 24px; font-size: 16px; font-weight: 600; cursor: pointer; font-family: inherit; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 8px; }
+  .btn-retry:hover { background: #2d8ae6; }
+  .fail-divider { color: var(--text3); font-size: 13px; margin: 4px 0; }
+</style>
+</head>
+<body>
+<div id="nav-mount"></div>
+
+<div class="fail-wrap">
+  <div class="fail-icon">😕</div>
+  <h1 class="fail-title">התשלום לא הושלם</h1>
+  <p class="fail-sub">לא צריך לדאוג — העגלה שלך שמורה.<br>ניתן לנסות שוב או לבחור שיטת תשלום אחרת.</p>
+
+  <div class="fail-reasons">
+    <h3>סיבות נפוצות לדחיית תשלום:</h3>
+    <ul>
+      <li>• פרטי הכרטיס הוזנו בצורה שגויה (מספר, תוקף, CVV)</li>
+      <li>• אין מסגרת אשראי פנויה מספקת</li>
+      <li>• הכרטיס חסום לעסקאות בינלאומיות</li>
+      <li>• תוקף הכרטיס פג</li>
+      <li>• חברת האשראי ביקשה אימות נוסף — בדוק SMS</li>
+    </ul>
+  </div>
+
+  <div class="fail-actions">
+    <a class="btn-retry" href="cart.html">🔄 נסה שוב עם אמצעי תשלום אחר</a>
+    <div class="fail-divider">— או —</div>
+    <a class="btn-wa" id="failWa" href="#" style="justify-content:center">💬 הזמן בוואטסאפ ושלם בהעברה</a>
+    <a class="btn-secondary" href="index.html#products" style="justify-content:center">← המשך לקנות</a>
+  </div>
+
+  <p style="margin-top:36px;font-size:13px;color:var(--text3)">
+    צריך עזרה? <a href="contact.html" style="color:var(--blue)">צור קשר</a> — נשמח לסייע
+  </p>
+</div>
+
+<div id="footer-mount"></div>
+
+<script src="assets/app.js" defer></script>
+<script>
+  setTimeout(function() {
+    var el = document.getElementById('failWa');
+    if (el && typeof waLink === 'function') {
+      el.href = waLink('שלום SafeView! ניסיתי לשלם ולא הצליח — אפשר לסיים את ההזמנה בהעברה בנקאית?');
+    }
+  }, 300);
+</script>
+</body>
+</html>

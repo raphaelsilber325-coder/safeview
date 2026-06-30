@@ -54,8 +54,14 @@
   <p style="color:var(--text2);font-size:14px">שאלות? פנו אלינו ב-WhatsApp ונענה תוך 10 דקות</p>
 
   <div class="thank-actions">
-    <a class="btn-wa" id="thankWa" href="#">דברו איתנו בוואטסאפ</a>
+    <a class="btn-wa" id="thankWa" href="#">💬 שאלות? דברו איתנו בוואטסאפ</a>
     <a class="btn-primary" href="index.html#products" style="text-decoration:none;display:inline-flex;align-items:center;padding:14px 28px">המשך לקנות</a>
+  </div>
+
+  <div style="margin-top:40px;background:rgba(58,159,255,.06);border:1px solid rgba(58,159,255,.18);border-radius:14px;padding:24px">
+    <div style="font-size:20px;margin-bottom:8px">🎁 שתף חבר — קבל הנחה</div>
+    <p style="color:var(--text2);font-size:14px;margin:0 0 14px">שלח לחבר/ה את הקישור הזה — הם יקבלו קוד <strong style="color:var(--blue)">FRIEND25</strong> ל-25₪ הנחה, ואתה תקבל תודה אישית מאיתנו 😊</p>
+    <a id="shareWa" href="#" class="btn-wa" style="display:inline-flex;padding:11px 20px;font-size:14px">📤 שתף עם חבר בוואטסאפ</a>
   </div>
 </div>
 
@@ -72,6 +78,15 @@
     var waEl = document.getElementById('thankWa');
     if (waEl && typeof waLink === 'function') {
       waEl.href = waLink('שלום! ביצעתי הזמנה במספר ' + orderNum + ', רציתי לוודא שהתקבלה.');
+    }
+  }, 300);
+
+  // כפתור שיתוף
+  setTimeout(function() {
+    var shareEl = document.getElementById('shareWa');
+    if (shareEl && typeof waLink === 'function') {
+      var msg = 'היי! רכשתי מצלמת אבטחה ב-SafeView וממליץ בחום 🛡️\n\nהשתמש בקוד FRIEND25 וקבל 25₪ הנחה על קנייה מעל ₪200:\nhttps://raphaelsilber325-coder.github.io/safeview/';
+      shareEl.href = waLink(msg);
     }
   }, 300);
 
