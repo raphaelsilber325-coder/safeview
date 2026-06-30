@@ -131,11 +131,17 @@
       galleryHtml = '<div class="pdp-gallery"><img src="'+p.img+'" alt="'+p.name+'">' + (p.badge ? '<div class="pdp-badge">'+p.badge+'</div>' : '') + '</div>';
     }
 
-    // "מה כלול" מתחת לתמונה
+    // "מה כלול בקופסה" — מוצג בעמודת המידע (לא בגלריה)
     var inboxItems = (PRODUCT_INBOX[p.id] || ['מצלמה × 1', 'ערכת התקנה', 'מדריך למשתמש']);
-    galleryHtml += '<div class="pdp-inbox-under-img"><strong>📦 מה כלול בקופסה:</strong><ul>' +
-      inboxItems.map(function(item){ return '<li>'+item+'</li>'; }).join('') +
-    '</ul></div>';
+    var inboxHtml =
+      '<div class="pdp-inbox-card">' +
+        '<div class="pdp-inbox-card-title">📦 מה כלול בקופסה</div>' +
+        '<div class="pdp-inbox-pills">' +
+          inboxItems.map(function(item){
+            return '<span class="pdp-inbox-pill"><span class="pdp-inbox-check">✓</span>' + item + '</span>';
+          }).join('') +
+        '</div>' +
+      '</div>';
 
     // variant selector
     var variantHtml = '';
@@ -182,6 +188,7 @@
           '<button class="btn-primary" onclick="addToCart(\''+p.id+'\',1,window._selVid,window._selPrice)">הוסף לעגלה</button>' +
         '</div>' +
         (p.specs && p.specs.length ? '<div class="pdp-specs">'+p.specs.map(function(sp){ return '<div class="pdp-spec"><span>'+sp[0]+'</span><span>'+sp[1]+'</span></div>'; }).join('')+'</div>' : '') +
+        inboxHtml +
         '<div class="pdp-trust">' +
           '<div><span class="pdp-trust-icon">'+ICON.truck+'</span>משלוח חינם בהזמנה מעל ₪200</div>' +
           '<div><span class="pdp-trust-icon">'+ICON.shield+'</span>אחריות מלאה לשנה + תמיכה בעברית</div>' +
