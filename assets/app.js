@@ -365,30 +365,15 @@ function saveUserReview(productId, review) {
 }
 
 function getProductReviews(productId) {
-  var static_ = _spreadRatings(PRODUCT_REVIEWS[productId] || [], productId);
-  var user = getUserReviews(productId);
-  return user.concat(static_);
+  return getUserReviews(productId);
 }
 
 function getReviewSummary(productId) {
-  var userRevs = getUserReviews(productId);
-  var staticRevs = _spreadRatings(PRODUCT_REVIEWS[productId] || [], productId);
-  var total = userRevs.length + staticRevs.length;
-  if (!total) return null;
-
-  if (userRevs.length) {
-    // ממוצע אמיתי כשיש ביקורות משתמש
-    var sum = 0;
-    userRevs.forEach(function(r){ sum += r.rating; });
-    staticRevs.forEach(function(r){ sum += r.rating; });
-    return { count: total, avg: Math.round((sum / total) * 10) / 10 };
-  }
-  // ממוצע דטרמיניסטי בין 4.1 ל-4.8 לביקורות סטטיות בלבד
-  var h = 5381;
-  for (var i = 0; i < productId.length; i++) h = Math.imul(h, 33) ^ productId.charCodeAt(i);
-  h = Math.abs(h >>> 0);
-  var decimals = [1, 2, 3, 4, 5, 6, 7, 8];
-  return { count: total, avg: 4 + decimals[h % decimals.length] / 10 };
+  var revs = getUserReviews(productId);
+  if (!revs.length) return null;
+  var sum = 0;
+  revs.forEach(function(r){ sum += r.rating; });
+  return { count: revs.length, avg: Math.round((sum / revs.length) * 10) / 10 };
 }
 
 function renderStars(rating, size) {
@@ -414,7 +399,30 @@ function renderReviewSummaryInline(productId) {
 function renderReviewsSection(productId) {
   var reviews = getProductReviews(productId);
   var sum = getReviewSummary(productId);
-  if (!reviews.length) return '';
+  if (!reviews.length) {
+    var emptyForm =
+      '<section class="pdp-reviews" id="reviews">' +
+        '<header class="pdp-reviews-head"><h2>⭐ ביקורות לקוחות</h2></header>' +
+        '<p style="color:var(--text2);text-align:center;padding:12px 0 4px">היה הראשון לכתוב ביקורת על המוצר הזה!</p>' +
+        '<section class="rev-form-wrap" id="rev-form-wrap">' +
+          '<h3 class="rev-form-title">✍️ כתוב ביקורת</h3>' +
+          '<div class="rev-star-picker" id="rev-star-picker" role="group" aria-label="בחר דירוג">' +
+            '<span class="rsp-star" data-v="1" onclick="setRevStar(1)" onmouseenter="hoverRevStar(1)" onmouseleave="hoverRevStar(0)" tabindex="0" role="radio" aria-label="כוכב 1">★</span>' +
+            '<span class="rsp-star" data-v="2" onclick="setRevStar(2)" onmouseenter="hoverRevStar(2)" onmouseleave="hoverRevStar(0)" tabindex="0" role="radio" aria-label="כוכב 2">★</span>' +
+            '<span class="rsp-star" data-v="3" onclick="setRevStar(3)" onmouseenter="hoverRevStar(3)" onmouseleave="hoverRevStar(0)" tabindex="0" role="radio" aria-label="כוכב 3">★</span>' +
+            '<span class="rsp-star" data-v="4" onclick="setRevStar(4)" onmouseenter="hoverRevStar(4)" onmouseleave="hoverRevStar(0)" tabindex="0" role="radio" aria-label="כוכב 4">★</span>' +
+            '<span class="rsp-star" data-v="5" onclick="setRevStar(5)" onmouseenter="hoverRevStar(5)" onmouseleave="hoverRevStar(0)" tabindex="0" role="radio" aria-label="כוכב 5">★</span>' +
+          '</div>' +
+          '<div id="rev-star-err" class="rev-field-err" style="display:none">אנא בחר דירוג</div>' +
+          '<div class="rev-form-row"><input class="rev-input" id="rev-name" type="text" placeholder="שמך" maxlength="40"><div id="rev-name-err" class="rev-field-err" style="display:none">אנא הזן שם</div></div>' +
+          '<div class="rev-form-row"><input class="rev-input" id="rev-title" type="text" placeholder="כותרת הביקורת" maxlength="80"><div id="rev-title-err" class="rev-field-err" style="display:none">אנא הזן כותרת</div></div>' +
+          '<div class="rev-form-row"><textarea class="rev-input rev-textarea" id="rev-text" placeholder="ספר לנו על חוויית השימוש..." maxlength="1000" rows="4"></textarea><div id="rev-text-err" class="rev-field-err" style="display:none">אנא כתוב ביקורת</div></div>' +
+          '<button class="rev-submit-btn" onclick="submitReview(\'' + productId + '\')">פרסם ביקורת</button>' +
+          '<div id="rev-success" class="rev-success" style="display:none">✅ תודה! הביקורת שלך פורסמה.</div>' +
+        '</section>' +
+      '</section>';
+    return emptyForm;
+  }
 
   // ספירת כוכבים לכל דירוג
   var dist = [0,0,0,0,0];
