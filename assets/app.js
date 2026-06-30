@@ -1557,6 +1557,7 @@ var ICON = {
   tool: '<svg viewBox="0 0 24 24"><path d="M21 4.5 19.5 3 15 7.5l2 2zm-7.4 4.6L4.4 18.3l1.4 1.4 9.2-9.2zM18 11.6l-2-2-8 8 2 2z"/></svg>',
   mail: '<svg viewBox="0 0 24 24"><path d="M4 4h16a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2zm0 4v10h16V8l-8 5-8-5zm0-2l8 5 8-5H4z"/></svg>',
   phone: '<svg viewBox="0 0 24 24"><path d="M6.6 10.8a15 15 0 006.6 6.6l2.2-2.2a1 1 0 011-.25 11.4 11.4 0 003.6.6 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.6 3.6a1 1 0 01-.25 1l-2.25 2.2z"/></svg>',
+  paypal: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7.6 20H5l2-12.5h4.3c1.5 0 2.6.3 3.3 1 .7.6 1 1.5.8 2.7-.4 2.5-2.2 3.8-5.2 3.8H8.6L7.6 20zm1.3-7.1h1.5c1.4 0 2.2-.6 2.4-1.9.1-.6 0-1-.3-1.3-.3-.3-.9-.4-1.6-.4H9.5l-.6 3.6zM18 8.5c.2-1.1-.1-1.9-.8-2.5-.8-.6-2-.9-3.6-.9H9.3L7 20h2.6l.6-3.6h1.9c1.5 0 2.7-.3 3.6-.9.9-.6 1.5-1.6 1.8-2.9l.2-1c.2-1.1.1-2-.4-2.6z"/></svg>',
   paypal: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7.144 19.532l1.049-5.751c.11-.606.691-1.002 1.304-.99h2.533c2.196 0 3.813-.464 4.819-1.374.921-.84 1.449-2.116 1.581-3.821.08-1.013-.005-1.846-.244-2.4-.315-.728-.92-1.136-1.983-1.348C15.574 3.71 14.56 3.6 13.44 3.6H7.498c-.613 0-1.124.444-1.215 1.05L4 19.05c-.066.424.27.822.7.822h2.139c.4 0 .74-.29.805-.68l.5-2.66zm10.208-11.7c-.196 1.25-.687 2.154-1.484 2.71-.872.601-2.166.904-3.88.904H10.16l-.86 4.748h-1.3l1.05-5.75h3.44c1.71 0 3.006-.304 3.88-.904.796-.556 1.288-1.46 1.484-2.71.08-.5.092-.946.038-1.346.4.432.614 1.05.52 2.348z"/></svg>'
 };
 
@@ -1846,15 +1847,16 @@ function initFaq(){
 // ===== באנר עוגיות (cookie consent) =====
 var COOKIE_KEY = 'sv_cookies_ok';
 function hasCookieConsent(){ try { return localStorage.getItem(COOKIE_KEY) === '1'; } catch(e){ return false; } }
-function setCookieConsent(){ try { localStorage.setItem(COOKIE_KEY, '1'); } catch(e){} var b = document.getElementById('cookieBanner'); if (b) b.remove(); }
+function setCookieConsent(val){ try { localStorage.setItem(COOKIE_KEY, val ? '1' : '0'); } catch(e){} var b = document.getElementById('cookieBanner'); if (b) b.remove(); }
 function showCookieBanner(){
-  if (hasCookieConsent()) return;
+  if (localStorage.getItem(COOKIE_KEY) !== null) return; // כבר הוחלט
   var html =
     '<div class="cookie-banner" id="cookieBanner" role="region" aria-label="הודעת עוגיות">' +
-      '<div class="cookie-text">אנחנו משתמשים בעוגיות (cookies) כדי לשפר את החוויה באתר ולצורכי אנליטיקה. ' +
-        '<a href="privacy.html">מידע נוסף</a></div>' +
+      '<div class="cookie-text">אנחנו משתמשים בעוגיות (cookies) לצורכי שיפור חוויה ואנליטיקה. ' +
+        '<a href="privacy.html">מדיניות פרטיות</a></div>' +
       '<div class="cookie-actions">' +
-        '<button class="cookie-ok" onclick="setCookieConsent()">מסכים/ה</button>' +
+        '<button class="cookie-ok" onclick="setCookieConsent(true)">אישור</button>' +
+        '<button class="cookie-decline" onclick="setCookieConsent(false)" style="background:transparent;border:1px solid var(--border2);color:var(--text2);padding:8px 16px;border-radius:8px;cursor:pointer;font-family:inherit;font-size:13px">דחה</button>' +
       '</div>' +
     '</div>';
   document.body.insertAdjacentHTML('beforeend', html);
@@ -1906,7 +1908,8 @@ function initA11y(){
 var GA4_ID = 'G-VBLPD1FCHP';
 var FB_PIXEL_ID = ''; // לדוגמה: '123456789012345'
 function initAnalytics(){
-  if (GA4_ID) {
+  var consented = localStorage.getItem(COOKIE_KEY) === '1';
+  if (GA4_ID && consented) {
     var s = document.createElement('script'); s.async = true;
     s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA4_ID;
     document.head.appendChild(s);
@@ -1914,7 +1917,7 @@ function initAnalytics(){
     window.gtag = function(){ dataLayer.push(arguments); };
     gtag('js', new Date()); gtag('config', GA4_ID);
   }
-  if (FB_PIXEL_ID) {
+  if (FB_PIXEL_ID && consented) {
     !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
       n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
       n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
@@ -2134,41 +2137,18 @@ window.copyExitCoupon = function(el) {
 
 // ===== Low Stock Indicator — מגוון, לא חוזר =====
 function getLowStockBadge(productId) {
-  var hash = 0;
-  for (var i = 0; i < productId.length; i++) hash = ((hash << 5) - hash) + productId.charCodeAt(i);
-  hash = Math.abs(hash);
-  if (hash % 10 >= 4) return ''; // 40% מהמוצרים מציגים אינדיקטור
-
-  var variants = [
-    { emoji: '🔥', text: 'מבצע חם — מלאי אחרון' },
-    { emoji: '⚡', text: 'מלאי מוגבל מאוד' },
-    { emoji: '📦', text: 'נותרו ' + ((hash % 12) + 4) + ' יחידות' },
-    { emoji: '⏰', text: 'אזל כמעט — ' + ((hash % 8) + 3) + ' אחרונות' },
-    { emoji: '🚨', text: 'המלאי הולך ואוזל' },
-    { emoji: '💨', text: 'נמכר מהר — ' + ((hash % 15) + 5) + ' זמינות' },
-    { emoji: '🎯', text: 'הזמנה אחרונה היום לפני 24 שעות' },
-    { emoji: '⭐', text: 'הכי פופולרי השבוע' },
-    { emoji: '🔥', text: '' + ((hash % 11) + 4) + ' נותרו במלאי' },
-    { emoji: '⚡', text: 'מבצע מסתיים בקרוב' }
-  ];
-  var v = variants[hash % variants.length];
-  return '<div class="low-stock"><span style="margin-left:6px">'+v.emoji+'</span>'+v.text+'</div>';
+  // מציג תג רק אם המוצר מוגדר עם lowStock:true במפרט
+  var p = getProduct(productId);
+  if (!p || !p.lowStock) return '';
+  return '<div class="low-stock"><span style="margin-left:6px">📦</span>מלאי מוגבל — צור קשר לאישור זמינות</div>';
 }
 
-// ===== Old Price (מחיר ישן עם קו) — לחלק מהמוצרים =====
+// ===== Old Price — מחיר מקורי אמיתי בלבד =====
+// מציג מחיר מחוק רק אם המוצר מוגדר עם oldPrice מפורש.
 function getOldPrice(p) {
-  // 40% מהמוצרים מקבלים מחיר ישן (מבצע ויזואלי)
-  var hash = 0;
-  for (var i = 0; i < p.id.length; i++) hash = ((hash << 5) - hash) + p.id.charCodeAt(i);
-  hash = Math.abs(hash);
-  if (hash % 10 >= 4) return null;
-  // הנחה של 15-30%
-  var pct = 15 + (hash % 16); // 15-30
-  var old = Math.round(p.price / (1 - pct/100));
-  // עיגול ל-9 (₪249, ₪399 וכו')
-  old = Math.round(old / 10) * 10 - 1;
-  if (old <= p.price) old = p.price + 50;
-  return { price: old, pct: pct };
+  if (!p.oldPrice || p.oldPrice <= p.price) return null;
+  var pct = Math.round((1 - p.price / p.oldPrice) * 100);
+  return { price: p.oldPrice, pct: pct };
 }
 
 // ===== מה באריזה — תצוגה קומפקטית =====
