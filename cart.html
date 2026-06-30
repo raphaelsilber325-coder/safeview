@@ -124,9 +124,22 @@
             '<button class="cart-coupon-btn" onclick="applyCartCoupon()">החל</button>' +
           '</div>' +
           couponResultHtml +
+          '<div class="cart-addr" id="cartAddr">' +
+            '<div class="cart-addr-title">📦 פרטי משלוח</div>' +
+            '<div class="cart-addr-row">' +
+              '<input class="cart-addr-input" id="addrName" type="text" placeholder="שם מלא *" maxlength="60">' +
+              '<input class="cart-addr-input" id="addrPhone" type="tel" placeholder="טלפון *" maxlength="20" dir="ltr">' +
+            '</div>' +
+            '<input class="cart-addr-input" id="addrStreet" type="text" placeholder="כתובת ורחוב *" maxlength="100">' +
+            '<div class="cart-addr-row">' +
+              '<input class="cart-addr-input" id="addrCity" type="text" placeholder="עיר *" maxlength="40">' +
+              '<input class="cart-addr-input" id="addrNote" type="text" placeholder="הערה (אופציונלי)" maxlength="100">' +
+            '</div>' +
+            '<div id="addrErr" class="rev-field-err" style="display:none">אנא מלא את כל שדות המשלוח הנדרשים (*)</div>' +
+          '</div>' +
           '<button class="btn-wa" style="width:100%;margin-top:10px;padding:13px" id="waCheckoutBtn" onclick="doWaCheckout()">'+ICON.wa+' הזמן בוואטסאפ</button>' +
           (ppLink ? '<a class="btn-payplus" style="width:100%;margin-top:8px" href="'+ppLink+'" target="_blank" rel="noopener">💳 שלם בכרטיס אשראי (PayPlus)</a>' : '') +
-          '<a class="btn-paypal" style="width:100%;margin-top:8px" href="'+paypalCheckoutLink({id:'cart', name:'הזמנה SafeView ('+c.length+' פריטים)', price:grandTotal, img:''})+'" target="_blank" rel="noopener">🍎 Apple Pay / PayPal / כרטיס אשראי</a>' +
+          '<button class="btn-paypal" style="width:100%;margin-top:8px;cursor:pointer;border:none;background:none;padding:0;display:block" onclick="doPaypalCheckout('+grandTotal+','+c.length+')">🍎 Apple Pay / PayPal / כרטיס אשראי</button>' +
           '<a class="btn-secondary" style="width:100%;margin-top:10px;justify-content:center" href="index.html#products">המשך בקנייה</a>' +
         '</div>';
 
@@ -171,12 +184,39 @@
     renderCart();
   };
 
+  function getAddrFields() {
+    return {
+      name:   (document.getElementById('addrName')   || {}).value || '',
+      phone:  (document.getElementById('addrPhone')  || {}).value || '',
+      street: (document.getElementById('addrStreet') || {}).value || '',
+      city:   (document.getElementById('addrCity')   || {}).value || '',
+      note:   (document.getElementById('addrNote')   || {}).value || ''
+    };
+  }
+
+  function validateAddr() {
+    var a = getAddrFields();
+    var ok = a.name.trim() && a.phone.trim() && a.street.trim() && a.city.trim();
+    var errEl = document.getElementById('addrErr');
+    if (errEl) errEl.style.display = ok ? 'none' : 'block';
+    return ok;
+  }
+
   window.doWaCheckout = function() {
-    var coupon = null;
-    try { coupon = JSON.parse(sessionStorage.getItem('sv_cart_coupon') || 'null'); } catch(e){}
     var ship = getShipMethod();
     if (!ship) { alert('בחר שיטת משלוח לפני ביצוע ההזמנה'); return; }
-    checkoutWhatsApp(coupon ? coupon.code : null, coupon ? coupon.discount : 0, ship);
+    if (!validateAddr()) { document.getElementById('cartAddr').scrollIntoView({behavior:'smooth',block:'center'}); return; }
+    var coupon = null;
+    try { coupon = JSON.parse(sessionStorage.getItem('sv_cart_coupon') || 'null'); } catch(e){}
+    var addr = getAddrFields();
+    checkoutWhatsApp(coupon ? coupon.code : null, coupon ? coupon.discount : 0, ship, addr);
+  };
+
+  window.doPaypalCheckout = function(grandTotal, itemCount) {
+    var ship = getShipMethod();
+    if (!ship) { alert('בחר שיטת משלוח לפני התשלום'); return; }
+    if (!validateAddr()) { document.getElementById('cartAddr').scrollIntoView({behavior:'smooth',block:'center'}); return; }
+    window.open(paypalCheckoutLink({id:'cart', name:'הזמנה SafeView ('+itemCount+' פריטים)', price:grandTotal, img:''}), '_blank', 'noopener');
   };
 
   function chg(id, d){ var it = getCart().filter(function(i){return i.id===id;})[0]; if(it){ setQty(id, it.qty + d); renderCart(); } }

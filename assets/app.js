@@ -1420,7 +1420,7 @@ function updateCartCount(){
 }
 
 // צ'קאאוט דרך וואטסאפ — שולח את כל ההזמנה כולל קופון ושיטת משלוח
-function checkoutWhatsApp(couponCode, discount, shipMethod) {
+function checkoutWhatsApp(couponCode, discount, shipMethod, addr) {
   var c = getCart();
   if (!c.length){ alert('העגלה ריקה'); return; }
   var lines = ['שלום SafeView! אני רוצה להזמין:', ''];
@@ -1450,12 +1450,22 @@ function checkoutWhatsApp(couponCode, discount, shipMethod) {
     lines.push(rawTotal >= FREE_SHIP_THRESHOLD ? 'משלוח: חינם' : 'משלוח: לפי בחירה');
   }
   lines.push('סה"כ לתשלום: ' + fmt(grandTotal));
-  window.open(waLink(lines.join('\n')), '_blank');
-  // מנקה עגלה וקופון אחרי שליחת ההזמנה
-  try { localStorage.removeItem('sv_cart'); } catch(e) {}
-  try { sessionStorage.removeItem('sv_cart_coupon'); } catch(e) {}
-  updateCartCount();
-  setTimeout(function(){ if (location.pathname.indexOf('cart') !== -1) location.href = 'thank-you.html'; }, 800);
+  if (addr && addr.name) {
+    lines.push('');
+    lines.push('📦 פרטי משלוח:');
+    lines.push('שם: ' + addr.name);
+    lines.push('טלפון: ' + addr.phone);
+    lines.push('כתובת: ' + addr.street + ', ' + addr.city);
+    if (addr.note) lines.push('הערה: ' + addr.note);
+  }
+  var waWin = window.open(waLink(lines.join('\n')), '_blank');
+  // מנקה עגלה רק אחרי שהחלון נפתח
+  if (waWin) {
+    try { localStorage.removeItem('sv_cart'); } catch(e) {}
+    try { sessionStorage.removeItem('sv_cart_coupon'); } catch(e) {}
+    updateCartCount();
+    setTimeout(function(){ if (location.pathname.indexOf('cart') !== -1) location.href = 'thank-you.html'; }, 1200);
+  }
 }
 
 // Checkout דרך Shopify — בניית URL ישיר לעגלת Shopify

@@ -846,6 +846,16 @@ html.a11y-motion *::after {
 }
 
 
+/* ===== Cart Address Form ===== */
+.cart-addr { margin-top: 18px; padding: 20px; background: var(--bg3); border-radius: 12px; border: 1px solid var(--border2); }
+.cart-addr-title { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 14px; }
+.cart-addr-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.cart-addr-input { width: 100%; box-sizing: border-box; background: var(--bg2); border: 1px solid var(--border2); border-radius: 8px; padding: 10px 14px; color: var(--text); font-size: 14px; font-family: inherit; outline: none; transition: border-color .2s; direction: rtl; margin-top: 10px; }
+.cart-addr-input:first-child { margin-top: 0; }
+.cart-addr-row .cart-addr-input { margin-top: 0; }
+.cart-addr-input:focus { border-color: var(--blue); }
+@media (max-width: 520px) { .cart-addr-row { grid-template-columns: 1fr; } }
+
 /* ===== Review Form ===== */
 .rev-form-wrap { margin-top: 40px; padding: 28px 32px; background: var(--bg3); border-radius: 14px; border: 1px solid var(--border2); }
 .rev-form-title { font-size: 20px; font-weight: 500; color: var(--text); margin: 0 0 20px; }

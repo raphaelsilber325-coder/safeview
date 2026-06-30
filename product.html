@@ -175,6 +175,7 @@
           '<button class="btn-secondary" style="justify-content:center;gap:8px" onclick="toggleWishlist(\''+p.id+'\',this)" id="pdpWlBtn">'+
             (isInWishlist(p.id) ? '♥ הסר ממועדפים' : '♡ שמור למועדפים')+
           '</button>' +
+          '<a class="btn-secondary" style="justify-content:center;gap:8px" href="compare.html?cat='+encodeURIComponent(p.cat)+'">⚖️ השווה מוצרים בקטגוריה</a>' +
         '</div>' +
         '<div class="pdp-sticky">' +
           '<div class="pdp-sticky-price">'+fmt(p.price)+'</div>' +
