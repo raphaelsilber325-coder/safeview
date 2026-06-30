@@ -209,7 +209,24 @@
     var coupon = null;
     try { coupon = JSON.parse(sessionStorage.getItem('sv_cart_coupon') || 'null'); } catch(e){}
     var addr = getAddrFields();
-    checkoutWhatsApp(coupon ? coupon.code : null, coupon ? coupon.discount : 0, ship, addr);
+
+    // modal אישור לפני שליחה
+    var c = getCart();
+    var rawTotal = c.reduce(function(s,i){ var p = getProduct(i.id); return s + (p ? (i.price||p.price)*i.qty : 0); }, 0);
+    var discount = coupon ? coupon.discount : 0;
+    var shipCost = getShipCost(rawTotal, ship);
+    var grand = rawTotal - discount + shipCost;
+    var itemsText = c.map(function(i){ var p = getProduct(i.id); return p ? p.name.split('|')[0].trim() + ' ×' + i.qty : ''; }).filter(Boolean).join('\n');
+
+    showOrderConfirm({
+      items: itemsText,
+      addr: addr.name + ', ' + addr.street + ', ' + addr.city,
+      ship: ship.label + (shipCost === 0 ? ' (חינם)' : ' — ' + fmt(shipCost)),
+      total: fmt(grand),
+      onConfirm: function() {
+        checkoutWhatsApp(coupon ? coupon.code : null, discount, ship, addr);
+      }
+    });
   };
 
   window.doPaypalCheckout = function(grandTotal, itemCount) {

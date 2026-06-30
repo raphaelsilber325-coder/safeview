@@ -43,9 +43,9 @@
   <div class="thank-steps">
     <h3>📋 מה הלאה?</h3>
     <ul>
-      <li><strong>תוך 30 דקות</strong> – תקבלו מייל אישור עם פרטי ההזמנה</li>
-      <li><strong>תוך 24 שעות</strong> – יישלח מספר מעקב למשלוח</li>
-      <li><strong>3-7 ימי עסקים</strong> – החבילה מגיעה לבית</li>
+      <li><strong>תוך 24 שעות</strong> – נאשר את ההזמנה בוואטסאפ</li>
+      <li><strong>תוך 3 ימי עסקים</strong> – יישלח מספר מעקב למשלוח</li>
+      <li><strong>15-25 ימי עסקים</strong> – החבילה מגיעה לבית (משלוח מסין)</li>
       <li><strong>14 ימים</strong> – תקופת החזרה ללא שאלות</li>
       <li><strong>שנה מלאה</strong> – אחריות יצרן + תמיכה בעברית</li>
     </ul>
@@ -63,8 +63,8 @@
 
 <script src="assets/app.js" defer></script>
 <script>
-  // יצירת מספר הזמנה אקראי
-  var orderNum = 'SV' + Date.now().toString().slice(-7);
+  // שלוף מספר הזמנה מה-session (נשמר ב-checkoutWhatsApp)
+  var orderNum = sessionStorage.getItem('sv_last_order') || ('SV-' + (parseInt(localStorage.getItem('sv_order_seq')||'1000')));
   document.getElementById('orderNum').textContent = orderNum;
 
   // הודעת WhatsApp

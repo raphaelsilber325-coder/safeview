@@ -1420,10 +1420,17 @@ function updateCartCount(){
 }
 
 // צ'קאאוט דרך וואטסאפ — שולח את כל ההזמנה כולל קופון ושיטת משלוח
+function generateOrderNumber() {
+  var n = parseInt(localStorage.getItem('sv_order_seq') || '999', 10) + 1;
+  localStorage.setItem('sv_order_seq', String(n));
+  return 'SV-' + n;
+}
+
 function checkoutWhatsApp(couponCode, discount, shipMethod, addr) {
   var c = getCart();
   if (!c.length){ alert('העגלה ריקה'); return; }
-  var lines = ['שלום SafeView! אני רוצה להזמין:', ''];
+  var orderNum = generateOrderNumber();
+  var lines = ['שלום SafeView! הזמנה מספר ' + orderNum, ''];
   var rawTotal = 0;
   c.forEach(function(i){
     var p = getProduct(i.id);
@@ -1459,11 +1466,11 @@ function checkoutWhatsApp(couponCode, discount, shipMethod, addr) {
     if (addr.note) lines.push('הערה: ' + addr.note);
   }
   var waWin = window.open(waLink(lines.join('\n')), '_blank');
-  // מנקה עגלה רק אחרי שהחלון נפתח
   if (waWin) {
     try { localStorage.removeItem('sv_cart'); } catch(e) {}
     try { sessionStorage.removeItem('sv_cart_coupon'); } catch(e) {}
     updateCartCount();
+    try { sessionStorage.setItem('sv_last_order', orderNum); } catch(e) {}
     setTimeout(function(){ if (location.pathname.indexOf('cart') !== -1) location.href = 'thank-you.html'; }, 1200);
   }
 }
@@ -1489,6 +1496,36 @@ function createShopifyCheckout() {
   } else {
     checkoutWhatsApp();
   }
+}
+
+// ===== Order Confirm Modal =====
+function showOrderConfirm(opts) {
+  var existing = document.getElementById('orderConfirmModal');
+  if (existing) existing.remove();
+
+  var overlay = document.createElement('div');
+  overlay.id = 'orderConfirmModal';
+  overlay.className = 'ocm-overlay';
+  overlay.innerHTML =
+    '<div class="ocm-box" role="dialog" aria-modal="true" aria-labelledby="ocmTitle">' +
+      '<h2 class="ocm-title" id="ocmTitle">✅ אישור הזמנה</h2>' +
+      '<div class="ocm-section"><div class="ocm-label">מוצרים:</div><div class="ocm-val ocm-items">' + opts.items.replace(/\n/g,'<br>') + '</div></div>' +
+      '<div class="ocm-section"><div class="ocm-label">כתובת משלוח:</div><div class="ocm-val">' + opts.addr + '</div></div>' +
+      '<div class="ocm-section"><div class="ocm-label">שיטת משלוח:</div><div class="ocm-val">' + opts.ship + '</div></div>' +
+      '<div class="ocm-total">סה"כ לתשלום: <strong>' + opts.total + '</strong></div>' +
+      '<p class="ocm-note">ההזמנה תישלח לוואטסאפ שלנו לאישור סופי.</p>' +
+      '<div class="ocm-btns">' +
+        '<button class="ocm-btn-confirm" id="ocmConfirm">שלח הזמנה ב-WA ✓</button>' +
+        '<button class="ocm-btn-cancel" id="ocmCancel">חזור לעריכה</button>' +
+      '</div>' +
+    '</div>';
+
+  document.body.appendChild(overlay);
+  document.getElementById('ocmConfirm').onclick = function() { overlay.remove(); opts.onConfirm(); };
+  document.getElementById('ocmCancel').onclick = function() { overlay.remove(); };
+  overlay.addEventListener('click', function(e){ if (e.target === overlay) overlay.remove(); });
+  // focus trap
+  setTimeout(function(){ var b = document.getElementById('ocmConfirm'); if(b) b.focus(); }, 50);
 }
 
 // ===== Toast =====
